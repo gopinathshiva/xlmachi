@@ -23,7 +23,10 @@ jQuery(document).ready(function($){
 	});
 
 	$('.xl-store-cat-filter input.xl-store-cat-filter-radio').on('click',function(event){		
-		event.stopPropagation();
+		debugger
+		$('.single-store .masonry .masonry-item').hide();
+		var categoryId = $(this).attr('data-xlcategory');
+		$('.single-store .masonry div[data-xlcategory*='+categoryId+']').fadeIn("slow");
 	});
 
 });

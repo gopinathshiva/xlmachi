@@ -11,8 +11,6 @@ $offer_type = get_query_var( $couponxl_slugs['offer_type'], '' );
 $theme_usage = couponxl_get_option( 'theme_usage' );
 //$theme_usage = 'cool';
 $store_link = get_post_meta( get_the_ID(), 'store_link', true );
-
-debug_to_console('$post_id:'.$post_id.' $offer_type:'.$offer_type.' $theme_usage:'.$theme_usage.' $store_link:'.$store_link);
 ?>
 
 <section>
@@ -190,21 +188,21 @@ debug_to_console('$post_id:'.$post_id.' $offer_type:'.$offer_type.' $theme_usage
 
                 </div>
 
-                <?php $offer_cats = couponxl_get_organized( 'offer_cat' ); ?>
+                <?php $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); ?>
 
                 <div class="white-block xl-store-cat-filter">
                     <div class="white-block-content">
                         <h2>Offer Categories</h2>
                         <ul class="list-unstyled">
-                        <?php foreach( $offer_cats as $key => $cat){ 
+                        <?php foreach( $xl_offer_cats as $key => $cat){ 
                             if(empty($cat->children)){?>
                                 <?php if($cat->count): ?>
-                                        <li><input type="radio"  class="xl-store-cat-filter-radio"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->slug; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?><span class="count">&nbsp(<?php echo $cat->count; ?>)</span></label></li>                                    
+                                        <li><input type="radio" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-store-cat-filter-radio"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->slug; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?><span class="count">&nbsp(<?php echo $cat->count; ?>)</span></label></li>                                    
                                 <?php endif; ?> 
                             <?php }else{?>
                                 <?php foreach( $cat->children as $key => $child ){ ?>
                                     <?php if($child->count): ?>
-                                        <li><input type="radio" class="xl-store-cat-filter-radio" id="xl_<?php echo $child->slug; ?>" name="store_offer_cat" value="<?php echo $child->slug; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?><span class="count">&nbsp(<?php echo $child->count; ?>)</span></label></li>                                    
+                                        <li><input type="radio" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>" class="xl-store-cat-filter-radio" id="xl_<?php echo $child->slug; ?>" name="store_offer_cat" value="<?php echo $child->slug; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?><span class="count">&nbsp(<?php echo $child->count; ?>)</span></label></li>                                    
                                     <?php endif; ?>   
                                 <?php } 
                             } 
@@ -296,8 +294,16 @@ debug_to_console('$post_id:'.$post_id.' $offer_type:'.$offer_type.' $theme_usage
                         <?php
                         while( $offers->have_posts() ){
                             $offers->the_post();
+                            $xl_offer_cat_id = '';
+                            $xl_offer_cat = get_the_terms( get_the_ID(), 'offer_cat' );
+                            foreach( $xl_offer_cat as $key => $cat){
+                                $xl_offer_cat_id.=$cat->term_taxonomy_id.',';
+                            }
+                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");
+                            print_r($terms);
+                            $xl_store_id = get_post_meta( get_the_ID(), 'offer_store', true );
                             ?>
-                            <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
+                            <div data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
                                 <?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
                             </div>
                             <?php
