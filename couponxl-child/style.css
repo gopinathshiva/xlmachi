@@ -1,0 +1,126 @@
+/*
+Theme Name: Coupon XL Child Theme
+Theme URI: http://demo.powerthemes.club/themes/couponxl/
+Description: Coupon XL | Premium Coupons And Dealt WP Theme
+Author: pebas
+Author URI: http://themeforest.net/user/pebas/
+License: GNU General Public License version 3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Version: 1.0
+Template: couponxl
+Tags: white
+*/
+
+/* ***********************  header style starts here ******************************* */
+
+
+/* ***********************  header style ends here ******************************* */
+
+
+
+/* ***********************  home page style starts here ******************************* */
+
+.deal-box .white-block-media .embed-responsive img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+.home-page-body  .home-page-title,.home-page-body .home-page-search-box{
+	display:none;
+}
+
+.home-page-title{
+	padding:30px 0 30px 0;
+	text-align:center;
+}
+
+.home-page-search-box{
+	padding-bottom: 35px;
+}
+
+/* ***********************  home page style ends here ******************************* */
+
+/* ***********************  store page style starts here ******************************* */
+
+.single-store .shop-logo{
+	padding:initial;
+}
+
+/* ***********************  store page style ends here ******************************* */
+
+/* ***********************  deal page style starts here ******************************* */
+
+
+
+/* ***********************  deal page style ends here ******************************* */
+
+/* ***********************  widget style starts here ******************************* */
+.textwidget{
+	color: #919394;
+	text-align:justify;
+}
+
+/* ***********************  widget style ends here ******************************* */
+
+.page-template-page-tpl_search_page .offer-box .white-block-content {
+    padding: 15px;
+}
+
+/* ***********************  read info css changes starts here ******************** */
+
+.masonry-item .deal-info-container,.masonry-item .coupon-info-container{
+    display: none;
+}
+
+.bottom-meta li{
+    margin-right: 6px;
+}
+
+.white-block-content ul li.deal-info-container a,.white-block-content ul li.coupon-info-container a{
+    font-size: 12px;
+    padding: 5px;
+}
+
+.deal-info-container,.coupon-info-container{    
+    float: right;
+}
+
+.white-block-content .read-info-description{
+    display: none;
+    padding-top: 15px;
+}
+
+a.read-info{
+    background: rgba(91,15,112,0.8);
+    color: white !important;
+    padding: 4px;
+    transition:background .3s ease;
+}
+
+.offer-box .white-block-content a.read-info:hover{
+    color: white;
+    background: #5B0F70;
+}
+
+/*.read-info-container{
+    padding-bottom: 15px;
+}*/
+
+/* ***********************  read info css changes ends here ******************** */
+
+/* ***********************  comment block css changes starts here ******************** */
+
+.xl-comment-block{
+    display: none;
+}
+
+/* ***********************  comment block css changes ends here ******************** */
