@@ -106,15 +106,16 @@ add_filter('show_admin_bar', '__return_false');
 /* removing emoji + emoticons */
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+if(!function_exists(debug_to_console)){
+	function debug_to_console( $data ) {
 
-function debug_to_console( $data ) {
+	    if ( is_array( $data ) )
+	        $output = "<script>console.log( 'Debug child-fn.php: " . implode( ',', $data) . "' );</script>";
+	    else
+	        $output = "<script>console.log( 'Debug child-fn.php: " . $data . "' );</script>";
 
-    if ( is_array( $data ) )
-        $output = "<script>console.log( 'Debug child-fn.php: " . implode( ',', $data) . "' );</script>";
-    else
-        $output = "<script>console.log( 'Debug child-fn.php: " . $data . "' );</script>";
-
-    echo $output;
+	    echo $output;
+	}
 }
 
 /* adding google analytics */
