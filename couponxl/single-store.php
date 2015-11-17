@@ -95,7 +95,7 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                         ?>
                     </div>
 
-                    <div class="white-block-content shop-offer-filter">
+                    <!-- <div class="white-block-content shop-offer-filter">
                         <?php
                         if( $theme_usage == 'all' || $theme_usage == 'deals' ){
                             $deals = couponxl_count_post_type( 
@@ -184,12 +184,13 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                         <?php if( $theme_usage == 'coupons' || $theme_usage == 'all' ): ?>
                             <a href="<?php echo couponxl_append_query_string( '', array( 'offer_type' => 'coupon' ), array( 'store' ) ); ?>" class="<?php echo $offer_type == 'coupon' ? 'active' : '' ?>"><?php _e( 'Coupons ', 'couponxl' ) ?>(<?php echo $coupons; ?>)</a>
                         <?php endif; ?>
-                    </div>
+                    </div> -->
 
                 </div>
 
-                <?php do_action('xl_offer_cat') ?>     
                 <?php do_action('xl_offer_type') ?>
+                <?php do_action('xl_offer_cat') ?>     
+                
 
                 <?php 
                     if ( is_active_sidebar( 'store-sidebar-1' ) ){

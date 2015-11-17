@@ -1,6 +1,7 @@
 <div class="col-md-3">
+    <?php do_action('xl_offer_type') ?>
     <?php do_action('xl_offer_cat') ?>
-    <div class="widget white-block widget_couponxl_filter">        
+    <!-- <div class="widget white-block widget_couponxl_filter">        
         <?php
         $theme_usage = couponxl_get_option( 'theme_usage' );
         if( $theme_usage == 'all' ):
@@ -145,9 +146,8 @@
                 echo '<div class="show-all"><a href="javascript:;" class="expand-filter closed" data-target=".ex_offer_cat" data-less="'.__( '-SHOW LESS CATEGORIES-', 'couponxl' ).'">'.__( '-SHOW ALL CATEGORIES-', 'couponxl' ).'</a></div>';
             }
         ?>
-
-	<!-- SEARCH SIDEBAR CHANGED -->                
-    </div>
+	
+    </div> -->
     <?php 
         if ( is_active_sidebar( 'sidebar-search' ) ){
             dynamic_sidebar( 'sidebar-search' );

@@ -98,8 +98,7 @@ jQuery(document).ready(function($){
 
 		$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').each(function(){			
 			var catId = $(this).val();
-			var catCount = $('div[data-xlcategory*='+catId+']').length;
-			debugger
+			var catCount = $('div[data-xlcategory*='+catId+']').length;			
 			if(!catCount){
 				$('li.xl-cat-'+catId).hide();
 			}else{

@@ -175,8 +175,14 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 	            					<?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
 	            				</div>
 	            				<?php
-	            			}
-	            			?>
+	            			}?>
+                            <script type="text/javascript">                        
+                                jQuery(document).ready(function($){
+                                    setTimeout(function(){
+                                        updateOfferCount();
+                                    },300);
+                                });
+                            </script>  	            			
                             <?php if( !empty( $pagination ) ): ?>
 	            			    <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
                                     <ul class="pagination">
