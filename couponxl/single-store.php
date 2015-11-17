@@ -301,8 +301,7 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                 $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
                             }
                             unset($i);                         
-                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");
-                            print_r($terms);
+                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");                            
                             $xl_store_id = get_post_meta( get_the_ID(), 'offer_store', true );
                             ?>
                             <div data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> store-item">

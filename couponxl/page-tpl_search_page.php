@@ -158,8 +158,16 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 	            			<?php
 	            			while( $offers->have_posts() ){
 	            				$offers->the_post();
+                                $xl_offer_cat_id = '';
+                                $xl_offer_cat = get_the_terms( get_the_ID(), 'offer_cat' );
+                                for ($i = 0; $i < count($xl_offer_cat); ++$i) {
+                                    $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
+                                }
+                                unset($i);                         
+                                $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");                            
+                                $xl_store_id = get_post_meta( get_the_ID(), 'offer_store', true );
 	            				?>
-	            				<div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
+	            				<div data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?>">
 	            					<?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
 	            				</div>
 	            				<?php
