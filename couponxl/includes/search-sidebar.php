@@ -1,6 +1,6 @@
 <div class="col-md-3">
-    <div class="widget white-block widget_couponxl_filter">
-
+    <?php do_action('xl_offer_cat') ?>
+    <div class="widget white-block widget_couponxl_filter">        
         <?php
         $theme_usage = couponxl_get_option( 'theme_usage' );
         if( $theme_usage == 'all' ):

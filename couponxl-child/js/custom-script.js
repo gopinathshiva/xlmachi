@@ -1,3 +1,4 @@
+var updateOfferCount;
 jQuery(document).ready(function($){
 
 	function xl_getText(text){		
@@ -23,30 +24,62 @@ jQuery(document).ready(function($){
 	});
 
 	//on click of checkbox in single-store page
-	$('.xl-store-cat-filter input.xl-store-cat-filter-checkbox').off('click').on('click',function(event){
-		var scrollStart = $("#xl-store-start").offset().top - 100;
+	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){
+		var scrollStart = $("body").offset().top + 150;
 		$('html, body').animate({
 		    scrollTop: scrollStart
-	 	}, 600);				
-		$('.single-store .store-item').hide();
-		if(!$('.xl-store-cat-filter input.xl-store-cat-filter-checkbox:checked').length){
-			$('.single-store .store-item').fadeIn("slow");
-		}else{
-			$('.xl-store-cat-filter input.xl-store-cat-filter-checkbox:checked').each(function() {	       	
-		       	var categoryId = $(this).val();
-				$('.single-store div[data-xlcategory*='+categoryId+']').fadeIn("slow");
-	     	});	
-		}			
+	 	}, 600);			
+	 	xl_filterOffers();	
+		// $('.xl-offer-item').hide();
+		// if(!$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length){
+		// 	$('.xl-offer-item').fadeIn("slow");
+		// }else{
+		// 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+		//        	var categoryId = $(this).val();
+		// 		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");
+	 //     	});	
+		// }			
 	});
 
+	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){			
+		xl_filterOffers();
+	});
+
+	function xl_filterOffers(){
+		var offerType = $('.xl-offer-type-filter input.xl-offer-type-filter-radio:checked').val();
+		$('.xl-offer-item').hide();
+		if(!$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length){
+			if(offerType=="all"){
+				$('.xl-offer-item').fadeIn("slow");
+			}else{
+				$('div[data-xltype='+offerType+']').fadeIn('slow');
+			}
+		}else{
+			$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+		       	var categoryId = $(this).val();
+		       	if(offerType=='all'){
+		       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");	
+		       	}else{
+		       		$('div[data-xltype='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn("slow");
+		       	}				
+	     	});	
+		}
+
+		if(!$('.xl-offer-item:visible').length){
+			$('.xl-offer-cat-filter-not-found').show();
+		}else{
+			$('.xl-offer-cat-filter-not-found').hide();
+		}
+	}
+
 	//input search text to filter categories in single store page
-	$('.xl-store-cat-filter .xl-store-cat-search').off('keyup').on('keyup',function(e){
+	$('.xl-offer-cat-filter .xl-offer-cat-search').off('keyup').on('keyup',function(e){
 		var value = $(this).val().toLowerCase();
 		if(!value){
-			$('.xl-store-cat-result li').show();
+			$('.xl-offer-cat-result li').show();
 			return;
 		}		
-		$('.xl-store-cat-result li').each(function(){
+		$('.xl-offer-cat-result li').each(function(){
 			if($(this).text().toLowerCase().indexOf(value)>=0){
 				$(this).show();
 			}else{
@@ -54,5 +87,25 @@ jQuery(document).ready(function($){
 			}
 		});
 	});
+
+	updateOfferCount = function(){				
+		var dealCount = $('div[data-xltype=deal]').length;
+		$('#xl-offer-type-deal-count').text('('+dealCount+')');
+		var couponCount = $('div[data-xltype=coupon]').length;
+		$('#xl-offer-type-coupon-count').text('('+couponCount+')');
+		var allCount = dealCount+couponCount;
+		$('#xl-offer-type-all-count').text('('+allCount+')');
+
+		$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').each(function(){			
+			var catId = $(this).val();
+			var catCount = $('div[data-xlcategory*='+catId+']').length;
+			debugger
+			if(!catCount){
+				$('li.xl-cat-'+catId).hide();
+			}else{
+				$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
+			}			
+		});
+	}
 
 });

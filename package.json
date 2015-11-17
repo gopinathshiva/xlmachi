@@ -2,6 +2,6 @@
   "name": "xl-machi",
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-shell": "^0.4.3"
+    "gulp-livereload": "^3.8.1"
   }
 }

@@ -17,6 +17,8 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                 <?php require_once( locate_template( 'includes/search-sidebar.php' ) ) ?>
             <?php endif; ?>
 
+
+
             <div class="col-md-9">
 
                 <?php 
@@ -158,16 +160,18 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 	            			<?php
 	            			while( $offers->have_posts() ){
 	            				$offers->the_post();
+                                $xl_post_id = get_the_ID();
                                 $xl_offer_cat_id = '';
-                                $xl_offer_cat = get_the_terms( get_the_ID(), 'offer_cat' );
+                                $xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
                                 for ($i = 0; $i < count($xl_offer_cat); ++$i) {
                                     $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
                                 }
                                 unset($i);                         
                                 $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");                            
-                                $xl_store_id = get_post_meta( get_the_ID(), 'offer_store', true );
+                                $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
+                                $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true ); 
 	            				?>
-	            				<div data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?>">
+	            				<div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
 	            					<?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
 	            				</div>
 	            				<?php

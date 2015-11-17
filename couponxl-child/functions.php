@@ -118,6 +118,48 @@ if(!function_exists(debug_to_console)){
 	}
 }
 
+add_action('xl_offer_cat','xl_offer_cat_fn');
+
+function xl_offer_cat_fn(){
+	$xl_offer_cats = couponxl_get_organized( 'offer_cat' ); ?>
+
+    <div class="white-block xl-offer-cat-filter">
+        <div class="white-block-content">
+            <h2>Filter By Categories</h2>
+            <input type="search" class="form-control xl-offer-cat-search" placeholder="Search in Categories">
+            <ul class="list-unstyled xl-offer-cat-result">
+            <?php foreach( $xl_offer_cats as $key => $cat){ 
+                if(empty($cat->children)){?>                    
+                            <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
+                <?php }else{?>
+                    <?php foreach( $cat->children as $key => $child ){ ?>                        
+                            <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
+                    <?php } 
+                } 
+            } ?>
+            </ul>
+        </div>
+    </div>
+    <?php
+}
+
+add_action('xl_offer_type','xl_offer_type_fn');
+
+function xl_offer_type_fn(){
+	?>	
+	<div class="white-block xl-offer-type-filter">
+        <div class="white-block-content">
+            <h2>Filter By Type</h2>
+            <ul class="list-unstyled xl-offer-type-result">
+            	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-id" value="all" checked><label for="xl-offer-type-id">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
+				<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-deals" value="deal"><label for="xl-offer-type-deals">&nbsp Deals <span id="xl-offer-type-deal-count" class="count"></span></label></li>
+            	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-coupons" value="coupon"><label for="xl-offer-type-coupons">&nbsp Coupons <span id="xl-offer-type-coupon-count" class="count"></span></label></li>
+            </ul>
+        </div>
+    </div>
+    <?php
+}
+
 /* adding google analytics */
 
 //add_action('wp_footer', 'add_google_analytics');

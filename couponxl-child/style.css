@@ -55,8 +55,12 @@ Tags: white
 	padding:initial;
 }
 
-.xl-store-cat-result{
+.xl-offer-cat-result{
     margin-top: 3px;
+}
+
+.xl-offer-cat-filter-not-found{
+    display: none;
 }
 
 /* ***********************  store page style ends here ******************************* */

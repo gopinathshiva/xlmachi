@@ -188,29 +188,8 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
 
                 </div>
 
-                <?php $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); ?>
-
-                <div class="white-block xl-store-cat-filter">
-                    <div class="white-block-content">
-                        <h2>Offer Categories</h2>
-                        <input type="search" class="form-control xl-store-cat-search" placeholder="Search in Categories">
-                        <ul class="list-unstyled xl-store-cat-result">
-                        <?php foreach( $xl_offer_cats as $key => $cat){ 
-                            if(empty($cat->children)){?>
-                                <?php if($cat->count): ?>
-                                        <li><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-store-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?><span class="count">&nbsp(<?php echo $cat->count; ?>)</span></label></li>                                    
-                                <?php endif; ?> 
-                            <?php }else{?>
-                                <?php foreach( $cat->children as $key => $child ){ ?>
-                                    <?php if($child->count): ?>
-                                        <li><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-store-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?><span class="count">&nbsp(<?php echo $child->count; ?>)</span></label></li>                                    
-                                    <?php endif; ?>   
-                                <?php } 
-                            } 
-                        } ?>
-                        </ul>
-                    </div>
-                </div>
+                <?php do_action('xl_offer_cat') ?>     
+                <?php do_action('xl_offer_type') ?>
 
                 <?php 
                     if ( is_active_sidebar( 'store-sidebar-1' ) ){
@@ -291,25 +270,33 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                         $col = 12;
                     }
                     ?>
-                    <div class="row masonry">
+                    <div class="row masonry">                        
                         <?php
                         while( $offers->have_posts() ){
-                            $offers->the_post();
+                            $offers->the_post();                            
+                            $xl_post_id = get_the_ID();
                             $xl_offer_cat_id = '';
-                            $xl_offer_cat = get_the_terms( get_the_ID(), 'offer_cat' );
+                            $xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
                             for ($i = 0; $i < count($xl_offer_cat); ++$i) {
                                 $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
                             }
                             unset($i);                         
                             $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");                            
-                            $xl_store_id = get_post_meta( get_the_ID(), 'offer_store', true );
+                            $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
+                            $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true );                            
                             ?>
-                            <div data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> store-item">
+                            <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
                                 <?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
                             </div>
                             <?php
-                        }
-                        ?>
+                        }?>
+                        <script type="text/javascript">                        
+                            jQuery(document).ready(function($){
+                                setTimeout(function(){
+                                    updateOfferCount();
+                                },300);
+                            });
+                        </script>                        
                         <?php if( !empty( $pagination ) ): ?>
                             <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
                                 <ul class="pagination">
@@ -317,6 +304,11 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                 </ul>
                             </div>
                         <?php endif; ?>                        
+                    </div>
+                    <div class="white-block xl-offer-cat-filter-not-found">
+                        <div class="white-block-content">
+                            <p class="nothing-found">Currently there is no offer available for the Selected Filter !!!</p>
+                        </div>
                     </div>
                     <?php
                 }
