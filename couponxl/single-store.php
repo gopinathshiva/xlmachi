@@ -306,7 +306,8 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                             </div>
                         <?php endif; ?>                        
                     </div>
-                    <div class="white-block xl-offer-cat-filter-not-found">
+                    <!-- CUSTOMISATION DONE HERE -->
+                    <div class="white-block xl-offer-filter-not-found">
                         <div class="white-block-content">
                             <p class="nothing-found">Currently there is no offer available for the Selected Filter !!!</p>
                         </div>

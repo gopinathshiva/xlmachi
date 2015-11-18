@@ -156,6 +156,12 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                             $col = 12;
                         }
             			?>
+                        <!-- CUSTOMISATION DONE HERE -->
+                        <div class="white-block xl-offer-filter-not-found">
+                            <div class="white-block-content">
+                                <p class="nothing-found">Currently there is no offer available for the Selected Filter !!!</p>
+                            </div>
+                        </div>
             			<div class="row masonry">
 	            			<?php
 	            			while( $offers->have_posts() ){

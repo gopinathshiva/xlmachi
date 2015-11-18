@@ -151,13 +151,46 @@ function xl_offer_type_fn(){
         <div class="white-block-content">
             <h2>Filter By Type</h2>
             <ul class="list-unstyled xl-offer-type-result">
-            	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-id" value="all" checked><label for="xl-offer-type-id">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
+            	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-all" value="all" checked><label for="xl-offer-type-all">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
 				<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-deals" value="deal"><label for="xl-offer-type-deals">&nbsp Deals <span id="xl-offer-type-deal-count" class="count"></span></label></li>
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-coupons" value="coupon"><label for="xl-offer-type-coupons">&nbsp Coupons <span id="xl-offer-type-coupon-count" class="count"></span></label></li>
             </ul>
         </div>
     </div>
     <?php
+}
+
+add_action('xl_offer_store','xl_offer_store_fn');
+
+function xl_offer_store_fn(){
+    $args = array(
+        'post_type' => 'store',        
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'orderby' => 'title',
+        'order' => 'asc'
+    );  
+
+    $stores = new WP_Query( $args );
+
+    if( $stores->have_posts() ){
+        ?>
+        <div class="white-block xl-offer-store-filter">
+            <div class="white-block-content">
+                <h2>Filter By Store</h2>
+                <input type="search" class="form-control xl-offer-store-search" placeholder="Search in Store">
+                <ul class="list-unstyled xl-offer-store-result">
+                <?php
+                while( $stores->have_posts() ){
+                    $stores->the_post();       
+                    ?><li class="xl-store-<?php echo get_the_ID() ?>"><input class="xl-offer-store-filter-checkbox" type="checkbox" name="xl-offer-store" id="xl-offer-store-<?php echo get_the_ID()?>" value="<?php echo get_the_ID()?>" ><label for="xl-offer-store-<?php echo get_the_ID()?>">&nbsp <?php the_title() ?> <span id="xl-offer-store-<?php echo get_the_ID()?>-count" class="count"></span></label></li>   <?php            
+                }
+                ?>
+                </ul>                
+            </div>
+        </div><?php
+    }
+    wp_reset_query();
 }
 
 /* adding google analytics */
