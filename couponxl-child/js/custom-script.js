@@ -24,11 +24,7 @@ jQuery(document).ready(function($){
 	});
 
 	//on click of checkbox in to filter offer category
-	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){
-		var scrollStart = $("body").offset().top + 150;
-		$('html, body').animate({
-		    scrollTop: scrollStart
-	 	}, 600);			
+	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
 	 	xl_filterOffers();				
 	});
 
@@ -43,6 +39,7 @@ jQuery(document).ready(function($){
 	});
 
 	function xl_filterOffers(){
+		$('.xl-offer-type-filter-radio,.xl-offer-cat-filter-checkbox,.xl-offer-store-filter-checkbox').prop('disabled',true);
 		$('.xl-offer-filter-not-found').hide();
 
 		var scrollStart = $("body").offset().top + 150;
@@ -112,6 +109,10 @@ jQuery(document).ready(function($){
 		if(!$('.xl-offer-item:visible').length){
 			$('.xl-offer-filter-not-found').fadeIn('slow');
 		}
+
+		setTimeout(function(){
+			$('.xl-offer-type-filter-radio,.xl-offer-cat-filter-checkbox,.xl-offer-store-filter-checkbox').prop('disabled',false);
+		},1000);		
 	}
 
 	//input search text to filter categories 

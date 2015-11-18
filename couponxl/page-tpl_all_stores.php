@@ -8,6 +8,7 @@ get_template_part( 'includes/title' );
 
 $cur_page = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; //get curent page
 $letter = get_query_var( $couponxl_slugs['letter'] ) ? esc_sql( get_query_var( $couponxl_slugs['letter'] ) ) : '';
+debug_to_console($letter);
 $stores_per_page = couponxl_get_option( 'stores_per_page' );
 
 $args = array(
