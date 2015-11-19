@@ -65,11 +65,13 @@
 	
 	<!-- hiding empty div when there is no price to be shown -->
 	
-	<?php if( !empty(couponxl_get_deal_price()) ){ ?>
+	<?php
+	 $xl_deal_price = couponxl_get_deal_price();
+	 if( !empty($xl_deal_price) ){ ?>
 	  <div class="white-block-footer  <?php echo $col == '12' ? 'col-sm-12' : '' ?>">
-	     <div class="white-block-content">
+	    <div class="white-block-content">
 		<?php echo couponxl_get_deal_price(); ?>
-	     </div>
-          </div>
+	    </div>
+      </div>
 	<?php } ?>
 </div>

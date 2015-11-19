@@ -63,6 +63,14 @@ Tags: white
     display: none;
 }
 
+@media screen and (min-width: 768px){
+    .xl-offer-item {
+        min-height: 370px;
+        height: auto;
+    }
+}
+
+
 /* ***********************  store page style ends here ******************************* */
 
 /* ***********************  deal page style starts here ******************************* */
