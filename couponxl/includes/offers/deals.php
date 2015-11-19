@@ -69,9 +69,9 @@
 	 $xl_deal_price = couponxl_get_deal_price();
 	 if( !empty($xl_deal_price) ){ ?>
 	  <div class="white-block-footer  <?php echo $col == '12' ? 'col-sm-12' : '' ?>">
-	     <div class="white-block-content">
+	    <div class="white-block-content">
 		<?php echo couponxl_get_deal_price(); ?>
-	     </div>
-          </div>
+	    </div>
+      </div>
 	<?php } ?>
 </div>
