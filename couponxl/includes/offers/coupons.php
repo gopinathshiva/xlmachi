@@ -47,8 +47,9 @@
 				<?php echo '<a href="'.get_permalink( $store_id ).'">'.get_the_title( $store_id ).'</a>'; ?>
 			</li>
 			
-			<?php	               
-	        if( !empty(get_the_content()) ):
+			<?php	       
+			$xl_coupon_content = get_the_content();        
+	        if( !empty($xl_coupon_content) ):
 	        ?>
 				<li class="coupon-info-container"> 					 					
 					<a class="read-info" href="javascript:void(0)">Coupon Info (+)</a>										
