@@ -25,17 +25,21 @@ jQuery(document).ready(function($){
 
 	//on click of checkbox in to filter offer category
 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
-	 	xl_filterOffers();				
+	 	xl_filterOffers();	
+	 	updateOfferTypeCount();			
 	});
 
 	//on click of radio button to filter offer type
 	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){			
-		xl_filterOffers();
+		xl_filterOffers();		
+		updateOfferCategoryCount();
 	});
 
-	//on click of radio button to filter offer type
+	//on click of checkbox to filter offer store
 	$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').off('click').on('click',function(event){					
-		xl_filterOffers();		
+		xl_filterOffers();	
+		updateOfferTypeCount();
+		updateOfferCategoryCount();	
 	});
 
 	function xl_filterOffers(){
@@ -131,6 +135,7 @@ jQuery(document).ready(function($){
 		});
 	});
 
+	//input search text to filter stores 
 	$('.xl-offer-store-filter .xl-offer-store-search').off('keyup').on('keyup',function(e){
 		var value = $(this).val().toLowerCase();
 		if(!value){
@@ -146,24 +151,36 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	updateOfferCount = function(){				
-		var dealCount = $('div[data-xltype=deal]').length;
+	updateOfferCount = function(){						
+
+		updateOfferTypeCount();
+		updateOfferCategoryCount();
+		updateOfferStoreCount();
+	
+	}
+
+	function updateOfferTypeCount(){
+		var dealCount = $('div[data-xltype=deal]:visible').length;
 		$('#xl-offer-type-deal-count').text('('+dealCount+')');
-		var couponCount = $('div[data-xltype=coupon]').length;
+		var couponCount = $('div[data-xltype=coupon]:visible').length;
 		$('#xl-offer-type-coupon-count').text('('+couponCount+')');
 		var allCount = dealCount+couponCount;
 		$('#xl-offer-type-all-count').text('('+allCount+')');
+	}
 
+	function updateOfferCategoryCount(){
 		$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').each(function(){			
 			var catId = $(this).val();
-			var catCount = $('div[data-xlcategory*='+catId+']').length;			
+			var catCount = $('div[data-xlcategory*='+catId+']:visible').length;			
 			if(!catCount){
 				$('li.xl-cat-'+catId).addClass('xl-no-offer').hide();
 			}else{
 				$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
 			}			
 		});
+	}
 
+	function updateOfferStoreCount(){
 		if($('.xl-offer-store-filter').length){
 			$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').each(function(){		
 				var storeId = $(this).val();
@@ -172,7 +189,7 @@ jQuery(document).ready(function($){
 					$('li.xl-store-'+storeId).addClass('xl-no-offer').hide();
 				}
 			});
-		}		
+		}	
 	}
 
 });
