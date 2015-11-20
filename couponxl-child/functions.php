@@ -9,14 +9,14 @@ add_action('wp_head', 'couponxl_custom_head');
 add_action('wp_ajax_search_offer', 'xl_search_offer');
 add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 
-function xl_search_offer(){    
+function xl_search_offer(){        
     $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
     $post_data = array();
     foreach( $xl_offer_cats as $key => $cat){
         $offer_cat = new stdClass();
         $offer_cat->offer_cat_id = $cat->term_taxonomy_id;
         $offer_cat->offer_store_id = null;
-        $offer_cat->offer_slug = $cat->slug;
+        $offer_cat->offer_slug = esc_url( home_url('/') ).'offer_cat/'.$cat->slug;
         $offer_cat->offer_name = $cat->name;
         $post_data[] = $offer_cat;              
     }  
@@ -26,13 +26,16 @@ function xl_search_offer(){
     );  
     $stores = new WP_Query( $args );
     if( $stores->have_posts() ){
-        while( $stores->have_posts() ){
-            $stores->the_post();            
+        while( $stores->have_posts() ){            
+            $stores->the_post();       
+            $store_name = get_the_title();
+            $store_slug = strtolower($store_name);
+            $store_slug = str_replace(' ', '-', $store_slug);
             $offer_store = new stdClass();
             $offer_store->offer_cat_id = null;
             $offer_store->offer_store_id = get_the_ID();
-            $offer_store->offer_slug = null;
-            $offer_store->offer_name = get_the_title();
+            $offer_store->offer_slug = esc_url( home_url('/') ).'store/'.$store_slug;
+            $offer_store->offer_name = $store_name;
             $post_data[] = $offer_store;   
         }
     }
@@ -60,14 +63,16 @@ function add_search_box($items, $args) {
         $searchform = ob_get_contents();
         ob_end_clean();
 
-        $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix"> 
-                                    <i class="fa fa-search icon-margin" style="position: absolute;right: 3px;top: 5px;"></i>
-                                    <div class="">
-                                        <input style="border-radius: 8px;outline: 0;border: 1px solid rgba(0, 0, 0, 0.3);text-align:center" type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
-                                    </div>
-                                </form>';
+        $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix xl-search-form"> 
+                            <i class="fa fa-search icon-margin" ></i>
+                            <div class="">
+                                <input type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
+                                <ul class="xl-search-result list-unstyled">
+                                </ul>
+                            </div>
+                        </form>';
 
-        $items .= '<li style="position:relative">' . $searchform . '</li>';
+        $items .= '<li class="xl-search-form-container">' . $searchform . '</li>';
 
     return $items;
 }

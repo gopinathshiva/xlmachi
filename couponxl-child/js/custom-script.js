@@ -1,26 +1,51 @@
 var updateOfferCount;
 jQuery(document).ready(function($){
 
-	var isAjaxCalled = false;
-	$( document ).on( 'keyup', '.xl-search-input', function() {	
-
-		if(isAjaxCalled){
-			return;
+	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
+		if(e.type=='blur'){
+			$('.xl-search-result').slideUp('fast');	
 		}
-		isAjaxCalled = true;
+		$(this).closest('.navbar').toggleClass('search-active');
+	});
+	
+	var keyupTimeout;
+	$( document ).on( 'keyup', '.xl-search-input', function() {	
+		if(keyupTimeout){
+			clearTimeout(keyupTimeout);
+		}
+		keyupTimeout = setTimeout(function(){
+			var parentElement = $(this).next()[0];
 
-		$.ajax({
-			url : xl_ajaxurl,
-			type : 'post',
-			data : {
-				action : 'search_offer',
-				searchText : $(this).val()
-			},
-			success : function( response ) {				
-				sessionStorage.setItem('xl_offer_result',response);
-				console.log(response);
+			$('.xl-search-result').slideUp('fast');
+
+			if(sessionStorage.getItem('xl_offer_result')){
+				updateSearchResults(sessionStorage.getItem('xl_offer_result'),$(this).val(),parentElement);
+				return;
 			}
-		});
+
+			$.ajax({
+				url : xl_ajaxurl,
+				type : 'post',
+				data : {
+					action : 'search_offer'				
+				},
+				success : function( response ) {				
+					sessionStorage.setItem('xl_offer_result',response);		
+					updateSearchResults(response,$(this).val(),parentElement);	
+				}
+			});
+		}.bind(this),300);		
+
+		function updateSearchResults(results,searchText,parentElement){
+			$(parentElement).empty();
+			results = JSON.parse(results);
+			$.each(results,function(i,v){
+				if(v.offer_name.toLowerCase().indexOf(searchText.toLowerCase())>=0){
+					$(parentElement).append("<li class='xl-search-result-item'><a href="+v.offer_slug+"><span>" + v.offer_name + "</span></a></li>");
+				}
+			});		
+			$(parentElement).slideDown('fast');
+		}
 		
 	});
 

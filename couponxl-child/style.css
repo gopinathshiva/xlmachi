@@ -140,3 +140,76 @@ a.read-info{
 }
 
 /* ***********************  comment block css changes ends here ******************** */
+
+/* ***********************  search block css changes ends here ******************** */
+
+.collapse.navbar-collapse{
+    float: left !important;
+}
+
+.navbar .xl-search-form-container{
+    position: absolute;
+    right: -35px;
+    top: 35px;
+    height: 40px;
+    z-index: 1500;
+}
+
+.navigation.sticky-nav .navbar .xl-search-form-container{
+    top: 14px;
+}
+
+.navbar .xl-search-form{
+    position: relative;
+}
+
+.navbar .xl-search-form-container .fa-search{
+    position: absolute;    
+    left: 15px;
+    top: 14px;    
+}
+
+.navbar .xl-search-form-container .xl-search-input{
+    border-radius: 8px;
+    outline: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);    
+    height: 40px;
+    padding-left: 40px;
+    width: 180px;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -ms-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition:width .5s ease;
+}
+
+.navbar.search-active .menu-item{
+    display: none;
+}
+
+.navbar.search-active .xl-search-input{
+    width: 700px;
+}
+
+.xl-search-result{
+    background: #fff;
+    z-index: 1500;
+}
+
+.navbar .xl-search-result .xl-search-result-item{
+    border-bottom: 1px solid #F4F4F4;
+    padding: 7px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.navbar .xl-search-result .xl-search-result-item a:hover{
+    background: transparent;    
+}
+
+.navbar .xl-search-result .xl-search-result-item:hover{
+    background: #E0E0E0;
+}
+
+/* ***********************  search block css changes ends here ******************** */
+
