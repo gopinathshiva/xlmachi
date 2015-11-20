@@ -57,6 +57,8 @@ Tags: white
 
 .xl-offer-list-unstyled{
     margin-top: 3px;
+    max-height: 200px;
+    overflow: auto;
 }
 
 .xl-offer-filter-not-found{

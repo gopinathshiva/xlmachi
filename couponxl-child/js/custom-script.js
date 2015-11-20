@@ -39,11 +39,16 @@ jQuery(document).ready(function($){
 		function updateSearchResults(results,searchText,parentElement){
 			$(parentElement).empty();
 			results = JSON.parse(results);
-			$.each(results,function(i,v){
-				if(v.offer_name.toLowerCase().indexOf(searchText.toLowerCase())>=0){
-					$(parentElement).append("<li class='xl-search-result-item'><a href="+v.offer_slug+"><span>" + v.offer_name + "</span></a></li>");
+			var resultCounter = 0;			
+			for(var i = 0 ;i < results.length; i++){
+				if(results[i].offer_name.toLowerCase().indexOf(searchText.toLowerCase())==0){
+					$(parentElement).append("<a href="+results[i].offer_slug+"><li class='xl-search-result-item'><span>" + results[i].offer_name + "</span></li></a>");
+					resultCounter++;
+					if(resultCounter>=6){
+						break;
+					}
 				}
-			});		
+			}			
 			$(parentElement).slideDown('fast');
 		}
 		
