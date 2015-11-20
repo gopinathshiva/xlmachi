@@ -4,6 +4,12 @@
 	***********************************************************************
 	COUPON FUNCTIONS
 	**********************************************************************/
+/* add admin-ajax */
+function couponxl_custom_head(){
+    echo '<script type="text/javascript">var ajaxurl = \'' . admin_url('admin-ajax.php') . '\';</script>';
+}
+add_action('wp_head', 'couponxl_custom_head');
+
 load_theme_textdomain('couponxl', get_template_directory() . '/languages');
 
 

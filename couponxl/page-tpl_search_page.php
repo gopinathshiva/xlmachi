@@ -185,7 +185,13 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                             <script type="text/javascript">                        
                                 jQuery(document).ready(function($){
                                     setTimeout(function(){
-                                        updateOfferCount();
+                                        //updateOfferCount();
+                                        var dealCount = $('div[data-xltype=deal]:visible').length;
+                                        $('#xl-offer-type-deal-count').text('('+dealCount+')');
+                                        var couponCount = $('div[data-xltype=coupon]:visible').length;
+                                        $('#xl-offer-type-coupon-count').text('('+couponCount+')');
+                                        var allCount = dealCount+couponCount;
+                                        $('#xl-offer-type-all-count').text('('+allCount+')');
                                     },300);
                                 });
                             </script>  	            			

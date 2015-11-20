@@ -1,11 +1,5 @@
 <?php
 
-/* add admin-ajax */
-function couponxl_custom_head(){
-    echo '<script type="text/javascript">var xl_ajaxurl = \'' . admin_url('admin-ajax.php') . '\';</script>';
-}
-add_action('wp_head', 'couponxl_custom_head');
-
 add_action('wp_ajax_search_offer', 'xl_search_offer');
 add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 

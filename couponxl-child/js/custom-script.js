@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
 			}
 
 			$.ajax({
-				url : xl_ajaxurl,
+				url : ajaxurl,
 				type : 'post',
 				data : {
 					action : 'search_offer'				
