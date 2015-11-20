@@ -23,28 +23,30 @@ jQuery(document).ready(function($){
 		$(this).text(replaceText);
 	});
 
-	//on click of checkbox in to filter offer category
+	//on click of checkbox to filter offer category
 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
 	 	xl_filterOffers();	
-	 	updateOfferTypeCount();			
+	 	//updateOfferTypeCount();			
 	});
 
 	//on click of radio button to filter offer type
 	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){			
 		xl_filterOffers();		
-		updateOfferCategoryCount();
+		//updateOfferCategoryCount();
 	});
 
 	//on click of checkbox to filter offer store
 	$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').off('click').on('click',function(event){					
 		xl_filterOffers();	
-		updateOfferTypeCount();
-		updateOfferCategoryCount();	
+		//updateOfferTypeCount();
+		//updateOfferCategoryCount();	
 	});
 
 	function xl_filterOffers(){
 		$('.xl-offer-type-filter-radio,.xl-offer-cat-filter-checkbox,.xl-offer-store-filter-checkbox').prop('disabled',true);
 		$('.xl-offer-filter-not-found').hide();
+
+		$('.xl-offer-item').removeClass('xl-filtered-type xl-filtered-cat xl-filtered-store');
 
 		var scrollStart = $("body").offset().top + 150;
 		$('html, body').animate({
@@ -54,61 +56,66 @@ jQuery(document).ready(function($){
 		var offerType = $('.xl-offer-type-filter input.xl-offer-type-filter-radio:checked').val();
 		$('.xl-offer-item').hide();
 
-		//offer type filter always checked
+		var offerCatCheckedCount = $('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length;
+		var offerStoreCheckedCount = $('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').length;
+
+		// if(!offerCatCheckedCount && !offerStoreCheckedCount){
+		// 	$('.xl-offer-item').fadeIn("slow");			
+		// }else{
+			//offer type filter always checked
 		
-		if($('.xl-offer-store-filter').length){
-					
-				$('.xl-offer-item').removeClass('xl-filtered-type xl-filtered-cat xl-filtered-store');
+			if($('.xl-offer-store-filter').length){
+									
+					//offer type filter 
+					if(offerType=="all"){
+						$('.xl-offer-item').addClass("xl-filtered-type");
+					}else{
+						$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
+					}
 
-				//offer type filter 
-				if(offerType=="all"){
-					$('.xl-offer-item').addClass("xl-filtered-type");
-				}else{
-					$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
+					//offer category filter 	
+					if(offerCatCheckedCount){
+						$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+					       	var categoryId = $(this).val();
+					       	$('.xl-offer-item.xl-filtered-type[data-xlcategory*='+categoryId+']').addClass("xl-filtered-cat");			       					
+				     	});
+					}else{
+						$('.xl-offer-item.xl-filtered-type').addClass("xl-filtered-cat");
+					}	
+
+					//offer store filter 	
+					if(offerStoreCheckedCount){
+						$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').each(function(){
+							$('.xl-offer-item.xl-filtered-type.xl-filtered-cat[data-xlstore='+$(this).val()+']').addClass('xl-filtered-store');
+						});	
+					}else{
+						$('.xl-offer-item.xl-filtered-type.xl-filtered-cat').addClass('xl-filtered-store');
+					}
+
+					$('.xl-offer-item.xl-filtered-type.xl-filtered-cat.xl-filtered-store').fadeIn('slow');
+			     	
+			}else{
+				//offer category filter not checked
+				if(!offerCatCheckedCount){
+					if(offerType=="all"){
+						$('.xl-offer-item').fadeIn("slow");
+					}else{
+						$('div[data-xltype='+offerType+']').fadeIn('slow');
+					}
 				}
-
-				//offer category filter 	
-				if($('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length){
+				//offer category filter checked
+				else{
 					$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
 				       	var categoryId = $(this).val();
-				       	$('.xl-offer-item.xl-filtered-type[data-xlcategory*='+categoryId+']').addClass("xl-filtered-cat");			       					
-			     	});
-				}else{
-					$('.xl-offer-item.xl-filtered-type').addClass("xl-filtered-cat");
-				}	
-
-				//offer store filter 	
-				if($('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').length){
-					$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').each(function(){
-						$('.xl-offer-item.xl-filtered-type.xl-filtered-cat[data-xlstore='+$(this).val()+']').addClass('xl-filtered-store');
-					});	
-				}else{
-					$('.xl-offer-item.xl-filtered-type.xl-filtered-cat').addClass('xl-filtered-store');
+				       	if(offerType=='all'){
+				       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");	
+				       	}else{
+				       		$('div[data-xltype='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn("slow");
+				       	}				
+			     	});	
 				}
-
-				$('.xl-offer-item.xl-filtered-type.xl-filtered-cat.xl-filtered-store').fadeIn('slow');
-		     	
-		}else{
-			//offer category filter not checked
-			if(!$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length){
-				if(offerType=="all"){
-					$('.xl-offer-item').fadeIn("slow");
-				}else{
-					$('div[data-xltype='+offerType+']').fadeIn('slow');
-				}
-			}
-			//offer category filter checked
-			else{
-				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
-			       	var categoryId = $(this).val();
-			       	if(offerType=='all'){
-			       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");	
-			       	}else{
-			       		$('div[data-xltype='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn("slow");
-			       	}				
-		     	});	
-			}
-		}				
+			}	
+		//}					
 
 		if(!$('.xl-offer-item:visible').length){
 			$('.xl-offer-filter-not-found').fadeIn('slow');
@@ -154,8 +161,8 @@ jQuery(document).ready(function($){
 	updateOfferCount = function(){						
 
 		updateOfferTypeCount();
-		updateOfferCategoryCount();
-		updateOfferStoreCount();
+		//updateOfferCategoryCount();
+		//updateOfferStoreCount();
 	
 	}
 

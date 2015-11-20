@@ -127,7 +127,7 @@ function xl_offer_cat_fn(){
         <div class="white-block-content">
             <h2>Filter By Categories</h2>
             <input type="search" class="form-control xl-offer-cat-search" placeholder="Search in Categories">
-            <ul class="list-unstyled xl-offer-cat-result">
+            <ul class="list-unstyled xl-offer-cat-result xl-offer-list-unstyled">
             <?php foreach( $xl_offer_cats as $key => $cat){ 
                 if(empty($cat->children)){?>                    
                             <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
@@ -150,7 +150,7 @@ function xl_offer_type_fn(){
 	<div class="white-block xl-offer-type-filter">
         <div class="white-block-content">
             <h2>Filter By Type</h2>
-            <ul class="list-unstyled xl-offer-type-result">
+            <ul class="list-unstyled xl-offer-type-result xl-offer-list-unstyled">
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-all" value="all" checked><label for="xl-offer-type-all">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
 				<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-deals" value="deal"><label for="xl-offer-type-deals">&nbsp Deals <span id="xl-offer-type-deal-count" class="count"></span></label></li>
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-coupons" value="coupon"><label for="xl-offer-type-coupons">&nbsp Coupons <span id="xl-offer-type-coupon-count" class="count"></span></label></li>
@@ -179,7 +179,7 @@ function xl_offer_store_fn(){
             <div class="white-block-content">
                 <h2>Filter By Store</h2>
                 <input type="search" class="form-control xl-offer-store-search" placeholder="Search in Store">
-                <ul class="list-unstyled xl-offer-store-result">
+                <ul class="list-unstyled xl-offer-store-result xl-offer-list-unstyled">
                 <?php
                 while( $stores->have_posts() ){
                     $stores->the_post();       
