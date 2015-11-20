@@ -1,11 +1,52 @@
 <?php
 
+/* add admin-ajax */
+function couponxl_custom_head(){
+    echo '<script type="text/javascript">var xl_ajaxurl = \'' . admin_url('admin-ajax.php') . '\';</script>';
+}
+add_action('wp_head', 'couponxl_custom_head');
+
+add_action('wp_ajax_search_offer', 'xl_search_offer');
+add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
+
+function xl_search_offer(){    
+    $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
+    $post_data = array();
+    foreach( $xl_offer_cats as $key => $cat){
+        $offer_cat = new stdClass();
+        $offer_cat->offer_cat_id = $cat->term_taxonomy_id;
+        $offer_cat->offer_store_id = null;
+        $offer_cat->offer_slug = $cat->slug;
+        $offer_cat->offer_name = $cat->name;
+        $post_data[] = $offer_cat;              
+    }  
+    $args = array(
+        'post_type' => 'store',
+        'post_status' => 'publish'        
+    );  
+    $stores = new WP_Query( $args );
+    if( $stores->have_posts() ){
+        while( $stores->have_posts() ){
+            $stores->the_post();            
+            $offer_store = new stdClass();
+            $offer_store->offer_cat_id = null;
+            $offer_store->offer_store_id = get_the_ID();
+            $offer_store->offer_slug = null;
+            $offer_store->offer_name = get_the_title();
+            $post_data[] = $offer_store;   
+        }
+    }
+    echo json_encode($post_data, JSON_PRETTY_PRINT);  
+    die();
+}
+
+
 function new_excerpt_length($length) {
 	return 15;
 }
 add_filter('excerpt_length', 'new_excerpt_length');
 
-function adding_custom_scripts() {
+function adding_custom_scripts() {    
 	wp_register_script('custom-script', 'http://localhost/CouponMachi/wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
 	wp_enqueue_script('custom-script');
 }
@@ -22,7 +63,7 @@ function add_search_box($items, $args) {
         $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix"> 
                                     <i class="fa fa-search icon-margin" style="position: absolute;right: 3px;top: 5px;"></i>
                                     <div class="">
-                                        <input style="border-radius: 8px;outline: 0;border: 1px solid rgba(0, 0, 0, 0.3);text-align:center" type="text" class="" value="" placeholder="Search" name="keyword">
+                                        <input style="border-radius: 8px;outline: 0;border: 1px solid rgba(0, 0, 0, 0.3);text-align:center" type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
                                     </div>
                                 </form>';
 

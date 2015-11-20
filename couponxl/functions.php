@@ -1082,12 +1082,6 @@ function couponxl_format_post_date($date, $format){
 	return date($format, strtotime($date));
 }
 
-/* add admin-ajax */
-function couponxl_custom_head(){
-	echo '<script type="text/javascript">var ajaxurl = \'' . admin_url('admin-ajax.php') . '\';</script>';
-}
-add_action('wp_head', 'couponxl_custom_head');
-
 function couponxl_smeta_images( $meta_key, $post_id, $default ){
 	if(class_exists('SM_Frontend')){
 		global $sm;

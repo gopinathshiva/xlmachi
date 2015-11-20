@@ -1,6 +1,29 @@
 var updateOfferCount;
 jQuery(document).ready(function($){
 
+	var isAjaxCalled = false;
+	$( document ).on( 'keyup', '.xl-search-input', function() {	
+
+		if(isAjaxCalled){
+			return;
+		}
+		isAjaxCalled = true;
+
+		$.ajax({
+			url : xl_ajaxurl,
+			type : 'post',
+			data : {
+				action : 'search_offer',
+				searchText : $(this).val()
+			},
+			success : function( response ) {				
+				sessionStorage.setItem('xl_offer_result',response);
+				console.log(response);
+			}
+		});
+		
+	});
+
 	function xl_getText(text){		
 		if(text.indexOf('+')<0){
 			return text.replace('-','+');
