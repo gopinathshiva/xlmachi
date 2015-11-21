@@ -154,7 +154,7 @@ a.read-info{
     right: -35px;
     top: 35px;
     height: 40px;
-    z-index: 1500;
+    z-index: 1000;
 }
 
 .navigation.sticky-nav .navbar .xl-search-form-container{
@@ -185,7 +185,7 @@ a.read-info{
     transition:width .5s ease;
 }
 
-.navbar.search-active .menu-item{
+.navbar.search-active .menu-item,.xl-search-description{
     display: none;
 }
 
@@ -193,9 +193,28 @@ a.read-info{
     width: 700px;
 }
 
-.xl-search-result{
+.xl-search-result,.xl-search-description{
     background: #fff;
     z-index: 1500;
+}
+
+.nav.navbar-nav .xl-search-description li{
+    border-bottom: 1px solid #F4F4F4;
+    padding: 7px;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
+.xl-search-description .right-description{    
+    float: right;
+    padding-right: 10px;
+}
+
+.xl-search-description .search-explanation{
+    background: #EAEAEA;
+    padding: 1px;
+    padding-left: 20px;
+    font-size: 12px;
 }
 
 .navbar .xl-search-result .xl-search-result-item{

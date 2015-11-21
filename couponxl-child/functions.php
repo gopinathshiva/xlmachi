@@ -12,27 +12,28 @@ function xl_search_offer(){
         $offer_cat->offer_store_id = null;
         $offer_cat->offer_slug = esc_url( home_url('/') ).'offer_cat/'.$cat->slug;
         $offer_cat->offer_name = $cat->name;
+        $offer_cat->offer_list = 'Categories';
         $post_data[] = $offer_cat;              
     }  
-    $args = array(
-        'post_type' => 'store',
-        'post_status' => 'publish'        
-    );  
-    $stores = new WP_Query( $args );
-    if( $stores->have_posts() ){
-        while( $stores->have_posts() ){            
-            $stores->the_post();       
-            $store_name = get_the_title();
-            $store_slug = strtolower($store_name);
-            $store_slug = str_replace(' ', '-', $store_slug);
+
+    global $wpdb;    
+    $stores = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT ID, post_title,post_name FROM {$wpdb->posts} AS posts WHERE posts.post_type = %s AND posts.post_status = %s",'store','publish'
+        )
+    );
+    if( !empty( $stores ) ){
+        foreach( $stores as $store ){                    
             $offer_store = new stdClass();
             $offer_store->offer_cat_id = null;
-            $offer_store->offer_store_id = get_the_ID();
-            $offer_store->offer_slug = esc_url( home_url('/') ).'store/'.$store_slug;
-            $offer_store->offer_name = $store_name;
-            $post_data[] = $offer_store;   
+            $offer_store->offer_store_id = $store->ID;            
+            $offer_store->offer_slug = esc_url( home_url('/') ).'store/'.$store->post_name;
+            $offer_store->offer_name = $store->post_title;
+            $offer_store->offer_list = 'Website';
+            $post_data[] = $offer_store;             
         }
     }
+
     echo json_encode($post_data, JSON_PRETTY_PRINT);  
     die();
 }
@@ -62,6 +63,11 @@ function add_search_box($items, $args) {
                             <div class="">
                                 <input type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
                                 <ul class="xl-search-result list-unstyled">
+                                </ul>
+                                <ul class="xl-search-description list-unstyled">
+                                <li class="search-explanation">You can Search for</li>
+                                <li><span class="left-description">Websites</span><span class="right-description">Paytm, Flipkart</span></li>
+                                <li><span class="left-description">Categories</span><span class="right-description">Recharge, Mobiles & Tablets</span></li>                                
                                 </ul>
                             </div>
                         </form>';
