@@ -21,6 +21,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 
             <div class="col-md-9">
 
+                <?php do_action('xl_filter_text') ?>
                 <?php 
                 $show_search_slider = couponxl_get_option( 'show_search_slider' );
                 if( $show_search_slider == 'yes' ){
