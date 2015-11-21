@@ -185,7 +185,7 @@ a.read-info{
     transition:width .5s ease;
 }
 
-.navbar.search-active .menu-item,.xl-search-description{
+.navbar.search-active .menu-item,.xl-search-description,#xl_filter_text_container{
     display: none;
 }
 
@@ -230,6 +230,18 @@ a.read-info{
 
 .navbar .xl-search-result .xl-search-result-item:hover{
     background: #E0E0E0;
+}
+
+#xl_filter_text_container{
+    padding: 10px;
+}
+
+#xl_filter_text_items,.xl_filter_text_item{
+    display: inline;
+}
+
+.xl_filter_text_item{    
+    font-weight: bold;
 }
 
 /* ***********************  search block css changes ends here ******************** */

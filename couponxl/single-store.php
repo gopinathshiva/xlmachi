@@ -200,6 +200,7 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
             </div>
 
             <div class="col-md-9" id='xl-store-start'>
+                <?php do_action('xl_filter_text') ?>
                 <?php
                 $cur_page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1; //get curent page
                 $offers_per_page = couponxl_get_option( 'offers_per_page' );

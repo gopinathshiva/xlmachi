@@ -86,9 +86,25 @@ jQuery(document).ready(function($){
 		$(this).text(replaceText);
 	});
 
+	function updateFilterTextContainer(){
+		if($('#xl_filter_text_items li').length){
+			$('#xl_filter_text_container').fadeIn('fast');
+		}else{
+			$('#xl_filter_text_container').fadeOut('fast');
+		}
+	}
+
 	//on click of checkbox to filter offer category
 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
-	 	xl_filterOffers();	
+	 	xl_filterOffers();	 	
+	 	if($(this).prop('checked')){	 		
+	 		var id="xl_filter_text_"+$(this).attr('data-option');
+	 		var element = '<li class="xl_filter_text_item" id='+id+'>'+$(this).attr('data-option')+', </li>'
+	 		$('#xl_filter_text_items').append(element);
+	 	}else{
+	 		$('#xl_filter_text_items #xl_filter_text_'+$(this).attr('data-option'))[0].remove();
+	 	}
+	 	updateFilterTextContainer();
 	 	//updateOfferTypeCount();			
 	});
 

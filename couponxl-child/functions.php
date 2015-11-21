@@ -164,6 +164,12 @@ if(!function_exists(debug_to_console)){
 	}
 }
 
+add_action('xl_filter_text','xl_filter_text_fn');
+
+function xl_filter_text_fn(){
+    echo '<div id="xl_filter_text_container">Showing Filtered Result for: <ul class="list-unstyled" id="xl_filter_text_items"></ul></div>';
+}
+
 add_action('xl_offer_cat','xl_offer_cat_fn');
 
 function xl_offer_cat_fn(){
@@ -176,10 +182,10 @@ function xl_offer_cat_fn(){
             <ul class="list-unstyled xl-offer-cat-result xl-offer-list-unstyled">
             <?php foreach( $xl_offer_cats as $key => $cat){ 
                 if(empty($cat->children)){?>                    
-                            <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
+                            <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
                 <?php }else{?>
                     <?php foreach( $cat->children as $key => $child ){ ?>                        
-                            <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
+                            <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
                     <?php } 
                 } 
             } ?>
