@@ -224,8 +224,8 @@ jQuery(document).ready(function($){
 	updateOfferCount = function(){						
 
 		updateOfferTypeCount();
-		//updateOfferCategoryCount();
-		//updateOfferStoreCount();
+		updateOfferCategoryCount();
+		updateOfferStoreCount();
 	
 	}
 
@@ -245,7 +245,7 @@ jQuery(document).ready(function($){
 			if(!catCount){
 				$('li.xl-cat-'+catId).addClass('xl-no-offer').hide();
 			}else{
-				$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
+				//$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
 			}			
 		});
 	}

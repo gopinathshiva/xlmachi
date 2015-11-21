@@ -45,7 +45,7 @@ function new_excerpt_length($length) {
 add_filter('excerpt_length', 'new_excerpt_length');
 
 function adding_custom_scripts() {    
-	wp_register_script('custom-script', 'http://localhost/CouponMachi/wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
+	wp_register_script('custom-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
 	wp_enqueue_script('custom-script');
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
