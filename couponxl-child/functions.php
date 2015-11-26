@@ -1,41 +1,39 @@
 <?php
 
-/* add admin-ajax */
-function couponxl_custom_head(){
-    echo '<script type="text/javascript">var xl_ajaxurl = \'' . admin_url('admin-ajax.php') . '\';</script>';
-}
-add_action('wp_head', 'couponxl_custom_head');
-
 add_action('wp_ajax_search_offer', 'xl_search_offer');
 add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 
-function xl_search_offer(){    
+function xl_search_offer(){        
     $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
     $post_data = array();
     foreach( $xl_offer_cats as $key => $cat){
         $offer_cat = new stdClass();
         $offer_cat->offer_cat_id = $cat->term_taxonomy_id;
         $offer_cat->offer_store_id = null;
-        $offer_cat->offer_slug = $cat->slug;
+        $offer_cat->offer_slug = esc_url( home_url('/') ).'offer_cat/'.$cat->slug;
         $offer_cat->offer_name = $cat->name;
+        $offer_cat->offer_list = 'Categories';
         $post_data[] = $offer_cat;              
     }  
-    $args = array(
-        'post_type' => 'store',
-        'post_status' => 'publish'        
-    );  
-    $stores = new WP_Query( $args );
-    if( $stores->have_posts() ){
-        while( $stores->have_posts() ){
-            $stores->the_post();            
+
+    global $wpdb;    
+    $stores = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT ID, post_title,post_name FROM {$wpdb->posts} AS posts WHERE posts.post_type = %s AND posts.post_status = %s",'store','publish'
+        )
+    );
+    if( !empty( $stores ) ){
+        foreach( $stores as $store ){                    
             $offer_store = new stdClass();
             $offer_store->offer_cat_id = null;
-            $offer_store->offer_store_id = get_the_ID();
-            $offer_store->offer_slug = null;
-            $offer_store->offer_name = get_the_title();
-            $post_data[] = $offer_store;   
+            $offer_store->offer_store_id = $store->ID;            
+            $offer_store->offer_slug = esc_url( home_url('/') ).'store/'.$store->post_name;
+            $offer_store->offer_name = $store->post_title;
+            $offer_store->offer_list = 'Website';
+            $post_data[] = $offer_store;             
         }
     }
+
     echo json_encode($post_data, JSON_PRETTY_PRINT);  
     die();
 }
@@ -47,7 +45,7 @@ function new_excerpt_length($length) {
 add_filter('excerpt_length', 'new_excerpt_length');
 
 function adding_custom_scripts() {    
-	wp_register_script('custom-script', 'http://localhost/CouponMachi/wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
+	wp_register_script('custom-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
 	wp_enqueue_script('custom-script');
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
@@ -60,14 +58,21 @@ function add_search_box($items, $args) {
         $searchform = ob_get_contents();
         ob_end_clean();
 
-        $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix"> 
-                                    <i class="fa fa-search icon-margin" style="position: absolute;right: 3px;top: 5px;"></i>
-                                    <div class="">
-                                        <input style="border-radius: 8px;outline: 0;border: 1px solid rgba(0, 0, 0, 0.3);text-align:center" type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
-                                    </div>
-                                </form>';
+        $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix xl-search-form"> 
+                            <i class="fa fa-search icon-margin" ></i>
+                            <div class="">
+                                <input type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
+                                <ul class="xl-search-result list-unstyled">
+                                </ul>
+                                <ul class="xl-search-description list-unstyled">
+                                <li class="search-explanation">You can Search for</li>
+                                <li><span class="left-description">Websites</span><span class="right-description">Paytm, Flipkart</span></li>
+                                <li><span class="left-description">Categories</span><span class="right-description">Recharge, Mobiles & Tablets</span></li>                                
+                                </ul>
+                            </div>
+                        </form>';
 
-        $items .= '<li style="position:relative">' . $searchform . '</li>';
+        $items .= '<li class="xl-search-form-container">' . $searchform . '</li>';
 
     return $items;
 }
@@ -159,6 +164,12 @@ if(!function_exists(debug_to_console)){
 	}
 }
 
+add_action('xl_filter_text','xl_filter_text_fn');
+
+function xl_filter_text_fn(){
+    echo '<div id="xl_filter_text_container">Showing Filtered Result for: <ul class="list-unstyled" id="xl_filter_text_items"></ul></div>';
+}
+
 add_action('xl_offer_cat','xl_offer_cat_fn');
 
 function xl_offer_cat_fn(){
@@ -171,10 +182,10 @@ function xl_offer_cat_fn(){
             <ul class="list-unstyled xl-offer-cat-result xl-offer-list-unstyled">
             <?php foreach( $xl_offer_cats as $key => $cat){ 
                 if(empty($cat->children)){?>                    
-                            <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
+                            <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
                 <?php }else{?>
                     <?php foreach( $cat->children as $key => $child ){ ?>                        
-                            <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
+                            <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
                     <?php } 
                 } 
             } ?>
@@ -224,7 +235,7 @@ function xl_offer_store_fn(){
                 <?php
                 while( $stores->have_posts() ){
                     $stores->the_post();       
-                    ?><li class="xl-store-<?php echo get_the_ID() ?>"><input class="xl-offer-store-filter-checkbox" type="checkbox" name="xl-offer-store" id="xl-offer-store-<?php echo get_the_ID()?>" value="<?php echo get_the_ID()?>" ><label for="xl-offer-store-<?php echo get_the_ID()?>">&nbsp <?php the_title() ?> <span id="xl-offer-store-<?php echo get_the_ID()?>-count" class="count"></span></label></li>   <?php            
+                    ?><li data-option="<?php echo the_title() ?>" class="xl-store-<?php echo get_the_ID() ?>"><input class="xl-offer-store-filter-checkbox" type="checkbox" name="xl-offer-store" id="xl-offer-store-<?php echo get_the_ID()?>" value="<?php echo get_the_ID()?>" ><label for="xl-offer-store-<?php echo get_the_ID()?>">&nbsp <?php the_title() ?> <span id="xl-offer-store-<?php echo get_the_ID()?>-count" class="count"></span></label></li>   <?php            
                 }
                 ?>
                 </ul>                

@@ -200,6 +200,7 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
             </div>
 
             <div class="col-md-9" id='xl-store-start'>
+                <?php do_action('xl_filter_text') ?>
                 <?php
                 $cur_page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1; //get curent page
                 $offers_per_page = couponxl_get_option( 'offers_per_page' );
@@ -294,7 +295,13 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                         <script type="text/javascript">                        
                             jQuery(document).ready(function($){
                                 setTimeout(function(){
-                                    updateOfferCount();
+                                    //updateOfferCount();
+                                    var dealCount = $('div[data-xltype=deal]:visible').length;
+                                    $('#xl-offer-type-deal-count').text('('+dealCount+')');
+                                    var couponCount = $('div[data-xltype=coupon]:visible').length;
+                                    $('#xl-offer-type-coupon-count').text('('+couponCount+')');
+                                    var allCount = dealCount+couponCount;
+                                    $('#xl-offer-type-all-count').text('('+allCount+')');
                                 },300);
                             });
                         </script>                        

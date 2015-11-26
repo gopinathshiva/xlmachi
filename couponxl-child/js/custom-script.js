@@ -1,26 +1,66 @@
 var updateOfferCount;
 jQuery(document).ready(function($){
 
-	var isAjaxCalled = false;
-	$( document ).on( 'keyup', '.xl-search-input', function() {	
-
-		if(isAjaxCalled){
-			return;
-		}
-		isAjaxCalled = true;
-
-		$.ajax({
-			url : xl_ajaxurl,
-			type : 'post',
-			data : {
-				action : 'search_offer',
-				searchText : $(this).val()
-			},
-			success : function( response ) {				
-				sessionStorage.setItem('xl_offer_result',response);
-				console.log(response);
+	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
+		if(e.type=='blur'){
+			$('.xl-search-result,.xl-search-description').slideUp('fast');	
+		}else{			
+			if($(this).val().length){
+				$('.xl-search-result').slideDown('fast');
+			}else{
+				$('.xl-search-description').slideDown('fast');
 			}
-		});
+		}
+		$(this).closest('.navbar').toggleClass('search-active');
+	});
+	
+	var keyupTimeout;
+	$( document ).on( 'keyup', '.xl-search-input', function() {	
+		if($(this).val().length==1){
+			$('.xl-search-description').slideUp('fast');
+		}
+		if(keyupTimeout){
+			clearTimeout(keyupTimeout);
+		}
+		keyupTimeout = setTimeout(function(){
+			var searchText = $(this).val();
+			var parentElement = $(this).next()[0];
+
+			$('.xl-search-result').slideUp('fast');
+
+			if(sessionStorage.getItem('xl_offer_result')){
+				updateSearchResults(sessionStorage.getItem('xl_offer_result'),$(this).val(),parentElement);
+				return;
+			}
+
+			$.ajax({
+				url : ajaxurl,
+				type : 'post',
+				data : {
+					action : 'search_offer'				
+				},
+				success : function( response ) {				
+					sessionStorage.setItem('xl_offer_result',response);		
+					updateSearchResults(response,searchText,parentElement);	
+				}
+			});
+		}.bind(this),300);		
+
+		function updateSearchResults(results,searchText,parentElement){
+			$(parentElement).empty();
+			results = JSON.parse(results);
+			var resultCounter = 0;			
+			for(var i = 0 ;i < results.length; i++){
+				if(results[i].offer_name.toLowerCase().indexOf(searchText.toLowerCase())==0){
+					$(parentElement).append("<a href="+results[i].offer_slug+"><li class='xl-search-result-item'><span>" + results[i].offer_name + "</span></li></a>");
+					resultCounter++;
+					if(resultCounter>=6){
+						break;
+					}
+				}
+			}			
+			$(parentElement).slideDown('fast');
+		}
 		
 	});
 
@@ -46,9 +86,25 @@ jQuery(document).ready(function($){
 		$(this).text(replaceText);
 	});
 
+	function updateFilterTextContainer(){
+		if($('#xl_filter_text_items li').length){
+			$('#xl_filter_text_container').fadeIn('fast');
+		}else{
+			$('#xl_filter_text_container').fadeOut('fast');
+		}
+	}
+
 	//on click of checkbox to filter offer category
 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
-	 	xl_filterOffers();	
+	 	xl_filterOffers();	 	
+	 	if($(this).prop('checked')){	 		
+	 		var id="xl_filter_text_"+$(this).attr('data-option');
+	 		var element = '<li class="xl_filter_text_item" id='+id+'>'+$(this).attr('data-option')+', </li>'
+	 		$('#xl_filter_text_items').append(element);
+	 	}else{
+	 		$('#xl_filter_text_items #xl_filter_text_'+$(this).attr('data-option'))[0].remove();
+	 	}
+	 	updateFilterTextContainer();
 	 	//updateOfferTypeCount();			
 	});
 
@@ -184,8 +240,8 @@ jQuery(document).ready(function($){
 	updateOfferCount = function(){						
 
 		updateOfferTypeCount();
-		//updateOfferCategoryCount();
-		//updateOfferStoreCount();
+		updateOfferCategoryCount();
+		updateOfferStoreCount();
 	
 	}
 
@@ -205,7 +261,7 @@ jQuery(document).ready(function($){
 			if(!catCount){
 				$('li.xl-cat-'+catId).addClass('xl-no-offer').hide();
 			}else{
-				$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
+				//$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
 			}			
 		});
 	}
