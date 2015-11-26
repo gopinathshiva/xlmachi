@@ -65,7 +65,7 @@ Tags: white
 
 @media screen and (min-width: 768px){
     .xl-offer-item {
-        min-height: 370px;
+        min-height: 380px;
         height: auto;
     }
 }
