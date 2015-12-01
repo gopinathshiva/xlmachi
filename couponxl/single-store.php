@@ -247,8 +247,6 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                     );
                 }
 
-                print_r($args);
-
                 $offers = new WP_Query( $args );
 
                 $page_links_total =  $offers->max_num_pages;
