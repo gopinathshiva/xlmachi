@@ -245,6 +245,48 @@ function xl_offer_store_fn(){
     wp_reset_query();
 }
 
+//wp-all-import action hook
+add_action('pmxi_saved_post', 'post_saved', 10, 1);
+
+function post_saved($id) {
+    $offer_type = get_post_meta($id, 'offer_type', true);    
+    $expiry_date = get_post_meta($id,'offer_expire',true);
+    $start_date = get_post_meta($id,'offer_start',true);
+    $offer_in_slider = get_post_meta($id,'offer_in_slider',true);
+
+    if($offer_type == 'Promotion' || $offer_type == 'Coupon'){
+        if($offer_type == 'Promotion'){
+            $offer_type = 'deal';
+        }else if($offer_type == 'Coupon'){
+            $offer_type = 'coupon';
+        }        
+        update_post_meta($id, 'offer_type', $offer_type);
+    }
+
+    if($offer_type == 'deal'){
+        $offer_link = get_post_meta($id,'coupon_link',true);
+        $deal_info = get_post_meta($id,'post_content',true);
+        update_post_meta($id, 'deal_link', $offer_link);
+        update_post_meta($id, 'deal_in_short', $deal_info);        
+    }else if($offer_type == 'coupon'){
+        update_post_meta($id, 'coupon_type', 'code');
+    }
+
+    $timestamp = strtotime($expiry_date. '+1 day');
+    update_post_meta($id, 'offer_expire', $timestamp);
+
+    $timestamp = strtotime($start_date);
+    update_post_meta($id, 'offer_start', $timestamp);
+
+    if(empty($offer_in_slider)){
+        update_post_meta($id, 'offer_in_slider', 'no');
+    }
+
+    update_post_meta($id, 'deal_status', 'has_items');
+    update_post_meta($id,'offer_initial_payment','paid');
+
+}
+
 /* adding google analytics */
 
 //add_action('wp_footer', 'add_google_analytics');

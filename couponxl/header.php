@@ -42,6 +42,7 @@ if( $show_top_bar == 'yes' ){
 }
 ?>
 <body <?php body_class( $body_extra_class ); ?> id="body">
+<div class="se-pre-con"></div>
 <?php $site_logo = couponxl_get_option( 'site_logo' ); ?>
 
 

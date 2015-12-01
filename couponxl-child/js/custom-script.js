@@ -1,6 +1,8 @@
 var updateOfferCount;
 jQuery(document).ready(function($){
 
+	$(".se-pre-con").fadeOut("slow");;	
+
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
 		if(e.type=='blur'){
 			$('.xl-search-result,.xl-search-description').slideUp('fast');	
