@@ -302,7 +302,17 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                     $('#xl-offer-type-coupon-count').text('('+couponCount+')');
                                     var allCount = dealCount+couponCount;
                                     $('#xl-offer-type-all-count').text('('+allCount+')');
-                                },300);
+                                    
+                                    //hiding categories with no offers                                    
+                                    $('.xl-offer-cat-result li').each(function(k,v){
+                                        var input = $(this).find('input')[0];
+                                        var id = ($(input).attr('id'));
+                                        if(!($('div[data-xlcategory='+id+']:visible').length)){
+                                            $('div[data-xlcategory='+id+']').hide();
+                                        }
+                                    });
+
+                                },1000);
                             });
                         </script>                        
                         <?php if( !empty( $pagination ) ): ?>

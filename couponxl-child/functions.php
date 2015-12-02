@@ -52,9 +52,22 @@ add_filter('excerpt_length', 'new_excerpt_length');
 
 function adding_custom_scripts() {    
 	wp_register_script('custom-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
+    wp_register_script('preloader-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/image-preloader.js','',null, true);
+
 	wp_enqueue_script('custom-script');
+    wp_enqueue_script('preloader-script');
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
+
+add_action('wp_head','add_image_preloader_inline_script');
+
+function add_image_preloader_inline_script() {
+    echo '<script type="text/javascript">
+            jQuery(function(){
+                jQuery(".container img").imgPreload();
+            });
+    </script>';
+}
 
 add_filter('wp_nav_menu_items','add_search_box', 10, 2);
 function add_search_box($items, $args) {
