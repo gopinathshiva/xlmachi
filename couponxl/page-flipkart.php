@@ -1,6 +1,6 @@
 <?php
 /*==================
- SINGLE BLOG POST
+ SINGLE BLOG POST FOR FLIPKART DAILY DEALS
 ==================*/
 
 get_header();
@@ -91,22 +91,26 @@ $post_id = 475;
             </div>
 
             <div class="col-md-9" id='xl-store-start'> 
-            <div id='flipkart-search-box' style="margin-bottom: 10px;margin-left: 15px;">
+            <!-- <div id='flipkart-search-box' style="margin-bottom: 10px;margin-left: 15px;">
             <input style="width: 70%;border-radius: 4px;outline: 0;border: 1px solid rgba(0, 0, 0, 0.3);padding-left: 10px;
     height: 35px;" type="text" class="xl-flipkart-search-input" value="" placeholder="Search Flipkart Offers" name="keyword">  
             <button id='flipkart-search' style="background: rgba(91, 15, 112, 0.29);height: 35px;border-radius: 5px;outline: 0;width: 29%;">Search</button>
-            </div>
-            <?php $response = getDailyDeals(); 
-                  $response = json_decode($response, true);                  
-                  $response = $response['dotdList'];
-                  if(empty($response)){
+            </div> -->
+            <?php 
+
+                if ( false === ( $response = get_transient( 'flipkart_daily_deals' ) ) ) {                   
+                   $response = getDailyDeals();
+                }   
+            
+                if(empty($response)){
                     echo '<h5>Sorry something went wrong ! Please try Reloading the page</h5>';
-                  }
-                  else{
-                  ?>
-                  <div id='flipkart-offer-start'>
-                  <?php                    
-                  foreach ($response as $value) {                                          
+                }
+                else{
+                    $response = $response['dotdList'];
+                    ?>
+                    <div id='flipkart-offer-start'>
+                    <?php                    
+                    foreach ($response as $value) {                                          
             ?>
 
             <!-- start -->

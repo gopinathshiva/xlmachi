@@ -108,10 +108,46 @@ if it's not present, don't show loader */
     padding: 15px;
 }
 
+/* *********************** offer other info css changes starts here ************** */
+
+.offer-box .white-block-content .top-meta li:last-child{
+    margin-top: 3px;
+}
+
+.top-meta li .item-ratings i.fa-star-o {
+    font-size: 12px;
+}
+
+.offer-box .offer-other-info-container{
+    margin-bottom:12px;
+    font-size:12px;
+    color:#7C7C7C;    
+}
+
+.offer-box .offer-used-count{
+    float:left;
+    border-right:1px solid #7C7C7C;
+    width:55%
+}
+
+.offer-box .offer-verified-status{
+    float: right;
+}
+
+.clear{
+    clear:both;
+}
+
+
+
 /* ***********************  read info css changes starts here ******************** */
 
+.coupon-info-container{
+    margin-top: 3px;
+}
+
 .masonry-item .deal-info-container,.masonry-item .coupon-info-container{
-    display: none;
+    display: none;    
 }
 
 .bottom-meta li{

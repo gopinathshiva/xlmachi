@@ -3,38 +3,44 @@
 add_action('wp_ajax_search_offer', 'xl_search_offer');
 add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 
-function xl_search_offer(){        
-    $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
-    $post_data = array();
-    foreach( $xl_offer_cats as $key => $cat){
-        $offer_cat = new stdClass();
-        $offer_cat->offer_cat_id = $cat->term_taxonomy_id;
-        $offer_cat->offer_store_id = null;
-        $offer_cat->offer_slug = esc_url( home_url('/') ).'offer_cat/'.$cat->slug;
-        $offer_cat->offer_name = $cat->name;
-        $offer_cat->offer_list = 'Categories';
-        $post_data[] = $offer_cat;              
-    }  
+function xl_search_offer(){
+    if ( false === ( $offer_categories = get_transient( 'couponxl_offer_categories_and_stores' ) ) ) {
+    
+        $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
+        $post_data = array();
+        foreach( $xl_offer_cats as $key => $cat){
+            $offer_cat = new stdClass();
+            $offer_cat->offer_cat_id = $cat->term_taxonomy_id;
+            $offer_cat->offer_store_id = null;
+            $offer_cat->offer_slug = esc_url( home_url('/') ).'offer_cat/'.$cat->slug;
+            $offer_cat->offer_name = $cat->name;
+            $offer_cat->offer_list = 'Categories';
+            $post_data[] = $offer_cat;              
+        }  
 
-    global $wpdb;    
-    $stores = $wpdb->get_results(
-        $wpdb->prepare(
-            "SELECT ID, post_title,post_name FROM {$wpdb->posts} AS posts WHERE posts.post_type = %s AND posts.post_status = %s",'store','publish'
-        )
-    );
-    if( !empty( $stores ) ){
-        foreach( $stores as $store ){                    
-            $offer_store = new stdClass();
-            $offer_store->offer_cat_id = null;
-            $offer_store->offer_store_id = $store->ID;            
-            $offer_store->offer_slug = esc_url( home_url('/') ).'store/'.$store->post_name;
-            $offer_store->offer_name = $store->post_title;
-            $offer_store->offer_list = 'Website';
-            $post_data[] = $offer_store;             
+        global $wpdb;    
+        $stores = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT ID, post_title,post_name FROM {$wpdb->posts} AS posts WHERE posts.post_type = %s AND posts.post_status = %s",'store','publish'
+            )
+        );
+        if( !empty( $stores ) ){
+            foreach( $stores as $store ){                    
+                $offer_store = new stdClass();
+                $offer_store->offer_cat_id = null;
+                $offer_store->offer_store_id = $store->ID;            
+                $offer_store->offer_slug = esc_url( home_url('/') ).'store/'.$store->post_name;
+                $offer_store->offer_name = $store->post_title;
+                $offer_store->offer_list = 'Website';
+                $post_data[] = $offer_store;             
+            }
         }
+
+        $offer_categories = json_encode($post_data); 
+        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, 24 * HOUR_IN_SECONDS );         
     }
 
-    echo json_encode($post_data, JSON_PRETTY_PRINT);  
+    echo $offer_categories;    
     die();
 }
 
@@ -285,6 +291,16 @@ function post_saved($id) {
     update_post_meta($id, 'deal_status', 'has_items');
     update_post_meta($id,'offer_initial_payment','paid');
 
+}
+
+add_action('offer_other_info','offer_other_info_callback');
+
+function offer_other_info_callback(){ ?>
+    <div class='offer-other-info-container'>
+            <div class='offer-used-count'><i class='fa fa-shopping-cart icon-margin'></i><?php echo(rand(2,50)); ?> Uses Today</div>
+            <div class='offer-verified-status'><i class='fa fa-check-circle icon-margin'></i>Verified</div>
+            <div class='clear'></div>
+    </div><?php
 }
 
 /* adding google analytics */

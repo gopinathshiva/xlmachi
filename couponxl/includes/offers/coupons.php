@@ -41,6 +41,8 @@
 			<a class="read-info" href="javascript:void(0)">Coupon Info (+)</a>
 			<div class="read-info-description"><?php the_excerpt(); ?></div>
 		</div> -->
+		<!-- CUSTOMISATION DONE HERE -->
+		<?php do_action('offer_other_info'); ?>
 		<ul class="list-unstyled list-inline bottom-meta">
 			<li>
 				<i class="fa fa-dot-circle-o icon-margin"></i>

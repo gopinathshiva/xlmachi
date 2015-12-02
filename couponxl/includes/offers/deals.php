@@ -41,7 +41,7 @@
 
 		<h3><a href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'deal' => get_the_ID() ), array('all') ) ); ?>"><?php the_title(); ?></a></h3>
 		
-
+		<?php do_action('offer_other_info'); ?>
 		<ul class="list-unstyled list-inline bottom-meta">
 			<li>
 				<i class="fa fa-dot-circle-o icon-margin"></i> 
