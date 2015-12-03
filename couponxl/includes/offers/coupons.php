@@ -1,5 +1,6 @@
 <div class="white-block offer-box coupon-box <?php echo esc_attr( $offer_view ) ?> <?php echo $col == '12' ? 'clearfix' : '' ?>">
 	<div class="white-block-media <?php echo $col == '12' ? 'col-sm-4 no-padding' : '' ?>">
+		<?php do_action('offer_top_info'); ?>
 		<div class="embed-responsive embed-responsive-16by9">
 			<?php
 			$store_id = get_post_meta( get_the_ID(), 'offer_store', true );

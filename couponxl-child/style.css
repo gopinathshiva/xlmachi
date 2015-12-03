@@ -111,6 +111,71 @@ if it's not present, don't show loader */
 
 /* *********************** offer other info css changes starts here ************** */
 
+.offer-box .xl-offer-label{
+    float: left;
+    margin: 8px 0 0 -1px;
+    padding: 0;
+    width: auto;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+}
+
+.offer-box .xl-offer-text{
+    float: left;
+    margin: 0;
+    padding: 0 5px;
+    width: auto;    
+    height: 20px;
+    color: #ffffff;
+    font: 600 11px/20px 'Open Sans', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.coupon-box .xl-offer-text{
+    background: #D23047;
+}
+
+.deal-box .xl-offer-text{
+    background: #1D5DCA;
+}
+
+.coupon-box .xl-offer-triangle-topright{
+    border-top: 10px solid #D23047;
+}
+
+.deal-box .xl-offer-triangle-topright{
+    border-top: 10px solid #1D5DCA;
+}
+
+.coupon-box .xl-offer-triangle-bottomright{    
+    border-bottom: 10px solid #D23047;
+}
+
+.deal-box .xl-offer-triangle-bottomright{
+    border-bottom: 10px solid #1D5DCA;
+}
+
+.offer-box .xl-offer-wrapper{
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 7px;
+}
+
+.offer-box .xl-offer-triangle-topright{
+    border-right: 8px solid rgba(0, 0, 0, 0);    
+    height: 0;
+    width: 0;
+}
+
+.offer-box .xl-offer-triangle-bottomright{    
+    border-right: 8px solid rgba(0, 0, 0, 0);
+    height: 0;
+    width: 0;
+}
+
 .offer-box .white-block-content .top-meta li:last-child{
     margin-top: 3px;
 }

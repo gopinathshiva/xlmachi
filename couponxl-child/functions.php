@@ -323,6 +323,46 @@ function offer_other_info_callback(){ ?>
     </div><?php
 }
 
+add_action('offer_top_info','offer_top_info_callback');
+
+// offer_number offer_unit offer_details -> 50 off flat cashback
+function offer_top_info_callback(){?>
+    <?php 
+    $offer_tag = wp_get_post_terms(get_the_ID(), 'offer_tag', array("fields" => "names"));     
+    if(is_array($offer_tag)){
+        $offer_unit = 'off';
+        foreach ($offer_tag as $tag_value) {
+            if(is_numeric($tag_value)){
+                $offer_number = $tag_value;
+            }else if($tag_value == 'flat'){
+                $offer_flat = $tag_value;
+                $offer_type = $tag_value;
+            }else if($tag_value == 'cashback'){
+                $offer_cashback = $tag_value;
+                $offer_type = $tag_value;
+            }else if($tag_value == 'off'){
+                $offer_unit = $tag_value;                
+            }else if($tag_value == 'percent'){
+                $offer_unit = $tag_value;                
+            }
+        }
+        if($offer_flat && $offer_cashback){
+            $offer_type = $offer_flat.' + '.$offer_cashback;
+        }                
+    }else{
+        $offer_type = 'Exclusive';
+    }    
+    ?>
+    <div class="xl-offer-label <?php echo $offer_flat.$offer_cashback; ?>" data-xl-offer-amount="<?php echo $offer_amount; ?>" data-xl-offer-number="<?php echo $offer_number; ?>" data-xl-offer-type="<?php echo $offer_type; ?>" data-xl-offer-unit="<?php echo $offer_unit; ?>">            
+        <div class="xl-offer-text"><?php echo $offer_type.' offer' ?></div>
+        <div class="xl-offer-wrapper">
+            <div class="xl-offer-triangle-topright"></div>
+            <div class="xl-offer-triangle-bottomright"></div>
+        </div>
+    </div>
+    <?php
+}
+
 /* adding google analytics */
 
 //add_action('wp_footer', 'add_google_analytics');

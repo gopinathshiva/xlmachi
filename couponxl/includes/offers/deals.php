@@ -1,5 +1,6 @@
 <div class="white-block offer-box deal-box <?php echo esc_attr( $offer_view ) ?> <?php echo $col == '12' ? 'clearfix' : '' ?>">
 	<div class="white-block-media  <?php echo $col == '12' ? 'col-sm-4 no-padding' : '' ?>">
+		<?php do_action('offer_top_info'); ?>		
 		<div class="embed-responsive embed-responsive-16by9">
 			<?php			
 			if( has_post_thumbnail() ){?>
