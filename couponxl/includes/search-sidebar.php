@@ -1,6 +1,6 @@
 <div class="col-md-3">
     <?php do_action('xl_offer_type') ?>
-    <?php do_action('xl_offer_cat') ?>
+    <!-- <?php do_action('xl_offer_cat') ?> -->
     <?php do_action('xl_offer_store') ?>
     <!-- <div class="widget white-block widget_couponxl_filter">        
         <?php

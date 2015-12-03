@@ -1,26 +1,43 @@
 var updateOfferCount;
 jQuery(document).ready(function($){
 
+	//for image pre-loader
 	$(".se-pre-con").fadeOut("slow");;	
 
+	//function to call when user focus/exit on search box
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
 		if(e.type=='blur'){
 			$('.xl-search-result,.xl-search-description').slideUp('fast');	
 		}else{			
-			if($(this).val().length){
-				$('.xl-search-result').slideDown('fast');
-			}else{
-				$('.xl-search-description').slideDown('fast');
-			}
+			updateSearchUI(this);
 		}
 		$(this).closest('.navbar').toggleClass('search-active');
+	});
+
+	function updateSearchUI(input){
+		if(!$(input).val()){
+			$('.xl-search-result').slideUp('fast');	
+			$('.xl-search-description').slideDown('fast');
+			return false;				
+		}else{
+			$('.xl-search-description').slideUp('fast');	
+			$('.xl-search-result').slideDown('fast');
+			return true;
+		}
+	}
+
+	//to block triggering blur event on clicking any of search results
+	$('.xl-search-form-container ul').off('mousedown').on('mousedown',function(evt) {
+		evt.preventDefault(); 
 	});
 	
 	var keyupTimeout;
 	$( document ).on( 'keyup', '.xl-search-input', function() {	
-		if($(this).val().length==1){
-			$('.xl-search-description').slideUp('fast');
+
+		if(!updateSearchUI(this)){
+			return false;
 		}
+
 		if(keyupTimeout){
 			clearTimeout(keyupTimeout);
 		}
@@ -60,10 +77,10 @@ jQuery(document).ready(function($){
 						break;
 					}
 				}
-			}			
+			}
 			$(parentElement).slideDown('fast');
 		}
-		
+
 	});
 
 	function xl_getText(text){		

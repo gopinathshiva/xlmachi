@@ -3,6 +3,7 @@
 add_action('wp_ajax_search_offer', 'xl_search_offer');
 add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 
+//ajax call which trigger when person is searching, will output all choices at once and saved it in transients
 function xl_search_offer(){
     if ( false === ( $offer_categories = get_transient( 'couponxl_offer_categories_and_stores' ) ) ) {
     
@@ -61,6 +62,7 @@ add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' );
 
 add_action('wp_head','add_image_preloader_inline_script');
 
+//for to add placeholder image before loading image
 function add_image_preloader_inline_script() {
     echo '<script type="text/javascript">
             jQuery(function(){
@@ -69,6 +71,7 @@ function add_image_preloader_inline_script() {
     </script>';
 }
 
+//to add search box in nav bar
 add_filter('wp_nav_menu_items','add_search_box', 10, 2);
 function add_search_box($items, $args) {
 
@@ -200,13 +203,17 @@ function xl_offer_cat_fn(){
             <input type="search" class="form-control xl-offer-cat-search" placeholder="Search in Categories">
             <ul class="list-unstyled xl-offer-cat-result xl-offer-list-unstyled">
             <?php foreach( $xl_offer_cats as $key => $cat){ 
-                if(empty($cat->children)){?>                    
-                            <li class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
-                <?php }else{?>
-                    <?php foreach( $cat->children as $key => $child ){ ?>                        
-                            <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
-                    <?php } 
-                } 
+                    if(empty($cat->children)){
+                        if($cat->count){?>  
+                            <li data-xl-offer-count="<?php echo $cat->count ?>" class="xl-cat-<?php echo $cat->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $cat->term_taxonomy_id ?>"  class="xl-offer-cat-filter-checkbox"  id="xl_<?php echo $cat->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $cat->term_taxonomy_id; ?>"><label for="xl_<?php echo $cat->slug; ?>">&nbsp<?php echo $cat->name; ?> <span class="count"></span></label></li>
+                <?php   }                            
+             }else{?>
+                    <?php foreach( $cat->children as $key => $child ){   
+                            if($child->count){ ?>               
+                                <li class="xl-cat-<?php echo $child->term_taxonomy_id ?>"><input type="checkbox" data-xlcategory="<?php echo $child->term_taxonomy_id ?>" class="xl-offer-cat-filter-checkbox" id="xl_<?php echo $child->slug; ?>" data-option="<?php echo $cat->name; ?>" name="store_offer_cat" value="<?php echo $child->term_taxonomy_id; ?>"><label for="xl_<?php echo $child->slug; ?>">&nbsp<?php echo $child->name; ?> <span class="count"></span></label></li>
+                    <?php   }
+                     } 
+                }
             } ?>
             </ul>
         </div>
