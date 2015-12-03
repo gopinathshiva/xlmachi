@@ -194,6 +194,15 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                                         var allCount = dealCount+couponCount;
                                         $('#xl-offer-type-all-count').text('('+allCount+')');
                                     },300);
+
+                                    //hiding stores with no offers                                    
+                                    $('.xl-offer-store-result li').each(function(k,v){
+                                        var input = $(this).find('input')[0];
+                                        var id = ($(input).val());
+                                        if(!($('div[data-xlstore='+id+']:visible').length)){
+                                            $(this).remove();
+                                        }
+                                    });
                                 });
                             </script>  	            			
                             <?php if( !empty( $pagination ) ): ?>

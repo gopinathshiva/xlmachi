@@ -301,9 +301,9 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                     var couponCount = $('div[data-xltype=coupon]:visible').length;
                                     $('#xl-offer-type-coupon-count').text('('+couponCount+')');
                                     var allCount = dealCount+couponCount;
-                                    $('#xl-offer-type-all-count').text('('+allCount+')');                                                                    
+                                    $('#xl-offer-type-all-count').text('('+allCount+')');                                                                        
 
-                                },800);
+                                },1000);
                             });
                         </script>                        
                         <?php if( !empty( $pagination ) ): ?>
