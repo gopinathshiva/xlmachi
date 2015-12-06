@@ -8,8 +8,8 @@
         if( empty( $small_title_link ) ){
             $small_title_link = esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_type' => 'deal' ), array() ) );
         }else{
-            $small_title_link = esc_url( home_url('/') ).$small_title_link.'/offer_type/deal/';
-        }        
+            $small_title_link = esc_url( home_url('/') ).$small_title_link;
+        }                
         ?>        
         <a href="<?php echo $small_title_link ?>">
             <?php echo $small_title; ?>

@@ -4,6 +4,7 @@ function couponxl_coupons_func( $atts, $content ){
 		'icon' => '',
 		'title' => '',
 		'small_title' => '',
+		'small_title_link' => '',
 		'coupon_categories' => '',
 		'coupon_locations' => '',
 		'coupon_stores' => '',

@@ -9,6 +9,7 @@ function couponxl_deals_func( $atts, $content ){
 		'icon' => '',
 		'title' => '',
 		'small_title' => '',
+		'small_title_link' => '',
 		'deal_categories' => '',
 		'deal_locations' => '',
 		'deal_stores' => '',

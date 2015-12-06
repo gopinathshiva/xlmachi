@@ -1,7 +1,9 @@
 <div class="col-md-3">
-    <?php do_action('xl_offer_type') ?>
-    <!-- <?php do_action('xl_offer_cat') ?> -->
-    <?php do_action('xl_offer_store') ?>
+    <?php do_action('xl_offer_type');
+    if($offer_tag == 'flat' || $offer_tag == 'cashback'){
+        do_action('xl_offer_cat');     
+    }    
+    do_action('xl_offer_store'); ?>
     <!-- <div class="widget white-block widget_couponxl_filter">        
         <?php
         $theme_usage = couponxl_get_option( 'theme_usage' );

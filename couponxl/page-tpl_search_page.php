@@ -79,7 +79,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                             $args['meta_key'] = $temp[0];
                             $args['order'] = $temp[1];
                         }
-                    }
+                    }                    
 
             		if( !empty( $offer_type ) ){
                         if( !empty( $offer_type ) || $offer_type == 'deal' ){
@@ -110,7 +110,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
             				'field'	=> 'slug',
             				'terms' => $offer_cat,
             			);
-            		}
+            		}                    
 
             		if( !empty( $offer_tag ) ){
             			$args['tax_query'][] = array(
