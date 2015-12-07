@@ -2,7 +2,14 @@ var updateOfferCount;
 jQuery(document).ready(function($){
 
 	//for image pre-loader
-	$(".se-pre-con").fadeOut("slow");;	
+	$(".se-pre-con").fadeOut("slow");
+
+	//show categories on hover
+	$('.navbar-nav .xl-dropdown-container').hover(function(){
+        $(this).find('div').addClass('open');
+    }, function() {
+        $(this).find('div').removeClass('open');
+    });	
 
 	//function to call when user focus/exit on search box
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
