@@ -362,7 +362,7 @@ a.read-info{
 }
 
 .nav.navbar-nav .xl-dropdown-container a i {
-    vertical-align: inherit;
+    vertical-align: middle;
 }
 
 @media screen and (max-width: 760px){
