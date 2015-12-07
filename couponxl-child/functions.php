@@ -66,7 +66,7 @@ add_action('wp_head','add_image_preloader_inline_script');
 function add_image_preloader_inline_script() {
     echo '<script type="text/javascript">
             jQuery(function(){
-                jQuery(".container img").imgPreload();
+                jQuery(".home-page-body  img").imgPreload();
             });
     </script>';
 }
@@ -94,7 +94,18 @@ function add_search_box($items, $args) {
                             </div>
                         </form>';
 
-        $items .= '<li class="xl-search-form-container">' . $searchform . '</li>';
+        $dropdown = '<div class="dropdown"> <a href="javascript:void(0);" data-toggle="dropdown" class="btn btn-block btn-grey" aria-expanded="false">Categories <i class="caret go-smooth"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://www.grabon.in/food-coupons/" title="Food Coupons">Food </a></li>
+                            <li><a href="http://www.grabon.in/travel-coupons/" title="Travel Coupons">Travel </a></li>
+                            <li><a href="http://www.grabon.in/categories/" title="All Categories">View All </a></li>
+                        </ul>
+                    </div>';
+
+        $items .= '<li class="col-md-12 col-xs-12 xl-search-form-container">' . $searchform . '</li>';
+
+        $items .= '<li class="col-md-12 col-xs-12 xl-dropdown-container">' . $dropdown . '</li>';
+        
 
     return $items;
 }

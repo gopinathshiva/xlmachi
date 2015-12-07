@@ -29,6 +29,10 @@ if it's not present, don't show loader */
 
 /* ***********************  header style starts here ******************************* */
 
+.account-collapse .xl-register{
+    background-color: #8C3BA2;
+    color: white;
+}
 
 /* ***********************  header style ends here ******************************* */
 
@@ -79,13 +83,6 @@ if it's not present, don't show loader */
 
 .xl-offer-filter-not-found{
     display: none;
-}
-
-@media screen and (min-width: 768px){
-    .xl-offer-item {
-        min-height: 380px;
-        height: auto;
-    }
 }
 
 
@@ -268,10 +265,15 @@ a.read-info{
 
 .navbar .xl-search-form-container{
     position: absolute;
-    right: -35px;
-    top: 35px;
+    right: 0px;
+    top: 22px;
     height: 40px;
     z-index: 1000;
+    width: 60%;
+}
+
+.nav.navbar-nav {
+    padding: 30px 0px 30px 0px !important;
 }
 
 .navigation.sticky-nav .navbar .xl-search-form-container{
@@ -294,7 +296,7 @@ a.read-info{
     border: 1px solid rgba(0, 0, 0, 0.3);    
     height: 40px;
     padding-left: 40px;
-    width: 180px;
+    width: 100%;
     -webkit-transition: width 0.5s ease;
     -moz-transition: width 0.5s ease;
     -ms-transition: width 0.5s ease;
@@ -362,4 +364,54 @@ a.read-info{
 }
 
 /* ***********************  search block css changes ends here ******************** */
+
+@media screen and (min-width: 768px){
+    .xl-offer-item {
+        min-height: 380px;
+        height: auto;
+    }
+}
+
+.nav.navbar-nav .xl-dropdown-container a i {
+    vertical-align: inherit;
+}
+
+@media screen and (max-width: 760px){
+
+    .nav.navbar-nav {
+        padding: 30px 0px 0px 0px !important;
+    }
+
+    .home-page-body {
+        margin-top: 26px;
+    }
+
+    .navbar .xl-search-form-container {
+        position: initial;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .navbar-nav .xl-dropdown-container .dropdown-menu {
+        display: none;
+    }
+
+    .navbar-nav .dropdown.open .dropdown-menu{
+        display: block;
+    }
+
+    .navbar-nav .xl-dropdown-container{
+        position: relative;
+    }
+
+    .navbar-nav .xl-dropdown-container .dropdown{
+        position: absolute;
+        z-index: -10;
+        width: 91%;
+    }
+
+    .navbar-toggle[data-target=".search-collapse"] {
+        display: none;
+    }
+}
 

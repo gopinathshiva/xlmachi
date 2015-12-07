@@ -126,47 +126,47 @@ if( $show_top_bar == 'yes' ):
                                 <div class="search_options"></div>
                             </div>
                         </div> -->
-                        <div class="col-sm-12">
+                        <!-- <div class="col-sm-12">
                             <i class="fa fa-shopping-cart"></i>
                             <div class="input-group">
                                 <input type="text" class="form-control top_bar_search" value="<?php echo esc_attr( $store_name ); ?>" placeholder="<?php echo couponxl_get_option( 'top_bar_store_placeholder' ); ?>">
                                 <input type="hidden" name="<?php echo esc_attr( $couponxl_slugs['offer_store'] ) ?>" value="<?php echo esc_attr( $offer_store ) ?>">
                                 <div class="search_options"></div>
                             </div>                    
-                        </div>			
+                        </div>	 -->		
                     </form>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <a href="javascript:;" class="btn keyword-search-toggle keyword-small-screen">
                             <i class="fa fa-search icon-margin"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-sm-6 collapse account-collapse">
                 <div class="text-right">
-                    <a href="javascript:;" class="btn keyword-search-toggle">
+                    <!-- <a href="javascript:;" class="btn keyword-search-toggle">
                         <i class="fa fa-search icon-margin"></i>
-                    </a>
+                    </a> -->
                     <?php
                     if( !is_user_logged_in() && get_option('users_can_register') ){
                         ?>
-                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_login' ) ?>" class="btn">
+                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_login' ) ?>" class="xl-login btn">
                             <i class="fa fa-sign-out icon-margin"></i><?php _e( 'LOGIN', 'couponxl' ) ?>
                         </a>
-                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_register' ) ?>" class="btn">
+                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_register' ) ?>" class="xl-register btn">
                             <i class="fa fa-unlock icon-margin"></i><?php _e( 'REGISTER', 'couponxl' ) ?>
                         </a>
-                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_register' ) ?>" class="btn">
+                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_register' ) ?>" class="xl-submit-offer btn">
                             <i class="fa fa-ticket icon-margin"></i><?php _e( 'SUBMIT OFFERS', 'couponxl' ) ?>
                         </a>
                         <?php
                     }
                     else if(  get_option('users_can_register') ){
                         ?>
-                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_my_profile' ) ?>" class="btn">
+                        <a href="<?php echo couponxl_get_permalink_by_tpl( 'page-tpl_my_profile' ) ?>" class="xl-my-account btn">
                             <i class="fa fa-user icon-margin"></i><?php _e( 'MY ACCOUNT', 'couponxl' ) ?>
                         </a>
-                        <a href="<?php echo wp_logout_url( home_url() ); ?>" class="btn">
+                        <a href="<?php echo wp_logout_url( home_url() ); ?>" class="xl-logout btn">
                             <i class="fa fa-sign-out icon-margin"></i><?php _e( 'LOG OUT', 'couponxl' ) ?>
                         </a>                    
                         <?php

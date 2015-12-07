@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 		}else{			
 			updateSearchUI(this);
 		}
-		$(this).closest('.navbar').toggleClass('search-active');
+		//$(this).closest('.navbar').toggleClass('search-active');
 	});
 
 	function updateSearchUI(input){
