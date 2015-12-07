@@ -1,8 +1,5 @@
 var updateOfferCount;
-jQuery(document).ready(function($){
-
-	//for image pre-loader
-	$(".se-pre-con").fadeOut("slow");
+jQuery(document).ready(function($){	
 
 	//show categories on hover
 	$('.navbar-nav .xl-dropdown-container').hover(function(){

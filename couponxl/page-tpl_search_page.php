@@ -130,26 +130,42 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                     if( !empty( $keyword ) ){
                         $args['s'] = urldecode( $keyword );
                     }
+                    
 
+                    $transient_args = $args;
 
-            		$offers = new WP_Query( $args );
-					$page_links_total =  $offers->max_num_pages;
-                    $pagination_args = array(
-                        'prev_next' => true,
-                        'end_size' => 2,
-                        'mid_size' => 2,
-                        'total' => $page_links_total,
-                        'current' => $cur_page, 
-                        'prev_next' => false,
-                        'type' => 'array'
-                    );
-                    if( is_front_page() ){
-                        $pagination_args['base'] = '%_%';
-                        $pagination_args['format'] = '?page=%#%';
+                    foreach ($transient_args as $index => $data) {                        
+                        if ($index == 'meta_query') {
+                            unset($transient_args[$index]);
+                        }
                     }
-					$page_links = paginate_links( $pagination_args );
 
-					$pagination = couponxl_format_pagination( $page_links );            		
+                    $transient_namespace = xl_transient_namespace();
+
+                    $transient_key = $transient_namespace .md5( serialize($transient_args) );   
+
+                    if ( false === ( $offers = get_transient( $transient_key ) ) ) {
+                        $offers = new WP_Query( $args );
+                        set_transient( $transient_key, $offers, DAY_IN_SECONDS );                                            
+                    }                   
+            		
+					// $page_links_total =  $offers->max_num_pages;
+     //                $pagination_args = array(
+     //                    'prev_next' => true,
+     //                    'end_size' => 2,
+     //                    'mid_size' => 2,
+     //                    'total' => $page_links_total,
+     //                    'current' => $cur_page, 
+     //                    'prev_next' => false,
+     //                    'type' => 'array'
+     //                );
+     //                if( is_front_page() ){
+     //                    $pagination_args['base'] = '%_%';
+     //                    $pagination_args['format'] = '?page=%#%';
+     //                }
+					// $page_links = paginate_links( $pagination_args );
+
+					// $pagination = couponxl_format_pagination( $page_links );            		
 
             		if( $offers->have_posts() ){
                         $col = is_active_sidebar( 'sidebar-search' ) ? '4' : '4'; /* CUSTOMISATION DONE changed from 6 to 4 to show 3 offers per row */
@@ -178,7 +194,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                                 $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
                                 $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true ); 
 	            				?>
-	            				<div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
+	            				<div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="offer-view-<?php echo $offer_view; ?> col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
 	            					<?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
 	            				</div>
 	            				<?php
@@ -205,13 +221,13 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                                     });
                                 });
                             </script>  	            			
-                            <?php if( !empty( $pagination ) ): ?>
+                            <!-- <?php if( !empty( $pagination ) ): ?>
 	            			    <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
                                     <ul class="pagination">
     	            				   <?php echo $pagination; ?>
                                     </ul>
 	            			    </div>
-                            <?php endif; ?>
+                            <?php endif; ?> -->
             			</div>
             			<?php
             		}

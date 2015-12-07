@@ -95,7 +95,7 @@ function add_search_box($items, $args) {
                         </form>';
 
         $home_url = esc_url(home_url('/'));
-        
+
         $dropdown = '<div class="dropdown"> <a href="javascript:void(0);" data-toggle="dropdown" class="btn-block btn-grey" aria-expanded="false">Categories <i class="caret go-smooth"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="'.$home_url.'offer_cat/bus" title="Bus Coupons">Bus </a></li>
@@ -375,6 +375,10 @@ function offer_top_info_callback(){?>
         </div>
     </div>
     <?php
+}
+
+function xl_transient_namespace(){
+    return substr('coupon_machi', 0, 7 );
 }
 
 /* adding google analytics */

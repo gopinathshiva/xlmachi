@@ -238,6 +238,24 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                     )
                 );
 
+                $transient_args = array(
+                    'post_type'     => 'offer',
+                    'posts_per_page'=> $offers_per_page,
+                    'post_status'   => 'publish',
+                    'meta_key'      => 'offer_expire',
+                    'orderby'       => 'meta_value_num',
+                    'paged'         => $cur_page,
+                    'order'         => 'ASC',
+                    'meta_query'    => array(
+                        'relation' => 'AND',
+                        array(
+                            'key' => 'offer_store',
+                            'value' => get_the_ID(),
+                            'compare' => '='
+                        ),
+                    )
+                );
+
 
                 if( !empty( $offer_type ) ){
                     $args['meta_query'][] = array(
@@ -247,25 +265,32 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                     );
                 }
 
-                $offers = new WP_Query( $args );
+                $transient_namespace = xl_transient_namespace();
 
-                $page_links_total =  $offers->max_num_pages;
-                $pagination_args = array(
-                    'end_size' => 2,
-                    'mid_size' => 2,
-                    'format' => '?page=%#%',
-                    'total' => $page_links_total,
-                    'current' => $cur_page, 
-                    'prev_next' => false,
-                    'type' => 'array'
-                );
+                $transient_key = $transient_namespace .md5( serialize($transient_args) );   
 
-                if( !empty( $offer_type ) ){
-                   //$pagination_args['format'] = !get_option( 'permalink_structure' ) ? '?page=%#%' : 'paged/%#%';
+                if ( false === ( $offers = get_transient( $transient_key ) ) ) {
+                    $offers = new WP_Query( $args );
+                    set_transient( $transient_key, $offers, DAY_IN_SECONDS );                    
                 }
-                $page_links = paginate_links( $pagination_args );
 
-                $pagination = couponxl_format_pagination( $page_links );
+                // $page_links_total =  $offers->max_num_pages;
+                // $pagination_args = array(
+                //     'end_size' => 2,
+                //     'mid_size' => 2,
+                //     'format' => '?page=%#%',
+                //     'total' => $page_links_total,
+                //     'current' => $cur_page, 
+                //     'prev_next' => false,
+                //     'type' => 'array'
+                // );
+
+                // if( !empty( $offer_type ) ){
+                //    //$pagination_args['format'] = !get_option( 'permalink_structure' ) ? '?page=%#%' : 'paged/%#%';
+                // }
+                // $page_links = paginate_links( $pagination_args );
+
+                // $pagination = couponxl_format_pagination( $page_links );
                 if( $offers->have_posts() ){                    
                     $col = 4;							/* CUSTOMISATION DONE HERE FROM 6 TO 4 */
                     if( $offer_view == 'list' ){
@@ -306,13 +331,13 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                 },1000);
                             });
                         </script>                        
-                        <?php if( !empty( $pagination ) ): ?>
+                        <!-- <?php if( !empty( $pagination ) ): ?>
                             <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
                                 <ul class="pagination">
                                    <?php echo $pagination; ?>
                                 </ul>
                             </div>
-                        <?php endif; ?>                        
+                        <?php endif; ?>   -->                      
                     </div>
                     <!-- CUSTOMISATION DONE HERE -->
                     <div class="white-block xl-offer-filter-not-found">
