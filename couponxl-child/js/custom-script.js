@@ -1,19 +1,18 @@
 var updateOfferCount;
-jQuery(document).ready(function($){	
+jQuery(document).ready(function($){
 
-	//show categories on hover
-	$('.navbar-nav .xl-dropdown-container').hover(function(){
-        $(this).find('div').addClass('open');
-    }, function() {
-        $(this).find('div').removeClass('open');
-    });	
+	var isTouchDevice = (window.innerWidth <= 760 ) ? true:false;
 
 	//function to call when user focus/exit on search box
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
 		if(e.type=='blur'){
 			$('.xl-search-result,.xl-search-description').slideUp('fast');	
+			$('.navbar-nav>li.dropdown').show();
 		}else{			
 			updateSearchUI(this);
+			if(isTouchDevice){
+				$('.navbar-nav>li.dropdown').hide();
+			}
 		}
 		//$(this).closest('.navbar').toggleClass('search-active');
 	});

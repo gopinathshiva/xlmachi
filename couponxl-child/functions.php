@@ -66,7 +66,7 @@ add_action('wp_head','add_image_preloader_inline_script');
 function add_image_preloader_inline_script() {
     echo '<script type="text/javascript">
             jQuery(function(){
-                jQuery(".home-page-body  img").imgPreload();
+                //jQuery(".home-page-body  img").imgPreload();
             });
     </script>';
 }
@@ -96,19 +96,19 @@ function add_search_box($items, $args) {
 
         $home_url = esc_url(home_url('/'));
 
-        $dropdown = '<div class="dropdown"> <a href="javascript:void(0);" data-toggle="dropdown" class="btn-block btn-grey" aria-expanded="false">Categories <i class="caret go-smooth"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="'.$home_url.'offer_cat/bus" title="Bus Coupons">Bus </a></li>
-                            <li><a href="'.$home_url.'offer_cat/mobile-recharge" title="Recharge Coupons">Recharge </a></li>
-                            <li><a href="'.$home_url.'offer_cat/footwear" title="Footwear Coupons">Footwear </a></li>
-                            <li><a href="'.$home_url.'offer_cat/clothing" title="Clothing Coupons">Clothing </a></li>
-                            <li><a href="'.$home_url.'categories/" title="All Categories">View All </a></li>
-                        </ul>
-                    </div>';
+        // $dropdown = '<div class="dropdown"> <a href="javascript:void(0);" data-toggle="dropdown" class="btn-block btn-grey" aria-expanded="false">Categories <i class="caret go-smooth"></i></a>
+        //                 <ul class="dropdown-menu">
+        //                     <li><a href="'.$home_url.'offer_cat/bus" title="Bus Coupons">Bus </a></li>
+        //                     <li><a href="'.$home_url.'offer_cat/mobile-recharge" title="Recharge Coupons">Recharge </a></li>
+        //                     <li><a href="'.$home_url.'offer_cat/footwear" title="Footwear Coupons">Footwear </a></li>
+        //                     <li><a href="'.$home_url.'offer_cat/clothing" title="Clothing Coupons">Clothing </a></li>
+        //                     <li><a href="'.$home_url.'categories/" title="All Categories">View All </a></li>
+        //                 </ul>
+        //             </div>';
 
         $items .= '<li class="col-md-12 col-xs-12 xl-search-form-container">' . $searchform . '</li>';
 
-        $items .= '<li class="col-md-12 col-xs-12 xl-dropdown-container">' . $dropdown . '</li>';
+        //$items .= '<li class="col-md-12 col-xs-12 xl-dropdown-container">' . $dropdown . '</li>';
         
 
     return $items;
