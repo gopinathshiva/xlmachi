@@ -313,7 +313,7 @@ function post_saved($id) {
         update_post_meta($id, 'coupon_type', 'code');
     }
 
-    $timestamp = strtotime($expiry_date. '+1 day');
+    $timestamp = strtotime($expiry_date. '+23 hours +59 minutes');
     update_post_meta($id, 'offer_expire', $timestamp);
 
     $timestamp = strtotime($start_date);
@@ -325,7 +325,34 @@ function post_saved($id) {
 
     update_post_meta($id, 'deal_status', 'has_items');
     update_post_meta($id,'offer_initial_payment','paid');
+    debug_to_console('calling expirationdate_update_post_meta function');
+    //to set post expiry date while importing via wp all import
+    xl_set_expiration($id,$expiry_date);
 
+}
+
+//using post-expirator plugin function
+//CAUTION this function won't work when post expirator is deactivated
+function xl_set_expiration($id, $date) {
+
+    $formatted_date = DateTime::createFromFormat('m/d/Y', $date);
+
+    $month   = intval($formatted_date->format('m'));
+    $day     = intval($formatted_date->format('d'));
+    $year    = intval($formatted_date->format('y'));
+
+    //Manually set post to expire at the end of the day.
+    $hour    = 23;
+    $minute  = 59;
+
+    $ts = get_gmt_from_date("$year-$month-$day $hour:$minute:0",'U');
+
+    $opts = array(
+        'expireType' => 'delete',
+        'id' => $id
+    );
+
+    _scheduleExpiratorEvent($id, $ts, $opts);
 }
 
 add_action('offer_other_info','offer_other_info_callback');
