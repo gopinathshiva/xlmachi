@@ -56,7 +56,7 @@ function adding_custom_scripts() {
     wp_register_script('preloader-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/image-preloader.js','',null, true);
 
 	wp_enqueue_script('custom-script');
-    wp_enqueue_script('preloader-script');
+    //wp_enqueue_script('preloader-script');
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
 

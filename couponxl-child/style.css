@@ -25,6 +25,10 @@ Tags: white
 
 /* ***********************  home page style starts here ******************************* */
 
+.home .page-content p{
+    margin:0 0 10px;
+}
+
 .deal-box .white-block-media .embed-responsive img{
     position: absolute;
     top: 50%;
