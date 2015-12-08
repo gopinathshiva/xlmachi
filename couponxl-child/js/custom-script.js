@@ -120,12 +120,15 @@ jQuery(document).ready(function($){
 	//on click of checkbox to filter offer category
 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
 	 	xl_filterOffers();	 	
+	 	var option = $(this).attr('data-option');
+	 	option = option.toLowerCase();
+ 		option = option.replace(' ','_');
 	 	if($(this).prop('checked')){	 		
-	 		var id="xl_filter_text_"+$(this).attr('data-option');
+	 		var id="xl_filter_text_"+option;	 		
 	 		var element = '<li class="xl_filter_text_item" id='+id+'>'+$(this).attr('data-option')+', </li>'
 	 		$('#xl_filter_text_items').append(element);
 	 	}else{
-	 		$('#xl_filter_text_items #xl_filter_text_'+$(this).attr('data-option'))[0].remove();
+	 		$('#xl_filter_text_items #xl_filter_text_'+option)[0].remove();
 	 	}
 	 	updateFilterTextContainer();
 	 	//updateOfferTypeCount();			
