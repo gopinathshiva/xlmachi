@@ -209,7 +209,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                                         $('#xl-offer-type-coupon-count').text('('+couponCount+')');
                                         var allCount = dealCount+couponCount;
                                         $('#xl-offer-type-all-count').text('('+allCount+')');
-                                    },300);
+                                    },1000);
 
                                     //hiding stores with no offers                                    
                                     $('.xl-offer-store-result li').each(function(k,v){

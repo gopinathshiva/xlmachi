@@ -329,6 +329,15 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                     $('#xl-offer-type-all-count').text('('+allCount+')');                                                                        
 
                                 },1000);
+
+                                //hiding categories with no offers                                    
+                                $('.xl-offer-cat-result li').each(function(k,v){
+                                    var input = $(this).find('input')[0];
+                                    var id = ($(input).val());
+                                    if(!($('div[data-xlcategory='+id+']:visible').length)){
+                                        $(this).remove();
+                                    }
+                                });
                             });
                         </script>                        
                         <!-- <?php if( !empty( $pagination ) ): ?>
