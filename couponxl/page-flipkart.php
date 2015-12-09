@@ -119,7 +119,7 @@ $post_id = 475;
                 <div class="white-block offer-box coupon-box grid ">
                     <div class="white-block-media ">
                         <div class="embed-responsive embed-responsive-16by9">
-                                        <a href="<?php echo $value['url'] ?>">
+                                        <a href="<?php echo $value['url'] ?>" target="_blank">
                             <img style="top:65%;" width="200" height="200" src="<?php echo $value['imageUrls'][1]['url'] ?>" alt="flipkart store logo">           
                             </a>
                         </div>
@@ -154,7 +154,7 @@ $post_id = 475;
                         </div>
 
                         <h3>
-                            <a href="<?php echo $value['url'] ?>">
+                            <a href="<?php echo $value['url'] ?>" target="_blank">
                                 <?php echo $value['title']; ?> - <?php echo $value['description']; ?> </a>
                         </h3>                        
                         <ul class="list-unstyled list-inline bottom-meta">

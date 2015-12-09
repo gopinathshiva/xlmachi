@@ -25,6 +25,10 @@ Tags: white
 
 /* ***********************  home page style starts here ******************************* */
 
+.home .page-content p{
+    margin:0 0 10px;
+}
+
 .deal-box .white-block-media .embed-responsive img{
     position: absolute;
     top: 50%;
@@ -361,11 +365,11 @@ a.read-info{
     }
 }
 
-.nav.navbar-nav .xl-dropdown-container a i {
-    vertical-align: middle;
-}
-
 @media screen and (max-width: 760px){
+
+    .breadcrumb-section {
+        visibility: hidden;
+    }
 
     .nav.navbar-nav {
         padding: 30px 0px 0px 0px !important;
@@ -381,26 +385,20 @@ a.read-info{
         margin-bottom: 5px;
     }
 
-    .navbar-nav .xl-dropdown-container .dropdown-menu {
-        display: none;
-    }
-
-    .navbar-nav .dropdown.open .dropdown-menu{
-        display: block;
-    }
-
-    .navbar-nav .xl-dropdown-container{
-        position: relative;
-    }
-
-    .navbar-nav .xl-dropdown-container .dropdown{
-        position: absolute;
-        z-index: -10;
-        width: 91%;
-    }
-
     .navbar-toggle[data-target=".search-collapse"] {
         display: none;
+    }
+
+    .navigation .navbar-nav li.dropdown{
+        background: #ECEBEB;
+    }
+
+    .navbar-nav .xl-search-form-container{
+        position: absolute;
+    }
+
+    .nav.navbar-nav>li.menu-item:first-child{
+        margin-top: 45px !important;
     }
 }
 
