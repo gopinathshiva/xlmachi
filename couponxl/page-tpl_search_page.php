@@ -146,7 +146,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );
-                        set_transient( $transient_key, $offers, DAY_IN_SECONDS );                                            
+                        set_transient( $transient_key, $offers, 12 * HOUR_IN_SECONDS );                                            
                     }                   
             		
 					// $page_links_total =  $offers->max_num_pages;

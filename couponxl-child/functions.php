@@ -325,15 +325,18 @@ function post_saved($id) {
 
     update_post_meta($id, 'deal_status', 'has_items');
     update_post_meta($id,'offer_initial_payment','paid');
-    debug_to_console('calling expirationdate_update_post_meta function');
     //to set post expiry date while importing via wp all import
-    xl_set_expiration($id,$expiry_date);
+    //setting expiry after 2 days for transient caching purpose
+    $timestamp = strtotime($expiry_date. '+2 days');
+    xl_set_expiration($id,$timestamp);
 
 }
 
 //using post-expirator plugin function
 //CAUTION this function won't work when post expirator is deactivated
-function xl_set_expiration($id, $date) {
+function xl_set_expiration($id, $timestamp) {
+
+	$date = date('m/d/Y', $timestamp);
 
     $formatted_date = DateTime::createFromFormat('m/d/Y', $date);
 

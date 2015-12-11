@@ -386,10 +386,6 @@ a.read-info{
         margin-bottom: 5px;
     }
 
-    .navbar-toggle[data-target=".search-collapse"] {
-        display: none;
-    }
-
     .navigation .navbar-nav li.dropdown{
         background: #ECEBEB;
     }
@@ -400,6 +396,14 @@ a.read-info{
 
     .nav.navbar-nav>li.menu-item:first-child{
         margin-top: 45px !important;
+    }
+
+    .navbar-toggle[data-target=".search-collapse"] {
+        background-color: #fff;
+    }
+
+    .navbar-toggle[data-target=".search-collapse"] .fa-search{
+        visibility: hidden;
     }
 }
 
