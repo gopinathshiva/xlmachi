@@ -83,6 +83,14 @@ Tags: white
 
 /* ***********************  deal page style ends here ******************************* */
 
+/* *********************** coupon box style starts here ***************************** */
+
+.white-block-content a.custom.show-code {
+    padding: 0;
+}
+
+/* ***********************  coupon box style ends here ******************************* */
+
 /* ***********************  widget style starts here ******************************* */
 .textwidget{
 	color: #919394;

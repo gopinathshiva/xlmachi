@@ -1162,6 +1162,7 @@ function couponxl_count_post_type( $post_type, $args = array() ){
 
 function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	global $couponxl_slugs;
+	global $xl_coupon_link;
 	if( empty( $post_id ) ){
 		$post_id = get_the_ID();
 	}
@@ -1184,18 +1185,18 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	}	
 	$coupon_type = get_post_meta( $post_id, 'coupon_type', true );
 	$affiliate_link = get_post_meta( $post_id, 'coupon_link', true );
-	$coupon_link = 'javascript:;';
-	$target = '';		
+	$xl_coupon_link = 'javascript:;';
+	$target = '';
 	if( !empty( $affiliate_link ) ){
-		$coupon_link = couponxl_append_query_string( $base_permalink, array( 'coupon' => $post_id ), array( 'all' ) );
+		$xl_coupon_link = couponxl_append_query_string( $base_permalink, array( 'coupon' => $post_id ), array( 'all' ) );
 		if( !empty( $paged[1] ) ){
-			$coupon_link .= 'page'.$paged[1];
+			$xl_coupon_link .= 'page'.$paged[1];
 		}
-		$coupon_link = esc_url( $coupon_link );
+		$xl_coupon_link = esc_url( $xl_coupon_link );
 		$target = 'target="_blank"';
 	}
 
-	$button = '<a href="'.$coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" '.$target.'>';
+	$button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" '.$target.'>';
 
 	switch( $coupon_type ){
 		case 'code': 

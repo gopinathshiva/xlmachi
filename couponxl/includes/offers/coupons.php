@@ -32,9 +32,12 @@
 				?>
 			</li>
 		</ul>
-
+		<?php 
+			$affiliate_link = get_post_meta( get_the_ID(), 'coupon_link', true );
+			global $xl_coupon_link;
+		?>
 		<h3>
-			<a href="<?php the_permalink() ?>">
+			<a class='custom show-code' href="<?php echo $xl_coupon_link; ?>" data-affiliate="<?php echo $affiliate_link ; ?>" target="_blank">
 				<?php the_title(); ?>
 			</a>
 		</h3>
