@@ -60,16 +60,16 @@ function adding_custom_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
 
-add_action('wp_head','add_image_preloader_inline_script');
+// add_action('wp_head','add_image_preloader_inline_script');
 
-//for to add placeholder image before loading image
-function add_image_preloader_inline_script() {
-    echo '<script type="text/javascript">
-            jQuery(function(){
-                //jQuery(".home-page-body  img").imgPreload();
-            });
-    </script>';
-}
+// //for to add placeholder image before loading image
+// function add_image_preloader_inline_script() {
+//     echo '<script type="text/javascript">
+//             jQuery(function(){
+//                 //jQuery(".home-page-body  img").imgPreload();
+//             });
+//     </script>';
+// }
 
 //to add search box in nav bar
 add_filter('wp_nav_menu_items','add_search_box', 10, 2);
