@@ -316,7 +316,11 @@ function post_saved($id) {
     $timestamp = strtotime($expiry_date. '+23 hours +59 minutes');
     update_post_meta($id, 'offer_expire', $timestamp);
 
-    $timestamp = strtotime($start_date);
+    if(empty($start_date)){
+        $timestamp = time();
+    }else{
+        $timestamp = strtotime($start_date);    
+    }    
     update_post_meta($id, 'offer_start', $timestamp);
 
     if(empty($offer_in_slider)){
@@ -410,6 +414,57 @@ function offer_top_info_callback(){?>
 function xl_transient_namespace(){
     return substr('coupon_machi', 0, 7 );
 }
+
+//adding custom cron schedule
+    function my_add_weekly( $schedules ) {
+        // add a 'weekly' schedule to the existing set
+        $schedules['3_hours'] = array(
+            'interval' => 10800,
+            'display' => __('Every 3 Hours - (Flipkart API call)')
+        );
+        return $schedules;
+    }
+    add_filter( 'cron_schedules', 'my_add_weekly' ); 
+
+    //action hook to set up cron events
+    add_action('get_flipkart_daily_deals','getDailyDeals');
+
+    //calling flipkart daily deals api, if fails, call again till 5 times and store it in transient for temp storage
+    function getDailyDeals(){               
+
+        $api_url = 'https://affiliate-api.flipkart.net/affiliate/offers/v1/dotd/json';  
+
+        function callFlipkartFeedsAPI($api_url){
+
+            static $api_call_counter = 1;           
+            
+            $api_response = wp_remote_get( $api_url ,
+                 array( 'timeout' => 10,
+                'headers' => array( 'Fk-Affiliate-Id' => 'couponmac',
+                                   'Fk-Affiliate-Token'=> '6eb39690116842ad937da289fa4e6e74' ) 
+            ));             
+
+            if( is_array($api_response) ) {
+
+                $api_response = $api_response['body'];
+                $api_response = json_decode($api_response, true);   
+
+                delete_transient( 'flipkart_daily_deals' );
+                set_transient( 'flipkart_daily_deals', $api_response, 24 * HOUR_IN_SECONDS );
+
+                return $api_response;
+            }else{              
+                $api_call_counter++;
+                if($api_call_counter>5){
+                    return '';
+                }
+                $api_response = callFlipkartFeedsAPI($api_url);
+                return $api_response;   
+            }          
+        }   
+
+        return callFlipkartFeedsAPI($api_url);                                              
+    }
 
 /* adding google analytics */
 
