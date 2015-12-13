@@ -3,9 +3,16 @@
 		<?php do_action('offer_top_info'); ?>
 		<div class="embed-responsive embed-responsive-16by9">
 			<?php
-			$store_id = get_post_meta( get_the_ID(), 'offer_store', true );
+			global $xl_coupon_link;
+			$xl_post_id = get_the_ID();
+			$store_id = get_post_meta( $xl_post_id, 'offer_store', true );			
+			$xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
+			$xl_affiliate_link = get_post_meta( get_the_ID(), 'coupon_link', true );
+			$xl_coupon_link = esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) );
+			$xl_coupon_link = rtrim($xl_coupon_link,"/");
+			$xl_coupon_link .= '?coupon_id='.$xl_post_id;
 			?>
-			<a href="<?php the_permalink() ?>">
+			<a class="show-code" target="_blank" data-affiliate="<?php echo $xl_affiliate_link; ?>" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>">
 			<?php 
 			couponxl_store_logo( $store_id );
 			?>			
@@ -19,6 +26,7 @@
 		echo couponxl_coupon_button( '', $is_shortcode ); 
 		?>
 	</div>
+	<!-- href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>" -->
 
 	<div style="<?php echo $coupons_per_row == '4'? 'padding:10px':'' ?>" class="white-block-content <?php echo $col == '12' ? 'col-sm-8' : '' ?>">
 		<ul class="list-unstyled list-inline top-meta">
@@ -27,17 +35,13 @@
 			</li>
 			<li>
 				<?php
-				$offer_expire = get_post_meta( get_the_ID(), 'offer_expire', true );
+				$offer_expire = get_post_meta( $xl_post_id, 'offer_expire', true );
 				echo couponxl_remaining_time( $offer_expire, 'left-red' );
 				?>
 			</li>
-		</ul>
-		<?php 
-			$affiliate_link = get_post_meta( get_the_ID(), 'coupon_link', true );
-			global $xl_coupon_link;
-		?>
+		</ul>		
 		<h3>
-			<a class='custom show-code' href="<?php echo $xl_coupon_link; ?>" data-affiliate="<?php echo $affiliate_link ; ?>" target="_blank">
+			<a class='custom show-code' target="_blank" data-affiliate="<?php echo $xl_affiliate_link; ?>" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>">
 				<?php the_title(); ?>
 			</a>
 		</h3>

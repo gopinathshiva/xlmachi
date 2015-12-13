@@ -137,37 +137,37 @@ jQuery(document).ready(function($){
 		});
 	}
 
-	/* RESPONSIVE SLIDES */
-	$('.post-slider').responsiveSlides({
-		speed: 800,
-		auto: false,
-		pager: false,
-		nav: true,
-		prevText: '<i class="fa fa-angle-left"></i>',
-		nextText: '<i class="fa fa-angle-right"></i>',
-	});	
+	// /* RESPONSIVE SLIDES */
+	// $('.post-slider').responsiveSlides({
+	// 	speed: 800,
+	// 	auto: false,
+	// 	pager: false,
+	// 	nav: true,
+	// 	prevText: '<i class="fa fa-angle-left"></i>',
+	// 	nextText: '<i class="fa fa-angle-right"></i>',
+	// });	
 
-	/* FEATURED SLIDER */
-	$(window).load(function(){
-		$('.featured-slider-loader').hide();
-		$('.featured-slider').show();
-		$('.featured-slider').responsiveSlides({
-			speed: 800,
-			timeout: $('.featured-slider').data( 'slider_speed' ) ? $('.featured-slider').data( 'slider_speed' ) : 4000,
-			auto: $('.featured-slider').data( 'slider_auto_rotate' ) == 'yes' ? true : false,
-			pager: false,
-			nav: true,
-			pause: true,
-			prevText: '<i class="fa fa-angle-left"></i>',
-			nextText: '<i class="fa fa-angle-right"></i>',
-			init: function(){
-				$('.rslides_nav').css( 'bottom', $('.rslides1_on .white-block').outerHeight( true ) + 1);
-			},		
-			after: function(){
-				$('.rslides_nav').css( 'bottom', $('.rslides1_on .white-block').outerHeight( true ) + 1);
-			}
-		});		
-	});
+	// /* FEATURED SLIDER */
+	// $(window).load(function(){
+	// 	$('.featured-slider-loader').hide();
+	// 	$('.featured-slider').show();
+	// 	$('.featured-slider').responsiveSlides({
+	// 		speed: 800,
+	// 		timeout: $('.featured-slider').data( 'slider_speed' ) ? $('.featured-slider').data( 'slider_speed' ) : 4000,
+	// 		auto: $('.featured-slider').data( 'slider_auto_rotate' ) == 'yes' ? true : false,
+	// 		pager: false,
+	// 		nav: true,
+	// 		pause: true,
+	// 		prevText: '<i class="fa fa-angle-left"></i>',
+	// 		nextText: '<i class="fa fa-angle-right"></i>',
+	// 		init: function(){
+	// 			$('.rslides_nav').css( 'bottom', $('.rslides1_on .white-block').outerHeight( true ) + 1);
+	// 		},		
+	// 		after: function(){
+	// 			$('.rslides_nav').css( 'bottom', $('.rslides1_on .white-block').outerHeight( true ) + 1);
+	// 		}
+	// 	});		
+	// });
 
 	/* COUNTDOWN */
 	var $countdown = $('.deal-countdown');
@@ -438,18 +438,32 @@ jQuery(document).ready(function($){
 		}
 	}
 
-	$('.show-code').click(function(e){
-		var $this = $(this);
-		var isSafari = /Safari/.test( navigator.userAgent ) && /Apple Computer/.test( navigator.vendor );
-		if( $this.data('affiliate') != '' && !isSafari ){
-			window.location.href = $this.data('affiliate');
-		}
-		else{
-			e.preventDefault();
-			var offer_id = $this.data( 'offer_id' );
+	//CUSTOMISATION DONE HERE 
+
+	if( window.location.href.indexOf('coupon_id'+'=') !== -1 ){
+		var offer_id = parseInt( window.location.href.split('coupon_id'+'=')[1].split('&')[0] );
+		if( !isNaN( offer_id ) ){
 			show_code_modal( offer_id );
 		}
-	});
+	}
+
+	//CUSTOMISATION DONE HERE
+	$('.show-code,.xl-activate-deal').click(function(e){
+		var $this = $(this);
+		if( $this.data('affiliate') != ''){
+			setTimeout(function(){document.location.href = $this.data('affiliate');},250);
+		}		
+
+		// var isSafari = /Safari/.test( navigator.userAgent ) && /Apple Computer/.test( navigator.vendor );
+		// if( $this.data('affiliate') != '' && !isSafari ){
+		// 	window.location.href = $this.data('affiliate');
+		// }
+		// else{
+		// 	e.preventDefault();
+		// 	var offer_id = $this.data( 'offer_id' );
+		// 	show_code_modal( offer_id );
+		// }
+	});	
 
 	ZeroClipboard.config( { swfPath: couponxl_data.url+"/js/ZeroClipboard.swf" } );
 	function prepare_copy(){
