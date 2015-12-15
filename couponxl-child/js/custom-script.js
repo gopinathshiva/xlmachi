@@ -303,4 +303,34 @@ jQuery(document).ready(function($){
 		}	
 	}
 
+	if(window.isXlSearchPage || window.isXlStorePage){
+		var dealCount = $('div[data-xltype=deal]:visible').length;
+        $('#xl-offer-type-deal-count').text('('+dealCount+')');
+        var couponCount = $('div[data-xltype=coupon]:visible').length;
+        $('#xl-offer-type-coupon-count').text('('+couponCount+')');
+        var allCount = dealCount+couponCount;
+        $('#xl-offer-type-all-count').text('('+allCount+')');                                        
+
+        if(window.isXlSearchPage){
+    		//hiding stores with no offers                                    
+	        $('.xl-offer-store-result li').each(function(k,v){
+	            var input = $(this).find('input')[0];
+	            var id = ($(input).val());
+	            if(!($('div[data-xlstore='+id+']:visible').length)){
+	                $(this).remove();
+	            }
+	        });
+        }        
+        else if(window.isXlStorePage){
+        	//hiding categories with no offers                                    
+	        $('.xl-offer-cat-result li').each(function(k,v){
+	            var input = $(this).find('input')[0];
+	            var id = ($(input).val());
+	            if(!($('div[data-xlcategory='+id+']:visible').length)){
+	                $(this).remove();
+	            }
+	        }); 
+        }        
+	}
+
 });

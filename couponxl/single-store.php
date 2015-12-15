@@ -317,23 +317,7 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                             <?php
                         }?>
                         <script type="text/javascript">  
-                            window.onload = function(e){                                    
-                                var dealCount = $('div[data-xltype=deal]:visible').length;
-                                $('#xl-offer-type-deal-count').text('('+dealCount+')');
-                                var couponCount = $('div[data-xltype=coupon]:visible').length;
-                                $('#xl-offer-type-coupon-count').text('('+couponCount+')');
-                                var allCount = dealCount+couponCount;
-                                $('#xl-offer-type-all-count').text('('+allCount+')'); 
-
-                                //hiding categories with no offers                                    
-                                $('.xl-offer-cat-result li').each(function(k,v){
-                                    var input = $(this).find('input')[0];
-                                    var id = ($(input).val());
-                                    if(!($('div[data-xlcategory='+id+']:visible').length)){
-                                        $(this).remove();
-                                    }
-                                });                                
-                            };                                                  
+                            window.isXlStorePage = true;
                         </script>                        
                         <!-- <?php if( !empty( $pagination ) ): ?>
                             <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">

@@ -200,23 +200,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 	            				<?php
 	            			}?>
                             <script type="text/javascript">  
-                                window.onload = function(e){                                                                                                     
-                                    var dealCount = $('div[data-xltype=deal]:visible').length;
-                                    $('#xl-offer-type-deal-count').text('('+dealCount+')');
-                                    var couponCount = $('div[data-xltype=coupon]:visible').length;
-                                    $('#xl-offer-type-coupon-count').text('('+couponCount+')');
-                                    var allCount = dealCount+couponCount;
-                                    $('#xl-offer-type-all-count').text('('+allCount+')');                                        
-
-                                    //hiding stores with no offers                                    
-                                    $('.xl-offer-store-result li').each(function(k,v){
-                                        var input = $(this).find('input')[0];
-                                        var id = ($(input).val());
-                                        if(!($('div[data-xlstore='+id+']:visible').length)){
-                                            $(this).remove();
-                                        }
-                                    });                                    
-                                };                                
+                                window.isXlSearchPage = true;
                             </script>  	            			
                             <!-- <?php if( !empty( $pagination ) ): ?>
 	            			    <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
