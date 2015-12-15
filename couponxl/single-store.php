@@ -316,18 +316,14 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                             </div>
                             <?php
                         }?>
-                        <script type="text/javascript">                        
-                            jQuery(document).ready(function($){
-                                setTimeout(function(){
-                                    //updateOfferCount();
-                                    var dealCount = $('div[data-xltype=deal]:visible').length;
-                                    $('#xl-offer-type-deal-count').text('('+dealCount+')');
-                                    var couponCount = $('div[data-xltype=coupon]:visible').length;
-                                    $('#xl-offer-type-coupon-count').text('('+couponCount+')');
-                                    var allCount = dealCount+couponCount;
-                                    $('#xl-offer-type-all-count').text('('+allCount+')');                                                                        
-
-                                },1000);
+                        <script type="text/javascript">  
+                            window.onload = function(e){                                    
+                                var dealCount = $('div[data-xltype=deal]:visible').length;
+                                $('#xl-offer-type-deal-count').text('('+dealCount+')');
+                                var couponCount = $('div[data-xltype=coupon]:visible').length;
+                                $('#xl-offer-type-coupon-count').text('('+couponCount+')');
+                                var allCount = dealCount+couponCount;
+                                $('#xl-offer-type-all-count').text('('+allCount+')'); 
 
                                 //hiding categories with no offers                                    
                                 $('.xl-offer-cat-result li').each(function(k,v){
@@ -336,8 +332,8 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                                     if(!($('div[data-xlcategory='+id+']:visible').length)){
                                         $(this).remove();
                                     }
-                                });
-                            });
+                                });                                
+                            };                                                  
                         </script>                        
                         <!-- <?php if( !empty( $pagination ) ): ?>
                             <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">

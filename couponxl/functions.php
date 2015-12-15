@@ -1,5 +1,21 @@
 <?php
 
+function is_localhost() {
+    $whitelist = array( '127.0.0.1', '::1' );
+    if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
+        return true;
+    else
+    	return false;
+}
+
+global $xl_asset_url;
+
+if(is_localhost()){
+	$xl_asset_url = get_template_directory_uri();
+}else{
+	$xl_asset_url = 'http://assets.couponmachi.com';
+}
+
 	/**********************************************************************
 	***********************************************************************
 	COUPON FUNCTIONS
@@ -956,11 +972,12 @@ add_action('wp_ajax_nopriv_write_rate', 'couponxl_write_ratings');
 
 /* setup neccessary styles and scripts */
 function couponxl_scripts_styles(){
+	global $xl_asset_url;
 	/* ENQUEUE STYLES */
 	/* FONT AWESOME */
 	wp_enqueue_style( 'couponxl-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
 	/* BOOTSTRAP */
-	wp_enqueue_style( 'couponxl-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css' );
+	wp_enqueue_style( 'couponxl-bootstrap', $xl_asset_url . '/css/bootstrap.min.css' );
 	if( get_page_template_slug() == 'page-tpl_my_profile.php' ){
 		/* BOOTSTRAP TABLES */
 		wp_enqueue_style( 'couponxl-bootstrap-table', get_template_directory_uri() . '/css/bootstrap-table.min.css' );
@@ -972,33 +989,33 @@ function couponxl_scripts_styles(){
 	$titles_font = couponxl_get_option( 'titles_font' );
 	$text_font = couponxl_get_option( 'text_font' );
 	$protocol = is_ssl() ? 'https' : 'http';
-	if( !empty( $navigation_font ) ){
-		//wp_enqueue_style( 'couponxl-navigation-font', $protocol."://fonts.googleapis.com/css?family=".str_replace( " ", "+", $navigation_font ).":100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
+	if( !empty( $navigation_font ) && !(is_localhost())) {
+		wp_enqueue_style( 'couponxl-navigation-font', $protocol."://fonts.googleapis.com/css?family=".str_replace( " ", "+", $navigation_font ).":100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
 	}
-	if( !empty( $titles_font ) ){
-		//wp_enqueue_style( 'couponxl-title-font', $protocol."://fonts.googleapis.com/css?family=".str_replace( " ", "+", $titles_font ).":100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
+	if( !empty( $titles_font ) && !(is_localhost())){
+		wp_enqueue_style( 'couponxl-title-font', $protocol."://fonts.googleapis.com/css?family=".str_replace( " ", "+", $titles_font ).":100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
 	}
-	if( $text_font ){
-		//wp_enqueue_style( 'couponxl-text-font', $protocol."://fonts.googleapis.com/css?family=".str_replace( " ", "+", $text_font ).":100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
+	if( $text_font && !(is_localhost())){
+		wp_enqueue_style( 'couponxl-text-font', $protocol."://fonts.googleapis.com/css?family=".str_replace( " ", "+", $text_font ).":100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
 	}
 
 	/* ENQUEUE STYLES */
 	wp_enqueue_script('jquery');
 	/* BOOTSTRAP */
-	wp_enqueue_script( 'couponxl-bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', false, false, true );
-	wp_enqueue_script( 'couponxl-bootstrap-multilevel-js', get_template_directory_uri() . '/js/bootstrap-dropdown-multilevel.js', false, false, true );	
+	wp_enqueue_script( 'couponxl-bootstrap-js', $xl_asset_url . '/js/bootstrap.min.js', false, false, true );
+	wp_enqueue_script( 'couponxl-bootstrap-multilevel-js', $xl_asset_url . '/js/bootstrap-dropdown-multilevel.js', false, false, true );	
 
 	if( get_page_template_slug() == 'page-tpl_my_profile.php' ){
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_script('jquery-ui-sortable');		
 		/* BOOTSTRAP TABLES */
-		wp_enqueue_script( 'couponxl-bootstrap-table',  get_template_directory_uri() . '/js/bootstrap-table.min.js', false, false, true );
+		wp_enqueue_script( 'couponxl-bootstrap-table',  $xl_asset_url . '/js/bootstrap-table.min.js', false, false, true );
 		wp_localize_script( 'couponxl-bootstrap-table', 'couponxl_tabe_strings', array(
 			'search' => __( 'Search', 'couponxl' ),
 			'no_records' => __( 'No matching records found', 'couponxl' ),
 		) );		
 		/* DATE TIME PICKER */
-		wp_enqueue_script( 'couponxl-datetimepicker',  get_template_directory_uri() . '/js/jquery.datetimepicker.js', false, false, true );
+		wp_enqueue_script( 'couponxl-datetimepicker',  $xl_asset_url . '/js/jquery.datetimepicker.js', false, false, true );
 
 		/* IMAGE UPLOADS */
 		wp_enqueue_media();
@@ -1006,34 +1023,34 @@ function couponxl_scripts_styles(){
 
 		/* STEPS */
 		wp_enqueue_style( 'couponxl-steps', get_template_directory_uri() . '/css/jquery.steps.css' );
-		wp_enqueue_script('couponxl-steps', get_template_directory_uri() . '/js/jquery.steps.min.js', false, false, true );				
+		wp_enqueue_script('couponxl-steps', $xl_asset_url . '/js/jquery.steps.min.js', false, false, true );				
 	}
 	
 	
 	if (is_singular() && comments_open() && get_option('thread_comments')){
 		wp_enqueue_script('comment-reply');
-	}
+	}	
 		
-	wp_enqueue_script( 'couponxl-zeroclipboard',  get_template_directory_uri() . '/js/ZeroClipboard.min.js', false, false, true );
+	wp_enqueue_script( 'couponxl-zeroclipboard',  $xl_asset_url . '/js/ZeroClipboard.min.js', false, false, true );
 	//wp_enqueue_script( 'couponxl-responsive-slides',  get_template_directory_uri() . '/js/responsiveslides.min.js', false, false, true );
 
-	wp_enqueue_script( 'couponxl-cookie',  get_template_directory_uri() . '/js/jquery.cookie.js', false, false, true );
+	wp_enqueue_script( 'couponxl-cookie',  $xl_asset_url . '/js/jquery.cookie.min.js', false, false, true );
 		
 	if( is_singular('offer') ){
-		wp_enqueue_script( 'couponxl-countdown',  get_template_directory_uri() . '/js/countdown.js', false, false, true );
+		wp_enqueue_script( 'couponxl-countdown',  $xl_asset_url . '/js/countdown.js', false, false, true );
 	}
 
 	//$protocol = is_ssl() ? 'https' : 'http';
 	//wp_enqueue_script( 'couponxl-googlemap', $protocol.'://maps.googleapis.com/maps/api/js?sensor=false', false, false, true );	
 
 
-	wp_enqueue_script( 'couponxl-imagesloaded', get_template_directory_uri() . '/js/imagesloaded.js', false, false, true );
-	wp_enqueue_script( 'couponxl-masonry', get_template_directory_uri() . '/js/masonry.js', false, false, true );
+	wp_enqueue_script( 'couponxl-imagesloaded', $xl_asset_url . '/js/imagesloaded.min.js', false, false, true );
+	wp_enqueue_script( 'couponxl-masonry', $xl_asset_url . '/js/masonry.js', false, false, true );
 
 
 	//wp_enqueue_script( 'couponxl-stripe', 'https://checkout.stripe.com/checkout.js', false, false, true );
 
-	wp_enqueue_script( 'couponxl-custom', get_template_directory_uri() . '/js/custom.js', false, false, true );
+	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.min.js', false, false, true );
 	wp_localize_script( 'couponxl-custom', 'couponxl_data', array(
 		'url' => get_template_directory_uri(),
 		'email_friend' => __( 'Friend\'s email address', 'couponxl' ),
@@ -1060,6 +1077,7 @@ add_action('wp_enqueue_scripts', 'couponxl_load_color_schema', 4 );
 
 function couponxl_admin_resources(){
 	global $post;
+	global $xl_asset_url;
 	wp_enqueue_style( 'couponxl-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
 	if( ( isset( $_GET['post_type'] ) && $_GET['post_type'] == 'voucher' ) || ( isset( $post ) && $post->post_type == 'offer' ) ){
 		wp_enqueue_script( 'couponxl-admin-voucher-pay', get_template_directory_uri() . '/js/admin.js', false, false, true );
