@@ -130,18 +130,21 @@ jQuery(document).ready(function($){
 	 		$('#xl_filter_text_items #xl_filter_text_'+option)[0].remove();
 	 	}
 	 	updateFilterTextContainer();
-	 	//updateOfferTypeCount();			
+	 	event.stopImmediatePropagation();
+	 	//updateOfferTypeCount();
 	});
 
 	//on click of radio button to filter offer type
 	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){			
-		xl_filterOffers();		
+		xl_filterOffers();
+		event.stopImmediatePropagation();
 		//updateOfferCategoryCount();
 	});
 
 	//on click of checkbox to filter offer store
 	$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').off('click').on('click',function(event){					
-		xl_filterOffers();	
+		xl_filterOffers();
+		event.stopImmediatePropagation();
 		//updateOfferTypeCount();
 		//updateOfferCategoryCount();	
 	});
@@ -155,7 +158,7 @@ jQuery(document).ready(function($){
 		var scrollStart = $("body").offset().top + 150;
 		$('html, body').animate({
 		    scrollTop: scrollStart
-	 	}, 600);
+	 	}, 550);
 	 	
 		var offerType = $('.xl-offer-type-filter input.xl-offer-type-filter-radio:checked').val();
 		$('.xl-offer-item').hide();
@@ -335,7 +338,7 @@ jQuery(document).ready(function($){
 
 	//scroll to top script
 	$(window).scroll(function () {
-        if ($(this).scrollTop() > 700) {
+        if ($(this).scrollTop() > 600) {
             $('.xl-scrollup').fadeIn();
         } else {
             $('.xl-scrollup').fadeOut();
