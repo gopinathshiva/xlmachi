@@ -333,4 +333,20 @@ jQuery(document).ready(function($){
         }        
 	}
 
+	//scroll to top script
+	$(window).scroll(function () {
+        if ($(this).scrollTop() > 700) {
+            $('.xl-scrollup').fadeIn();
+        } else {
+            $('.xl-scrollup').fadeOut();
+        }
+    });
+
+    $('.xl-scrollup').click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });   
+
 });

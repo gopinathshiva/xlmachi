@@ -27,6 +27,8 @@ if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $foote
 						<?php echo $footer_copyrights ?>
 					</div>
 
+					<?php do_action('xl_scroll_top'); ?>
+
 					<div class="pull-right">
 						<?php
 							if( !empty( $footer_facebook ) ){
