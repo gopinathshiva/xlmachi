@@ -126,6 +126,10 @@ class Shortcodes{
 	function featured_stores(){
 		$fields = $this->render_options( couponxl_featured_stores_params() );
 	}
+	//CUSTOMISATION DONE HERE
+	function top_categories(){
+		$fields = $this->render_options( couponxl_top_categories_params() );
+	}
 }
 
 if( is_admin() ){

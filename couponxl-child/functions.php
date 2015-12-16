@@ -456,8 +456,7 @@ function xl_transient_namespace(){
 
                 $api_response = $api_response['body'];
                 $api_response = json_decode($api_response, true);   
-
-                delete_transient( 'flipkart_daily_deals' );
+                
                 set_transient( 'flipkart_daily_deals', $api_response, 24 * HOUR_IN_SECONDS );
 
                 return $api_response;
@@ -474,6 +473,8 @@ function xl_transient_namespace(){
         return callFlipkartFeedsAPI($api_url);                                              
     }
 
+//action to show scroll top icon in all pages
+
 add_action('xl_scroll_top','xl_scroll_top_callback');
 
 function xl_scroll_top_callback(){
@@ -482,6 +483,7 @@ function xl_scroll_top_callback(){
     <?php
 }
 
+//action to show top categories in homepage
 add_action('add_xl_top_categories','xl_top_categories_callback');
 
 function xl_top_categories_callback(){    
