@@ -11,6 +11,8 @@ function couponxl_top_categories_func( $atts, $content ){
 		'categories_per_row'=>'3',
 		'top_stores'=>''
 	), $atts ) );
+
+	$top_categories = explode( ",", $top_categories );
 	
 	$is_shortcode = true;
 	$col = 4;	
