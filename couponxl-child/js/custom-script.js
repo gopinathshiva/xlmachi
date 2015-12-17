@@ -350,6 +350,27 @@ jQuery(document).ready(function($){
             scrollTop: 0
         }, 600);
         return false;
-    });   
+    });
+
+    //ajax category filter in home page
+    $('.couponxl-ajax-category-filter-menu li').off('click').on('click',function(e){
+    	var cat_id = $(this).attr('data-xlcategoryid');
+    	cat_id = parseInt(cat_id);
+    	if(cat_id){
+    		$.ajax({
+				url : ajaxurl,
+				type : 'post',
+				data : {
+					action : 'xl_ajax_category_filter',
+					cat_id : cat_id				
+				},
+				success : function( response ) {
+					debugger			
+					sessionStorage.setItem('xl_offer_result',response);		
+					updateSearchResults(response,searchText,parentElement);	
+				}
+			});
+    	}
+    });
 
 });

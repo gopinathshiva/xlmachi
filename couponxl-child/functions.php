@@ -46,10 +46,10 @@ function xl_search_offer(){
         }
 
         $offer_categories = json_encode($post_data); 
-        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, 24 * HOUR_IN_SECONDS );         
+        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, 24 * HOUR_IN_SECONDS );
     }
 
-    echo $offer_categories;    
+    echo $offer_categories;
     die();
 }
 

@@ -1,6 +1,4 @@
-<?php
-//print_r($top_categories);
-?><div class="row xl-coupon-listing">
+<div class="row xl-coupon-listing">
     <div class="white-block">
         <div class="white-block-title no-border">
             <?php if( !empty( $icon ) ): ?>
