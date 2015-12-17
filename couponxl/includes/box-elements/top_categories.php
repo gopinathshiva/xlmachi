@@ -20,8 +20,7 @@
             </a>
         </div>
     </div>    
-    <div class="row">
-        <!-- main categories div should be in container -->
+    <div class="row">      
         <div class="categories category-boxes">
               <?php foreach ($top_categories as $category) { ?>
                 <div class="<?php echo $categories_per_row == 4?'col-sm-3':'col-sm-4'; ?>">
