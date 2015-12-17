@@ -523,7 +523,7 @@ a.read-info{
     padding-right: 5px;
     height: 25px;
     width: 35px;
-    text-indent: -999em;
+    /*text-indent: -999em;*/
     color: #fff;
     text-decoration: none;
     font: 300 14px/20px 'Oswald', sans-serif;
