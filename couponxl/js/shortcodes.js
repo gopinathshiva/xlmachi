@@ -231,8 +231,7 @@
 						{ text: 'Slider', value: 'slider' },
 						{ text: 'Accordion', value: 'accordion' },
 						//CUSTOMISATION DONE HERE
-						{ text: 'Top Categories', value: 'top_categories' },
-						{ text: 'Ajax HomePage Categories Filter', value: 'category_homepage_filters' }
+						{ text: 'Top Categories', value: 'top_categories' }
 					],
 					onPostRender: function() {
 						ed.my_control = this;
