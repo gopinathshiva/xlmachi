@@ -500,3 +500,31 @@ a.read-info{
     -o-transform: rotate(360deg) scale(1.2); 
     transform: rotate(360deg) scale(1.2);
 }
+
+/* side menu css starts here */
+
+.xl-sidemenu{
+    position: fixed;
+    z-index: 1000;
+    display: block;
+    margin-left: 12px;
+    top: 155px;
+}
+
+.xl-sidemenu ul li {
+    margin-bottom: 0px;
+}
+
+.xl-sidemenu li a {
+    background-color: #f5f5f5!important;
+    display: block;
+    margin: 0px;
+    padding-top: 5px;
+    padding-right: 5px;
+    height: 25px;
+    width: 35px;
+    text-indent: -999em;
+    color: #fff;
+    text-decoration: none;
+    font: 300 14px/20px 'Oswald', sans-serif;
+}

@@ -579,6 +579,27 @@ function xl_top_categories_callback(){
     <?php
 }
 
+/* sidemenu for home page */
+
+add_action('xl_side_menu','xl_side_menu_callback');
+
+function xl_side_menu_callback(){ ?>
+    <div class="xl-sidemenu">
+        <ul>
+            <li><a href="#featured-stores" class="side-menu-scroller-link featuredStores"><i class="fa fa-share-alt"></i>Featured stores</a></li>
+            <li><a href="#hottest-deals" class="side-menu-scroller-link hottestOffers">Hottest offers</a></li>
+            <li><a href="#electronics-hottest-deals" class="side-menu-scroller-link electronics">Electronics</a></li>
+            <li><a href="#fashion-hottest-deals" class="side-menu-scroller-link fashion">Fashion</a></li>
+            <li><a href="#babies-and-kids-hottest-deals" class="side-menu-scroller-link babies-and-kids">Babies &amp; Kids</a></li>
+            <li><a href="#home-and-kitchen-hottest-deals" class="side-menu-scroller-link home-and-kitchen">Home &amp; Kitchen</a></li>
+            <li><a href="#health-and-beauty-hottest-deals" class="side-menu-scroller-link health-and-beauty">Health &amp; Beauty</a></li>
+            <li><a href="#food-and-dining-hottest-deals" class="side-menu-scroller-link food-and-dining">Food &amp; Dining</a></li>
+            <li><a href="#travel-hottest-deals" class="side-menu-scroller-link travel">Travel</a></li>
+            <li><a href="#books-music-and-movies-hottest-deals" class="side-menu-scroller-link books-music-and-movies">Books, Music &amp; Movies</a></li>
+        </ul>
+    </div><?php
+}
+
 /* adding google analytics */
 
 //add_action('wp_footer', 'add_google_analytics');
