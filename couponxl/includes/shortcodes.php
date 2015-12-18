@@ -130,6 +130,9 @@ class Shortcodes{
 	function top_categories(){
 		$fields = $this->render_options( couponxl_top_categories_params() );
 	}
+	function category_homepage_filters(){
+		$fields = $this->render_options( couponxl_category_homepage_filters_params() );	
+	}
 }
 
 if( is_admin() ){
