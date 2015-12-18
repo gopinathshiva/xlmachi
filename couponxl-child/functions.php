@@ -586,13 +586,13 @@ add_action('xl_side_menu','xl_side_menu_callback');
 function xl_side_menu_callback(){ ?>
     <div class="xl-sidemenu">
         <ul>
-            <li><a href="#featured-stores" class="side-menu-scroller-link featuredStores"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li>
-            <li><a href="#mobile-recharge" class="side-menu-scroller-link hottestOffers"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
-            <li><a href="#bus" class="side-menu-scroller-link featuredStores"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
-            <li><a href="#hottest-deals" class="side-menu-scroller-link hottestOffers"><i class="fa fa-tablet icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
-            <li><a href="#featured-stores" class="side-menu-scroller-link featuredStores"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
-            <li><a href="#clothing" class="side-menu-scroller-link featuredStores"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
-            <li><a href="#cashback" class="side-menu-scroller-link hottestOffers"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
+            <li><a href="#featured-stores" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li>
+            <li><a href="#mobile-recharge" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+            <li><a href="#bus" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
+            <li><a href="#featured-stores" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
+            <li><a href="#hottest-deals" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+            <li><a href="#clothing" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+            <li><a href="#cashback" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
         </ul>
     </div><?php
 }

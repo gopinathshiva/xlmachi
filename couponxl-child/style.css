@@ -535,18 +535,30 @@ a.read-info{
 }
 
 .xl-sidemenu li a i{
+    -webkit-transform: scale(1.4) rotate(0deg);
+    -moz-transform: scale(1.4) rotate(0deg);
+    -ms-transform: scale(1.4) rotate(0deg);
+    -o-transform: scale(1.4) rotate(0deg);
     transform:scale(1.4) rotate(0deg);
+    -webkit-transition: transform .3s ease;
+    -moz-transition: transform .3s ease;
+    -ms-transition: transform .3s ease;
+    -o-transition: transform .3s ease;
     transition:transform .3s ease;
 }
 
 .xl-sidemenu li a i:hover{
-    transform:scale(1.8) rotate(360deg);    
+    -webkit-transform: scale(1.8) rotate(360deg);
+    -moz-transform: scale(1.8) rotate(360deg);
+    -ms-transform: scale(1.8) rotate(360deg);
+    -o-transform: scale(1.8) rotate(360deg);
+    transform:scale(1.8) rotate(360deg);
 }
 
 .xl-sidemenu li span{
     display: none;
     position: absolute;
     background: white;
-    left: 22px;
+    left: 23px;
     top: 0;
 }
