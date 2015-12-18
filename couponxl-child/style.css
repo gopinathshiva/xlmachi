@@ -562,3 +562,28 @@ a.read-info{
     left: 23px;
     top: 0;
 }
+
+/* featured stores css starts */
+.featured-stores ul{
+    margin: 0;
+}
+
+.featured-stores ul li {
+    width: 13%;
+    min-width: 60px;
+    margin:initial;
+}
+
+.featured-stores .store-logo a{
+    border-right: initial;
+}
+
+.featured-stores ul li .store-logo,.featured-stores .store-logo img{
+    height: 85px;
+}
+
+.featured-stores .store-logo img{
+    top: initial;
+    left: initial;
+    transform: initial;    
+}

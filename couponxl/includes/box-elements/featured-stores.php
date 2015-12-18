@@ -1,6 +1,6 @@
 <div class="white-block featured-stores">
     <div class="row">
-        <div class="col-sm-4">
+        <!-- <div class="col-sm-4">
             <div class="featured-stores-title">
                 <?php if( !empty( $title ) ): ?>
                     <h2><?php echo $title; ?></h2>
@@ -14,8 +14,8 @@
                     </a>
                 <?php endif; ?>
             </div>
-        </div>
-        <div class="col-sm-8">
+        </div> -->
+        <div class="col-sm-12">
             <?php
             $args = array(
                 'post_type' => 'store',
