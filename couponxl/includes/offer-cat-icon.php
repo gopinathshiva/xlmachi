@@ -22,7 +22,7 @@ function load_my_custom_script() {
 	}
 }
 
-/* Adding New */
+/* Adding New **/
 /* icon meta */
 function couponxl_category_icon_add() {
 	echo '
