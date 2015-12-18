@@ -586,12 +586,13 @@ add_action('xl_side_menu','xl_side_menu_callback');
 function xl_side_menu_callback(){ ?>
     <div class="xl-sidemenu">
         <ul>
-            <li><a href="#featured-stores" class="side-menu-scroller-link featuredStores"><i class="fa fa-arrow-circle"></i>Featured stores</a></li>
-            <li><a href="#hottest-deals" class="side-menu-scroller-link hottestOffers">Hottest offers</a></li>
-            <li><a href="#electronics-hottest-deals" class="side-menu-scroller-link electronics">Electronics</a></li>
-            <li><a href="#fashion-hottest-deals" class="side-menu-scroller-link fashion">Fashion</a></li>
-            <li><a href="#babies-and-kids-hottest-deals" class="side-menu-scroller-link babies-and-kids">Babies &amp; Kids</a></li>
-            <li><a href="#home-and-kitchen-hottest-deals" class="side-menu-scroller-link home-and-kitchen">Home &amp; Kitchen</a></li>
+            <li><a href="#featured-stores" class="side-menu-scroller-link featuredStores"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li>
+            <li><a href="#mobile-recharge" class="side-menu-scroller-link hottestOffers"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+            <li><a href="#bus" class="side-menu-scroller-link featuredStores"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
+            <li><a href="#hottest-deals" class="side-menu-scroller-link hottestOffers"><i class="fa fa-tablet icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
+            <li><a href="#featured-stores" class="side-menu-scroller-link featuredStores"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
+            <li><a href="#clothing" class="side-menu-scroller-link featuredStores"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+            <li><a href="#cashback" class="side-menu-scroller-link hottestOffers"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
         </ul>
     </div><?php
 }

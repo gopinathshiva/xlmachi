@@ -507,24 +507,46 @@ a.read-info{
     position: fixed;
     z-index: 1000;
     display: block;
-    margin-left: 12px;
-    top: 155px;
+    margin-left: 10px;
+    top: 175px;
+    background-color: #fff;
+}
+
+.xl-sidemenu ul{
+    list-style-type: none;
 }
 
 .xl-sidemenu ul li {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
+    margin-left: -25px;
 }
 
-.xl-sidemenu li a {
-    background-color: #f5f5f5!important;
+.xl-sidemenu li a {    
     display: block;
     margin: 0px;
     padding-top: 5px;
-    padding-right: 5px;
-    height: 25px;
-    width: 35px;
-    /*text-indent: -999em;*/
-    color: #fff;
+    padding-right: 5px;    
     text-decoration: none;
-    font: 300 14px/20px 'Oswald', sans-serif;
+    position: relative;
+}
+
+.xl-sidemenu li a:hover { 
+    color: black;
+}
+
+.xl-sidemenu li a i{
+    transform:scale(1.4) rotate(0deg);
+    transition:transform .3s ease;
+}
+
+.xl-sidemenu li a i:hover{
+    transform:scale(1.8) rotate(360deg);    
+}
+
+.xl-sidemenu li span{
+    display: none;
+    position: absolute;
+    background: white;
+    left: 22px;
+    top: 0;
 }

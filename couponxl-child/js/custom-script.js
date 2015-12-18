@@ -352,4 +352,11 @@ jQuery(document).ready(function($){
         return false;
     });
 
+    //sidemenu script
+    $('.xl-sidemenu li').hover(function () {
+    	$(this).find('span').fadeIn('fast');
+    },function(){
+    	$(this).find('span').fadeOut('fast');
+    });
+
 });
