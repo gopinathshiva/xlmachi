@@ -23,27 +23,28 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 
                 <?php do_action('xl_filter_text') ?>
                 <?php 
-                $show_search_slider = couponxl_get_option( 'show_search_slider' );
-                if( $show_search_slider == 'yes' ){
-                    include( locate_template( 'includes/featured-slider.php' ) );
-                }
+                // $show_search_slider = couponxl_get_option( 'show_search_slider' );
+                // if( $show_search_slider == 'yes' ){
+                //     include( locate_template( 'includes/featured-slider.php' ) );
+                // }
 
-                include( locate_template( 'includes/filter-bar.php' ) );
+                //include( locate_template( 'includes/filter-bar.php' ) );
                 ?>
 
             	<?php
-                    $cur_page = 1;
-                    if( get_query_var( 'paged' ) ){
-                        $cur_page = get_query_var( 'paged' );
-                    }
-                    else if( get_query_var( 'page' ) ){
-                        $cur_page = get_query_var( 'page' );
-                    }
+                    // $cur_page = 1;
+                    // if( get_query_var( 'paged' ) ){
+                    //     $cur_page = get_query_var( 'paged' );
+                    // }
+                    // else if( get_query_var( 'page' ) ){
+                    //     $cur_page = get_query_var( 'page' );
+                    // }
             		$args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
             			'post_type'	=> 'offer',
             			'paged' => $cur_page,
+                        //'paged' => $cur_page,
             			'orderby' => 'meta_value_num',
             			'meta_key' => 'offer_expire',
             			'order' => 'ASC',
@@ -65,71 +66,71 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
             			)
             		);
 
-                    if( !empty( $offer_sort ) ){
-                        $temp = explode( '-', $offer_sort );
-                        if( $temp[0] == 'date' ){
-                            unset( $args['meta_key'] );
-                            $args['orderby'] = $temp[0];
-                            $args['order'] = $temp[1];
-                        }
-                        else{
-                            if( $temp[0] == 'rate' ){
-                                $temp[0] = 'couponxl_average_rate';
-                            }
-                            $args['meta_key'] = $temp[0];
-                            $args['order'] = $temp[1];
-                        }
-                    }                    
+                    // if( !empty( $offer_sort ) ){
+                    //     $temp = explode( '-', $offer_sort );
+                    //     if( $temp[0] == 'date' ){
+                    //         unset( $args['meta_key'] );
+                    //         $args['orderby'] = $temp[0];
+                    //         $args['order'] = $temp[1];
+                    //     }
+                    //     else{
+                    //         if( $temp[0] == 'rate' ){
+                    //             $temp[0] = 'couponxl_average_rate';
+                    //         }
+                    //         $args['meta_key'] = $temp[0];
+                    //         $args['order'] = $temp[1];
+                    //     }
+                    // }                    
 
-            		if( !empty( $offer_type ) ){
-                        if( !empty( $offer_type ) || $offer_type == 'deal' ){
-                            $args['meta_query'][] = array(
-                                'key' => 'deal_status',
-                                'value' => 'has_items',
-                                'compare' => '='
-                            );
-                        }
-            			$args['meta_query'][] = array(
-            				'key' => 'offer_type',
-            				'value' => $offer_type,
-            				'compare' => '='
-            			);
-            		}
+            		// if( !empty( $offer_type ) ){
+              //           if( !empty( $offer_type ) || $offer_type == 'deal' ){
+              //               $args['meta_query'][] = array(
+              //                   'key' => 'deal_status',
+              //                   'value' => 'has_items',
+              //                   'compare' => '='
+              //               );
+              //           }
+            		// 	$args['meta_query'][] = array(
+            		// 		'key' => 'offer_type',
+            		// 		'value' => $offer_type,
+            		// 		'compare' => '='
+            		// 	);
+            		// }
 
-                    if( !empty( $offer_store ) ){
-                        $args['meta_query'][] = array(
-                            'key' => 'offer_store',
-                            'value' => $offer_store,
-                            'compare' => '=',
-                        );
-                    }
+                    // if( !empty( $offer_store ) ){
+                    //     $args['meta_query'][] = array(
+                    //         'key' => 'offer_store',
+                    //         'value' => $offer_store,
+                    //         'compare' => '=',
+                    //     );
+                    // }
 
-            		if( !empty( $offer_cat ) ){
-            			$args['tax_query'][] = array(
-            				'taxonomy' => 'offer_cat',
-            				'field'	=> 'slug',
-            				'terms' => $offer_cat,
-            			);
-            		}                    
+            		// if( !empty( $offer_cat ) ){
+            		// 	$args['tax_query'][] = array(
+            		// 		'taxonomy' => 'offer_cat',
+            		// 		'field'	=> 'slug',
+            		// 		'terms' => $offer_cat,
+            		// 	);
+            		// }                    
 
-            		if( !empty( $offer_tag ) ){
-            			$args['tax_query'][] = array(
-            				'taxonomy' => 'offer_tag',
-            				'field'	=> 'slug',
-            				'terms' => $offer_tag,
-            			);
-            		}
-            		if( !empty( $location ) ){
-            			$args['tax_query'][] = array(
-            				'taxonomy' => 'location',
-            				'field'	=> 'slug',
-            				'terms' => $location,
-            			);
-            		}
+            		// if( !empty( $offer_tag ) ){
+            		// 	$args['tax_query'][] = array(
+            		// 		'taxonomy' => 'offer_tag',
+            		// 		'field'	=> 'slug',
+            		// 		'terms' => $offer_tag,
+            		// 	);
+            		// }
+            		// if( !empty( $location ) ){
+            		// 	$args['tax_query'][] = array(
+            		// 		'taxonomy' => 'location',
+            		// 		'field'	=> 'slug',
+            		// 		'terms' => $location,
+            		// 	);
+            		// }
 
-                    if( !empty( $keyword ) ){
-                        $args['s'] = urldecode( $keyword );
-                    }
+                    // if( !empty( $keyword ) ){
+                    //     $args['s'] = urldecode( $keyword );
+                    // }
                     
 
                     $transient_args = $args;
@@ -142,7 +143,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 
                     $transient_namespace = xl_transient_namespace();
 
-                    $transient_key = $transient_namespace .md5( serialize($transient_args) );   
+                    $transient_key = $transient_namespace .md5( serialize($transient_args) );                       
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );

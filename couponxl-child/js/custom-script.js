@@ -6,11 +6,13 @@ jQuery(document).ready(function($){
 	//function to call for smooth scrolling on click of sidebar menu
 
 	$(".xl-sidemenu a").click(function() {
-		var offsetToAdd = ($('.navigation').height() + 5);
-		var id = $(this).attr('data-scroll-id');
-	    $('html, body').animate({
-	        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
-	    }, 2000);
+		if ($(this).hasAttr("data-scroll-id")) {
+			var offsetToAdd = ($('.navigation').height() + 5);
+			var id = $(this).attr('data-scroll-id');
+		    $('html, body').animate({
+		        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
+		    }, 2000);
+		}
 	});
 
 	//function to call when user focus/exit on search box

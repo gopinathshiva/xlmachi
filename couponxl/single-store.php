@@ -201,8 +201,10 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
             <div class="col-md-9" id='xl-store-start'>
                 <?php do_action('xl_filter_text') ?>
                 <?php
-                $cur_page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1; //get curent page
-                $offers_per_page = couponxl_get_option( 'offers_per_page' );
+                //$cur_page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1; //get curent page
+                $cur_page = 1; //get curent page
+                //$offers_per_page = couponxl_get_option( 'offers_per_page' );
+                $offers_per_page = -1;
 
                 $args = array(
                     'post_type'     => 'offer',
@@ -256,13 +258,13 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                 );
 
 
-                if( !empty( $offer_type ) ){
-                    $args['meta_query'][] = array(
-                        'key' => 'offer_type',
-                        'value' => $offer_type,
-                        'compare' => '='
-                    );
-                }
+                // if( !empty( $offer_type ) ){
+                //     $args['meta_query'][] = array(
+                //         'key' => 'offer_type',
+                //         'value' => $offer_type,
+                //         'compare' => '='
+                //     );
+                // }
 
                 $transient_namespace = xl_transient_namespace();
 
