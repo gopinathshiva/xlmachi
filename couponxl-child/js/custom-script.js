@@ -3,6 +3,16 @@ jQuery(document).ready(function($){
 
 	var isTouchDevice = (window.innerWidth <= 760 ) ? true:false;
 
+	//function to call for smooth scrolling on click of sidebar menu
+
+	$(".xl-sidemenu a").click(function() {
+		var offsetToAdd = ($('.navigation').height() + 5);
+		var id = $(this).attr('data-scroll-id');
+	    $('html, body').animate({
+	        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
+	    }, 2000);
+	});
+
 	//function to call when user focus/exit on search box
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
 		if(e.type=='blur'){
@@ -13,8 +23,7 @@ jQuery(document).ready(function($){
 			if(isTouchDevice){
 				$('.navbar-nav>li.dropdown').hide();
 			}
-		}
-		//$(this).closest('.navbar').toggleClass('search-active');
+		}		
 	});
 
 	function updateSearchUI(input){

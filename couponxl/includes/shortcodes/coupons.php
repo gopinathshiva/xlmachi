@@ -13,6 +13,7 @@ function couponxl_coupons_func( $atts, $content ){
 		'coupons_orderby' => 'offer_expire',
 		'coupons_order' => 'ASC',		
 		'items' => '',
+		'home_offer_id'=> '',
 	), $atts ) );
 
 	$items = explode( ",", $items );
@@ -66,6 +67,15 @@ function couponxl_coupons_params(){
 			"param_name" => "small_title_link",
 			"value" => '',
 			"description" => __("Input link for the small title. eg) store/amazon, store/paytm","couponxl")
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => __("ID","couponxl"),
+			"param_name" => "home_offer_id",
+			"value" => "",
+			"description" => __("Input ID of the offer.","couponxl")
 		),
 		array(
 			"type" => "multidropdown",

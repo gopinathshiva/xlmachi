@@ -1,4 +1,4 @@
-<div class="white-block">
+<div class="white-block" id="xl-home-offer-<?php echo $home_offer_id; ?>">
     <div class="white-block-title no-border">
         <?php if( !empty( $icon ) ): ?>
             <i class="fa fa-<?php echo esc_attr( $icon ); ?>"></i>
