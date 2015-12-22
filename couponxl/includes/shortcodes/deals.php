@@ -23,13 +23,18 @@ function couponxl_deals_func( $atts, $content ){
 		'home_offer_id'=> '',
 	), $atts ) );
 
-	$items = explode( ",", $items );
-	$col = 4;
-	$offer_view = '';
-	ob_start();
-	include( locate_template( 'includes/box-elements/deals.php' ) );
-	$content = ob_get_contents();
-	ob_end_clean();
+	$transient_args = $atts;
+	$transient_key = $transient_namespace .md5( serialize($transient_args) );
+
+	if ( false === ( $content = get_transient( $transient_key ) ) ) {
+		$items = explode( ",", $items );
+		$col = 4;
+		$offer_view = '';
+		ob_start();
+		include( locate_template( 'includes/box-elements/deals.php' ) );
+		$content = ob_get_contents();
+		ob_end_clean();
+	}
 
 	return $content;
 }

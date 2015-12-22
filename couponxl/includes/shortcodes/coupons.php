@@ -16,14 +16,20 @@ function couponxl_coupons_func( $atts, $content ){
 		'home_offer_id'=> '',
 	), $atts ) );
 
-	$items = explode( ",", $items );
-	$is_shortcode = true;
-	$col = 4;
-	$offer_view = '';
-	ob_start();
-	include( locate_template( 'includes/box-elements/coupons.php' ) );
-	$content = ob_get_contents();
-	ob_end_clean();
+	$transient_args = $atts;
+	$transient_key = $transient_namespace .md5( serialize($transient_args) );
+
+	if ( false === ( $content = get_transient( $transient_key ) ) ) {
+        $items = explode( ",", $items );
+		$is_shortcode = true;
+		$col = 4;
+		$offer_view = '';
+		ob_start();
+		include( locate_template( 'includes/box-elements/coupons.php' ) );
+		$content = ob_get_contents();
+		ob_end_clean();
+        set_transient( $transient_key, $content, 3 * HOUR_IN_SECONDS );                    
+    }
 
 	return $content;
 }

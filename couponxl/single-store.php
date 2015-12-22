@@ -267,11 +267,11 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
 
                 $transient_namespace = xl_transient_namespace();
 
-                $transient_key = $transient_namespace .md5( serialize($transient_args) );   
+                $transient_key = $transient_namespace .md5( serialize($transient_args) );
 
                 if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                     $offers = new WP_Query( $args );
-                    set_transient( $transient_key, $offers, 12 * HOUR_IN_SECONDS );                    
+                    set_transient( $transient_key, $offers, 8 * HOUR_IN_SECONDS );                    
                 }
 
                 // $page_links_total =  $offers->max_num_pages;
