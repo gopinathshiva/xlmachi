@@ -370,10 +370,9 @@ jQuery(document).ready(function($){
     	$(this).find('span').fadeOut('fast');
     });
     
-
+    //fixed position widget scroll on offer and store page
     if(window.isXlSearchPage && !isTouchDevice){
 
-    	//fixed position widget scroll on offer and store page    
     	var fixmeTop = $('.xl-search-page-widget').offset().top;
     	var offerTypeFilterHeight = $('.xl-offer-type-filter').height();
 
@@ -403,7 +402,7 @@ jQuery(document).ready(function($){
 		});
 
     }else if(window.isXlStorePage && !isTouchDevice){
-    	//fixed position widget scroll on offer and store page
+    	
     	var fixmeTop = $('.xl-store-detail').offset().top;       // get initial position of the element
     	var offerTypeFilterHeight = $('.xl-offer-type-filter').height();
 
