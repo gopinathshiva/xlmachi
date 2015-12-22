@@ -16,7 +16,10 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="white-block">
+
+                <?php do_action('xl_offer_type') ?>
+                <?php do_action('xl_offer_cat') ?>
+                <div class="white-block xl-store-detail">
                     
                     <?php if( has_post_thumbnail() ): ?>
                         <div class="shop-logo">
@@ -186,10 +189,6 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                     </div> -->
 
                 </div>
-
-                <?php do_action('xl_offer_type') ?>
-                <?php do_action('xl_offer_cat') ?>     
-                
 
                 <?php 
                     if ( is_active_sidebar( 'store-sidebar-1' ) ){

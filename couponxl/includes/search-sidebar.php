@@ -151,9 +151,11 @@
         ?>
 	
     </div> -->
+    <div class="xl-search-page-widget">
     <?php 
         if ( is_active_sidebar( 'sidebar-search' ) ){
             dynamic_sidebar( 'sidebar-search' );
         }
     ?>
+    </div>
 </div>

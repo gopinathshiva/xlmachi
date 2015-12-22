@@ -2,12 +2,12 @@ var updateOfferCount;
 jQuery(document).ready(function($){
 
 	var isTouchDevice = (window.innerWidth <= 760 ) ? true:false;
+	var navigationHeight = $('.navigation').height();
 
 	//function to call for smooth scrolling on click of sidebar menu
-
 	$(".xl-sidemenu a").click(function() {
 		if ($(this).hasAttr("data-scroll-id")) {
-			var offsetToAdd = ($('.navigation').height() + 5);
+			var offsetToAdd = (navigationHeight + 5);
 			var id = $(this).attr('data-scroll-id');
 		    $('html, body').animate({
 		        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
@@ -369,5 +369,68 @@ jQuery(document).ready(function($){
     },function(){
     	$(this).find('span').fadeOut('fast');
     });
+    
+
+    if(window.isXlSearchPage && !isTouchDevice){
+
+    	//fixed position widget scroll on offer and store page    
+    	var fixmeTop = $('.xl-search-page-widget').offset().top;
+    	var offerTypeFilterHeight = $('.xl-offer-type-filter').height();
+
+    	$(window).scroll(function() {                  // assign scroll event listener
+
+		    var currentScroll = $(window).scrollTop(); // get current position
+		    console.log('currentScroll='+currentScroll+' fixmeTop='+fixmeTop);
+
+		    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
+		            position: 'fixed',
+		            top:(navigationHeight+10)+'px'
+		        });
+		        $('.xl-offer-store-filter').css({                      // scroll to that element or below it
+		            position: 'fixed',
+		            top:(navigationHeight+offerTypeFilterHeight+25)+'px'
+		        });
+		    } else {                                   // apply position: static
+		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
+		            position: 'static'
+		        });
+		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
+		            position: 'static'
+		        });
+		    }
+
+		});
+
+    }else if(window.isXlStorePage && !isTouchDevice){
+    	//fixed position widget scroll on offer and store page
+    	var fixmeTop = $('.xl-store-detail').offset().top;       // get initial position of the element
+    	var offerTypeFilterHeight = $('.xl-offer-type-filter').height();
+
+    	$(window).scroll(function() {                  // assign scroll event listener
+
+		    var currentScroll = $(window).scrollTop(); // get current position
+		    console.log('currentScroll='+currentScroll+' fixmeTop='+fixmeTop);
+
+		    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
+		            position: 'fixed',
+		            top:(navigationHeight+10)+'px'
+		        });
+		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
+		            position: 'fixed',
+		            top:(navigationHeight+offerTypeFilterHeight+25)+'px'
+		        });
+		    } else {                                   // apply position: static
+		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
+		            position: 'static'
+		        });
+		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
+		            position: 'static'
+		        });
+		    }
+
+		});
+    }
 
 });

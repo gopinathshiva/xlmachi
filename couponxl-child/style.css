@@ -569,7 +569,7 @@ a.read-info{
 }
 
 .featured-stores ul li {
-    width: 13%;
+    width: 12%;
     min-width: 60px;
     margin:initial;
 }
@@ -579,7 +579,7 @@ a.read-info{
 }
 
 .featured-stores ul li .store-logo,.featured-stores .store-logo img{
-    height: 85px;
+    height: 100px;
 }
 
 .featured-stores .store-logo img{
