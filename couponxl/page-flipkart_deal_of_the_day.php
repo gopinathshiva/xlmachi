@@ -5,7 +5,7 @@
 
 get_header();
 if(!is_localhost()){
-    $xl_home_url = 'http://couponmachi.com/';
+    $xl_home_url = 'http://media.couponmachi.com/';
 }else{
     $xl_home_url = 'http://localhost/coupons/';
 }
@@ -17,10 +17,10 @@ $post_id = 475;
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3"
                 <div class="white-block">                                    
                         <div class="shop-logo">
-                            <img width="150" height="150" src="<?php echo $xl_home_url; ?>wp-content/uploads/2015/11/Flipkart-store-logo-150x150.png" class="img-responsive wp-post-image" alt="Flipkart store logo">
+                            <img width="150" height="150" src="<?php echo $xl_home_url; ?>wp-content/uploads/2015/12/Flipkart-store-logo-150x150.png" class="img-responsive wp-post-image" alt="Flipkart store logo">
                         </div>                    
 
                     <ul class="list-unstyled list-inline store-social-networks">
