@@ -7,14 +7,16 @@ $footer_twitter = couponxl_get_option( 'footer_twitter' );
 $footer_google = couponxl_get_option( 'footer_google' );
 
 if(is_front_page() && !wp_is_mobile()){
-	do_action('xl_side_menu');
+	do_action('xl_side_menu');	
 }
 if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $footer_twitter ) || !empty( $footer_google ) ):
 ?>
 	<section class="footer">
+
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
+					<?php do_action('xl_footer_stats'); ?>
 					<?php
 					$show_to_top = couponxl_get_option( 'show_to_top' );
 					if( $show_to_top == 'yes' ):
@@ -31,7 +33,6 @@ if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $foote
 					</div>
 
 					<?php 
-					debug_to_console('calling scroll top action');
 					do_action('xl_scroll_top'); ?>
 
 					<div class="pull-right">

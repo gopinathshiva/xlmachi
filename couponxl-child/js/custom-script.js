@@ -2,12 +2,12 @@ var updateOfferCount;
 jQuery(document).ready(function($){
 
 	var isTouchDevice = (window.innerWidth <= 760 ) ? true:false;
-	var navigationHeight = $('.navigation').height();
+	var stickyNavigationHeight = $('.navigation.sticky-nav').height();
 
 	//function to call for smooth scrolling on click of sidebar menu
 	$(".xl-sidemenu a").click(function() {
 		if ($(this).hasAttr("data-scroll-id")) {
-			var offsetToAdd = (navigationHeight + 5);
+			var offsetToAdd = (stickyNavigationHeight + 5);
 			var id = $(this).attr('data-scroll-id');
 		    $('html, body').animate({
 		        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
@@ -378,17 +378,17 @@ jQuery(document).ready(function($){
 
     	$(window).scroll(function() {                  // assign scroll event listener
 
-		    var currentScroll = $(window).scrollTop(); // get current position
-		    console.log('currentScroll='+currentScroll+' fixmeTop='+fixmeTop);
-
+		    var currentScroll = $(window).scrollTop(); // get current position		    
 		    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
-		            top:(navigationHeight+10)+'px'
+		            top:(stickyNavigationHeight+5)+'px',
+		            'z-index':'-1'
 		        });
 		        $('.xl-offer-store-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
-		            top:(navigationHeight+offerTypeFilterHeight+25)+'px'
+		            top:(stickyNavigationHeight+offerTypeFilterHeight+25)+'px',
+		            'z-index':'-1'
 		        });
 		    } else {                                   // apply position: static
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
@@ -408,17 +408,17 @@ jQuery(document).ready(function($){
 
     	$(window).scroll(function() {                  // assign scroll event listener
 
-		    var currentScroll = $(window).scrollTop(); // get current position
-		    console.log('currentScroll='+currentScroll+' fixmeTop='+fixmeTop);
-
+		    var currentScroll = $(window).scrollTop(); // get current position		    
 		    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
-		            top:(navigationHeight+10)+'px'
+		            top:(stickyNavigationHeight+5)+'px',
+		            'z-index':'-1'
 		        });
 		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
-		            top:(navigationHeight+offerTypeFilterHeight+25)+'px'
+		            top:(stickyNavigationHeight+offerTypeFilterHeight+25)+'px',
+		            'z-index':'-1'
 		        });
 		    } else {                                   // apply position: static
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it

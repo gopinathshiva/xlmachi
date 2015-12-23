@@ -2,6 +2,9 @@
     <section class="widget-footer">
         <div class="container">
             <div class="row">
+                <!-- <div class="col-md-12">
+                    <?php do_action('xl_footer_stats'); ?>
+                </div> -->
                 <div class="col-sm-4">
                     <?php 
                     if( is_active_sidebar( 'sidebar-bottom-1' ) ){
