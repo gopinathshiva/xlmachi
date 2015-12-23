@@ -394,7 +394,7 @@ jQuery(document).ready(function($){
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'static'
 		        });
-		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
+		        $('.xl-offer-store-filter').css({                      // scroll to that element or below it
 		            position: 'static'
 		        });
 		    }

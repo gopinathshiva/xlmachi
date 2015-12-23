@@ -624,3 +624,7 @@ a.read-info{
     left: 16px;
 }
 
+.xl-footer-stats>li>span:first-child i.fa-smile-o,.xl-footer-stats>li>span:first-child i.fa-check-circle {
+    left: 15px;
+    top: 12px;
+}
