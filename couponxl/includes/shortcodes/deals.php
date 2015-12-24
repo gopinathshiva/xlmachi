@@ -24,6 +24,7 @@ function couponxl_deals_func( $atts, $content ){
 	), $atts ) );
 
 	$transient_args = $atts;
+	$transient_namespace = xl_transient_namespace();
 	$transient_key = $transient_namespace .md5( serialize($transient_args) );
 
 	if ( false === ( $content = get_transient( $transient_key ) ) ) {

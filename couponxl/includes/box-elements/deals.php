@@ -62,14 +62,14 @@ if( !empty( $deal_categories ) || !empty( $deal_locations ) || !empty( $deal_sto
             'operator' => 'IN'
         );
     }
-    if( !empty( $deal_locations ) ){
-        $args['tax_query'][] = array(
-            'taxonomy' => 'location',
-            'field' => 'slug',
-            'terms' => explode( ",", $deal_locations ),
-            'operator' => 'IN'
-        );
-    }
+    // if( !empty( $deal_locations ) ){
+    //     $args['tax_query'][] = array(
+    //         'taxonomy' => 'location',
+    //         'field' => 'slug',
+    //         'terms' => explode( ",", $deal_locations ),
+    //         'operator' => 'IN'
+    //     );
+    // }
     if( !empty( $deal_stores ) ){
         $args['meta_query'][] = array(
             'key' => 'offer_store',

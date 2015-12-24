@@ -83,13 +83,13 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                     // }                    
 
             		if( !empty( $offer_type ) ){
-                        if( !empty( $offer_type ) || $offer_type == 'deal' ){
-                            $args['meta_query'][] = array(
-                                'key' => 'deal_status',
-                                'value' => 'has_items',
-                                'compare' => '='
-                            );
-                        }
+                        // if( !empty( $offer_type ) || $offer_type == 'deal' ){
+                        //     $args['meta_query'][] = array(
+                        //         'key' => 'deal_status',
+                        //         'value' => 'has_items',
+                        //         'compare' => '='
+                        //     );
+                        // }
             			$args['meta_query'][] = array(
             				'key' => 'offer_type',
             				'value' => $offer_type,

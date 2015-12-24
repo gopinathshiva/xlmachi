@@ -368,6 +368,10 @@ a.read-info{
     .xl-offer-item.offer-view-list{
         min-height: initial;
     }
+
+    .offer-box .white-block-content h3 {
+        min-height: 100px;
+    }
 }
 
 @media screen and (max-width: 760px){
@@ -565,9 +569,10 @@ a.read-info{
 }
 
 .featured-stores ul li {
-    width: 12%;
+    width: 11.5%;
     min-width: 60px;
-    margin:initial;
+    margin: initial;
+    margin-right: 1%;
 }
 
 .featured-stores .store-logo a{
@@ -582,6 +587,11 @@ a.read-info{
     top: initial;
     left: initial;
     transform: initial;    
+}
+
+.featured-stores {
+    background-color: transparent;
+    box-shadow: initial;
 }
 
 /* footer stats css starts here */
