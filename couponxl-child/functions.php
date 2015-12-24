@@ -491,9 +491,26 @@ function xl_footer_stats_callback(){ ?>
 
 add_action('xl_footer_stats','xl_footer_stats_callback');
 
+/* function xl_offer_of_the_day_callback(){?>
+    <div class="buzz-container"> 
+        <div class="buzz-it-up notification" id="buzz_smile" data-notifcount="2">
+            <a href="https://buzz.grabon.in?utm_source=homepage" target="_blank" class=""><b><i class="gie-bellsmile"></i></b><span><b>BUZZ ME! </b><small>One Click To Happiness </small></span></a>
+        </div>
+        <div class="recent-buzz">
+            <a href="http://goo.gl/FyQPN1" target="_blank" class="buzz-item buzz-1" data-buzzid="1"><b><i class="gie-bellsmile"></i></b><span><b>Just Recharge For FREE</b><small>Get Upto 100% Cashback On Recharge @ Paytm, Freecharge &amp; More</small></span></a>
+            <a href="http://goo.gl/xKRgdE" target="_blank" class="buzz-item buzz-2" data-buzzid="2"><b><i class="gie-bellsmile"></i></b><span><b>Flat Rs 10000 Cashback On Apple Products</b><small>Shop For iPhones, iPads, Mac Books &amp; More @ Paytm</small></span></a>
+        </div>
+    </div>
+}<?php
+
+add_action('xl_offer_of_the_day','xl_offer_of_the_day_callback'); */
+
 /* adding google analytics */
 
-//add_action('wp_footer', 'add_google_analytics');
+if(!is_localhost()){
+    add_action('wp_footer', 'add_google_analytics');
+}
+
 function add_google_analytics() { ?>
  
 <script>
