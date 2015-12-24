@@ -62,8 +62,10 @@ add_filter('excerpt_length', 'new_excerpt_length');
 function adding_custom_scripts() {    
 	wp_register_script('custom-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
     wp_register_script('preloader-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/image-preloader.js','',null, true);
+    wp_register_script('xmas-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/snowstorm.js','',null, false);
 
 	wp_enqueue_script('custom-script');
+    wp_enqueue_script('xmas-script');
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
 

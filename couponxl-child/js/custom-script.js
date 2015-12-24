@@ -1,4 +1,9 @@
 var updateOfferCount;
+if(snowStorm){
+	snowStorm.snowColor = '#99ccff'; 
+	snowStorm.useTwinkleEffect = true;
+}
+
 jQuery(document).ready(function($){
 
 	var isTouchDevice = (window.innerWidth <= 760 ) ? true:false;
