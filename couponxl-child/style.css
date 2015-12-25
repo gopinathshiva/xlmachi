@@ -372,6 +372,10 @@ a.read-info{
 
 @media screen and (max-width: 760px){
 
+    .xl-sidemenu{
+        display: none;
+    }
+
     .breadcrumb-section {
         visibility: hidden;
     }
@@ -627,4 +631,9 @@ a.read-info{
 .xl-footer-stats>li>span:first-child i.fa-smile-o,.xl-footer-stats>li>span:first-child i.fa-check-circle {
     left: 15px;
     top: 12px;
+}
+
+/* Registration fix */
+.social_connect_login_twitter{
+    display: none;
 }
