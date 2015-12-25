@@ -15,6 +15,16 @@ jQuery(document).ready(function($){
 		}
 	});
 
+	//on click of left arrow in sidemenu
+	$(".xl-sidemenu .xl-sidemenu-left").off('click').on('click',function(){
+		$('.xl-sidemenu').addClass('push-left');
+	});
+
+	//onclick of right arrow in sidemenu
+	$(".xl-sidemenu .xl-sidemenu-right").off('click').on('click',function(){
+		$('.xl-sidemenu').removeClass('push-left');
+	});
+
 	//function to call when user focus/exit on search box
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
 		if(e.type=='blur'){

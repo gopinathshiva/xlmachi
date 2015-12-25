@@ -503,13 +503,43 @@ a.read-info{
 
 /* side menu css starts here */
 
+.xl-sidemenu-left,.xl-sidemenu-right{
+    background: #f4f4f4;
+    position: relative;
+}
+
+.xl-sidemenu-left a,.xl-sidemenu-right a{
+    position: absolute;
+    top: 5px;
+    left: 13px;
+    opacity: .65;
+}
+
+.xl-sidemenu-right a{
+    left: 73px;
+}
+
+.xl-sidemenu-right{
+    display: none;
+}
+
+.xl-sidemenu.push-left .xl-sidemenu-right{
+    display: block;
+}
+
 .xl-sidemenu{
     position: fixed;
     z-index: 1000;
     display: block;
     margin-left: 10px;
     top: 175px;
+    left: 0;
     background-color: #fff;
+    transition:left .3s ease;
+}
+
+.xl-sidemenu.push-left{
+    left:-60px;
 }
 
 .xl-sidemenu ul{
