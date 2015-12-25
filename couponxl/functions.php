@@ -1042,7 +1042,7 @@ function couponxl_scripts_styles(){
 
 	//wp_enqueue_script( 'couponxl-stripe', 'https://checkout.stripe.com/checkout.js', false, false, true );
 
-	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.min.js', false, false, true );
+	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.js', false, false, true );
 	wp_localize_script( 'couponxl-custom', 'couponxl_data', array(
 		'url' => get_template_directory_uri(),
 		'email_friend' => __( 'Friend\'s email address', 'couponxl' ),
@@ -5404,7 +5404,7 @@ function couponxl_register(){
 	$repeat_password = isset( $_POST['repeat_password'] ) ? esc_sql( $_POST['repeat_password'] ) : '';
 	$message = '';
 
-	var_dump( $_POST );
+	//var_dump( $_POST );
 
 	if( isset( $_POST['register_field'] ) ){
 	    if( wp_verify_nonce($_POST['register_field'], 'register') ){
