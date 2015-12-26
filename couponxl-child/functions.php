@@ -280,10 +280,6 @@ function post_saved($id) {
 
     $post = get_post($id);
     $offer_title = $post->post_title;
-
-    debug_to_console('title b4 explode:'.$offer_title);
-    //$offer_title = explode(" ",$offer_title);
-    debug_to_console('title after explode:'.$offer_title);
     
     $offer_tag = '';
 
@@ -306,8 +302,6 @@ function post_saved($id) {
     // }
 
     $offer_tag = rtrim($offer_tag,',');
-
-    debug_to_console('tag:'.$offer_tag);
 
     wp_set_object_terms($id, $offer_tag, 'offer_tag', true);
     //update_post_meta($id, 'offer_tag', $offer_tag);
