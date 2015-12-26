@@ -278,6 +278,40 @@ function post_saved($id) {
     $start_date = get_post_meta($id,'offer_start',true);
     $offer_in_slider = get_post_meta($id,'offer_in_slider',true);
 
+    $post = get_post($id);
+    $offer_title = $post->post_title;
+
+    debug_to_console('title b4 explode:'.$offer_title);
+    //$offer_title = explode(" ",$offer_title);
+    debug_to_console('title after explode:'.$offer_title);
+    
+    $offer_tag = '';
+
+    $offer_title = strtolower($offer_title);
+
+    if (strpos($offer_title, 'cashback') !== false)
+        $offer_tag = 'cashback,';
+
+    if (strpos($offer_title, 'flat') !== false)
+        $offer_tag = 'flat,';
+
+    // foreach ($offer_title as $string) {
+    //     $string = strtolower($string);
+    //     debug_to_console('inside loop:'.$string);
+    //     if($string == 'cashback'){
+    //         $offer_tag = 'cashback,';
+    //     }else if($string == 'flat'){
+    //         $offer_tag = 'flat,';
+    //     }
+    // }
+
+    $offer_tag = rtrim($offer_tag,',');
+
+    debug_to_console('tag:'.$offer_tag);
+
+    wp_set_object_terms($id, $offer_tag, 'offer_tag', true);
+    //update_post_meta($id, 'offer_tag', $offer_tag);
+
     if($offer_type == 'Promotion' || $offer_type == 'Coupon'){
         if($offer_type == 'Promotion'){
             $offer_type = 'deal';
