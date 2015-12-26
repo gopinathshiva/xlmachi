@@ -372,7 +372,7 @@ a.read-info{
 
 @media screen and (max-width: 760px){
 
-    .xl-sidemenu{
+    .xl-sidemenu,.featured-stores{
         display: none;
     }
 
@@ -594,14 +594,21 @@ a.read-info{
 }
 
 /* featured stores css starts */
+
+.featured-stores{
+    background-color: transparent;
+    box-shadow: initial;
+}
+
 .featured-stores ul{
     margin: 0;
 }
 
 .featured-stores ul li {
-    width: 12%;
+    width: 11.5%;
     min-width: 60px;
-    margin:initial;
+    margin: initial;
+    margin-right: .5%;
 }
 
 .featured-stores .store-logo a{
