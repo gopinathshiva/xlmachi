@@ -85,6 +85,10 @@ Tags: white
 
 /* *********************** coupon box style starts here ***************************** */
 
+.offer-box .white-block-content h3{
+    min-height: 100px;
+}
+
 .white-block-content a.custom.show-code {
     padding: 0;
 }

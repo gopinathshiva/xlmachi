@@ -1042,7 +1042,7 @@ function couponxl_scripts_styles(){
 
 	//wp_enqueue_script( 'couponxl-stripe', 'https://checkout.stripe.com/checkout.js', false, false, true );
 
-	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.js', false, false, true );
+	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.min.js', false, false, true );
 	wp_localize_script( 'couponxl-custom', 'couponxl_data', array(
 		'url' => get_template_directory_uri(),
 		'email_friend' => __( 'Friend\'s email address', 'couponxl' ),
