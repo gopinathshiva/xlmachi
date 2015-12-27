@@ -1,9 +1,8 @@
 <?php
 /*
-	Template Name: Search Page
+	Template Name: Beauty and Health Page
 */
-
-            	    require_once( locate_template( 'includes/search-before.php' ) );
+                    require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
                     // if( get_query_var( 'paged' ) ){
                     //     $cur_page = get_query_var( 'paged' );
@@ -11,6 +10,9 @@
                     // else if( get_query_var( 'page' ) ){
                     //     $cur_page = get_query_var( 'page' );
                     // }
+
+                    $offer_cat = 'nutrition,personal-care-beauty,tablets';
+                    
             		$args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
@@ -54,20 +56,20 @@
                     //     }
                     // }                    
 
-            		if( !empty( $offer_type ) ){
-                        if( !empty( $offer_type ) || $offer_type == 'deal' ){
-                            $args['meta_query'][] = array(
-                                'key' => 'deal_status',
-                                'value' => 'has_items',
-                                'compare' => '='
-                            );
-                        }
-            			$args['meta_query'][] = array(
-            				'key' => 'offer_type',
-            				'value' => $offer_type,
-            				'compare' => '='
-            			);
-            		}
+            		// if( !empty( $offer_type ) ){
+              //           if( !empty( $offer_type ) || $offer_type == 'deal' ){
+              //               $args['meta_query'][] = array(
+              //                   'key' => 'deal_status',
+              //                   'value' => 'has_items',
+              //                   'compare' => '='
+              //               );
+              //           }
+            		// 	$args['meta_query'][] = array(
+            		// 		'key' => 'offer_type',
+            		// 		'value' => $offer_type,
+            		// 		'compare' => '='
+            		// 	);
+            		// }
 
                     // if( !empty( $offer_store ) ){
                     //     $args['meta_query'][] = array(
@@ -81,17 +83,18 @@
             			$args['tax_query'][] = array(
             				'taxonomy' => 'offer_cat',
             				'field'	=> 'slug',
-            				'terms' => $offer_cat,
+            				'terms' => explode( ",", $offer_cat ),
+                            'operator' => 'IN'
             			);
             		}                    
 
-            		if( !empty( $offer_tag ) ){
-            			$args['tax_query'][] = array(
-            				'taxonomy' => 'offer_tag',
-            				'field'	=> 'slug',
-            				'terms' => $offer_tag,
-            			);
-            		}
+            		// if( !empty( $offer_tag ) ){
+            		// 	$args['tax_query'][] = array(
+            		// 		'taxonomy' => 'offer_tag',
+            		// 		'field'	=> 'slug',
+            		// 		'terms' => $offer_tag,
+            		// 	);
+            		// }
             		// if( !empty( $location ) ){
             		// 	$args['tax_query'][] = array(
             		// 		'taxonomy' => 'location',
@@ -122,6 +125,5 @@
                         set_transient( $transient_key, $offers, 8 * HOUR_IN_SECONDS );                                            
                     }                   
             		
-                    require_once( locate_template( 'includes/search-after.php' ) );
-
+					require_once( locate_template( 'includes/search-before.php' ) );
 ?>

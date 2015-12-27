@@ -510,7 +510,7 @@ function xl_side_menu_callback(){
         <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/mobile-recharge' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/bus' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
-        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/mobiles' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'electronics' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/food-ordering' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/clothing' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
