@@ -159,7 +159,7 @@ jQuery(document).ready(function($){
 	});
 
 	//on click of radio button to filter offer type
-	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){			
+	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){	
 		xl_filterOffers();
 		event.stopImmediatePropagation();
 		//updateOfferCategoryCount();
@@ -174,22 +174,24 @@ jQuery(document).ready(function($){
 	});
 
 	function xl_filterOffers(){
+
+		var scrollStart = $("body").offset().top + 150;
+
+		$('html, body').animate({
+		    scrollTop: scrollStart
+	 	}, 350);
+
 		$('.xl-offer-type-filter-radio,.xl-offer-cat-filter-checkbox,.xl-offer-store-filter-checkbox').prop('disabled',true);
 		$('.xl-offer-filter-not-found').hide();
 
 		$('.xl-offer-item').removeClass('xl-filtered-type xl-filtered-cat xl-filtered-store');
-
-		var scrollStart = $("body").offset().top + 150;
-		$('html, body').animate({
-		    scrollTop: scrollStart
-	 	}, 550);
 	 	
 		var offerType = $('.xl-offer-type-filter input.xl-offer-type-filter-radio:checked').val();
-		$('.xl-offer-item').hide();
 
 		var offerCatCheckedCount = $('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length;
 		var offerStoreCheckedCount = $('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').length;
 
+		$('.xl-offer-item').hide();
 		// if(!offerCatCheckedCount && !offerStoreCheckedCount){
 		// 	$('.xl-offer-item').fadeIn("slow");			
 		// }else{
@@ -396,12 +398,12 @@ jQuery(document).ready(function($){
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+5)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		        $('.xl-offer-store-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+offerTypeFilterHeight+25)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		    } else {                                   // apply position: static
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
@@ -426,12 +428,12 @@ jQuery(document).ready(function($){
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+5)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+offerTypeFilterHeight+25)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		    } else {                                   // apply position: static
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
