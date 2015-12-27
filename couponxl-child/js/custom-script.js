@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 			var id = $(this).attr('data-scroll-id');
 		    $('html, body').animate({
 		        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
-		    }, 2000);
+		    }, 350);
 		}
 	});
 

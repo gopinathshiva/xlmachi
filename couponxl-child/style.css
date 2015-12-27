@@ -421,10 +421,10 @@ a.read-info{
 
 /* wp robot style fixes */
 
-.nav.navbar-nav  .dropdown.open .dropdown-menu{
+/*.nav.navbar-nav  .dropdown.open .dropdown-menu{
     height: inherit !important;
     padding-top: 41px !important;
-}
+}*/
 
 /* scroll to top fix */
 .xl-scrollup {
