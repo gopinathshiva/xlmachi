@@ -1,6 +1,6 @@
 <?php
 /*
-	Template Name: Search Page
+	Template Name: Electronics Page
 */
 get_header();
 the_post();
@@ -82,20 +82,20 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                     //     }
                     // }                    
 
-            		if( !empty( $offer_type ) ){
-                        if( !empty( $offer_type ) || $offer_type == 'deal' ){
-                            $args['meta_query'][] = array(
-                                'key' => 'deal_status',
-                                'value' => 'has_items',
-                                'compare' => '='
-                            );
-                        }
-            			$args['meta_query'][] = array(
-            				'key' => 'offer_type',
-            				'value' => $offer_type,
-            				'compare' => '='
-            			);
-            		}
+            		// if( !empty( $offer_type ) ){
+              //           if( !empty( $offer_type ) || $offer_type == 'deal' ){
+              //               $args['meta_query'][] = array(
+              //                   'key' => 'deal_status',
+              //                   'value' => 'has_items',
+              //                   'compare' => '='
+              //               );
+              //           }
+            		// 	$args['meta_query'][] = array(
+            		// 		'key' => 'offer_type',
+            		// 		'value' => $offer_type,
+            		// 		'compare' => '='
+            		// 	);
+            		// }
 
                     // if( !empty( $offer_store ) ){
                     //     $args['meta_query'][] = array(
@@ -105,21 +105,24 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
                     //     );
                     // }
 
+                    $offer_cat = 'pc,mobiles,tablets,tv,watches';
+
             		if( !empty( $offer_cat ) ){
             			$args['tax_query'][] = array(
             				'taxonomy' => 'offer_cat',
             				'field'	=> 'slug',
-            				'terms' => $offer_cat,
+            				'terms' => explode( ",", $offer_cat ),
+                            'operator' => 'IN'
             			);
             		}                    
 
-            		if( !empty( $offer_tag ) ){
-            			$args['tax_query'][] = array(
-            				'taxonomy' => 'offer_tag',
-            				'field'	=> 'slug',
-            				'terms' => $offer_tag,
-            			);
-            		}
+            		// if( !empty( $offer_tag ) ){
+            		// 	$args['tax_query'][] = array(
+            		// 		'taxonomy' => 'offer_tag',
+            		// 		'field'	=> 'slug',
+            		// 		'terms' => $offer_tag,
+            		// 	);
+            		// }
             		// if( !empty( $location ) ){
             		// 	$args['tax_query'][] = array(
             		// 		'taxonomy' => 'location',

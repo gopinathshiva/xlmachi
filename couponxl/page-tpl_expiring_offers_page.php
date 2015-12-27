@@ -1,6 +1,6 @@
 <?php
 /*
-	Template Name: Search Page
+	Template Name: Expiring Offers Page
 */
 get_header();
 the_post();
@@ -16,8 +16,6 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
             <?php if( $search_sidebar_location == 'left' ): ?>
                 <?php require_once( locate_template( 'includes/search-sidebar.php' ) ) ?>
             <?php endif; ?>
-
-
 
             <div class="col-md-9">
 
@@ -48,19 +46,27 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
             			'orderby' => 'meta_value_num',
             			'meta_key' => 'offer_expire',
             			'order' => 'ASC',
-            			'meta_query' => array(
-            				'relation' => 'AND',
+                        'meta_query'     => array(
                             array(
-                                'key' => 'offer_start',
-                                'value' => current_time( 'timestamp' ),
-                                'compare' => '<='
-                            ),
-                            array(
-                                'key' => 'offer_expire',
-                                'value' => current_time( 'timestamp' ),
-                                'compare' => '>='
-                            ),
-            			),
+                              'key'     => 'offer_expire',
+                              'value'   => array( time(), time() + (60 * 60 * 24 * 7) ),
+                              'compare' => 'BETWEEN',
+                              //'type'    => 'DATE'
+                            ) 
+                        ),
+            			// 'meta_query' => array(
+            			// 	'relation' => 'AND',
+               //              array(
+               //                  'key' => 'offer_start',
+               //                  'value' => current_time( 'timestamp' ),
+               //                  'compare' => '<='
+               //              ),
+               //              array(
+               //                  'key' => 'offer_expire',
+               //                  'value' => current_time( 'timestamp' ),
+               //                  'compare' => '>='
+               //              ),
+            			// ),
             			'tax_query' => array(
             				'relation' => 'AND'
             			)
@@ -143,7 +149,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 
                     $transient_namespace = xl_transient_namespace();
 
-                    $transient_key = $transient_namespace .md5( serialize($transient_args) );                       
+                    $transient_key = $transient_namespace .md5( serialize($transient_args) );   
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );
