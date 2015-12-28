@@ -101,6 +101,11 @@ Tags: white
 	text-align:justify;
 }
 
+.widget-footer{
+    z-index: 3;
+    position: relative;
+}
+
 /* ***********************  widget style ends here ******************************* */
 
 .page-template-page-tpl_search_page .offer-box .white-block-content {
@@ -363,65 +368,6 @@ a.read-info{
 
 /* ***********************  search block css changes ends here ******************** */
 
-@media screen and (min-width: 768px){
-    .xl-offer-item {
-        min-height: 380px;
-        height: auto;
-    }
-
-    .xl-offer-item.offer-view-list{
-        min-height: initial;
-    }
-
-    .offer-box .white-block-content h3 {
-        min-height: 100px;
-    }
-}
-
-@media screen and (max-width: 760px){
-
-    .xl-sidemenu,.featured-stores{
-        display: none;
-    }
-
-    .breadcrumb-section {
-        visibility: hidden;
-    }
-
-    .nav.navbar-nav {
-        padding: 30px 0px 0px 0px !important;
-    }
-
-    .home-page-body {
-        margin-top: 26px;
-    }
-
-    .navbar .xl-search-form-container {
-        position: initial;
-        width: 100%;
-        margin-bottom: 5px;
-    }
-
-    .navigation .navbar-nav li.dropdown{
-        background: #ECEBEB;
-    }
-
-    .navbar-nav .xl-search-form-container{
-        position: absolute;
-    }
-
-    .nav.navbar-nav>li.menu-item:first-child{
-        margin-top: 45px !important;
-    }
-
-    .navbar-toggle[data-target=".search-collapse"] {
-        background-color: #fff;
-    }
-
-    .navbar-toggle[data-target=".search-collapse"] .fa-search{
-        visibility: hidden;
-    }
-}
 
 /* wp rocket style fixes */
 
@@ -687,4 +633,66 @@ a.read-info{
 /* Registration fix */
 .social_connect_login_twitter{
     display: none;
+}
+
+/* Media Queries */
+
+@media screen and (min-width: 768px){
+    .xl-offer-item {
+        min-height: 380px;
+        height: auto;
+    }
+
+    .xl-offer-item.offer-view-list{
+        min-height: initial;
+    }
+
+    .offer-box .white-block-content h3 {
+        min-height: 100px;
+    }
+}
+
+@media screen and (max-width: 760px){
+
+    .xl-sidemenu,.featured-stores{
+        display: none;
+    }
+
+    .breadcrumb-section {
+        visibility: hidden;
+    }
+
+    .nav.navbar-nav {
+        padding: 30px 0px 0px 0px !important;
+    }
+
+    .home-page-body {
+        margin-top: 26px;
+    }
+
+    .navbar .xl-search-form-container {
+        position: initial;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .navigation .navbar-nav li.dropdown{
+        background: #ECEBEB;
+    }
+
+    .navbar-nav .xl-search-form-container{
+        position: absolute;
+    }
+
+    .nav.navbar-nav>li.menu-item:first-child{
+        margin-top: 45px !important;
+    }
+
+    .navbar-toggle[data-target=".search-collapse"] {
+        background-color: #fff;
+    }
+
+    .navbar-toggle[data-target=".search-collapse"] .fa-search{
+        visibility: hidden;
+    }
 }

@@ -125,5 +125,5 @@
                         set_transient( $transient_key, $offers, 8 * HOUR_IN_SECONDS );                                            
                     }                   
             		
-					require_once( locate_template( 'includes/search-before.php' ) );
+					require_once( locate_template( 'includes/search-after.php' ) );
 ?>
