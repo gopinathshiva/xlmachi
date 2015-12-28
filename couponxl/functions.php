@@ -5404,7 +5404,7 @@ function couponxl_register(){
 	$repeat_password = isset( $_POST['repeat_password'] ) ? esc_sql( $_POST['repeat_password'] ) : '';
 	$message = '';
 
-	var_dump( $_POST );
+	//var_dump( $_POST );
 
 	if( isset( $_POST['register_field'] ) ){
 	    if( wp_verify_nonce($_POST['register_field'], 'register') ){

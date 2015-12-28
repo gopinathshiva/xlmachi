@@ -16,8 +16,18 @@ jQuery(document).ready(function($){
 			var id = $(this).attr('data-scroll-id');
 		    $('html, body').animate({
 		        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
-		    }, 2000);
+		    }, 350);
 		}
+	});
+
+	//on click of left arrow in sidemenu
+	$(".xl-sidemenu .xl-sidemenu-left").off('click').on('click',function(){
+		$('.xl-sidemenu').addClass('push-left');
+	});
+
+	//onclick of right arrow in sidemenu
+	$(".xl-sidemenu .xl-sidemenu-right").off('click').on('click',function(){
+		$('.xl-sidemenu').removeClass('push-left');
 	});
 
 	//function to call when user focus/exit on search box
@@ -89,13 +99,16 @@ jQuery(document).ready(function($){
 			results = JSON.parse(results);
 			var resultCounter = 0;			
 			for(var i = 0 ;i < results.length; i++){
-				if(results[i].offer_name.toLowerCase().indexOf(searchText.toLowerCase())==0){
+				if(results[i].offer_name.toLowerCase().indexOf(searchText.toLowerCase())>=0){
 					$(parentElement).append("<a href="+results[i].offer_slug+"><li class='xl-search-result-item'><span>" + results[i].offer_name + "</span></li></a>");
 					resultCounter++;
-					if(resultCounter>=6){
+					if(resultCounter>=8){
 						break;
 					}
 				}
+			}
+			if(!resultCounter){
+				$(parentElement).append("<a href='javascript:void(0)'><li class='xl-search-result-item'><span>No Results Found</span></li></a>");
 			}
 			$(parentElement).slideDown('fast');
 		}
@@ -151,7 +164,7 @@ jQuery(document).ready(function($){
 	});
 
 	//on click of radio button to filter offer type
-	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){			
+	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){	
 		xl_filterOffers();
 		event.stopImmediatePropagation();
 		//updateOfferCategoryCount();
@@ -166,22 +179,24 @@ jQuery(document).ready(function($){
 	});
 
 	function xl_filterOffers(){
+
+		var scrollStart = $("body").offset().top + 150;
+
+		$('html, body').animate({
+		    scrollTop: scrollStart
+	 	}, 350);
+
 		$('.xl-offer-type-filter-radio,.xl-offer-cat-filter-checkbox,.xl-offer-store-filter-checkbox').prop('disabled',true);
 		$('.xl-offer-filter-not-found').hide();
 
 		$('.xl-offer-item').removeClass('xl-filtered-type xl-filtered-cat xl-filtered-store');
-
-		var scrollStart = $("body").offset().top + 150;
-		$('html, body').animate({
-		    scrollTop: scrollStart
-	 	}, 550);
 	 	
 		var offerType = $('.xl-offer-type-filter input.xl-offer-type-filter-radio:checked').val();
-		$('.xl-offer-item').hide();
 
 		var offerCatCheckedCount = $('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length;
 		var offerStoreCheckedCount = $('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').length;
 
+		$('.xl-offer-item').hide();
 		// if(!offerCatCheckedCount && !offerStoreCheckedCount){
 		// 	$('.xl-offer-item').fadeIn("slow");			
 		// }else{
@@ -388,12 +403,12 @@ jQuery(document).ready(function($){
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+5)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		        $('.xl-offer-store-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+offerTypeFilterHeight+25)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		    } else {                                   // apply position: static
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
@@ -418,12 +433,12 @@ jQuery(document).ready(function($){
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+5)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		        $('.xl-offer-cat-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
 		            top:(stickyNavigationHeight+offerTypeFilterHeight+25)+'px',
-		            'z-index':'-1'
+		            'z-index':'initial'
 		        });
 		    } else {                                   // apply position: static
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it

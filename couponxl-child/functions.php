@@ -280,6 +280,34 @@ function post_saved($id) {
     $start_date = get_post_meta($id,'offer_start',true);
     $offer_in_slider = get_post_meta($id,'offer_in_slider',true);
 
+    $post = get_post($id);
+    $offer_title = $post->post_title;
+    
+    $offer_tag = '';
+
+    $offer_title = strtolower($offer_title);
+
+    if (strpos($offer_title, 'cashback') !== false)
+        $offer_tag = 'cashback,';
+
+    if (strpos($offer_title, 'flat') !== false)
+        $offer_tag = 'flat,';
+
+    // foreach ($offer_title as $string) {
+    //     $string = strtolower($string);
+    //     debug_to_console('inside loop:'.$string);
+    //     if($string == 'cashback'){
+    //         $offer_tag = 'cashback,';
+    //     }else if($string == 'flat'){
+    //         $offer_tag = 'flat,';
+    //     }
+    // }
+
+    $offer_tag = rtrim($offer_tag,',');
+
+    wp_set_object_terms($id, $offer_tag, 'offer_tag', true);
+    //update_post_meta($id, 'offer_tag', $offer_tag);
+
     if($offer_type == 'Promotion' || $offer_type == 'Coupon'){
         if($offer_type == 'Promotion'){
             $offer_type = 'deal';
@@ -464,17 +492,36 @@ function xl_scroll_top_callback(){
 
 add_action('xl_side_menu','xl_side_menu_callback');
 
-function xl_side_menu_callback(){ ?>
+function xl_side_menu_callback(){
+    ?>
     <div class="xl-sidemenu">
         <ul>
-            <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li>
-            <li><a data-scroll-id="mobile-recharge" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
-            <li><a data-scroll-id="bus" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
-            <li><a data-scroll-id="electronics" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
-            <li><a data-scroll-id="food-ordering" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
-            <li><a data-scroll-id="clothing" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
-            <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
+    <?php
+    if(is_front_page()){?>
+        
+        <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li>
+        <li><a data-scroll-id="mobile-recharge" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a data-scroll-id="bus" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
+        <li><a data-scroll-id="electronics" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
+        <li><a data-scroll-id="food-ordering" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a data-scroll-id="fashion" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
+
+    <?php }else{?>
+        
+        <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/mobile-recharge' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/bus' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
+        <li><a href="<?php echo esc_url( home_url('/') ).'electronics' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/food-ordering' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/clothing' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
+    <?php }
+    ?>
+
         </ul>
+        <div class="xl-sidemenu-left"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-left icon-margin" ></i></a></div>
+        <div class="xl-sidemenu-right"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-right icon-margin" ></i></a></div>
     </div><?php
 }
 

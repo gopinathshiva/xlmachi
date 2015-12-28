@@ -85,6 +85,10 @@ Tags: white
 
 /* *********************** coupon box style starts here ***************************** */
 
+.offer-box .white-block-content h3{
+    min-height: 100px;
+}
+
 .white-block-content a.custom.show-code {
     padding: 0;
 }
@@ -376,6 +380,10 @@ a.read-info{
 
 @media screen and (max-width: 760px){
 
+    .xl-sidemenu,.featured-stores{
+        display: none;
+    }
+
     .breadcrumb-section {
         visibility: hidden;
     }
@@ -417,10 +425,10 @@ a.read-info{
 
 /* wp rocket style fixes */
 
-.nav.navbar-nav  .dropdown.open .dropdown-menu{
+/*.nav.navbar-nav  .dropdown.open .dropdown-menu{
     height: inherit !important;
     padding-top: 41px !important;
-}
+}*/
 
 /* scroll to top fix */
 .xl-scrollup {
@@ -503,13 +511,43 @@ a.read-info{
 
 /* side menu css starts here */
 
+.xl-sidemenu-left,.xl-sidemenu-right{
+    background: #f4f4f4;
+    position: relative;
+}
+
+.xl-sidemenu-left a,.xl-sidemenu-right a{
+    position: absolute;
+    top: 5px;
+    left: 13px;
+    opacity: .65;
+}
+
+.xl-sidemenu-right a{
+    left: 73px;
+}
+
+.xl-sidemenu-right{
+    display: none;
+}
+
+.xl-sidemenu.push-left .xl-sidemenu-right{
+    display: block;
+}
+
 .xl-sidemenu{
     position: fixed;
     z-index: 1000;
     display: block;
     margin-left: 10px;
     top: 175px;
+    left: 0;
     background-color: #fff;
+    transition:left .3s ease;
+}
+
+.xl-sidemenu.push-left{
+    left:-60px;
 }
 
 .xl-sidemenu ul{
@@ -564,6 +602,12 @@ a.read-info{
 }
 
 /* featured stores css starts */
+
+.featured-stores{
+    background-color: transparent;
+    box-shadow: initial;
+}
+
 .featured-stores ul{
     margin: 0;
 }
@@ -573,6 +617,7 @@ a.read-info{
     min-width: 60px;
     margin: initial;
     margin-right: 1%;
+    margin-right: .5%;
 }
 
 .featured-stores .store-logo a{
@@ -637,4 +682,9 @@ a.read-info{
 .xl-footer-stats>li>span:first-child i.fa-smile-o,.xl-footer-stats>li>span:first-child i.fa-check-circle {
     left: 15px;
     top: 12px;
+}
+
+/* Registration fix */
+.social_connect_login_twitter{
+    display: none;
 }

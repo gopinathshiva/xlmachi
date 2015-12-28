@@ -6,9 +6,8 @@ $footer_facebook = couponxl_get_option( 'footer_facebook' );
 $footer_twitter = couponxl_get_option( 'footer_twitter' );
 $footer_google = couponxl_get_option( 'footer_google' );
 
-if(is_front_page() && !wp_is_mobile()){
-	do_action('xl_side_menu');	
-}
+do_action('xl_side_menu');	
+
 if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $footer_twitter ) || !empty( $footer_google ) ):
 ?>
 	<section class="footer">

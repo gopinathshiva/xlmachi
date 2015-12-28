@@ -1,9 +1,8 @@
 <?php
 /*
-	Template Name: Search Page
+	Template Name: Expiring Offers Page
 */
-
-            	    require_once( locate_template( 'includes/search-before.php' ) );
+                    require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
                     // if( get_query_var( 'paged' ) ){
                     //     $cur_page = get_query_var( 'paged' );
@@ -20,19 +19,27 @@
             			'orderby' => 'meta_value_num',
             			'meta_key' => 'offer_expire',
             			'order' => 'ASC',
-            			'meta_query' => array(
-            				'relation' => 'AND',
+                        'meta_query'     => array(
                             array(
-                                'key' => 'offer_start',
-                                'value' => current_time( 'timestamp' ),
-                                'compare' => '<='
-                            ),
-                            array(
-                                'key' => 'offer_expire',
-                                'value' => current_time( 'timestamp' ),
-                                'compare' => '>='
-                            ),
-            			),
+                              'key'     => 'offer_expire',
+                              'value'   => array( time(), time() + (60 * 60 * 24 * 7) ),
+                              'compare' => 'BETWEEN',
+                              //'type'    => 'DATE'
+                            ) 
+                        ),
+            			// 'meta_query' => array(
+            			// 	'relation' => 'AND',
+               //              array(
+               //                  'key' => 'offer_start',
+               //                  'value' => current_time( 'timestamp' ),
+               //                  'compare' => '<='
+               //              ),
+               //              array(
+               //                  'key' => 'offer_expire',
+               //                  'value' => current_time( 'timestamp' ),
+               //                  'compare' => '>='
+               //              ),
+            			// ),
             			'tax_query' => array(
             				'relation' => 'AND'
             			)
@@ -55,13 +62,13 @@
                     // }                    
 
             		if( !empty( $offer_type ) ){
-                        // if( !empty( $offer_type ) || $offer_type == 'deal' ){
-                        //     $args['meta_query'][] = array(
-                        //         'key' => 'deal_status',
-                        //         'value' => 'has_items',
-                        //         'compare' => '='
-                        //     );
-                        // }
+                        if( !empty( $offer_type ) || $offer_type == 'deal' ){
+                            $args['meta_query'][] = array(
+                                'key' => 'deal_status',
+                                'value' => 'has_items',
+                                'compare' => '='
+                            );
+                        }
             			$args['meta_query'][] = array(
             				'key' => 'offer_type',
             				'value' => $offer_type,
@@ -115,13 +122,12 @@
 
                     $transient_namespace = xl_transient_namespace();
 
-                    $transient_key = $transient_namespace .md5( serialize($transient_args) );                       
+                    $transient_key = $transient_namespace .md5( serialize($transient_args) );   
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );
                         set_transient( $transient_key, $offers, 8 * HOUR_IN_SECONDS );                                            
                     }                   
             		
-                    require_once( locate_template( 'includes/search-after.php' ) );
-
+                    require_once( locate_template( 'includes/search-after.php' ) );					
 ?>
