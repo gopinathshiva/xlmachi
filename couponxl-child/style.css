@@ -554,17 +554,17 @@ a.read-info{
     box-shadow: initial;
 }
 
-.featured-stores ul{
+/*.featured-stores ul{
     margin: 0;
-}
+}*/
 
-.featured-stores ul li {
+/*.featured-stores ul li {
     width: 11.5%;
     min-width: 60px;
     margin: initial;
     margin-right: 1%;
     margin-right: .5%;
-}
+}*/
 
 .featured-stores .store-logo a{
     border-right: initial;
@@ -574,15 +574,50 @@ a.read-info{
     height: 100px;
 }
 
-.featured-stores .store-logo img{
-    top: initial;
-    left: initial;
-    transform: initial;    
-}
-
 .featured-stores {
     background-color: transparent;
     box-shadow: initial;
+}
+
+/* carousel effect for featured stores */
+
+.featured-stores>.row{
+    margin: 0;
+}
+
+.featured-stores .col-sm-12{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.featured-stores ul{
+    margin: 0;
+    position: absolute;
+    width: 200%;
+    height: 100px;
+}
+
+.featured-stores ul li{
+    width: 11.5%;
+    min-width: 60px;
+    margin: initial;
+    margin-right: .5%;
+    width: 130px;
+    height: 100px;
+}
+
+.featured-stores ul li .store-logo img{
+    top: initial;
+    left: initial;
+    -webkit-transform: initial;
+    -moz-transform: initial;
+    -ms-transform: initial;
+    -o-transform: initial;
+    transform: initial;
+    position: initial; 
 }
 
 /* footer stats css starts here */
