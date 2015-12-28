@@ -1,8 +1,4 @@
 var updateOfferCount;
-if(snowStorm){
-	snowStorm.snowColor = '#99ccff'; 
-	snowStorm.useTwinkleEffect = true;
-}
 
 jQuery(document).ready(function($){
 
@@ -451,5 +447,36 @@ jQuery(document).ready(function($){
 
 		});
     }
+
+    //added for carousel effect in featured store page in home page
+
+    if($('.featured-stores ul').length){
+    	var firstval = 0,isCarouselPaused = false;	
+
+		function Carousel() {
+		    firstval += 2;		    
+		    var parent = $('.featured-stores ul')[0];
+		    parent.style.left = "-" + firstval + "px";
+		    if (!(firstval % 130)) {
+		        setTimeout(Carousel, 3000);
+		        firstval = 0;
+		        var firstChild = parent.firstElementChild;
+		        parent.appendChild(firstChild);
+		        parent.style.left= 0;
+		        return;
+		    }
+		    if(!isCarouselPaused){
+		    	setTimeout(Carousel, 20);
+		    }		    
+		}
+		Carousel();
+
+		$('.featured-stores').hover(function(){
+			isCarouselPaused = true;
+		},function(){
+			isCarouselPaused = false;
+			Carousel();
+		});
+    }    
 
 });

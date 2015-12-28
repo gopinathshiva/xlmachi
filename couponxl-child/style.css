@@ -490,6 +490,7 @@ a.read-info{
     left: 0;
     background-color: #fff;
     transition:left .3s ease;
+    cursor: pointer;
 }
 
 .xl-sidemenu.push-left{
