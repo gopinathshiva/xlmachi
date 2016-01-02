@@ -19,7 +19,6 @@ function couponxl_coupons_func( $atts, $content ){
 	$transient_args = $atts;
 	$transient_namespace = xl_transient_namespace();
 	$transient_key = $transient_namespace .md5( serialize($transient_args) );
-
 	if ( false === ( $content = get_transient( $transient_key ) ) ) {
         $items = explode( ",", $items );
 		$is_shortcode = true;

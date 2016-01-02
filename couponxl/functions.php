@@ -1042,7 +1042,7 @@ function couponxl_scripts_styles(){
 
 	//wp_enqueue_script( 'couponxl-stripe', 'https://checkout.stripe.com/checkout.js', false, false, true );
 
-	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.min.js', false, false, true );
+	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.js', false, false, true );
 	wp_localize_script( 'couponxl-custom', 'couponxl_data', array(
 		'url' => get_template_directory_uri(),
 		'email_friend' => __( 'Friend\'s email address', 'couponxl' ),
@@ -1195,6 +1195,7 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	}	
 	$coupon_type = get_post_meta( $post_id, 'coupon_type', true );
 	$affiliate_link = get_post_meta( $post_id, 'coupon_link', true );
+	$coupon_code = get_post_meta( $post_id, 'coupon_code', true );
 	//$xl_coupon_link = 'javascript:;';
 	$target = '';
 	// if( !empty( $affiliate_link ) ){
@@ -1206,7 +1207,8 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	// 	$target = 'target="_blank"';
 	// }
 
-	$button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" target="_blank">';
+	// $button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" target="_blank">';
+	$button = '<a href="'.get_the_permalink().'" data-coupon="'.$coupon_code.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code">';
 
 	switch( $coupon_type ){
 		case 'code': 
