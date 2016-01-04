@@ -11,12 +11,12 @@
                     // else if( get_query_var( 'page' ) ){
                     //     $cur_page = get_query_var( 'page' );
                     // }
+                    
             		$args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
             			'post_type'	=> 'offer',
             			'paged' => $cur_page,
-                        //'paged' => $cur_page,
             			'orderby' => 'meta_value_num',
             			'meta_key' => 'offer_expire',
             			'order' => 'ASC',
@@ -101,21 +101,59 @@
             		// }
 
                     if( !empty( $keyword ) ){
-                        $args['s'] = urldecode( $keyword );
+                        $keyword = urldecode( $keyword );
+                        $args['s'] = $keyword;
+                        // $isSearchArgsPassed = false;
+
+                        // $keyword = strtolower($keyword);
+                        // $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
+
+                        // $stores = $wpdb->get_results(
+                        //     $wpdb->prepare(
+                        //         "SELECT ID, post_title,post_name FROM {$wpdb->posts} AS posts WHERE posts.post_type = %s AND posts.post_status = %s",'store','publish'
+                        //     )
+                        // );
+                        // if( !empty( $stores ) && !$isSearchArgsPassed){
+                        //     foreach( $stores as $store ){
+                        //         if($store->post_name == $keyword){
+                        //             $args['tax_query'][] = array(
+                        //                 'taxonomy' => 'offer_store',
+                        //                 'field' => 'slug',
+                        //                 'terms' => $keyword,
+                        //             );
+                        //             $isSearchArgsPassed = true;
+                        //         }
+                        //     }
+                        // }
+                        // else if(!empty($xl_offer_cats) && !$isSearchArgsPassed){
+                        //     foreach( $xl_offer_cats as $key => $cat){
+                        //         $cat_name = strtolower($cat->name);
+                        //         if($cat->name == $keyword){
+                        //             $args['tax_query'][] = array(
+                        //                 'taxonomy' => 'offer_cat',
+                        //                 'field' => 'slug',
+                        //                 'terms' => $keyword,
+                        //             );
+                        //         }
+                        //     }
+                        // }
+                        // else{
+                        //     $args['s'] = $keyword;
+                        // }
+                        
                     }
                     
-
                     $transient_args = $args;
 
-                    foreach ($transient_args as $index => $data) {                        
-                        if ($index == 'meta_query') {
-                            unset($transient_args[$index]);
-                        }
-                    }
+                    // foreach ($transient_args as $index => $data) {                        
+                    //     if ($index == 'meta_query') {
+                    //         unset($transient_args[$index]);
+                    //     }
+                    // }
 
                     $transient_namespace = xl_transient_namespace();
 
-                    $transient_key = $transient_namespace .md5( serialize($transient_args) );                       
+                    $transient_key = $transient_namespace .md5( serialize($transient_args) );    
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );

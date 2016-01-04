@@ -77,7 +77,7 @@ function add_search_box($items, $args) {
         $searchform = ob_get_contents();
         ob_end_clean();
 
-        $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix xl-search-form"> 
+        $searchform = '<form onsubmit="return false;" method="get" action="'.esc_url( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ) ).'" class="clearfix xl-search-form"> 
                             <i class="fa fa-search icon-margin" ></i>
                             <div class="">
                                 <input type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">

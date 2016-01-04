@@ -11,6 +11,9 @@ Template: couponxl
 Tags: white
 */
 
+/*.home-page-body{
+    background: url('images/bg.webp');
+}*/
 
 /* ***********************  header style starts here ******************************* */
 
@@ -79,7 +82,29 @@ Tags: white
 
 /* ***********************  deal page style starts here ******************************* */
 
+.coupon_modal_content a.xl-activate-deal{
+    color: white;
+    margin-bottom: 15px;
+    border-color: transparent;
+}
 
+.offer-box .xl-permalink{
+    display: none;
+}
+
+.offer-box{
+    transition:box-shadow .3s ease;
+    -webkit-transition: box-shadow .3s ease
+    -moz-transition: box-shadow .3s ease
+    -ms-transition: box-shadow .3s ease
+    -o-transition: box-shadow .3s ease
+}
+
+.offer-box:hover{
+    box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
+}
 
 /* ***********************  deal page style ends here ******************************* */
 
@@ -243,6 +268,10 @@ a.read-info{
     color: white !important;
     padding: 4px;
     transition:background .3s ease;
+    -webkit-transition: background .3s ease;
+    -moz-transition: background .3s ease;
+    -ms-transition: background .3s ease;
+    -o-transition: background .3s ease;
 }
 
 .offer-box .white-block-content a.read-info:hover{
@@ -684,7 +713,7 @@ a.read-info{
     }
 
     .offer-box .white-block-content h3 {
-        min-height: 100px;
+        min-height: 105px;
     }
 }
 

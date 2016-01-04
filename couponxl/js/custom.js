@@ -397,73 +397,132 @@ jQuery(document).ready(function($){
 	});
 	
 	/* SHOW CODE */
-	function show_code_modal( offer_id ){
-		$('.coupon-print-image').remove();
-		$.ajax({
-			url: ajaxurl,
-			method: 'POST',
-			data: {
-				action: 'show_code',
-				offer_id: offer_id,
-			},
-			dataType: "HTML",
-			success: function(response){
-				$('#showCode .coupon_modal_content').html( response );
-				$('body').append( $('.coupon-print-image').clone() );
-				$('#showCode .coupon-print-image').remove();
-				$('#showCode').modal('show');
-				if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-				    prepare_copy();
-				}
-				else{
-					$('.coupon-code-modal.print').attr( 'href', $('.coupon-print-image').attr('src') );
-					$('.coupon-code-copied').hide();
-				}
+	// function show_code_modal( offer_id ){
+	// 	$('.coupon-print-image').remove();
+	// 	$.ajax({
+	// 		url: ajaxurl,
+	// 		method: 'POST',
+	// 		data: {
+	// 			action: 'show_code',
+	// 			offer_id: offer_id,
+	// 		},
+	// 		dataType: "HTML",
+	// 		success: function(response){
+	// 			$('#showCode .coupon_modal_content').html( response );
+	// 			$('body').append( $('.coupon-print-image').clone() );
+	// 			$('#showCode .coupon-print-image').remove();
+	// 			$('#showCode').modal('show');
+	// 			if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+	// 			    prepare_copy();
+	// 			}
+	// 			else{
+	// 				$('.coupon-code-modal.print').attr( 'href', $('.coupon-print-image').attr('src') );
+	// 				$('.coupon-code-copied').hide();
+	// 			}
+	// 		}
+	// 	});
+	// }
+
+	function show_code_modal( button,offer_type,permalink ){
+		try{
+			var coupon_code,offer_btn,parent,title,description,permalink,response;
+			if(offer_type=='coupon'){
+				coupon_code = $(button).attr('data-coupon');
+				offer_btn = '<a href="'+permalink+'" target="_blank"><input type="text" class="coupon-code-modal" readonly="readonly" value='+coupon_code+' /><p class="coupon-code-copied" data-aftertext="Code is copied.">Click the code to copy & shop</p></a>';
+			}else{
+				offer_btn = '<a href="'+permalink+'" class="xl-activate-deal btn" target="_blank">ACTIVATE DEAL</a><br/>';
 			}
-		});
-	}
+			
+			parent = $(button).closest('.offer-box');
+			title = $(parent).find('h3 a')[0];
+			title = $(title).text().trim();
+			description = $(parent).find('.read-info-description')[0];
+			description = $(description).text().trim();
+			permalink = $(parent).find('.xl-permalink')[0];
+			permalink = $(permalink).text().trim();
 
-	var coupon_slug = $('.coupon_slug').val();
-	if( window.location.href.indexOf(coupon_slug+'=') !== -1 ){
-		var offer_id = parseInt( window.location.href.split(coupon_slug+'=')[1].split('&')[0] );
-		if( !isNaN( offer_id ) ){
-			show_code_modal( offer_id );
+			$('.coupon-print-image').remove();
+
+			response = '<h4>'+title+'</h4>'+offer_btn+
+			'<ul class="list-unstyled list-inline store-social-networks">'+
+	            '<li>'+
+	                '<a href="https://www.facebook.com/sharer/sharer.php?u='+permalink+'" class="share" target="_blank">'+
+	                    '<i class="fa fa-facebook"></i>'+
+	                '</a>'+
+	            '</li>'+
+	            '<li>'+
+	                '<a href="http://twitter.com/intent/tweet?source=CouponMachi&amp;text='+permalink+'" class="share" target="_blank">'+
+	                    '<i class="fa fa-twitter"></i>'+
+	                '</a>'+
+	            '</li>'+
+	            '<li>'+
+	                '<a href="https://plus.google.com/share?url='+permalink+'" class="share" target="_blank">'+
+	                    '<i class="fa fa-google-plus"></i>'+
+	                '</a>'+
+	            '</li> '+
+	        '</ul>'+
+			'<p>'+description+'</p>';
+
+			$('#showCode .coupon_modal_content').html( response );
+			$('body').append( $('.coupon-print-image').clone() );
+			$('#showCode .coupon-print-image').remove();
+			$('#showCode').modal('show');
+			if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+			    prepare_copy();
+			}
+			else{
+				$('.coupon-code-modal.print').attr( 'href', $('.coupon-print-image').attr('src') );
+				$('.coupon-code-copied').hide();
+			}	
+		}catch(e){
+			console.log('exception thrown:'+e);
 		}
 	}
-	else if( window.location.href.indexOf(coupon_slug+'/') !== -1 ){
-		var temp = window.location.href.split(coupon_slug+'/');
-		var offer_id = parseInt( temp[temp.length-1].replace('/', '') );
-		if( !isNaN( offer_id ) ){
-			show_code_modal( offer_id );
-		}
-	}
 
-	//CUSTOMISATION DONE HERE 
+	// var coupon_slug = $('.coupon_slug').val();
+	// if( window.location.href.indexOf(coupon_slug+'=') !== -1 ){
+	// 	var offer_id = parseInt( window.location.href.split(coupon_slug+'=')[1].split('&')[0] );
+	// 	if( !isNaN( offer_id ) ){
+	// 		show_code_modal( offer_id );
+	// 	}
+	// }
+	// else if( window.location.href.indexOf(coupon_slug+'/') !== -1 ){
+	// 	var temp = window.location.href.split(coupon_slug+'/');
+	// 	var offer_id = parseInt( temp[temp.length-1].replace('/', '') );
+	// 	if( !isNaN( offer_id ) ){
+	// 		show_code_modal( offer_id );
+	// 	}
+	// }
 
-	if( window.location.href.indexOf('coupon_id'+'=') !== -1 ){
-		var offer_id = parseInt( window.location.href.split('coupon_id'+'=')[1].split('&')[0] );
-		if( !isNaN( offer_id ) ){
-			show_code_modal( offer_id );
-		}
-	}
+	// //CUSTOMISATION DONE HERE 
 
-	//CUSTOMISATION DONE HERE
-	$('.show-code,.xl-activate-deal').click(function(e){
+	// if( window.location.href.indexOf('coupon_id'+'=') !== -1 ){
+	// 	var offer_id = parseInt( window.location.href.split('coupon_id'+'=')[1].split('&')[0] );
+	// 	if( !isNaN( offer_id ) ){
+	// 		show_code_modal( offer_id );
+	// 	}
+	// }
+
+	var aff_url;
+
+	$(document).on('click','.xl-activate-deal',function(e){
 		var $this = $(this);
-		if( $this.data('affiliate') != ''){
-			setTimeout(function(){document.location.href = $this.data('affiliate');},250);
-		}		
+		$this.text('ACTIVATED');
+	});
 
-		// var isSafari = /Safari/.test( navigator.userAgent ) && /Apple Computer/.test( navigator.vendor );
-		// if( $this.data('affiliate') != '' && !isSafari ){
-		// 	window.location.href = $this.data('affiliate');
-		// }
-		// else{
-		// 	e.preventDefault();
-		// 	var offer_id = $this.data( 'offer_id' );
-		// 	show_code_modal( offer_id );
-		// }
-	});	
+	$('.deal-info-container a.read-info').click(function(e){
+		e.preventDefault();
+		var permalink = $(this).attr('href');
+		aff_url = $(this).attr('data-affiliate');
+		show_code_modal( $(this),'deal',permalink );
+	});
+
+	$('.show-code').click(function(e){
+		e.preventDefault();
+		var permalink = $(this).attr('href');
+		aff_url = $(this).attr('data-affiliate');
+		show_code_modal( $(this),'coupon',permalink );
+	});
 
 	ZeroClipboard.config( { swfPath: couponxl_data.url+"/js/ZeroClipboard.swf" } );
 	function prepare_copy(){
@@ -479,6 +538,9 @@ jQuery(document).ready(function($){
 			client.on( 'ready', function(event) {
 				client.on( 'copy', function(event) {
 					event.clipboardData.setData('text/plain', $code.val() );
+					// setTimeout(function(){
+					// 	$("<a>").attr("href", aff_url).attr("target", "_blank")[0].click();
+					// },1000);
 				});
 		
 				client.on( 'aftercopy', function(event) {
