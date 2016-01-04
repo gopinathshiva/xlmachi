@@ -274,7 +274,8 @@ function xl_offer_store_fn(){
 add_action('pmxi_saved_post', 'post_saved', 10, 1);
 
 function post_saved($id) {
-    $offer_type = get_post_meta($id, 'offer_type', true);    
+    $offer_type = get_post_meta($id, 'offer_type', true);   
+    $offer_type = strtolower($offer_type); 
     $expiry_date = get_post_meta($id,'offer_expire',true);
     $start_date = get_post_meta($id,'offer_start',true);
     $offer_in_slider = get_post_meta($id,'offer_in_slider',true);
@@ -307,10 +308,10 @@ function post_saved($id) {
     wp_set_object_terms($id, $offer_tag, 'offer_tag', true);
     //update_post_meta($id, 'offer_tag', $offer_tag);
 
-    if($offer_type == 'Promotion' || $offer_type == 'Coupon'){
-        if($offer_type == 'Promotion'){
+    if($offer_type == 'promotion' || $offer_type == 'coupon'){
+        if($offer_type == 'promotion'){
             $offer_type = 'deal';
-        }else if($offer_type == 'Coupon'){
+        }else if($offer_type == 'coupon'){
             $offer_type = 'coupon';
         }        
         update_post_meta($id, 'offer_type', $offer_type);
@@ -402,11 +403,12 @@ function offer_top_info_callback(){?>
             }else if($tag_value == 'cashback'){
                 $offer_cashback = $tag_value;
                 $offer_type = $tag_value;
-            }else if($tag_value == 'off'){
-                $offer_unit = $tag_value;                
-            }else if($tag_value == 'percent'){
-                $offer_unit = $tag_value;                
             }
+            // else if($tag_value == 'off'){
+            //     $offer_unit = $tag_value;                
+            // }else if($tag_value == 'percent'){
+            //     $offer_unit = $tag_value;                
+            // }
         }
         if($offer_flat && $offer_cashback){
             $offer_type = $offer_flat.' + '.$offer_cashback;
