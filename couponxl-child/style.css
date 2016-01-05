@@ -22,6 +22,12 @@ Tags: white
     color: white;
 }
 
+/* megamenu css fix */
+
+#menu-item-904 .list-unstyled.mega_menu.col-2{
+    height: initial;
+}
+
 /* ***********************  header style ends here ******************************* */
 
 

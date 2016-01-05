@@ -11,7 +11,7 @@
                     //     $cur_page = get_query_var( 'page' );
                     // }
 
-                    $offer_cat = 'bus,flight,hotel';
+                    $offer_cat = 'bus,flight,hotel,cabs';
                     
             		$args = array(
             			'post_status' => 'publish',
