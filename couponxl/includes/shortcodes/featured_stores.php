@@ -9,12 +9,17 @@ function couponxl_featured_stores_func( $atts, $content ){
 		'items' => '',
 	), $atts ) );
 
-	$items = explode( ",", $items );
-
-	ob_start();
-	include( locate_template( 'includes/box-elements/featured-stores.php' ) );
-	$content = ob_get_contents();
-	ob_end_clean();
+	$transient_args = $atts;
+	$transient_namespace = xl_transient_namespace();
+	$transient_key = $transient_namespace .md5( serialize($transient_args) );
+	if ( false === ( $content = get_transient( $transient_key ) ) ) {
+		$items = explode( ",", $items );
+		ob_start();
+		include( locate_template( 'includes/box-elements/featured-stores.php' ) );
+		$content = ob_get_contents();
+		ob_end_clean();
+		set_transient( $transient_key, $content, 3 * HOUR_IN_SECONDS );                    
+	}
 
 	return $content;
 }
