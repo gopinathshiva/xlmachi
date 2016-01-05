@@ -9,7 +9,7 @@
 			
 			if( has_post_thumbnail() ){?>
 			<!-- CUSTOMISATION DONE HERE -->
-			<a target="_blank" href="<?php the_permalink(); ?>" data-affiliate="<?php echo $xl_affiliate_link; ?>" class="">			
+			<a target="_blank" href="<?php the_permalink(); ?>" >			
 				<?php the_post_thumbnail( 'offer-box', array( 'class' => 'embed-responsive-item' ) ); ?>
 				</a>
 			<?php 
@@ -17,7 +17,7 @@
 				$store_id = get_post_meta( $xl_post_id, 'offer_store', true );
 				?>				
 
-				<a target="_blank" href="<?php the_permalink(); ?>" data-affiliate="<?php echo $xl_affiliate_link; ?>" class="">
+				<a target="_blank" href="<?php the_permalink(); ?>" >
 					<?php
 					couponxl_store_logo( $store_id );
 					?>
@@ -29,9 +29,9 @@
 		<?php 
 			get_template_part( 'includes/share' );
 		?>	
-					<!-- CUSTOMISATION DONE HERE -->		
+		<!-- CUSTOMISATION DONE HERE -->		
 		<!-- <a data-affiliate="<?php echo $xl_affiliate_link; ?>" class="xl-activate-deal btn" onclick="activateDeal(this,'<?php echo $xl_affiliate_link; ?>')">ACTIVATE DEAL</a>					 -->
-		<a target="_blank" href="<?php the_permalink(); ?>" data-affiliate="<?php echo $xl_affiliate_link; ?>" class="xl-activate-deal btn">ACTIVATE DEAL</a>
+		<a target="_blank" href="<?php the_permalink(); ?>" class="xl-activate-deal btn">ACTIVATE DEAL</a>
 		<!-- <a href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'deal' => get_the_ID() ), array('all') ) ); ?>" class="btn"><?php _e( 'VIEW DEAL', 'couponxl' ) ?></a> -->
 	</div>
 
@@ -48,7 +48,7 @@
 			</li>
 		</ul>
 
-		<h3><a target="_blank" href="<?php the_permalink(); ?>" data-affiliate="<?php echo $xl_affiliate_link; ?>" class=""><?php the_title(); ?></a></h3>
+		<h3><a target="_blank" href="<?php the_permalink(); ?>" class=""><?php the_title(); ?></a></h3>
 		
 		<?php do_action('offer_other_info'); ?>
 		<ul class="list-unstyled list-inline bottom-meta">

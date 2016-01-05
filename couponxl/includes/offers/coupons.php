@@ -2,15 +2,11 @@
 	<div class="white-block-media <?php echo $col == '12' ? 'col-sm-4 no-padding' : '' ?>">
 		<?php do_action('offer_top_info'); ?>
 		<div class="embed-responsive embed-responsive-16by9">
-			<?php
-			global $xl_coupon_link;
+			<?php			
 			$xl_post_id = get_the_ID();
 			$store_id = get_post_meta( $xl_post_id, 'offer_store', true );			
 			$xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
-			$xl_affiliate_link = get_post_meta( $xl_post_id, 'coupon_link', true );
-			$xl_coupon_link = esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) );
-			$xl_coupon_link = rtrim($xl_coupon_link,"/");
-			$xl_coupon_link .= '?coupon_id='.$xl_post_id;
+			$xl_affiliate_link = get_post_meta( $xl_post_id, 'coupon_link', true );									
 			$coupon_code = get_post_meta( $xl_post_id, 'coupon_code', true );
 			?>
 			<!-- <a class="show-code" target="_blank" data-affiliate="<?php echo $xl_affiliate_link; ?>" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>"> -->
@@ -43,14 +39,10 @@
 			</li>
 		</ul>		
 		<h3>
-			<a data-coupon="<?php echo $coupon_code; ?>" href="<?php the_permalink(); ?>" class='custom show-code' target="_blank" data-affiliate="<?php echo $xl_affiliate_link; ?>" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>">
+			<a data-coupon="<?php echo $coupon_code; ?>" href="<?php the_permalink(); ?>" class='custom show-code' target="_blank" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>">
 				<?php the_title(); ?>
 			</a>
-		</h3>
-		<!-- <div class="read-info-container">
-			<a class="read-info" href="javascript:void(0)">Coupon Info (+)</a>
-			<div class="read-info-description"><?php the_excerpt(); ?></div>
-		</div> -->
+		</h3>		
 		<!-- CUSTOMISATION DONE HERE -->
 		<?php do_action('offer_other_info'); ?>
 		<ul class="list-unstyled list-inline bottom-meta">
@@ -65,7 +57,7 @@
 	        if( !empty($xl_coupon_content) ):
 	        ?>
 				<li class="coupon-info-container"> 					 					
-					<a href="<?php the_permalink(); ?>" data-coupon="<?php echo $coupon_code; ?>" data-offer_id="<?php echo esc_attr( $xl_post_id );?>" data-affiliate="<?php echo esc_url( $xl_affiliate_link ); ?>" class="read-info show-code" href="javascript:void(0)">Coupon Info (+)</a>										
+					<a href="<?php the_permalink(); ?>" data-coupon="<?php echo $coupon_code; ?>" data-offer_id="<?php echo esc_attr( $xl_post_id );?>" class="read-info show-code" href="javascript:void(0)">Coupon Info (+)</a>										
 				</li>				
 			<?php endif; ?>
 			<?php

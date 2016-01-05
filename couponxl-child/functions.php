@@ -194,8 +194,11 @@ function xl_filter_text_fn(){
 add_action('xl_offer_cat','xl_offer_cat_fn');
 
 function xl_offer_cat_fn(){
-	$xl_offer_cats = couponxl_get_organized( 'offer_cat' ); ?>
-
+    if ( false === ( $xl_offer_cats = get_transient( 'couponxl_filter_categories' ) ) ) {
+        $xl_offer_cats = couponxl_get_organized( 'offer_cat' );
+        set_transient( 'couponxl_filter_categories', $xl_offer_cats, 2 * HOUR_IN_SECONDS );
+    } ?>
+    
     <div class="white-block xl-offer-cat-filter">
         <div class="white-block-content">
             <h2>Filter By Categories</h2>
@@ -240,15 +243,21 @@ function xl_offer_type_fn(){
 add_action('xl_offer_store','xl_offer_store_fn');
 
 function xl_offer_store_fn(){
-    $args = array(
-        'post_type' => 'store',        
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-        'orderby' => 'title',
-        'order' => 'asc'
-    );  
 
-    $stores = new WP_Query( $args );
+    if ( false === ( $stores = get_transient( 'couponxl_filter_stores' ) ) ) {        
+
+        $args = array(
+            'post_type' => 'store',        
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'orderby' => 'title',
+            'order' => 'asc'
+        );  
+
+        $stores = new WP_Query( $args );
+
+        set_transient( 'couponxl_filter_stores', $stores, 2 * HOUR_IN_SECONDS );
+    }        
 
     if( $stores->have_posts() ){
         ?>

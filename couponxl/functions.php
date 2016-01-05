@@ -1029,7 +1029,7 @@ function couponxl_scripts_styles(){
 	wp_enqueue_script( 'couponxl-cookie',  $xl_asset_url . '/js/jquery.cookie.min.js', false, false, true );
 		
 	if( is_singular('offer') ){
-		wp_enqueue_script( 'couponxl-countdown',  $xl_asset_url . '/js/countdown.js', false, false, true );
+		//wp_enqueue_script( 'couponxl-countdown',  $xl_asset_url . '/js/countdown.js', false, false, true );
 	}
 
 	//$protocol = is_ssl() ? 'https' : 'http';
@@ -1172,7 +1172,7 @@ function couponxl_count_post_type( $post_type, $args = array() ){
 
 function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	global $couponxl_slugs;
-	global $xl_coupon_link;
+	//global $xl_coupon_link;
 	if( empty( $post_id ) ){
 		$post_id = get_the_ID();
 	}
@@ -1195,17 +1195,7 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	}	
 	$coupon_type = get_post_meta( $post_id, 'coupon_type', true );
 	$affiliate_link = get_post_meta( $post_id, 'coupon_link', true );
-	$coupon_code = get_post_meta( $post_id, 'coupon_code', true );
-	//$xl_coupon_link = 'javascript:;';
-	$target = '';
-	// if( !empty( $affiliate_link ) ){
-	// 	$xl_coupon_link = couponxl_append_query_string( $base_permalink, array( 'coupon' => $post_id ), array( 'all' ) );
-	// 	if( !empty( $paged[1] ) ){
-	// 		$xl_coupon_link .= 'page'.$paged[1];
-	// 	}
-	// 	$xl_coupon_link = esc_url( $xl_coupon_link );
-	// 	$target = 'target="_blank"';
-	// }
+	$coupon_code = get_post_meta( $post_id, 'coupon_code', true );	
 
 	// $button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" target="_blank">';
 	$button = '<a href="'.get_the_permalink().'" data-coupon="'.$coupon_code.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code">';
