@@ -10,10 +10,8 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
         <div class="row">
 
             <?php if( $search_sidebar_location == 'left' ): ?>
-                <?php require_once( locate_template( 'includes/search-sidebar.php' ) ) ?>
+                <?php require_once( locate_template( 'includes/search-middle.php' ) ) ?>
             <?php endif; ?>
-
-
 
             <div class="col-md-9">
 

@@ -341,26 +341,40 @@ jQuery(document).ready(function($){
         var allCount = dealCount+couponCount;
         $('#xl-offer-type-all-count').text('('+allCount+')');                                        
 
-        if(window.isXlSearchPage){
-    		//hiding stores with no offers                                    
-	        $('.xl-offer-store-result li').each(function(k,v){
-	            var input = $(this).find('input')[0];
-	            var id = ($(input).val());
-	            if(!($('div[data-xlstore='+id+']:visible').length)){
-	                $(this).remove();
-	            }
-	        });
-        }        
-        else if(window.isXlStorePage){
-        	//hiding categories with no offers                                    
-	        $('.xl-offer-cat-result li').each(function(k,v){
-	            var input = $(this).find('input')[0];
-	            var id = ($(input).val());
-	            if(!($('div[data-xlcategory='+id+']:visible').length)){
-	                $(this).remove();
-	            }
-	        }); 
-        }        
+        if(window.isXlSearchPage && window.isXlStorePage){
+        	checkStoresFilter();
+        	checkCategoryFilter();
+
+        }else{
+        	if(window.isXlSearchPage){
+		        checkStoresFilter();
+	        }        
+	        else if(window.isXlStorePage){
+		        checkCategoryFilter();
+	        } 
+        }
+	}
+
+	//hiding stores with no offers
+	function checkStoresFilter(){
+		$('.xl-offer-store-result li').each(function(k,v){
+            var input = $(this).find('input')[0];
+            var id = ($(input).val());
+            if(!($('div[data-xlstore='+id+']:visible').length)){
+                $(this).remove();
+            }
+        });
+	}
+
+	//hiding categories with no offers
+	function checkCategoryFilter(){
+		$('.xl-offer-cat-result li').each(function(k,v){
+            var input = $(this).find('input')[0];
+            var id = ($(input).val());
+            if(!($('div[data-xlcategory='+id+']:visible').length)){
+                $(this).remove();
+            }
+        });	
 	}
 
 	//scroll to top script
