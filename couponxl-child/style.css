@@ -82,7 +82,14 @@ Tags: white
 .xl-offer-filter-not-found{
     display: none;
 }
+ 
+.single-store .col-md-3 .white-block,.search-template-page .col-md-3 .white-block{
+    margin-bottom: 20px;
+}
 
+.single-store .col-md-3 .white-block-content,.search-template-page .col-md-3 .white-block-content{
+    padding: 5px 20px;
+}
 
 /* ***********************  store page style ends here ******************************* */
 
