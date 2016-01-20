@@ -203,6 +203,8 @@ jQuery(document).ready(function($){
 					//offer type filter 
 					if(offerType=="all"){
 						$('.xl-offer-item').addClass("xl-filtered-type");
+					}else if(offerType=="cashback"){
+						$('div[data-xltag='+offerType+']').addClass("xl-filtered-type");
 					}else{
 						$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
 					}
