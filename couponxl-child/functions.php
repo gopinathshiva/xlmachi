@@ -3,8 +3,8 @@
 $categories_data_transient_lifetime = 4 * DAY_IN_SECONDS;
 $stores_data_transient_lifetime = 4 * DAY_IN_SECONDS;
 $search_data_transient_lifetime = 4 * DAY_IN_SECONDS;
-$shortcode_transient_lifetime = 1 * DAY_IN_SECONDS;
-$category_page_transient_lifetime = 1 * DAY_IN_SECONDS;
+$shortcode_transient_lifetime = 10 * HOUR_IN_SECONDS;
+$category_page_transient_lifetime = 10 * HOUR_IN_SECONDS;
 
 $flipkart_deals_page_transient_lifetime = 3 * HOUR_IN_SECONDS;
 
