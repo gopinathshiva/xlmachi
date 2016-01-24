@@ -2,6 +2,7 @@
 /*
 	Template Name: Baby, Kids and Toys Page
 */
+    global $category_page_transient_lifetime;
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
 
@@ -115,7 +116,7 @@
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );
-                        set_transient( $transient_key, $offers, 8 * HOUR_IN_SECONDS );                                            
+                        set_transient( $transient_key, $offers, $category_page_transient_lifetime );                                            
                     }                   
             		
 					require_once( locate_template( 'includes/search-after.php' ) );

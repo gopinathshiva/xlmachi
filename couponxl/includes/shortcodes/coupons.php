@@ -1,5 +1,10 @@
 <?php
+
+
+
 function couponxl_coupons_func( $atts, $content ){
+	global $shortcode_transient_lifetime;
+	
 	extract( shortcode_atts( array(
 		'icon' => '',
 		'title' => '',
@@ -28,7 +33,7 @@ function couponxl_coupons_func( $atts, $content ){
 		include( locate_template( 'includes/box-elements/coupons.php' ) );
 		$content = ob_get_contents();
 		ob_end_clean();
-        set_transient( $transient_key, $content, 3 * HOUR_IN_SECONDS );                    
+        set_transient( $transient_key, $content, $shortcode_transient_lifetime );                    
     }
 
 	return $content;

@@ -10,6 +10,7 @@ $post_id = get_the_ID();
 $offer_type = get_query_var( $couponxl_slugs['offer_type'], '' );
 $theme_usage = couponxl_get_option( 'theme_usage' );
 $store_link = get_post_meta( get_the_ID(), 'store_link', true );
+global $categories_data_transient_lifetime;
 ?>
 
 <section>
@@ -271,7 +272,7 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
 
                 if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                     $offers = new WP_Query( $args );
-                    set_transient( $transient_key, $offers, 8 * HOUR_IN_SECONDS );                    
+                    set_transient( $transient_key, $offers, $category_page_transient_lifetime );                    
                 }
 
                 // $page_links_total =  $offers->max_num_pages;

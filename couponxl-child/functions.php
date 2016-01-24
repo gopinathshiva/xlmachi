@@ -1,5 +1,13 @@
 <?php
 
+$categories_data_transient_lifetime = 4 * DAY_IN_SECONDS;
+$stores_data_transient_lifetime = 4 * DAY_IN_SECONDS;
+$search_data_transient_lifetime = 4 * DAY_IN_SECONDS;
+$shortcode_transient_lifetime = 1 * DAY_IN_SECONDS;
+$category_page_transient_lifetime = 1 * DAY_IN_SECONDS;
+
+$flipkart_deals_page_transient_lifetime = 3 * HOUR_IN_SECONDS;
+
 function is_localhost() {
     $whitelist = array( '127.0.0.1', '::1' );
     if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
@@ -13,6 +21,8 @@ add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 
 //ajax call which trigger when person is searching, will output all choices at once and saved it in transients
 function xl_search_offer(){
+    global $search_data_transient_lifetime;
+
     if ( false === ( $offer_categories = get_transient( 'couponxl_offer_categories_and_stores' ) ) ) {
     
         $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
@@ -46,7 +56,7 @@ function xl_search_offer(){
         }
 
         $offer_categories = json_encode($post_data); 
-        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, 24 * HOUR_IN_SECONDS );
+        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, $search_data_transient_lifetime );
     }
 
     echo $offer_categories;
@@ -194,9 +204,11 @@ function xl_filter_text_fn(){
 add_action('xl_offer_cat','xl_offer_cat_fn');
 
 function xl_offer_cat_fn(){
+    global $categories_data_transient_lifetime;
+
     if ( false === ( $xl_offer_cats = get_transient( 'couponxl_filter_categories' ) ) ) {
         $xl_offer_cats = couponxl_get_organized( 'offer_cat' );
-        set_transient( 'couponxl_filter_categories', $xl_offer_cats, 2 * HOUR_IN_SECONDS );
+        set_transient( 'couponxl_filter_categories', $xl_offer_cats, $categories_data_transient_lifetime );
     } ?>
     
     <div class="white-block xl-offer-cat-filter">
@@ -245,6 +257,8 @@ add_action('xl_offer_store','xl_offer_store_fn');
 
 function xl_offer_store_fn(){
 
+    global $stores_data_transient_lifetime;
+
     if ( false === ( $stores = get_transient( 'couponxl_filter_stores' ) ) ) {        
 
         $args = array(
@@ -257,7 +271,7 @@ function xl_offer_store_fn(){
 
         $stores = new WP_Query( $args );
 
-        set_transient( 'couponxl_filter_stores', $stores, 2 * HOUR_IN_SECONDS );
+        set_transient( 'couponxl_filter_stores', $stores, $stores_data_transient_lifetime );
     }        
 
     if( $stores->have_posts() ){
@@ -456,6 +470,7 @@ function xl_transient_namespace(){
     //calling flipkart daily deals api, if fails, call again till 5 times and store it in transient for temp storage
     function getDailyDeals(){               
 
+        global $flipkart_deals_page_transient_lifetime;
         $api_url = 'https://affiliate-api.flipkart.net/affiliate/offers/v1/dotd/json';  
 
         function callFlipkartFeedsAPI($api_url){
@@ -473,7 +488,7 @@ function xl_transient_namespace(){
                 $api_response = $api_response['body'];
                 $api_response = json_decode($api_response, true);   
                 
-                set_transient( 'flipkart_daily_deals', $api_response, 24 * HOUR_IN_SECONDS );
+                set_transient( 'flipkart_daily_deals', $api_response, $flipkart_deals_page_transient_lifetime );
 
                 return $api_response;
             }else{              
@@ -521,11 +536,12 @@ function xl_side_menu_callback(){
     <?php }else{?>
         
         <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
-        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/mobile-recharge' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/bus' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
-        <li><a href="<?php echo esc_url( home_url('/') ).'electronics' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/food-ordering' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'offer_cat/clothing' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'recharge-offers' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'travel-offers' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
+        <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-offers' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'tv-audio-video-entertainment-offers' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-offers' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'fashion-offers' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
     <?php }
     ?>
