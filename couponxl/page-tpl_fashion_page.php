@@ -5,7 +5,7 @@
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
 
-                    $offer_cat = 'clothing,footwear,sun-glasses,watches,bag,jewellery,winter-wear,sports-wear,eye-wear';
+                    $offer_cat = 'clothing,footwear,sun-glasses,watches,bag,jewellery,winter-wear,sports-wear,eye-wear,handbags-wallets';
                     
             		$args = array(
             			'post_status' => 'publish',
