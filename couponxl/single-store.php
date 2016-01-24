@@ -303,16 +303,22 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                             $offers->the_post();                            
                             $xl_post_id = get_the_ID();
                             $xl_offer_cat_id = '';
+                            $xl_offer_tag_slug = '';
                             $xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
+                            $xl_offer_tag = get_the_terms( $xl_post_id, 'offer_tag' );
                             for ($i = 0; $i < count($xl_offer_cat); ++$i) {
                                 $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
                             }
+                            for ($i = 0; $i < count($xl_offer_tag); ++$i) {
+                                $xl_offer_tag_slug.=$xl_offer_tag[$i]->slug.',';                                
+                            }
                             unset($i);                         
-                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");                            
+                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ","); 
+                            $xl_offer_tag_slug =  rtrim($xl_offer_tag_slug, ",");                                 
                             $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
                             $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true );                            
                             ?>
-                            <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
+                            <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" data-xltag="<?php echo $xl_offer_tag_slug; ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
                                 <?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
                             </div>
                             <?php

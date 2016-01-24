@@ -234,6 +234,7 @@ function xl_offer_type_fn(){
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-all" value="all" checked><label for="xl-offer-type-all">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
 				<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-deals" value="deal"><label for="xl-offer-type-deals">&nbsp Deals <span id="xl-offer-type-deal-count" class="count"></span></label></li>
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-coupons" value="coupon"><label for="xl-offer-type-coupons">&nbsp Coupons <span id="xl-offer-type-coupon-count" class="count"></span></label></li>
+                <li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-cashback" value="cashback"><label for="xl-offer-type-cashback">&nbsp Cashback <span id="xl-offer-type-cashback-count" class="count"></span></label></li>
             </ul>
         </div>
     </div>

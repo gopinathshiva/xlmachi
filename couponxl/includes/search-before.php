@@ -5,7 +5,7 @@ $permalink = couponxl_get_permalink_by_tpl( 'page-tpl_search_page' );
 
 $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 ?>
-<section>
+<section class="search-template-page">
     <div class="container">
         <div class="row">
 

@@ -6,7 +6,7 @@
 			$xl_post_id = get_the_ID();
 			$store_id = get_post_meta( $xl_post_id, 'offer_store', true );			
 			$xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
-			$xl_affiliate_link = get_post_meta( $xl_post_id, 'coupon_link', true );									
+			//$xl_affiliate_link = get_post_meta( $xl_post_id, 'coupon_link', true );									
 			$coupon_code = get_post_meta( $xl_post_id, 'coupon_code', true );
 			?>
 			<!-- <a class="show-code" target="_blank" data-affiliate="<?php echo $xl_affiliate_link; ?>" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>"> -->

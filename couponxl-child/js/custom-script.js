@@ -146,7 +146,7 @@ jQuery(document).ready(function($){
 	 	xl_filterOffers();	 	
 	 	var option = $(this).attr('data-option');
 	 	option = option.toLowerCase();
- 		option = option.replace(' ','_');
+ 		option = option.split(' ').join('_');
 	 	if($(this).prop('checked')){	 		
 	 		var id="xl_filter_text_"+option;	 		
 	 		var element = '<li class="xl_filter_text_item" id='+id+'>'+$(this).attr('data-option')+', </li>'
@@ -203,6 +203,8 @@ jQuery(document).ready(function($){
 					//offer type filter 
 					if(offerType=="all"){
 						$('.xl-offer-item').addClass("xl-filtered-type");
+					}else if(offerType=="cashback"){
+						$('div[data-xltag='+offerType+']').addClass("xl-filtered-type");
 					}else{
 						$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
 					}

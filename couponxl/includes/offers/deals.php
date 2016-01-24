@@ -4,8 +4,8 @@
 		<div class="embed-responsive embed-responsive-16by9">
 			<?php
 			$xl_post_id = get_the_ID();
-			$xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
-			$xl_affiliate_link = get_post_meta( $xl_post_id, 'deal_link')[0];			
+			//$xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
+			//$xl_affiliate_link = get_post_meta( $xl_post_id, 'deal_link')[0];			
 			
 			if( has_post_thumbnail() ){?>
 			<!-- CUSTOMISATION DONE HERE -->
