@@ -4,21 +4,14 @@
 */
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
-                    // if( get_query_var( 'paged' ) ){
-                    //     $cur_page = get_query_var( 'paged' );
-                    // }
-                    // else if( get_query_var( 'page' ) ){
-                    //     $cur_page = get_query_var( 'page' );
-                    // }
 
-                    $offer_cat = 'laptops-desktops,computer-laptop-accessories,gaming';
+                    $offer_cat = 'laptops,computer-laptop-accessories,monitors-desktops,headphones-speakers,gaming';
 
             		$args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
             			'post_type'	=> 'offer',
             			'paged' => $cur_page,
-                        //'paged' => $cur_page,
             			'orderby' => 'meta_value_num',
             			'meta_key' => 'offer_expire',
             			'order' => 'ASC',

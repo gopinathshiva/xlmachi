@@ -4,12 +4,6 @@
 */
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
-                    // if( get_query_var( 'paged' ) ){
-                    //     $cur_page = get_query_var( 'paged' );
-                    // }
-                    // else if( get_query_var( 'page' ) ){
-                    //     $cur_page = get_query_var( 'page' );
-                    // }
 
                     $offer_cat = 'bus,flight,hotel,cabs';
                     

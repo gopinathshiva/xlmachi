@@ -4,18 +4,12 @@
 */
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
-                    // if( get_query_var( 'paged' ) ){
-                    //     $cur_page = get_query_var( 'paged' );
-                    // }
-                    // else if( get_query_var( 'page' ) ){
-                    //     $cur_page = get_query_var( 'page' );
-                    // }
+                    
             		$args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
             			'post_type'	=> 'offer',
             			'paged' => $cur_page,
-                        //'paged' => $cur_page,
             			'orderby' => 'meta_value_num',
             			'meta_key' => 'offer_expire',
             			'order' => 'ASC',
@@ -23,8 +17,7 @@
                             array(
                               'key'     => 'offer_expire',
                               'value'   => array( time(), time() + (60 * 60 * 24 * 7) ),
-                              'compare' => 'BETWEEN',
-                              //'type'    => 'DATE'
+                              'compare' => 'BETWEEN'
                             ) 
                         ),
             			// 'meta_query' => array(

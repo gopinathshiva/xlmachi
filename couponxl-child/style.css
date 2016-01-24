@@ -727,6 +727,8 @@ a.read-info{
 
     .offer-box .white-block-content h3 {
         min-height: 105px;
+        max-height: 105px;
+        overflow: auto;
     }
 }
 

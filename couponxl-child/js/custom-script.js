@@ -193,65 +193,64 @@ jQuery(document).ready(function($){
 		var offerStoreCheckedCount = $('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').length;
 
 		$('.xl-offer-item').hide();
-		// if(!offerCatCheckedCount && !offerStoreCheckedCount){
-		// 	$('.xl-offer-item').fadeIn("slow");			
-		// }else{
-			//offer type filter always checked
 		
-			if($('.xl-offer-store-filter').length){
-									
-					//offer type filter 
-					if(offerType=="all"){
-						$('.xl-offer-item').addClass("xl-filtered-type");
-					}else if(offerType=="cashback"){
-						$('div[data-xltag='+offerType+']').addClass("xl-filtered-type");
-					}else{
-						$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
-					}
-
-					//offer category filter 	
-					if(offerCatCheckedCount){
-						$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
-					       	var categoryId = $(this).val();
-					       	$('.xl-offer-item.xl-filtered-type[data-xlcategory*='+categoryId+']').addClass("xl-filtered-cat");			       					
-				     	});
-					}else{
-						$('.xl-offer-item.xl-filtered-type').addClass("xl-filtered-cat");
-					}	
-
-					//offer store filter 	
-					if(offerStoreCheckedCount){
-						$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').each(function(){
-							$('.xl-offer-item.xl-filtered-type.xl-filtered-cat[data-xlstore='+$(this).val()+']').addClass('xl-filtered-store');
-						});	
-					}else{
-						$('.xl-offer-item.xl-filtered-type.xl-filtered-cat').addClass('xl-filtered-store');
-					}
-
-					$('.xl-offer-item.xl-filtered-type.xl-filtered-cat.xl-filtered-store').fadeIn('slow');
-			     	
+		if($('.xl-offer-store-filter').length){
+								
+			//offer type filter 
+			if(offerType=="all"){
+				$('.xl-offer-item').addClass("xl-filtered-type");
+			}else if(offerType=="cashback"){
+				$('div[data-xltag='+offerType+']').addClass("xl-filtered-type");
 			}else{
-				//offer category filter not checked
-				if(!offerCatCheckedCount){
-					if(offerType=="all"){
-						$('.xl-offer-item').fadeIn("slow");
-					}else{
-						$('div[data-xltype='+offerType+']').fadeIn('slow');
-					}
-				}
-				//offer category filter checked
-				else{
-					$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
-				       	var categoryId = $(this).val();
-				       	if(offerType=='all'){
-				       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");	
-				       	}else{
-				       		$('div[data-xltype='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn("slow");
-				       	}				
-			     	});	
-				}
+				$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
+			}
+
+			//offer category filter 	
+			if(offerCatCheckedCount){
+				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+			       	var categoryId = $(this).val();
+			       	$('.xl-offer-item.xl-filtered-type[data-xlcategory*='+categoryId+']').addClass("xl-filtered-cat");			       					
+		     	});
+			}else{
+				$('.xl-offer-item.xl-filtered-type').addClass("xl-filtered-cat");
 			}	
-		//}					
+
+			//offer store filter 	
+			if(offerStoreCheckedCount){
+				$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').each(function(){
+					$('.xl-offer-item.xl-filtered-type.xl-filtered-cat[data-xlstore='+$(this).val()+']').addClass('xl-filtered-store');
+				});	
+			}else{
+				$('.xl-offer-item.xl-filtered-type.xl-filtered-cat').addClass('xl-filtered-store');
+			}
+
+			$('.xl-offer-item.xl-filtered-type.xl-filtered-cat.xl-filtered-store').fadeIn('slow');
+		     	
+		}else{
+			//offer category filter not checked
+			if(!offerCatCheckedCount){
+				if(offerType=="all"){
+					$('.xl-offer-item').fadeIn("slow");
+				}else if(offerType=="cashback"){
+					$('div[data-xltag='+offerType+']').fadeIn('slow');
+				}else{
+					$('div[data-xltype='+offerType+']').fadeIn('slow');
+				}
+			}
+			//offer category filter checked
+			else{
+				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+			       	var categoryId = $(this).val();
+			       	if(offerType=='all'){
+			       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");	
+			       	}else if(offerType=="cashback"){
+						$('div[data-xltag='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn('slow');
+					}else{
+			       		$('div[data-xltype='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn("slow");
+			       	}				
+		     	});	
+			}
+		}
 
 		if(!$('.xl-offer-item:visible').length){
 			$('.xl-offer-filter-not-found').fadeIn('slow');
@@ -307,6 +306,9 @@ jQuery(document).ready(function($){
 		$('#xl-offer-type-deal-count').text('('+dealCount+')');
 		var couponCount = $('div[data-xltype=coupon]:visible').length;
 		$('#xl-offer-type-coupon-count').text('('+couponCount+')');
+		var cashbackCount = $('div[data-xltag=cashback]:visible').length;
+		$('#xl-offer-type-cashback-count').text('('+cashbackCount+')');
+		
 		var allCount = dealCount+couponCount;
 		$('#xl-offer-type-all-count').text('('+allCount+')');
 	}
@@ -317,8 +319,6 @@ jQuery(document).ready(function($){
 			var catCount = $('div[data-xlcategory*='+catId+']:visible').length;			
 			if(!catCount){
 				$('li.xl-cat-'+catId).addClass('xl-no-offer').hide();
-			}else{
-				//$('li.xl-cat-'+catId+' .count').text('('+catCount+')');	
 			}			
 		});
 	}
@@ -336,12 +336,7 @@ jQuery(document).ready(function($){
 	}
 
 	if(window.isXlSearchPage || window.isXlStorePage){
-		var dealCount = $('div[data-xltype=deal]:visible').length;
-        $('#xl-offer-type-deal-count').text('('+dealCount+')');
-        var couponCount = $('div[data-xltype=coupon]:visible').length;
-        $('#xl-offer-type-coupon-count').text('('+couponCount+')');
-        var allCount = dealCount+couponCount;
-        $('#xl-offer-type-all-count').text('('+allCount+')');                                        
+		updateOfferTypeCount();                                     
 
         if(window.isXlSearchPage && window.isXlStorePage){
         	checkStoresFilter();
