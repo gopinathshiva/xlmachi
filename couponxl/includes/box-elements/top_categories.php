@@ -1,5 +1,5 @@
 <div class="row xl-coupon-listing">
-    <div class="white-block">
+    <div class="white-block" >
         <div class="white-block-title no-border">
             <?php if( !empty( $icon ) ): ?>
                 <i class="fa fa-<?php echo esc_attr( $icon ); ?>"></i>
@@ -18,7 +18,7 @@
             </a>
         </div>
     </div>    
-    <div class="row">      
+    <!-- <div class="row">      
         <div class="categories category-boxes">
               <?php foreach ($top_categories as $category) { ?>
                 <div class="<?php echo $categories_per_row == 4?'col-sm-3':'col-sm-4'; ?>">
@@ -37,5 +37,18 @@
                 </div>              
               <?php } ?>              
         </div>
+    </div> -->
+    <div class="row" >
+      <div class="category_slider">
+        <ul>
+          <li ><a href="http://couponmachi.com/recharge-offers"  ><i class="fa fa-flash icon-margin"></i><h6 class="pop-cat-title">Recharge</h6></a></li>
+          <li ><a href="http://couponmachi.com/travel-offers"  ><i class="fa fa-bus icon-margin"></i><h6 class="pop-cat-title">Travel</h6></a></li>
+          <li ><a href="http://couponmachi.com/food-dining-offers"  ><i class="fa fa-cutlery icon-margin"></i><h6 class="pop-cat-title">Food</h6></a></li>
+          <li ><a href="http://couponmachi.com/groceries-offers"  ><i class="fa fa-shopping-cart icon-margin"></i><h6 class="pop-cat-title">Groceries</h6></a></li>
+          <li ><a href="http://couponmachi.com/mobiles-tablets-offers"  ><i class="fa fa-mobile icon-margin"></i><h6 class="pop-cat-title">Mobile/Tablet</h6></a></li>
+          <!-- <li ><a   ><i class="fa fa-mobile icon-margin"></i><h6 class="pop-cat-title">Mobile/Tablet</h6></a></li> -->
+          <li ><a href="http://couponmachi.com/fashion-offers"  ><i class="fa fa-female icon-margin"></i><h6 class="pop-cat-title">Fashion</h6></a></li>
+          <li ><a href="http://couponmachi.com/search/offer_cat/hotel/"  ><i class="fa fa-bed icon-margin"></i><h6 class="pop-cat-title">Hotel</h6></a></li>
+        </ul>
     </div>
 </div>

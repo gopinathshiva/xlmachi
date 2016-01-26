@@ -48,7 +48,7 @@
 			</li>
 		</ul>
 
-		<h3><a target="_blank" href="<?php the_permalink(); ?>" class=""><?php the_title(); ?></a></h3>
+		<h3 style="max-height:105px;overflow:auto;"><a target="_blank" href="<?php the_permalink(); ?>" class=""><?php the_title(); ?></a></h3>
 		
 		<?php do_action('offer_other_info'); ?>
 		<ul class="list-unstyled list-inline bottom-meta">

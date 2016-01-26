@@ -435,9 +435,50 @@ a.read-info{
     opacity: 1;
 }
 
-/* Top Cateogry css starts here */
+/* Top Category css starts here */
 
-.xl-coupon-listing {
+.xl-coupon-listing .white-block{
+    margin-bottom:3px;
+}
+
+.xl-coupon-listing .white-block-title{
+    margin-bottom: 0;
+}
+
+.xl-coupon-listing .row {
+    margin-bottom:-30px;
+}
+
+.xl-coupon-listing .category_slider{
+    background: none;
+    max-width: 100%;
+    margin: 20px auto 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.xl-coupon-listing ul{
+    display: inline-block;
+    padding:0;
+}
+
+.xl-coupon-listing li{
+    width: 135px;
+    float: left;
+    display: inline;
+    text-align:center;
+}
+
+.xl-coupon-listing li a{
+    display: block;
+}
+
+.xl-coupon-listing li a i{
+    font-size:45px;
+    color:#5b0f70;
+}
+
+/*.xl-coupon-listing {
     margin: 0px 0 0px 0;
 }
 
@@ -495,7 +536,7 @@ a.read-info{
     -ms-transform: rotate(360deg) scale(1.2);
     -o-transform: rotate(360deg) scale(1.2); 
     transform: rotate(360deg) scale(1.2);
-}
+}*/
 
 /* side menu css starts here */
 
@@ -716,6 +757,7 @@ a.read-info{
 /* Media Queries */
 
 @media screen and (min-width: 768px){
+
     .xl-offer-item {
         min-height: 380px;
         height: auto;
@@ -734,8 +776,8 @@ a.read-info{
 
 @media screen and (max-width: 760px){
 
-    .xl-sidemenu,.featured-stores{
-        display: none;
+    .xl-coupon-listing li{
+        width: 160px;
     }
 
     .breadcrumb-section {
@@ -774,5 +816,23 @@ a.read-info{
 
     .navbar-toggle[data-target=".search-collapse"] .fa-search{
         visibility: hidden;
+    }
+}
+
+@media screen and (max-width:1000px){
+    .xl-sidemenu,.featured-stores{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1050px){
+    .xl-coupon-listing li{
+        width: 125px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1000px){
+    .xl-coupon-listing li{
+        width: 110px;
     }
 }

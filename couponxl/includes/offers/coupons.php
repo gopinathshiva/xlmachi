@@ -38,7 +38,7 @@
 				?>
 			</li>
 		</ul>		
-		<h3>
+		<h3 style="max-height:105px;overflow:auto;">
 			<a data-coupon="<?php echo $coupon_code; ?>" href="<?php the_permalink(); ?>" class='custom show-code' target="_blank" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>">
 				<?php the_title(); ?>
 			</a>
