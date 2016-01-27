@@ -403,7 +403,7 @@ add_action('offer_other_info','offer_other_info_callback');
 
 function offer_other_info_callback(){ ?>
     <div class='offer-other-info-container'>
-            <div class='offer-used-count'><i class='fa fa-shopping-cart icon-margin'></i><?php echo(rand(2,50)); ?> Uses Today</div>
+            <div class='offer-used-count'><i class='fa fa-shopping-cart icon-margin'></i><?php echo(rand(10,300)); ?> Uses Today</div>
             <div class='offer-verified-status'><i class='fa fa-check-circle icon-margin'></i>Verified</div>
             <div class='clear'></div>
     </div><?php
@@ -557,9 +557,9 @@ function xl_side_menu_callback(){
 function xl_footer_stats_callback(){ ?>
     
         <ul class="list-inline xl-footer-stats go-flex"> 
-            <li><span><i class="fa fa-smile-o"></i></span><span><b>1325</b><br><small>Coupons redeemed so far</small></span></li>
-            <li><span><i class="fa fa-bookmark"></i></span><span><b>2204</b><br><small>Coupons &amp; Deals for you</small></span></li> 
-            <li><span><i class="fa fa-users"></i></span><span><b>636</b><br><small>Subscribed Users</small></span></li> 
+            <li><span><i class="fa fa-smile-o"></i></span><span><b>4325</b><br><small>Coupons redeemed so far</small></span></li>
+            <li><span><i class="fa fa-bookmark"></i></span><span><b>5204</b><br><small>Coupons &amp; Deals for you</small></span></li> 
+            <li><span><i class="fa fa-users"></i></span><span><b>2636</b><br><small>Subscribed Users</small></span></li> 
             <li><span><i class="fa fa-check-circle"></i></span><span><b>100%</b><br><small>Verified</small></span></li> 
         </ul>
     <?php 

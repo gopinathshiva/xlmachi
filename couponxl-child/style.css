@@ -439,14 +439,17 @@ a.read-info{
 
 .xl-coupon-listing .white-block{
     margin-bottom:3px;
+    background: transparent;
+    text-align: center;
+    box-shadow: initial;
 }
 
 .xl-coupon-listing .white-block-title{
     margin-bottom: 0;
 }
 
-.xl-coupon-listing .row {
-    margin-bottom:-30px;
+.xl-coupon-listing .white-block-title i{
+    display: none;
 }
 
 .xl-coupon-listing .category_slider{
