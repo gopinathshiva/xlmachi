@@ -34,7 +34,6 @@ $permalink = couponxl_get_permalink_by_tpl( 'page-tpl_search_page' );
                 <?php
                 $counter = 0;
                 $max = round( count( $offer_cats ) / 3, 0 );
-                debug_to_console($max);
                 $max = max( 1, $max );                
                 if( !empty( $offer_cats ) ){
                     foreach( $offer_cats as $key => $cat){

@@ -2,8 +2,27 @@
 
 /* Custom Meta For Taxonomies */
 
+/* CUSTOMISATION DONE HERE /*
+/* loading required script and styles for media uploader */
 
-/* Adding New */
+add_action('admin_init','load_my_custom_script');
+function load_my_custom_script() {
+	global $pagenow, $typenow;
+	if (empty($typenow) && !empty($_GET['post'])) {
+		$post = get_post($_GET['post']);
+		$typenow = $post->post_type;
+	}
+	if (is_admin() && $typenow=='offer' && $pagenow=='edit-tags.php') {
+		wp_enqueue_script('media-upload');
+		wp_enqueue_script('thickbox');
+		wp_enqueue_style('thickbox');
+
+		wp_register_script('custom-script-cat-featured-img', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/admin-custom-script.js','',null, true);
+		wp_enqueue_script('custom-script-cat-featured-img');
+	}
+}
+
+/* Adding New **/
 /* icon meta */
 function couponxl_category_icon_add() {
 	echo '
@@ -13,7 +32,14 @@ function couponxl_category_icon_add() {
 			'.couponxl_icons_list( '' ).'
 		</select>
 		<p class="description">'.__( 'Select icon for the code category','pippin' ).'</p>
-	</div>';
+	</div>
+	<div class="form-field">
+		<label for="term_meta[category_featured_image]">'.__( 'Featured Image:', 'pippin' ).'</label>
+		<input id="category_featured_image" type="text" size="36" name="term_meta[category_featured_image]" value="" />
+		<input id="upload_image_button" type="button" value="Upload Image" />
+		<p class="description">'.__( 'Select featured image for the code category','pippin' ).'</p>
+	</div>
+	';
 }
 add_action( 'offer_cat_add_form_fields', 'couponxl_category_icon_add', 10, 2 );
 
@@ -23,6 +49,7 @@ function couponxl_category_icon_edit( $term ) {
 	$term_meta = get_option( "taxonomy_$t_id" );
 	
 	$value = !empty( $term_meta['category_icon'] ) ? $term_meta['category_icon'] : '';
+	$feature_category_image = !empty( $term_meta['category_featured_image'] ) ? $term_meta['category_featured_image'] : '';
 	?>
 	<table class="form-table">
 		<tbody>
@@ -33,6 +60,18 @@ function couponxl_category_icon_edit( $term ) {
 						<?php echo couponxl_icons_list( $value ); ?>
 					</select>
 				<p class="description"><?php _e( 'Select icon for the code category', 'couponxl' ); ?></p></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="form-table">
+		<tbody>
+			<tr class="form-field form-required">
+				<th scope="row"><label for="term_meta[category_featured_image]"><?php _e( 'Featured Image', 'couponxl' ); ?></label></th>
+				<td>
+					<input id="category_featured_image" type="text" size="36" name="term_meta[category_featured_image]" value="<?php echo $feature_category_image; ?>" />
+					<input id="upload_image_button" type="button" value="Upload Image" />
+				<p class="description"><?php _e( 'Select featured image for the code category', 'couponxl' ); ?></p></td>
 			</tr>
 		</tbody>
 	</table>

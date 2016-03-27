@@ -1,13 +1,5 @@
 <?php
 
-function is_localhost() {
-    $whitelist = array( '127.0.0.1', '::1' );
-    if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
-        return true;
-    else
-    	return false;
-}
-
 global $xl_asset_url;
 
 if(is_localhost()){
@@ -1037,7 +1029,7 @@ function couponxl_scripts_styles(){
 	wp_enqueue_script( 'couponxl-cookie',  $xl_asset_url . '/js/jquery.cookie.min.js', false, false, true );
 		
 	if( is_singular('offer') ){
-		wp_enqueue_script( 'couponxl-countdown',  $xl_asset_url . '/js/countdown.js', false, false, true );
+		//wp_enqueue_script( 'couponxl-countdown',  $xl_asset_url . '/js/countdown.js', false, false, true );
 	}
 
 	//$protocol = is_ssl() ? 'https' : 'http';
@@ -1050,7 +1042,7 @@ function couponxl_scripts_styles(){
 
 	//wp_enqueue_script( 'couponxl-stripe', 'https://checkout.stripe.com/checkout.js', false, false, true );
 
-	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.min.js', false, false, true );
+	wp_enqueue_script( 'couponxl-custom', $xl_asset_url . '/js/custom.js', false, false, true );
 	wp_localize_script( 'couponxl-custom', 'couponxl_data', array(
 		'url' => get_template_directory_uri(),
 		'email_friend' => __( 'Friend\'s email address', 'couponxl' ),
@@ -1180,7 +1172,7 @@ function couponxl_count_post_type( $post_type, $args = array() ){
 
 function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	global $couponxl_slugs;
-	global $xl_coupon_link;
+	//global $xl_coupon_link;
 	if( empty( $post_id ) ){
 		$post_id = get_the_ID();
 	}
@@ -1203,18 +1195,10 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	}	
 	$coupon_type = get_post_meta( $post_id, 'coupon_type', true );
 	$affiliate_link = get_post_meta( $post_id, 'coupon_link', true );
-	//$xl_coupon_link = 'javascript:;';
-	$target = '';
-	// if( !empty( $affiliate_link ) ){
-	// 	$xl_coupon_link = couponxl_append_query_string( $base_permalink, array( 'coupon' => $post_id ), array( 'all' ) );
-	// 	if( !empty( $paged[1] ) ){
-	// 		$xl_coupon_link .= 'page'.$paged[1];
-	// 	}
-	// 	$xl_coupon_link = esc_url( $xl_coupon_link );
-	// 	$target = 'target="_blank"';
-	// }
+	$coupon_code = get_post_meta( $post_id, 'coupon_code', true );	
 
-	$button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" target="_blank">';
+	// $button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" target="_blank">';
+	$button = '<a href="'.get_the_permalink().'" data-coupon="'.$coupon_code.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code">';
 
 	switch( $coupon_type ){
 		case 'code': 
@@ -5412,7 +5396,7 @@ function couponxl_register(){
 	$repeat_password = isset( $_POST['repeat_password'] ) ? esc_sql( $_POST['repeat_password'] ) : '';
 	$message = '';
 
-	var_dump( $_POST );
+	//var_dump( $_POST );
 
 	if( isset( $_POST['register_field'] ) ){
 	    if( wp_verify_nonce($_POST['register_field'], 'register') ){

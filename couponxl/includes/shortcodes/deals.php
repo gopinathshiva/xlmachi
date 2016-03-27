@@ -5,6 +5,7 @@
  * deals_orderby > sort order 
  */
 function couponxl_deals_func( $atts, $content ){
+	global $shortcode_transient_lifetime;
 	extract( shortcode_atts( array(
 		'icon' => '',
 		'title' => '',
@@ -20,15 +21,23 @@ function couponxl_deals_func( $atts, $content ){
 		'orderby' => '',
 		'order' => '',
 		'items' => '',
+		'home_offer_id'=> '',
 	), $atts ) );
 
-	$items = explode( ",", $items );
-	$col = 4;
-	$offer_view = '';
-	ob_start();
-	include( locate_template( 'includes/box-elements/deals.php' ) );
-	$content = ob_get_contents();
-	ob_end_clean();
+	$transient_args = $atts;
+	$transient_namespace = xl_transient_namespace();
+	$transient_key = $transient_namespace .md5( serialize($transient_args) );
+
+	if ( false === ( $content = get_transient( $transient_key ) ) ) {
+		$items = explode( ",", $items );
+		$col = 4;
+		$offer_view = '';
+		ob_start();
+		include( locate_template( 'includes/box-elements/deals.php' ) );
+		$content = ob_get_contents();
+		ob_end_clean();
+		set_transient( $transient_key, $content, $shortcode_transient_lifetime );
+	}
 
 	return $content;
 }
@@ -72,6 +81,15 @@ function couponxl_deals_params(){
 			"param_name" => "small_title_link",
 			"value" => '',
 			"description" => __("Input link for the small title. eg) store/amazon, store/paytm","couponxl")
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => __("ID","couponxl"),
+			"param_name" => "home_offer_id",
+			"value" => "",
+			"description" => __("Input ID of the offer.","couponxl")
 		),
 		array(
 			"type" => "multidropdown",

@@ -10,13 +10,17 @@ $post_id = get_the_ID();
 $offer_type = get_query_var( $couponxl_slugs['offer_type'], '' );
 $theme_usage = couponxl_get_option( 'theme_usage' );
 $store_link = get_post_meta( get_the_ID(), 'store_link', true );
+global $categories_data_transient_lifetime;
 ?>
 
 <section>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="white-block">
+
+                <?php do_action('xl_offer_type') ?>
+                <?php do_action('xl_offer_cat') ?>
+                <div class="white-block xl-store-detail">
                     
                     <?php if( has_post_thumbnail() ): ?>
                         <div class="shop-logo">
@@ -187,10 +191,6 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
 
                 </div>
 
-                <?php do_action('xl_offer_type') ?>
-                <?php do_action('xl_offer_cat') ?>     
-                
-
                 <?php 
                     if ( is_active_sidebar( 'store-sidebar-1' ) ){
                         dynamic_sidebar( 'store-sidebar-1' );
@@ -201,8 +201,10 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
             <div class="col-md-9" id='xl-store-start'>
                 <?php do_action('xl_filter_text') ?>
                 <?php
-                $cur_page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1; //get curent page
-                $offers_per_page = couponxl_get_option( 'offers_per_page' );
+                //$cur_page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1; //get curent page
+                $cur_page = 1; //get curent page
+                //$offers_per_page = couponxl_get_option( 'offers_per_page' );
+                $offers_per_page = -1;
 
                 $args = array(
                     'post_type'     => 'offer',
@@ -256,21 +258,21 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                 );
 
 
-                if( !empty( $offer_type ) ){
-                    $args['meta_query'][] = array(
-                        'key' => 'offer_type',
-                        'value' => $offer_type,
-                        'compare' => '='
-                    );
-                }
+                // if( !empty( $offer_type ) ){
+                //     $args['meta_query'][] = array(
+                //         'key' => 'offer_type',
+                //         'value' => $offer_type,
+                //         'compare' => '='
+                //     );
+                // }
 
                 $transient_namespace = xl_transient_namespace();
 
-                $transient_key = $transient_namespace .md5( serialize($transient_args) );   
+                $transient_key = $transient_namespace .md5( serialize($transient_args) );
 
                 if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                     $offers = new WP_Query( $args );
-                    set_transient( $transient_key, $offers, 12 * HOUR_IN_SECONDS );                    
+                    set_transient( $transient_key, $offers, $category_page_transient_lifetime );                    
                 }
 
                 // $page_links_total =  $offers->max_num_pages;
@@ -302,16 +304,22 @@ $store_link = get_post_meta( get_the_ID(), 'store_link', true );
                             $offers->the_post();                            
                             $xl_post_id = get_the_ID();
                             $xl_offer_cat_id = '';
+                            $xl_offer_tag_slug = '';
                             $xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
+                            $xl_offer_tag = get_the_terms( $xl_post_id, 'offer_tag' );
                             for ($i = 0; $i < count($xl_offer_cat); ++$i) {
                                 $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
                             }
+                            for ($i = 0; $i < count($xl_offer_tag); ++$i) {
+                                $xl_offer_tag_slug.=$xl_offer_tag[$i]->slug.',';                                
+                            }
                             unset($i);                         
-                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");                            
+                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ","); 
+                            $xl_offer_tag_slug =  rtrim($xl_offer_tag_slug, ",");                                 
                             $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
                             $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true );                            
                             ?>
-                            <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
+                            <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" data-xltag="<?php echo $xl_offer_tag_slug; ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
                                 <?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
                             </div>
                             <?php

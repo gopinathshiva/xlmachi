@@ -1,4 +1,4 @@
-<div class="white-block">
+<div class="white-block" id="xl-home-offer-<?php echo $home_offer_id; ?>">
     <div class="white-block-title no-border">
         <?php if( !empty( $icon ) ): ?>
             <i class="fa fa-<?php echo esc_attr( $icon ); ?>"></i>
@@ -58,14 +58,14 @@ if( !empty( $coupon_categories ) || !empty( $coupon_locations ) || !empty( $coup
             'operator' => 'IN'
         );
     }
-    if( !empty( $coupon_locations ) ){
-        $args['tax_query'][] = array(
-            'taxonomy' => 'location',
-            'field' => 'slug',
-            'terms' => explode( ",", $coupon_locations ),
-            'operator' => 'IN'
-        );
-    }
+    // if( !empty( $coupon_locations ) ){
+    //     $args['tax_query'][] = array(
+    //         'taxonomy' => 'location',
+    //         'field' => 'slug',
+    //         'terms' => explode( ",", $coupon_locations ),
+    //         'operator' => 'IN'
+    //     );
+    // }
     if( !empty( $coupon_stores ) ){
         $args['meta_query'][] = array(
             'key' => 'offer_store',
@@ -93,9 +93,9 @@ if( !empty( $coupons_orderby ) ){
     }
     $args['orderby'] = $coupons_orderby;
 }
-if( !empty( $coupons_order ) ){
-    $args['order'] = $coupons_order;
-} 
+// if( !empty( $coupons_order ) ){
+//     $args['order'] = $coupons_order;
+// } 
 
 $coupons = new WP_Query( $args );
 $counter = 0;

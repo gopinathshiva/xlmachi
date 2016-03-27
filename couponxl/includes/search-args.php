@@ -8,6 +8,8 @@
 	}
 
 	$default_offer_listing = couponxl_get_option( 'default_offer_listing' );
+
+
 	if( empty( $offer_view ) ){
 		$offer_view = $default_offer_listing;
 	}

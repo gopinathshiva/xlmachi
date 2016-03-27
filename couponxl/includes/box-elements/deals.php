@@ -1,4 +1,4 @@
-<div class="white-block">
+<div class="white-block" id="xl-home-offer-<?php echo $home_offer_id; ?>">
     <div class="white-block-title no-border">
         <?php if( !empty( $icon ) ): ?>
             <i class="fa fa-<?php echo esc_attr( $icon ); ?>"></i>
@@ -62,14 +62,14 @@ if( !empty( $deal_categories ) || !empty( $deal_locations ) || !empty( $deal_sto
             'operator' => 'IN'
         );
     }
-    if( !empty( $deal_locations ) ){
-        $args['tax_query'][] = array(
-            'taxonomy' => 'location',
-            'field' => 'slug',
-            'terms' => explode( ",", $deal_locations ),
-            'operator' => 'IN'
-        );
-    }
+    // if( !empty( $deal_locations ) ){
+    //     $args['tax_query'][] = array(
+    //         'taxonomy' => 'location',
+    //         'field' => 'slug',
+    //         'terms' => explode( ",", $deal_locations ),
+    //         'operator' => 'IN'
+    //     );
+    // }
     if( !empty( $deal_stores ) ){
         $args['meta_query'][] = array(
             'key' => 'offer_store',

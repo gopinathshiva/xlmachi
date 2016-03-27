@@ -83,7 +83,6 @@ else{
 	/* ADDED CUSTOM CODE ENDS */
 
 	$args['post__in'] = $home_page_slider_items;
-	//debug_to_console( couponxl_get_option( 'home_page_slider_items' ) );
 	$args['posts_per_page'] = count( $home_page_slider_items );
 	$args['orderby'] = 'post__in';
 

@@ -6,12 +6,16 @@ $footer_facebook = couponxl_get_option( 'footer_facebook' );
 $footer_twitter = couponxl_get_option( 'footer_twitter' );
 $footer_google = couponxl_get_option( 'footer_google' );
 
+do_action('xl_side_menu');	
+
 if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $footer_twitter ) || !empty( $footer_google ) ):
 ?>
 	<section class="footer">
+
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
+					<?php do_action('xl_footer_stats'); ?>
 					<?php
 					$show_to_top = couponxl_get_option( 'show_to_top' );
 					if( $show_to_top == 'yes' ):
@@ -26,6 +30,9 @@ if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $foote
 					<div class="pull-left">
 						<?php echo $footer_copyrights ?>
 					</div>
+
+					<?php 
+					do_action('xl_scroll_top'); ?>
 
 					<div class="pull-right">
 						<?php

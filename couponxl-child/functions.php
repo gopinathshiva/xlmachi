@@ -1,10 +1,28 @@
 <?php
 
+$categories_data_transient_lifetime = 4 * DAY_IN_SECONDS;
+$stores_data_transient_lifetime = 4 * DAY_IN_SECONDS;
+$search_data_transient_lifetime = 4 * DAY_IN_SECONDS;
+$shortcode_transient_lifetime = 10 * HOUR_IN_SECONDS;
+$category_page_transient_lifetime = 10 * HOUR_IN_SECONDS;
+
+$flipkart_deals_page_transient_lifetime = 3 * HOUR_IN_SECONDS;
+
+function is_localhost() {
+    $whitelist = array( '127.0.0.1', '::1' );
+    if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
+        return true;
+    else
+        return false;
+}
+
 add_action('wp_ajax_search_offer', 'xl_search_offer');
 add_action('wp_ajax_nopriv_search_offer', 'xl_search_offer');
 
 //ajax call which trigger when person is searching, will output all choices at once and saved it in transients
 function xl_search_offer(){
+    global $search_data_transient_lifetime;
+
     if ( false === ( $offer_categories = get_transient( 'couponxl_offer_categories_and_stores' ) ) ) {
     
         $xl_offer_cats = couponxl_get_organized( 'offer_cat' ); 
@@ -38,10 +56,10 @@ function xl_search_offer(){
         }
 
         $offer_categories = json_encode($post_data); 
-        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, 24 * HOUR_IN_SECONDS );         
+        set_transient( 'couponxl_offer_categories_and_stores', $offer_categories, $search_data_transient_lifetime );
     }
 
-    echo $offer_categories;    
+    echo $offer_categories;
     die();
 }
 
@@ -52,24 +70,13 @@ function new_excerpt_length($length) {
 add_filter('excerpt_length', 'new_excerpt_length');
 
 function adding_custom_scripts() {    
-	wp_register_script('custom-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/custom-script.js','',null, true);
-    wp_register_script('preloader-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/image-preloader.js','',null, true);
+	wp_register_script('custom-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/custom-script.js',array( "jquery" ),null, true);
+    //wp_register_script('preloader-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/image-preloader.js','',null, true);
+    //wp_register_script('xmas-script', esc_url( home_url('/') ).'wp-content/themes/couponxl-child/js/snowstorm.js','',null, false);
 
 	wp_enqueue_script('custom-script');
-    //wp_enqueue_script('preloader-script');
 }
 add_action( 'wp_enqueue_scripts', 'adding_custom_scripts' ); 
-
-// add_action('wp_head','add_image_preloader_inline_script');
-
-// //for to add placeholder image before loading image
-// function add_image_preloader_inline_script() {
-//     echo '<script type="text/javascript">
-//             jQuery(function(){
-//                 //jQuery(".home-page-body  img").imgPreload();
-//             });
-//     </script>';
-// }
 
 //to add search box in nav bar
 add_filter('wp_nav_menu_items','add_search_box', 10, 2);
@@ -80,7 +87,7 @@ function add_search_box($items, $args) {
         $searchform = ob_get_contents();
         ob_end_clean();
 
-        $searchform = '<form method="get" action="http://couponmachi.com/search-page/" class="clearfix xl-search-form"> 
+        $searchform = '<form onsubmit="return false;" method="get" action="'.esc_url( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ) ).'" class="clearfix xl-search-form"> 
                             <i class="fa fa-search icon-margin" ></i>
                             <div class="">
                                 <input type="text" class="xl-search-input" value="" placeholder="Search" name="keyword">
@@ -96,20 +103,7 @@ function add_search_box($items, $args) {
 
         $home_url = esc_url(home_url('/'));
 
-        // $dropdown = '<div class="dropdown"> <a href="javascript:void(0);" data-toggle="dropdown" class="btn-block btn-grey" aria-expanded="false">Categories <i class="caret go-smooth"></i></a>
-        //                 <ul class="dropdown-menu">
-        //                     <li><a href="'.$home_url.'offer_cat/bus" title="Bus Coupons">Bus </a></li>
-        //                     <li><a href="'.$home_url.'offer_cat/mobile-recharge" title="Recharge Coupons">Recharge </a></li>
-        //                     <li><a href="'.$home_url.'offer_cat/footwear" title="Footwear Coupons">Footwear </a></li>
-        //                     <li><a href="'.$home_url.'offer_cat/clothing" title="Clothing Coupons">Clothing </a></li>
-        //                     <li><a href="'.$home_url.'categories/" title="All Categories">View All </a></li>
-        //                 </ul>
-        //             </div>';
-
         $items .= '<li class="col-md-12 col-xs-12 xl-search-form-container">' . $searchform . '</li>';
-
-        //$items .= '<li class="col-md-12 col-xs-12 xl-dropdown-container">' . $dropdown . '</li>';
-        
 
     return $items;
 }
@@ -210,8 +204,13 @@ function xl_filter_text_fn(){
 add_action('xl_offer_cat','xl_offer_cat_fn');
 
 function xl_offer_cat_fn(){
-	$xl_offer_cats = couponxl_get_organized( 'offer_cat' ); ?>
+    global $categories_data_transient_lifetime;
 
+    if ( false === ( $xl_offer_cats = get_transient( 'couponxl_filter_categories' ) ) ) {
+        $xl_offer_cats = couponxl_get_organized( 'offer_cat' );
+        set_transient( 'couponxl_filter_categories', $xl_offer_cats, $categories_data_transient_lifetime );
+    } ?>
+    
     <div class="white-block xl-offer-cat-filter">
         <div class="white-block-content">
             <h2>Filter By Categories</h2>
@@ -247,6 +246,7 @@ function xl_offer_type_fn(){
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-all" value="all" checked><label for="xl-offer-type-all">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
 				<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-deals" value="deal"><label for="xl-offer-type-deals">&nbsp Deals <span id="xl-offer-type-deal-count" class="count"></span></label></li>
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-coupons" value="coupon"><label for="xl-offer-type-coupons">&nbsp Coupons <span id="xl-offer-type-coupon-count" class="count"></span></label></li>
+                <li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-cashback" value="cashback"><label for="xl-offer-type-cashback">&nbsp Cashback <span id="xl-offer-type-cashback-count" class="count"></span></label></li>
             </ul>
         </div>
     </div>
@@ -256,15 +256,23 @@ function xl_offer_type_fn(){
 add_action('xl_offer_store','xl_offer_store_fn');
 
 function xl_offer_store_fn(){
-    $args = array(
-        'post_type' => 'store',        
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-        'orderby' => 'title',
-        'order' => 'asc'
-    );  
 
-    $stores = new WP_Query( $args );
+    global $stores_data_transient_lifetime;
+
+    if ( false === ( $stores = get_transient( 'couponxl_filter_stores' ) ) ) {        
+
+        $args = array(
+            'post_type' => 'store',        
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'orderby' => 'title',
+            'order' => 'asc'
+        );  
+
+        $stores = new WP_Query( $args );
+
+        set_transient( 'couponxl_filter_stores', $stores, $stores_data_transient_lifetime );
+    }        
 
     if( $stores->have_posts() ){
         ?>
@@ -290,15 +298,44 @@ function xl_offer_store_fn(){
 add_action('pmxi_saved_post', 'post_saved', 10, 1);
 
 function post_saved($id) {
-    $offer_type = get_post_meta($id, 'offer_type', true);    
+    $offer_type = get_post_meta($id, 'offer_type', true);   
+    $offer_type = strtolower($offer_type); 
     $expiry_date = get_post_meta($id,'offer_expire',true);
     $start_date = get_post_meta($id,'offer_start',true);
     $offer_in_slider = get_post_meta($id,'offer_in_slider',true);
 
-    if($offer_type == 'Promotion' || $offer_type == 'Coupon'){
-        if($offer_type == 'Promotion'){
+    $post = get_post($id);
+    $offer_title = $post->post_title;
+    
+    $offer_tag = '';
+
+    $offer_title = strtolower($offer_title);
+
+    if (strpos($offer_title, 'cashback') !== false)
+        $offer_tag = 'cashback,';
+
+    if (strpos($offer_title, 'flat') !== false)
+        $offer_tag = 'flat,';
+
+    // foreach ($offer_title as $string) {
+    //     $string = strtolower($string);
+    //     debug_to_console('inside loop:'.$string);
+    //     if($string == 'cashback'){
+    //         $offer_tag = 'cashback,';
+    //     }else if($string == 'flat'){
+    //         $offer_tag = 'flat,';
+    //     }
+    // }
+
+    $offer_tag = rtrim($offer_tag,',');
+
+    wp_set_object_terms($id, $offer_tag, 'offer_tag', true);
+    //update_post_meta($id, 'offer_tag', $offer_tag);
+
+    if($offer_type == 'promotion' || $offer_type == 'coupon'){
+        if($offer_type == 'promotion'){
             $offer_type = 'deal';
-        }else if($offer_type == 'Coupon'){
+        }else if($offer_type == 'coupon'){
             $offer_type = 'coupon';
         }        
         update_post_meta($id, 'offer_type', $offer_type);
@@ -366,7 +403,7 @@ add_action('offer_other_info','offer_other_info_callback');
 
 function offer_other_info_callback(){ ?>
     <div class='offer-other-info-container'>
-            <div class='offer-used-count'><i class='fa fa-shopping-cart icon-margin'></i><?php echo(rand(2,50)); ?> Uses Today</div>
+            <div class='offer-used-count'><i class='fa fa-shopping-cart icon-margin'></i><?php echo(rand(10,300)); ?> Uses Today</div>
             <div class='offer-verified-status'><i class='fa fa-check-circle icon-margin'></i>Verified</div>
             <div class='clear'></div>
     </div><?php
@@ -390,11 +427,12 @@ function offer_top_info_callback(){?>
             }else if($tag_value == 'cashback'){
                 $offer_cashback = $tag_value;
                 $offer_type = $tag_value;
-            }else if($tag_value == 'off'){
-                $offer_unit = $tag_value;                
-            }else if($tag_value == 'percent'){
-                $offer_unit = $tag_value;                
             }
+            // else if($tag_value == 'off'){
+            //     $offer_unit = $tag_value;                
+            // }else if($tag_value == 'percent'){
+            //     $offer_unit = $tag_value;                
+            // }
         }
         if($offer_flat && $offer_cashback){
             $offer_type = $offer_flat.' + '.$offer_cashback;
@@ -432,6 +470,7 @@ function xl_transient_namespace(){
     //calling flipkart daily deals api, if fails, call again till 5 times and store it in transient for temp storage
     function getDailyDeals(){               
 
+        global $flipkart_deals_page_transient_lifetime;
         $api_url = 'https://affiliate-api.flipkart.net/affiliate/offers/v1/dotd/json';  
 
         function callFlipkartFeedsAPI($api_url){
@@ -448,9 +487,8 @@ function xl_transient_namespace(){
 
                 $api_response = $api_response['body'];
                 $api_response = json_decode($api_response, true);   
-
-                delete_transient( 'flipkart_daily_deals' );
-                set_transient( 'flipkart_daily_deals', $api_response, 24 * HOUR_IN_SECONDS );
+                
+                set_transient( 'flipkart_daily_deals', $api_response, $flipkart_deals_page_transient_lifetime );
 
                 return $api_response;
             }else{              
@@ -466,9 +504,89 @@ function xl_transient_namespace(){
         return callFlipkartFeedsAPI($api_url);                                              
     }
 
+//action to show scroll top icon in all pages
+
+add_action('xl_scroll_top','xl_scroll_top_callback');
+
+function xl_scroll_top_callback(){
+    ?>
+        <a href="javascript:void(0)" class="xl-scrollup" title="scroll to top"></a>
+    <?php
+}
+
+/* sidemenu for home page */
+
+add_action('xl_side_menu','xl_side_menu_callback');
+
+function xl_side_menu_callback(){
+    ?>
+    <div class="xl-sidemenu">
+        <ul>
+    <?php
+    if(is_front_page()){?>
+        
+        <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li>
+        <li><a data-scroll-id="mobile-recharge" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a data-scroll-id="bus" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
+        <li><a data-scroll-id="electronics" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>Electronics</span></a></li>
+        <li><a data-scroll-id="food-ordering" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a data-scroll-id="fashion" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
+
+    <?php }else{?>
+        
+        <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
+        <li><a href="<?php echo esc_url( home_url('/') ).'recharge-offers' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'travel-offers' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>            
+        <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-offers' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'tv-audio-video-entertainment-offers' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-offers' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'fashion-offers' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
+    <?php }
+    ?>
+
+        </ul>
+        <div class="xl-sidemenu-left"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-left icon-margin" ></i></a></div>
+        <div class="xl-sidemenu-right"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-right icon-margin" ></i></a></div>
+    </div><?php
+}
+
+/* adding footer stats meta */
+
+function xl_footer_stats_callback(){ ?>
+    
+        <ul class="list-inline xl-footer-stats go-flex"> 
+            <li><span><i class="fa fa-smile-o"></i></span><span><b>4325</b><br><small>Coupons redeemed so far</small></span></li>
+            <li><span><i class="fa fa-bookmark"></i></span><span><b>5204</b><br><small>Coupons &amp; Deals for you</small></span></li> 
+            <li><span><i class="fa fa-users"></i></span><span><b>2636</b><br><small>Subscribed Users</small></span></li> 
+            <li><span><i class="fa fa-check-circle"></i></span><span><b>100%</b><br><small>Verified</small></span></li> 
+        </ul>
+    <?php 
+}
+
+add_action('xl_footer_stats','xl_footer_stats_callback');
+
+/* function xl_offer_of_the_day_callback(){?>
+    <div class="buzz-container"> 
+        <div class="buzz-it-up notification" id="buzz_smile" data-notifcount="2">
+            <a href="https://buzz.grabon.in?utm_source=homepage" target="_blank" class=""><b><i class="gie-bellsmile"></i></b><span><b>BUZZ ME! </b><small>One Click To Happiness </small></span></a>
+        </div>
+        <div class="recent-buzz">
+            <a href="http://goo.gl/FyQPN1" target="_blank" class="buzz-item buzz-1" data-buzzid="1"><b><i class="gie-bellsmile"></i></b><span><b>Just Recharge For FREE</b><small>Get Upto 100% Cashback On Recharge @ Paytm, Freecharge &amp; More</small></span></a>
+            <a href="http://goo.gl/xKRgdE" target="_blank" class="buzz-item buzz-2" data-buzzid="2"><b><i class="gie-bellsmile"></i></b><span><b>Flat Rs 10000 Cashback On Apple Products</b><small>Shop For iPhones, iPads, Mac Books &amp; More @ Paytm</small></span></a>
+        </div>
+    </div>
+}<?php
+
+add_action('xl_offer_of_the_day','xl_offer_of_the_day_callback'); */
+
 /* adding google analytics */
 
-//add_action('wp_footer', 'add_google_analytics');
+if(!is_localhost()){
+    add_action('wp_footer', 'add_google_analytics');
+}
+
 function add_google_analytics() { ?>
  
 <script>
@@ -483,5 +601,59 @@ function add_google_analytics() { ?>
 </script>
  
 <?php }
+
+
+
+/**
+ * Remove the slug from published post permalinks. Only affect our custom post type, though.
+ */
+function gp_remove_cpt_slug( $post_link, $post, $leavename ) {
+ 
+    if ( 'store' != $post->post_type || 'publish' != $post->post_status ) {
+        return $post_link;
+    }
+ 
+    $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
+ 
+    return $post_link;
+}
+add_filter( 'post_type_link', 'gp_remove_cpt_slug', 10, 3 );
+
+function gp_parse_request_trick( $query ) {
+ 
+    // Only noop the main query
+    if ( ! $query->is_main_query() )
+        return;
+ 
+    // Only noop our very specific rewrite rule match
+    if ( 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
+        return;
+    }
+ 
+    // 'name' will be set if post permalinks are just post_name, otherwise the page rule will match
+    if ( ! empty( $query->query['name'] ) ) {
+        $query->set( 'post_type', array( 'post', 'page', 'store' ) );
+    }
+}
+add_action( 'pre_get_posts', 'gp_parse_request_trick' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

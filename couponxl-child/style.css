@@ -11,12 +11,21 @@ Template: couponxl
 Tags: white
 */
 
+/*.home-page-body{
+    background: url('images/bg.webp');
+}*/
 
 /* ***********************  header style starts here ******************************* */
 
 .account-collapse .xl-register{
     background-color: #8C3BA2;
     color: white;
+}
+
+/* megamenu css fix */
+
+#menu-item-904 .list-unstyled.mega_menu.col-2{
+    height: initial;
 }
 
 /* ***********************  header style ends here ******************************* */
@@ -73,17 +82,50 @@ Tags: white
 .xl-offer-filter-not-found{
     display: none;
 }
+ 
+.single-store .col-md-3 .white-block,.search-template-page .col-md-3 .white-block{
+    margin-bottom: 20px;
+}
 
+.single-store .col-md-3 .white-block-content,.search-template-page .col-md-3 .white-block-content{
+    padding: 5px 20px;
+}
 
 /* ***********************  store page style ends here ******************************* */
 
 /* ***********************  deal page style starts here ******************************* */
 
+.coupon_modal_content a.xl-activate-deal{
+    color: white;
+    margin-bottom: 15px;
+    border-color: transparent;
+}
 
+.offer-box .xl-permalink{
+    display: none;
+}
+
+.offer-box{
+    transition:box-shadow .3s ease;
+    -webkit-transition: box-shadow .3s ease;
+    -moz-transition: box-shadow .3s ease;
+    -ms-transition: box-shadow .3s ease;
+    -o-transition: box-shadow .3s ease;
+}
+
+.offer-box:hover{
+    box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
+}
 
 /* ***********************  deal page style ends here ******************************* */
 
 /* *********************** coupon box style starts here ***************************** */
+
+.offer-box .white-block-content h3{
+    min-height: 100px;
+}
 
 .white-block-content a.custom.show-code {
     padding: 0;
@@ -95,6 +137,11 @@ Tags: white
 .textwidget{
 	color: #919394;
 	text-align:justify;
+}
+
+.widget-footer{
+    z-index: 3;
+    position: relative;
 }
 
 /* ***********************  widget style ends here ******************************* */
@@ -234,6 +281,10 @@ a.read-info{
     color: white !important;
     padding: 4px;
     transition:background .3s ease;
+    -webkit-transition: background .3s ease;
+    -moz-transition: background .3s ease;
+    -ms-transition: background .3s ease;
+    -o-transition: background .3s ease;
 }
 
 .offer-box .white-block-content a.read-info:hover{
@@ -268,10 +319,6 @@ a.read-info{
     height: 40px;
     z-index: 1000;
     width: 55%;
-}
-
-.nav.navbar-nav {
-    padding: 30px 0px 30px 0px !important;
 }
 
 .navigation.sticky-nav .navbar .xl-search-form-container{
@@ -363,7 +410,371 @@ a.read-info{
 
 /* ***********************  search block css changes ends here ******************** */
 
+
+/* wp rocket style fixes */
+
+/*.nav.navbar-nav  .dropdown.open .dropdown-menu{
+    height: inherit !important;
+    padding-top: 41px !important;
+}*/
+
+/* scroll to top fix */
+.xl-scrollup {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    display: none;
+    text-indent: -9999px;
+    background: url('images/scroll-to-top3.png') no-repeat;
+    opacity: .4;
+}
+
+.xl-scrollup:hover{
+    opacity: 1;
+}
+
+/* Top Category css starts here */
+
+.xl-coupon-listing .white-block{
+    margin-bottom:3px;
+    background: transparent;
+    text-align: center;
+    box-shadow: initial;
+}
+
+.xl-coupon-listing .white-block-title{
+    margin-bottom: 0;
+}
+
+.xl-coupon-listing .white-block-title i{
+    display: none;
+}
+
+.xl-coupon-listing .category_slider{
+    background: none;
+    max-width: 100%;
+    margin: 20px auto 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.xl-coupon-listing ul{
+    display: inline-block;
+    padding:0;
+}
+
+.xl-coupon-listing li{
+    width: 135px;
+    float: left;
+    display: inline;
+    text-align:center;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.xl-coupon-listing li:hover{
+
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform:scale(1.1);
+}
+
+.xl-coupon-listing li a{
+    display: block;
+}
+
+.xl-coupon-listing li a i{
+    font-size:45px;
+    color:#5b0f70;
+}
+
+/*.xl-coupon-listing {
+    margin: 0px 0 0px 0;
+}
+
+.xl-coupon-listing .row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.xl-coupon-listing .col-6 {
+    width: 25%;
+    position: relative;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+}
+
+.xl-coupon-listing .category-box {
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    margin: 10px 0px;
+    background-position: center;
+    background-size: cover;
+}
+
+.xl-coupon-listing .category-box .content {
+    height: 100%;
+    background-color: rgba(0, 0, 0 , 0.60);
+    padding-top: 50px;
+    text-align: center;
+}
+
+.xl-coupon-listing .category-boxes a img {
+    -webkit-transition: -webkit-transform 0.4s ease-in-out;
+    -moz-transition: transform 0.4s ease-in-out;
+    -ms-transition: transform 0.4s ease-in-out;
+    -o-transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+    height: 70px;
+}
+
+.category-box .content p {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+.xl-coupon-listing .category-boxes a img:hover {
+    -webkit-transform: rotate(360deg) scale(1.2); 
+    -moz-transform: rotate(360deg) scale(1.2);
+    -ms-transform: rotate(360deg) scale(1.2);
+    -o-transform: rotate(360deg) scale(1.2); 
+    transform: rotate(360deg) scale(1.2);
+}*/
+
+/* side menu css starts here */
+
+.xl-sidemenu-left,.xl-sidemenu-right{
+    background: #f4f4f4;
+    position: relative;
+}
+
+.xl-sidemenu-left a,.xl-sidemenu-right a{
+    position: absolute;
+    top: 5px;
+    left: 13px;
+    opacity: .65;
+}
+
+.xl-sidemenu-right a{
+    left: 73px;
+}
+
+.xl-sidemenu-right{
+    display: none;
+}
+
+.xl-sidemenu.push-left .xl-sidemenu-right{
+    display: block;
+}
+
+.xl-sidemenu{
+    position: fixed;
+    z-index: 1000;
+    display: block;
+    margin-left: 10px;
+    top: 175px;
+    left: 0;
+    background-color: #fff;
+    transition:left .3s ease;
+    cursor: pointer;
+}
+
+.xl-sidemenu.push-left{
+    left:-60px;
+}
+
+.xl-sidemenu ul{
+    list-style-type: none;
+}
+
+.xl-sidemenu ul li {
+    margin-bottom: 10px;
+    margin-left: -25px;
+}
+
+.xl-sidemenu li a {    
+    display: block;
+    margin: 0px;
+    padding-top: 5px;
+    padding-right: 5px;    
+    text-decoration: none;
+    position: relative;
+}
+
+.xl-sidemenu li a:hover { 
+    color: black;
+}
+
+.xl-sidemenu li a i{
+    -webkit-transform: scale(1.4) rotate(0deg);
+    -moz-transform: scale(1.4) rotate(0deg);
+    -ms-transform: scale(1.4) rotate(0deg);
+    -o-transform: scale(1.4) rotate(0deg);
+    transform:scale(1.4) rotate(0deg);
+    -webkit-transition: transform .3s ease;
+    -moz-transition: transform .3s ease;
+    -ms-transition: transform .3s ease;
+    -o-transition: transform .3s ease;
+    transition:transform .3s ease;
+}
+
+.xl-sidemenu li a i:hover{
+    -webkit-transform: scale(1.8) rotate(360deg);
+    -moz-transform: scale(1.8) rotate(360deg);
+    -ms-transform: scale(1.8) rotate(360deg);
+    -o-transform: scale(1.8) rotate(360deg);
+    transform:scale(1.8) rotate(360deg);
+}
+
+.xl-sidemenu li span{
+    display: none;
+    position: absolute;
+    background: white;
+    left: 23px;
+    top: 0;
+}
+
+/* featured stores css starts */
+
+.featured-stores{
+    background-color: transparent;
+    box-shadow: initial;
+}
+
+/*.featured-stores ul{
+    margin: 0;
+}*/
+
+/*.featured-stores ul li {
+    width: 11.5%;
+    min-width: 60px;
+    margin: initial;
+    margin-right: 1%;
+    margin-right: .5%;
+}*/
+
+.featured-stores .store-logo a{
+    border-right: initial;
+}
+
+.featured-stores ul li .store-logo,.featured-stores .store-logo img{
+    height: 100px;
+}
+
+.featured-stores {
+    background-color: transparent;
+    box-shadow: initial;
+}
+
+/* carousel effect for featured stores */
+
+.featured-stores>.row{
+    margin: 0;
+}
+
+.featured-stores .col-sm-12{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.featured-stores ul{
+    margin: 0;
+    position: absolute;
+    width: 200%;
+    height: 100px;
+}
+
+.featured-stores ul li{
+    width: 11.5%;
+    min-width: 60px;
+    margin: initial;
+    margin-right: .5%;
+    width: 130px;
+    height: 100px;
+}
+
+.featured-stores ul li .store-logo img{
+    top: initial;
+    left: initial;
+    -webkit-transform: initial;
+    -moz-transform: initial;
+    -ms-transform: initial;
+    -o-transform: initial;
+    transform: initial;
+    position: initial; 
+}
+
+/* footer stats css starts here */
+
+.xl-footer-stats {
+    margin-bottom: 50px;
+    padding: 34px 0;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.74);
+    border-bottom: 1px rgba(145, 143, 130, 0.35) solid;
+}
+
+.xl-footer-stats li{
+    width: 25%;
+    float: left;
+    padding-left: 5%;
+}
+
+.xl-footer-stats>li>span:first-child {
+    width: 50px;
+    height: 50px;
+    display: block;
+    float: left;
+    border-radius: 50%;
+    background-color: #7B3F8C;
+    color: #fff;
+    line-height: 56px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.xl-footer-stats>li>span:first-child i {
+    position: absolute;
+    top: 11px;
+    left: 13px;
+    font-size: 25px;
+}
+
+.xl-footer-stats>li>span:first-child i.fa-bookmark {
+    left: 16px;
+}
+
+.xl-footer-stats>li>span:first-child i.fa-smile-o,.xl-footer-stats>li>span:first-child i.fa-check-circle {
+    left: 15px;
+    top: 12px;
+}
+
+/* Registration fix */
+.social_connect_login_twitter{
+    display: none;
+}
+
+/* Media Queries */
+
 @media screen and (min-width: 768px){
+
     .xl-offer-item {
         min-height: 380px;
         height: auto;
@@ -372,9 +783,19 @@ a.read-info{
     .xl-offer-item.offer-view-list{
         min-height: initial;
     }
+
+    .offer-box .white-block-content h3 {
+        min-height: 105px;
+        max-height: 105px;
+        overflow: auto;
+    }
 }
 
 @media screen and (max-width: 760px){
+
+    .xl-coupon-listing li{
+        width: 160px;
+    }
 
     .breadcrumb-section {
         visibility: hidden;
@@ -415,3 +836,20 @@ a.read-info{
     }
 }
 
+@media screen and (max-width:1000px){
+    .xl-sidemenu,.featured-stores{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1050px){
+    .xl-coupon-listing li{
+        width: 125px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1000px){
+    .xl-coupon-listing li{
+        width: 110px;
+    }
+}

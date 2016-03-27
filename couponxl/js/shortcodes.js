@@ -230,6 +230,8 @@
 						{ text: 'Sidebar', value: 'sidebar' },
 						{ text: 'Slider', value: 'slider' },
 						{ text: 'Accordion', value: 'accordion' },
+						//CUSTOMISATION DONE HERE
+						{ text: 'Top Categories', value: 'top_categories' }
 					],
 					onPostRender: function() {
 						ed.my_control = this;
