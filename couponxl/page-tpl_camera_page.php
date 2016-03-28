@@ -6,7 +6,7 @@
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
 
-                    $offer_cat = 'cameras,camera-accessories';
+                    $offer_cat = 'cameras-accessories';
 
             		$args = array(
             			'post_status' => 'publish',
