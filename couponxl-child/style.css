@@ -794,7 +794,7 @@ a.read-info{
 @media screen and (max-width: 760px){
 
     .xl-coupon-listing li{
-        width: 160px;
+        width: 30%;
     }
 
     .breadcrumb-section {
@@ -851,5 +851,15 @@ a.read-info{
 @media screen and (min-width: 769px) and (max-width: 1000px){
     .xl-coupon-listing li{
         width: 110px;
+    }
+}
+
+@media screen and (max-width: 465px){
+    .xl-coupon-listing li{
+        width: 50%;
+    }
+
+    ..home .xl-coupon-listing .white-block-title h2{
+        font-size: 19px;
     }
 }
