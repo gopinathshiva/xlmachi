@@ -652,6 +652,12 @@ function no_wordpress_errors(){
 }
 add_filter( 'login_errors', 'no_wordpress_errors' );
 
+//logged in for 1 month
+add_filter( 'auth_cookie_expiration', 'stay_logged_in_for_1_year' );
+function stay_logged_in_for_1_year( $expire ) {
+  return 2592000; // 1 month in seconds
+}
+
 
 
 
