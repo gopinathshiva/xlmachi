@@ -637,6 +637,11 @@ function gp_parse_request_trick( $query ) {
 }
 add_action( 'pre_get_posts', 'gp_parse_request_trick' );
 
+//Remove unnecessary meta tags from WordPress header
+remove_action( 'wp_head', 'wp_generator' ) ;
+remove_action( 'wp_head', 'wlwmanifest_link' ) ;
+remove_action( 'wp_head', 'rsd_link' ) ;
+
 
 
 
