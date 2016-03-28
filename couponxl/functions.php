@@ -106,7 +106,7 @@ function couponxl_requred_plugins(){
 				'force_activation'     => false,
 				'force_deactivation'   => false,
 				'external_url'         => '',
-		),			
+		),
 	);
 
 	/**
@@ -160,7 +160,7 @@ add_filter('the_excerpt', 'do_shortcode');
 
 /* include custom made widgets */
 function couponxl_widgets_init(){
-	
+
 	register_sidebar(array(
 		'name' => __('Blog Sidebar', 'couponxl') ,
 		'id' => 'sidebar-blog',
@@ -170,7 +170,7 @@ function couponxl_widgets_init(){
 		'after_title' => '</h4></div>',
 		'description' => __('Appears on the right side of the blog.', 'couponxl')
 	));
-	
+
 	register_sidebar(array(
 		'name' => __('Page Sidebar Right', 'couponxl') ,
 		'id' => 'sidebar-right',
@@ -199,7 +199,7 @@ function couponxl_widgets_init(){
 		'before_title' => '<div class="widget-title"><h4>',
 		'after_title' => '</h4></div>',
 		'description' => __('Appears on the left side of the coupon listing page.', 'couponxl')
-	));	
+	));
 
 	register_sidebar(array(
 		'name' => __('Deal Page Sidebar', 'couponxl') ,
@@ -239,8 +239,8 @@ function couponxl_widgets_init(){
 		'before_title' => '<div class="widget-title"><h4>',
 		'after_title' => '</h4></div>',
 		'description' => __('Appears on the left side of the search page.', 'couponxl')
-	));	
-	
+	));
+
 	register_sidebar(array(
 		'name' => __('Bottom Sidebar 1', 'couponxl') ,
 		'id' => 'sidebar-bottom-1',
@@ -250,7 +250,7 @@ function couponxl_widgets_init(){
 		'after_title' => '</h4></div>',
 		'description' => __('Appears at the bottom of the page.', 'couponxl')
 	));
-	
+
 	register_sidebar(array(
 		'name' => __('Bottom Sidebar 2', 'couponxl') ,
 		'id' => 'sidebar-bottom-2',
@@ -260,7 +260,7 @@ function couponxl_widgets_init(){
 		'after_title' => '</h4></div>',
 		'description' => __('Appears at the bottom of the page.', 'couponxl')
 	));
-	
+
 	register_sidebar(array(
 		'name' => __('Bottom Sidebar 3', 'couponxl') ,
 		'id' => 'sidebar-bottom-3',
@@ -279,7 +279,7 @@ function couponxl_widgets_init(){
 		'before_title' => '<div class="widget-title"><h4>',
 		'after_title' => '</h4></div>',
 		'description' => __('Used for the widget area on home page.', 'couponxl')
-	));	
+	));
 
 	register_sidebar(array(
 		'name' => __('Store Sidebar', 'couponxl') ,
@@ -289,7 +289,7 @@ function couponxl_widgets_init(){
 		'before_title' => '<div class="widget-title"><h4>',
 		'after_title' => '</h4></div>',
 		'description' => __('Used for the widget area on store page.', 'couponxl')
-	));	
+	));
 
 	$home_sidebars = couponxl_get_option( 'home_sidebars' );
 	if( empty( $home_sidebars ) ){
@@ -306,7 +306,7 @@ function couponxl_widgets_init(){
 			'after_title' => '</h4></div>',
 			'description' => __('Used for the widget area on home page.', 'couponxl')
 		));
-	}	
+	}
 
 	$mega_menu_sidebars = couponxl_get_option( 'mega_menu_sidebars' );
 	if( empty( $mega_menu_sidebars ) ){
@@ -323,7 +323,7 @@ function couponxl_widgets_init(){
 			'after_title' => '</h4></div>',
 			'description' => __('This will be shown as the dropdown menu in the navigation.', 'couponxl')
 		));
-	}	
+	}
 }
 
 add_action('widgets_init', 'couponxl_widgets_init');
@@ -353,7 +353,7 @@ function couponxl_store_url(){
 			wp_redirect( $store_link );
 		}
 		else{
-			wp_redirect( get_permalink( $_GET['rs'] ) );	
+			wp_redirect( get_permalink( $_GET['rs'] ) );
 		}
 	}
 	/* redirect to external deal link */
@@ -493,7 +493,7 @@ function couponxl_active_column($columns) {
     return $columns;
 }
 add_filter('manage_users_columns', 'couponxl_active_column');
- 
+
 /* add user activation user status data to the columns */
 function couponxl_active_column_content( $value, $column_name, $user_id ){
 	if ( 'active' == $column_name ){
@@ -533,7 +533,7 @@ function couponxl_active_column_content( $value, $column_name, $user_id ){
 				)
 			)
 		));
-	}	
+	}
     return $value;
 }
 add_action('manage_users_custom_column',  'couponxl_active_column_content', 10, 3);
@@ -580,16 +580,16 @@ function couponxler_edit_user_status( $user ){
                 	</select>
                 </td>
             </tr>
-        </table>          
+        </table>
     <?php
 }
 add_action( 'show_user_profile', 'couponxler_edit_user_status' );
 add_action( 'edit_user_profile', 'couponxler_edit_user_status' );
 
 function couponxler_save_user_meta( $user_id ){
-	update_user_meta( $user_id,'user_active_status', sanitize_text_field($_POST['user_active_status']) );    
-	update_user_meta( $user_id,'seller_paypal_account', sanitize_text_field($_POST['seller_paypal_account']) );    
-	update_user_meta( $user_id,'user_agent', sanitize_text_field($_POST['user_agent']) );    
+	update_user_meta( $user_id,'user_active_status', sanitize_text_field($_POST['user_active_status']) );
+	update_user_meta( $user_id,'seller_paypal_account', sanitize_text_field($_POST['seller_paypal_account']) );
+	update_user_meta( $user_id,'user_agent', sanitize_text_field($_POST['user_agent']) );
 }
 add_action( 'personal_options_update', 'couponxler_save_user_meta' );
 add_action( 'edit_user_profile_update', 'couponxler_save_user_meta' );
@@ -598,7 +598,7 @@ add_action( 'edit_user_profile_update', 'couponxler_save_user_meta' );
 /* --------------------------------------------------------DISABLE BAR---------------------------------------------------*/
 function couponxl_remove_admin_bar() {
 	$user_ID = get_current_user_id();
-	$user_agent = get_user_meta( $user_ID, 'user_agent', true );	
+	$user_agent = get_user_meta( $user_ID, 'user_agent', true );
 	if (!current_user_can('administrator') && !is_admin() && ( !$user_agent || $user_agent == 'no' ) ) {
 		show_admin_bar(false);
 	}
@@ -616,7 +616,7 @@ function couponxl_custom_post_count( $type ){
 
 
 /* total_defaults */
-function couponxl_defaults( $id ){	
+function couponxl_defaults( $id ){
 	$defaults = array(
 		'terms' => '',
 		'show_notification_bar' => 'no',
@@ -650,7 +650,7 @@ function couponxl_defaults( $id ){
 		'trans_action' => 'action',
 		'main_color' => '#5b0f70',
 		'main_color_font' => '#ffffff',
-		'body_bg_color' => '#f4f4f4',	
+		'body_bg_color' => '#f4f4f4',
 		'button_light_green_bg_color' => '#5ba835',
 		'button_light_green_font_color' => '#ffffff',
 		'button_light_green_bg_color_hvr' => '#448722',
@@ -664,7 +664,7 @@ function couponxl_defaults( $id ){
 		'show_top_bar' => 'no',
 		'top_bar_facebook_link' => '',
 		'top_bar_twitter_link' => '',
-		'top_bar_google_link' => '',	
+		'top_bar_google_link' => '',
 		'top_bar_location_placeholder' => __( 'Location ( New Yor, Chicago, ... )', 'couponxl' ),
 		'top_bar_store_placeholder' => __( 'Store ( Addidas, nike, ... )', 'couponxl' ),
 		'keyword_search_placeholder' => __('Search for... ( 20% off, great deal,... )', 'couponxl'),
@@ -675,8 +675,8 @@ function couponxl_defaults( $id ){
 		'site_navigation_padding' => '',
 		'mega_menu_sidebars' => '5',
 		'mega_menu_min_height' => '',
-		'show_to_top' => 'no',	
-		'footer_copyrights' => '',	
+		'show_to_top' => 'no',
+		'footer_copyrights' => '',
 		'footer_facebook' => '',
 		'footer_twitter' => '',
 		'footer_google' => '',
@@ -688,12 +688,12 @@ function couponxl_defaults( $id ){
 		'home_page_bg_image_size' => 'auto',
 		'home_page_show_title' => 'yes',
 		'home_page_title' => '',
-		'home_page_subtitle' => '',	
-		'home_page_show_search' => 'yes',	
+		'home_page_subtitle' => '',
+		'home_page_show_search' => 'yes',
 		'home_page_search_location_placeholder' => __( 'Location ( New York, Chicago... )', 'couponxl' ),
 		'home_page_search_location_desc' => __( 'Example: Detroit US, Washington DC ...', 'couponxl' ),
 		'home_page_search_store_placeholder' => __( 'What are you looking for?', 'couponxl' ),
-		'home_page_search_store_desc' => __( 'Example: Wallmart, Nike, Reebok, Dell, Apple, Addidas ...', 'couponxl' ),		
+		'home_page_search_store_desc' => __( 'Example: Wallmart, Nike, Reebok, Dell, Apple, Addidas ...', 'couponxl' ),
 		'home_page_slider_items' => array(),
 		'home_page_main_title_font_color' => '#ffffff',
 		'home_page_search_input_bg_color' => '#ffffff',
@@ -711,7 +711,7 @@ function couponxl_defaults( $id ){
 		'page_title_bg_image' => array( 'url' => '' ),
 		'page_title_bg_image_repeat' => 'no-repeat',
 		'page_title_bg_image_size' => 'auto',
-		'page_title_font_color' => '#ffffff',		
+		'page_title_font_color' => '#ffffff',
 		'blog_subtitle' => '',
 		'offer_subtitle' => '',
 		'show_breadcrumbs' => 'no',
@@ -725,7 +725,7 @@ function couponxl_defaults( $id ){
 		'contact_map_scroll_zoom' => 'no',
 		'show_search_slider' => 'yes',
 		'default_offer_listing' => 'grid',
-		'stores_per_page' => '10',  
+		'stores_per_page' => '10',
 		'offers_per_page' => '10',
 		'store_no_offers_message' => '',
 		'search_no_offers_message' => '',
@@ -738,7 +738,7 @@ function couponxl_defaults( $id ){
 		'search_visible_locations_count' => '6',
 		'show_filter_bar' => 'yes',
 		'deal_show_bought' => 'yes',
-		'deal_show_similar' => 'yes',		
+		'deal_show_similar' => 'yes',
 		'similar_offers' => '2',
 		'deal_show_author' => 'yes',
 		'deal_owner_price_shared' => '',
@@ -787,12 +787,12 @@ function couponxl_defaults( $id ){
 		'twitter-consumer_secret' => '',
 		'new_offer_email' => ''
 	);
-	
+
 	if( isset( $defaults[$id] ) ){
 		return $defaults[$id];
 	}
 	else{
-		
+
 		return '';
 	}
 }
@@ -811,7 +811,7 @@ function couponxl_get_option($id){
 	}
 	else{
 		return apply_filters( 'couponxl_get_options', couponxl_defaults( $id ), $id );
-	}	
+	}
 }
 
 	/* setup neccessary theme support, add image sizes */
@@ -824,9 +824,9 @@ function couponxl_setup(){
 	));
 	register_nav_menu('top-navigation', __('Top Navigation', 'couponxl'));
 	register_nav_menu('widget-navigation', __('Widget Navigation', 'couponxl'));
-	
+
 	add_theme_support('post-thumbnails',array( 'post', 'pages', 'store', 'offer' ));
-	
+
 	set_post_thumbnail_size(848, 477, true);
 	if (function_exists('add_image_size')){
 		add_image_size( 'shop_logo', 150 );
@@ -864,7 +864,7 @@ function couponxl_calculate_ratings( $post_id ){
 	$rate = '<i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>';
 
 	$result = couponxl_get_rate_average( $post_id );
-	
+
 	if( $result['count'] > 0 ) {
 		$average = get_post_meta( $post_id, 'couponxl_average_rate', true );
 		if( $average <= 0.25 ){
@@ -935,25 +935,25 @@ function couponxl_write_ratings(){
 		$result['count'] -= 1;
 		delete_post_meta( $post_id, 'couponxl_rating', $check_vote->meta_value  );
 	}
-	$wpdb->insert( 
+	$wpdb->insert(
 		$wpdb->postmeta,
-		array( 
+		array(
 			'post_id' => $post_id,
 			'meta_key' => 'couponxl_rating',
 			'meta_value' => $_SERVER['REMOTE_ADDR'].'|'.$rate
-		), 
-		array( 
+		),
+		array(
 			'%d',
 			'%s',
 			'%s'
-		) 
+		)
 	);
 	//add_post_meta( $post_id, 'couponxl_rating', $_SERVER['REMOTE_ADDR'].'|'.$rate );
-	
+
 	$average = 0;
 	$average = number_format( ( $result['sum'] + $rate ) / ( $result['count'] + 1 ), 2 );
 	update_post_meta( $post_id, 'couponxl_average_rate', $average );
-	
+
 	$rate = couponxl_calculate_ratings( $post_id );
 
 	echo $rate;
@@ -995,45 +995,45 @@ function couponxl_scripts_styles(){
 	wp_enqueue_script('jquery');
 	/* BOOTSTRAP */
 	wp_enqueue_script( 'couponxl-bootstrap-js', $xl_asset_url . '/js/bootstrap.min.js', false, false, true );
-	wp_enqueue_script( 'couponxl-bootstrap-multilevel-js', $xl_asset_url . '/js/bootstrap-dropdown-multilevel.js', false, false, true );	
+	wp_enqueue_script( 'couponxl-bootstrap-multilevel-js', $xl_asset_url . '/js/bootstrap-dropdown-multilevel.js', false, false, true );
 
 	if( get_page_template_slug() == 'page-tpl_my_profile.php' ){
 		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_script('jquery-ui-sortable');		
+		wp_enqueue_script('jquery-ui-sortable');
 		/* BOOTSTRAP TABLES */
 		wp_enqueue_script( 'couponxl-bootstrap-table',  $xl_asset_url . '/js/bootstrap-table.min.js', false, false, true );
 		wp_localize_script( 'couponxl-bootstrap-table', 'couponxl_tabe_strings', array(
 			'search' => __( 'Search', 'couponxl' ),
 			'no_records' => __( 'No matching records found', 'couponxl' ),
-		) );		
+		) );
 		/* DATE TIME PICKER */
 		wp_enqueue_script( 'couponxl-datetimepicker',  $xl_asset_url . '/js/jquery.datetimepicker.js', false, false, true );
 
 		/* IMAGE UPLOADS */
 		wp_enqueue_media();
-		wp_enqueue_script('couponxl-image-uploads', get_template_directory_uri() . '/js/front-uploader.js', false, false, true );		
+		wp_enqueue_script('couponxl-image-uploads', get_template_directory_uri() . '/js/front-uploader.js', false, false, true );
 
 		/* STEPS */
 		wp_enqueue_style( 'couponxl-steps', get_template_directory_uri() . '/css/jquery.steps.css' );
-		wp_enqueue_script('couponxl-steps', $xl_asset_url . '/js/jquery.steps.min.js', false, false, true );				
+		wp_enqueue_script('couponxl-steps', $xl_asset_url . '/js/jquery.steps.min.js', false, false, true );
 	}
-	
-	
+
+
 	if (is_singular() && comments_open() && get_option('thread_comments')){
 		wp_enqueue_script('comment-reply');
-	}	
-		
+	}
+
 	wp_enqueue_script( 'couponxl-zeroclipboard',  $xl_asset_url . '/js/ZeroClipboard.min.js', false, false, true );
 	//wp_enqueue_script( 'couponxl-responsive-slides',  get_template_directory_uri() . '/js/responsiveslides.min.js', false, false, true );
 
 	wp_enqueue_script( 'couponxl-cookie',  $xl_asset_url . '/js/jquery.cookie.min.js', false, false, true );
-		
+
 	if( is_singular('offer') ){
 		//wp_enqueue_script( 'couponxl-countdown',  $xl_asset_url . '/js/countdown.js', false, false, true );
 	}
 
 	//$protocol = is_ssl() ? 'https' : 'http';
-	//wp_enqueue_script( 'couponxl-googlemap', $protocol.'://maps.googleapis.com/maps/api/js?sensor=false', false, false, true );	
+	//wp_enqueue_script( 'couponxl-googlemap', $protocol.'://maps.googleapis.com/maps/api/js?sensor=false', false, false, true );
 
 
 	wp_enqueue_script( 'couponxl-imagesloaded', $xl_asset_url . '/js/imagesloaded.min.js', false, false, true );
@@ -1063,7 +1063,7 @@ function couponxl_load_color_schema(){
 	include( locate_template( 'css/main-color.css.php' ) );
 	$custom_css = ob_get_contents();
 	ob_end_clean();
-	wp_add_inline_style( 'couponxl-style', $custom_css );	
+	wp_add_inline_style( 'couponxl-style', $custom_css );
 }
 add_action('wp_enqueue_scripts', 'couponxl_load_color_schema', 4 );
 
@@ -1089,7 +1089,7 @@ function couponxl_admin_resources(){
 
 	if( strpos( $_SERVER['REQUEST_URI'], 'widget' ) !== false ){
 		wp_enqueue_script('couponxl-shortcodes', get_template_directory_uri() . '/js/shortcodes.js', false, false, true);
-	}	
+	}
 }
 add_action( 'admin_enqueue_scripts', 'couponxl_admin_resources' );
 
@@ -1103,7 +1103,7 @@ function couponxl_smeta_images( $meta_key, $post_id, $default ){
 		global $sm;
 		return $result = $sm->sm_get_meta($meta_key, $post_id);
 	}
-	else{		
+	else{
 		return $default;
 	}
 }
@@ -1117,16 +1117,16 @@ function couponxl_get_custom_list( $post_type, $args = array(), $orderby = '', $
 		$args['order'] = 'ASC';
 	}
 	$posts = get_posts( $args );
-	
+
 	foreach( $posts as $post ){
 		if( $direction == 'right' ){
 			$post_array[$post->ID] = $post->post_title;
 		}
 		else{
-			$post_array[$post->post_title] = $post->ID;	
+			$post_array[$post->post_title] = $post->ID;
 		}
 	}
-	
+
 	return $post_array;
 }
 
@@ -1176,7 +1176,7 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	if( empty( $post_id ) ){
 		$post_id = get_the_ID();
 	}
-	
+
 	if( $is_shortcode || is_front_page() ){
 		$base_permalink = couponxl_get_permalink_by_tpl( 'page-tpl_search_page' );
 	}
@@ -1192,16 +1192,16 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 	if( get_query_var( $couponxl_slugs['coupon'] ) && get_option('permalink_structure') ){
 		$end = strrpos( $base_permalink, $couponxl_slugs['coupon'] );
 		$base_permalink = substr( $base_permalink, 0, $end );
-	}	
+	}
 	$coupon_type = get_post_meta( $post_id, 'coupon_type', true );
 	$affiliate_link = get_post_meta( $post_id, 'coupon_link', true );
-	$coupon_code = get_post_meta( $post_id, 'coupon_code', true );	
+	$coupon_code = get_post_meta( $post_id, 'coupon_code', true );
 
 	// $button = '<a href="'.$xl_coupon_link.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code" target="_blank">';
 	$button = '<a href="'.get_the_permalink().'" data-coupon="'.$coupon_code.'" data-affiliate="'.esc_url( $affiliate_link ).'" data-offer_id="'.esc_attr( $post_id ).'" class="btn show-code">';
 
 	switch( $coupon_type ){
-		case 'code': 
+		case 'code':
 			$button .= '
 				<i class="fa fa-scissors coupon-type"></i>
 				'.__( 'SHOW CODE', 'couponxl' );
@@ -1210,12 +1210,12 @@ function couponxl_coupon_button( $post_id = '', $is_shortcode = false ){
 			$button .= '
 				<i class="fa fa-chain coupon-type"></i>
 				'.__( 'CHECK SALE', 'couponxl' );
-			break;		
+			break;
 		case 'printable':
 			$button .= '
 				<i class="fa fa-print coupon-type"></i>
 				'.__( 'SHOW COUPON', 'couponxl' );
-			break;		
+			break;
 	}
 
 	$button .= '</a>';
@@ -1239,7 +1239,7 @@ function couponxl_custom_meta_boxes(){
 		'title' => __( 'Page Subtitle', 'couponxl' ),
 		'pages' => 'page',
 		'fields' => $page_meta,
-	);	
+	);
 
 	/* common fields for the deals and for the coupons */
 	$offer_meta = array(
@@ -1258,7 +1258,7 @@ function couponxl_custom_meta_boxes(){
 			'name' => __( 'Start date', 'couponxl' ),
 			'type' => 'datetime_unix',
 			'desc' => __( 'Set start date and time for the offer.', 'couponxl' )
-		),		
+		),
 		array(
 			'id' => 'offer_expire',
 			'name' => __( 'Expire date', 'couponxl' ),
@@ -1323,9 +1323,9 @@ function couponxl_custom_meta_boxes(){
 		'title' => __( 'Offer Requests', 'couponxl' ),
 		'pages' => 'offer',
 		'fields' => $offer_requests,
-	);	
+	);
 
-	
+
 	/* custom meta fields for the offer as coupon */
 	$coupon_meta = array(
 		array(
@@ -1362,7 +1362,7 @@ function couponxl_custom_meta_boxes(){
 			'name' => __( 'Coupon Affiliate Link', 'couponxl' ),
 			'type' => 'text',
 			'desc' => __( 'Input affiliate link which will be opened once the coupon is clicked.', 'couponxl' )
-		),		
+		),
 
 	);
 	$meta_boxes[] = array(
@@ -1383,7 +1383,7 @@ function couponxl_custom_meta_boxes(){
 			'name' => __( 'Deal Items Vouchers', 'couponxl' ),
 			'type' => 'textarea',
 			'desc' => __( 'If you want to serve predefined vouchers instead of random generated ones, input them here one in a row and make sure that you have same amount of these vouchers as the number of items.', 'couponxl' )
-		),		
+		),
 		array(
 			'id' => 'deal_price',
 			'name' => __( 'Deal Price', 'couponxl' ),
@@ -1411,7 +1411,7 @@ function couponxl_custom_meta_boxes(){
 				'sold_out' => __( 'Sold Out', 'couponxl' ),
 			),
 			'desc' => __( 'Manually set status of the deal ( this is auto populated depending on the items left to sell ).', 'couponxl' )
-		),		
+		),
 		array(
 			'id' => 'deal_voucher_expire',
 			'name' => __( 'Deal Vouchers Expire Date', 'couponxl' ),
@@ -1433,7 +1433,7 @@ function couponxl_custom_meta_boxes(){
 					'id' => 'deal_marker_longitude',
 					'name' => __( 'Place Longitude', 'couponxl' ),
 					'type' => 'text'
-				),	
+				),
 				array(
 					'id' => 'deal_marker_latitude',
 					'name' => __( 'Place Latitude', 'couponxl' ),
@@ -1465,7 +1465,7 @@ function couponxl_custom_meta_boxes(){
 			'name' => __( 'Deal Affiliate Link', 'couponxl' ),
 			'type' => 'text',
 			'desc' => __( 'Input affiliate link for the deal in order to avoid payment over this website.', 'couponxl' ),
-		),		
+		),
 		array(
 			'id' => 'deal_owner_price',
 			'name' => __( 'Set site owner part', 'couponxl' ),
@@ -1478,9 +1478,15 @@ function couponxl_custom_meta_boxes(){
 		'pages' => 'offer',
 		'fields' => $deal_meta,
 	);
-	
+
 	/* store custom meta fields */
 	$store_meta = array(
+		array(
+			'id' => 'store_bottom',
+			'name' => __('Store Bottom Description','couponxl'),
+			'type' => 'textarea',
+			'desc' => __('Type Store Bottom Description here','couponxl')
+		),
 		array(
 			'id' => 'store_link',
 			'name' => __( 'Store Link', 'couponxl' ),
@@ -1528,7 +1534,7 @@ function couponxl_custom_meta_boxes(){
 		'title' => __( 'Store information', 'couponxl' ),
 		'pages' => 'store',
 		'fields' => $store_meta,
-	);	
+	);
 
 	/* VOUCHER META FIELDS */
 	$voucher_meta = array(
@@ -1536,15 +1542,15 @@ function couponxl_custom_meta_boxes(){
 			'id' => 'voucher_deal',
 			'name' => __( 'Voucher For Deal', 'couponxl' ),
 			'type' => 'select',
-			'options' => couponxl_get_custom_list( 
-				'offer', 
-				array( 
+			'options' => couponxl_get_custom_list(
+				'offer',
+				array(
 					'meta_query' => array(
 						'key' => 'offer_type',
 						'value' => 'deal',
 						'couponxl' => '='
-					) 
-				) 
+					)
+				)
 			),
 			'desc' => __( 'Select deal for which the voucher is generated ( this is auto populated on voucher generation ).', 'couponxl' )
 		),
@@ -1576,7 +1582,7 @@ function couponxl_custom_meta_boxes(){
 			'type' => 'select',
 			'options' => couponxl_get_users_select(),
 			'desc' => __( 'Select deal submitter ( this is auto populated on voucher generation ).', 'couponxl' )
-		),		
+		),
 		array(
 			'id' => 'voucher_transaction_id',
 			'name' => __( 'Voucher Transaction ID', 'couponxl' ),
@@ -1621,13 +1627,13 @@ function couponxl_custom_meta_boxes(){
 				'paid' => __( 'Payment Sent', 'couponxl' )
 			),
 			'desc' => __( 'If the deal type is shared and the amount which goes to deal submitter is not sent this has value Payment Not Sent.', 'couponxl' )
-		),		
+		),
 	);
 	$meta_boxes[] = array(
 		'title' => __( 'Voucher information', 'couponxl' ),
 		'pages' => 'voucher',
 		'fields' => $voucher_meta,
-	);	
+	);
 
 	$post_meta_standard = array(
 		array(
@@ -1637,13 +1643,13 @@ function couponxl_custom_meta_boxes(){
 			'desc' => __( 'Input custom URL which will be embeded as the blog post media.', 'couponxl' )
 		),
 	);
-	
+
 	$meta_boxes[] = array(
 		'title' => __( 'Standard Post Information', 'couponxl' ),
 		'pages' => 'post',
 		'fields' => $post_meta_standard,
-	);	
-	
+	);
+
 	$post_meta_gallery = array(
 		array(
 			'id' => 'gallery_images',
@@ -1658,9 +1664,9 @@ function couponxl_custom_meta_boxes(){
 		'title' => __( 'Gallery Post Information', 'couponxl' ),
 		'pages' => 'post',
 		'fields' => $post_meta_gallery,
-	);	
-	
-	
+	);
+
+
 	$post_meta_audio = array(
 		array(
 			'id' => 'iframe_audio',
@@ -1668,7 +1674,7 @@ function couponxl_custom_meta_boxes(){
 			'type' => 'text',
 			'desc' => __( 'Input url to the audio source which will be media for the audio post format.', 'couponxl' )
 		),
-		
+
 		array(
 			'id' => 'audio_type',
 			'name' => __( 'Audio Type', 'couponxl' ),
@@ -1680,13 +1686,13 @@ function couponxl_custom_meta_boxes(){
 			'desc' => __( 'Select format of the audio URL ( Direct Link - for mp3, Embed - for the links from SoundCloud, MixCloud,... ).', 'couponxl' )
 		),
 	);
-	
+
 	$meta_boxes[] = array(
 		'title' => __( 'Audio Post Information', 'couponxl' ),
 		'pages' => 'post',
 		'fields' => $post_meta_audio,
 	);
-	
+
 	$post_meta_video = array(
 		array(
 			'id' => 'video',
@@ -1700,18 +1706,18 @@ function couponxl_custom_meta_boxes(){
 			'type' => 'select',
 			'options' => array(
 				'remote' => __( 'Embed', 'couponxl' ),
-				'self' => __( 'Direct Link', 'couponxl' ),				
+				'self' => __( 'Direct Link', 'couponxl' ),
 			),
 			'desc' => __( 'Select format of the video URL ( Direct Link - for ogg, mp4..., Embed - for the links from YouTube, Vimeo,... ).', 'couponxl' )
 		),
 	);
-	
+
 	$meta_boxes[] = array(
 		'title' => __( 'Video Post Information', 'couponxl' ),
 		'pages' => 'post',
 		'fields' => $post_meta_video,
 	);
-	
+
 	$post_meta_quote = array(
 		array(
 			'id' => 'blockquote',
@@ -1726,12 +1732,12 @@ function couponxl_custom_meta_boxes(){
 			'desc' => __( 'Input quoted person\'s name for the quote post format.', 'couponxl' )
 		),
 	);
-	
+
 	$meta_boxes[] = array(
 		'title' => __( 'Quote Post Information', 'couponxl' ),
 		'pages' => 'post',
 		'fields' => $post_meta_quote,
-	);	
+	);
 
 	$post_meta_link = array(
 		array(
@@ -1741,7 +1747,7 @@ function couponxl_custom_meta_boxes(){
 			'desc' => __( 'Input link as blog media for the link post format.', 'couponxl' )
 		),
 	);
-	
+
 	$meta_boxes[] = array(
 		'title' => __( 'Link Post Information', 'couponxl' ),
 		'pages' => 'post',
@@ -1761,7 +1767,7 @@ function couponxl_hex2rgb( $hex ) {
 	$r = hexdec(substr($hex,0,2));
 	$g = hexdec(substr($hex,2,2));
 	$b = hexdec(substr($hex,4,2));
-	return $r.", ".$g.", ".$b; 
+	return $r.", ".$g.", ".$b;
 }
 
 /* format remaining time */
@@ -1770,7 +1776,7 @@ function couponxl_remaining_time( $expire_timestamp, $left_red = 'right' ){
 		$diff = $expire_timestamp - current_time( 'timestamp' );
 
 		if( $diff > 0 ){
-		
+
 			$secondsInAMinute = 60;
 			$secondsInAnHour  = 60 * $secondsInAMinute;
 			$secondsInADay    = 24 * $secondsInAnHour;
@@ -1788,8 +1794,8 @@ function couponxl_remaining_time( $expire_timestamp, $left_red = 'right' ){
 
 			/* extract the remaining seconds */
 			$remainingSeconds = $minuteSeconds % $secondsInAMinute;
-			$seconds = ceil( $remainingSeconds );	
-		
+			$seconds = ceil( $remainingSeconds );
+
 			if( $days > 0 ){
 				if( $days == 1 ){
 					$remaining = '1 '.__( 'day', 'couponxl' );
@@ -1830,7 +1836,7 @@ function couponxl_remaining_time( $expire_timestamp, $left_red = 'right' ){
 	else{
 		$remaining = __( 'Unlimited Time', 'couponxl' );
 	}
-	
+
 	if( $left_red == 'right' ){
 		return __( 'Expires in: ', 'couponxl' ).'<span class="red-meta">'.$remaining.'</span>';
 	}
@@ -1872,17 +1878,17 @@ add_action('wp_ajax_nopriv_register_click', 'couponxl_register_click');
 function couponxl_save_post_meta( $post_id, $post ){
 	if( $post->post_type == 'offer' ){
 		$post_type = get_post_type_object( $post->post_type );
-		
+
 		/* Check if the current user has permission to edit the post. */
 		if ( !current_user_can( $post_type->cap->edit_post, $post_id ) ){
 			return $post_id;
 		}
-		
+
 		/* Check autosave */
 		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
 			return $post_id;
 		}
-		
+
 		$meta_value = get_post_meta( $post_id, 'offer_clicks', true );
 		if( empty( $meta_value ) ){
 			add_post_meta( $post_id, 'offer_clicks', '0', true );
@@ -1893,7 +1899,7 @@ add_action( 'save_post', 'couponxl_save_post_meta', 10, 2 );
 
 /* custom walker class to create main top and bottom navigation */
 class couponxl_walker extends Walker_Nav_Menu {
-  
+
 	/**
 	* @see Walker::start_lvl()
 	* @since 3.0.0
@@ -1929,16 +1935,16 @@ class couponxl_walker extends Walker_Nav_Menu {
 		*/
 		if ( strcasecmp( $item->attr_title, 'divider' ) == 0 && $depth === 1 ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
-		} 
+		}
 		else if ( strcasecmp( $item->title, 'divider') == 0 && $depth === 1 ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
-		} 
+		}
 		else if ( strcasecmp( $item->attr_title, 'dropdown-header') == 0 && $depth === 1 ) {
 			$output .= $indent . '<li role="presentation" class="dropdown-header">' . esc_attr( $item->title );
-		} 
+		}
 		else if ( strcasecmp($item->attr_title, 'disabled' ) == 0 ) {
 			$output .= $indent . '<li role="presentation" class="disabled"><a href="#">' . esc_attr( $item->title ) . '</a>';
-		} 
+		}
 		else {
 
 			$mega_menu_custom = get_post_meta( $item->ID, 'mega-menu-set', true );
@@ -1950,11 +1956,11 @@ class couponxl_walker extends Walker_Nav_Menu {
 			}
 			$classes[] = 'menu-item-' . $item->ID;
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-			
+
 			if ( $args->has_children ){
 				$class_names .= ' dropdown';
 			}
-			
+
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
@@ -1973,7 +1979,7 @@ class couponxl_walker extends Walker_Nav_Menu {
 				$atts['class']	= 'dropdown-toggle';
 				$atts['data-hover']	= 'dropdown';
 				$atts['aria-haspopup']	= 'true';
-			} 
+			}
 
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
 
@@ -2027,7 +2033,7 @@ class couponxl_walker extends Walker_Nav_Menu {
 				$item_output .= '</a>';
 			}
 			$item_output .= $args->after;
-			
+
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}
 	}
@@ -2132,7 +2138,7 @@ add_filter( 'widget_tag_cloud_args', 'couponxl_custom_tag_cloud_widget' );
 
 /* format wp_link_pages so it has the right css applied to it */
 function couponxl_link_pages(){
-	$post_pages = wp_link_pages( 
+	$post_pages = wp_link_pages(
 		array(
 			'before' 		   => '',
 			'after' 		   => '',
@@ -2140,20 +2146,20 @@ function couponxl_link_pages(){
 			'link_after'       => '</span>',
 			'next_or_number'   => 'number',
 			'nextpagelink'     => __( '&raquo;', 'couponxl' ),
-			'previouspagelink' => __( '&laquo;', 'couponxl' ),			
+			'previouspagelink' => __( '&laquo;', 'couponxl' ),
 			'separator'        => ' ',
 			'echo'			   => 0
-		) 
+		)
 	);
 	/* format pages that are not current ones */
 	$post_pages = str_replace( '<a', '<li><a', $post_pages );
 	$post_pages = str_replace( '</span></a>', '</a></li>', $post_pages );
 	$post_pages = str_replace( '><span>', '>', $post_pages );
-	
+
 	/* format current page */
 	$post_pages = str_replace( '<span>', '<li class="active"><a href="javascript:;">', $post_pages );
 	$post_pages = str_replace( '</span>', '</a></li>', $post_pages );
-	
+
 	return $post_pages;
 }
 
@@ -2218,7 +2224,7 @@ function couponxl_the_excerpt(){
 		$excerpt = substr( $excerpt, 0, strripos ( $excerpt, " " ) );
 		$excerpt = $excerpt . '...' ;
 	}
-	
+
 	return '<p>'.$excerpt.'</p>';
 }
 
@@ -2232,7 +2238,7 @@ function couponxl_categories_list(){
 			$categories[] = '<a href="'.esc_url( get_category_link( $category->term_id ) ).'">'.$category->name.'</a>';
 		}
 	}
-	
+
 	return join( ', ', $categories );
 }
 
@@ -2254,13 +2260,13 @@ function couponxl_format_pagination( $page_links ){
 				else{
 					$page_link = preg_replace( '#(&\\#038\\;'.$couponxl_slugs['coupon'].'|&'.$couponxl_slugs['coupon'].')=(.*?)&#i', '&', $page_link );
 					$page_link = preg_replace( '#(&\\#038\\;'.$couponxl_slugs['coupon'].'|&'.$couponxl_slugs['coupon'].')=(.*?)\'#i', '\'', $page_link );
-				}				
+				}
 				$list .= '<li>'.$page_link.'</li>';
 			}
-			
+
 		}
 	}
-	
+
 	return $list;
 }
 
@@ -2284,13 +2290,13 @@ function couponxl_new_excerpt_more( $more ) {
 /* create options for the select box in the category icon select */
 function couponxl_icons_list( $value ){
 	$icons_list = couponxl_awesome_icons_list();
-	
+
 	$select_data = '';
-	
+
 	foreach( $icons_list as $key => $label){
 		$select_data .= '<option value="'.esc_attr( $key ).'" '.( $value == $key ? 'selected="selected"' : '' ).'>'.$label.'</option>';
 	}
-	
+
 	return $select_data;
 }
 
@@ -2358,7 +2364,7 @@ add_action('wp_ajax_nopriv_contact', 'couponxl_send_contact');
 
 function couponxl_send_subscription( $email = '' ){
 	$email = !empty( $email ) ? $email : $_POST["email"];
-	$response = array();	
+	$response = array();
 	if( filter_var( $email, FILTER_VALIDATE_EMAIL ) ){
 		require_once( locate_template( 'includes/mailchimp.php' ) );
 		$chimp_api = couponxl_get_option("mail_chimp_api");
@@ -2369,7 +2375,7 @@ function couponxl_send_subscription( $email = '' ){
 				'id'                => $chimp_list_id,
 				'email'             => array( 'email' => $email )
 			));
-			
+
 			if( $result === false) {
 				$response['error'] = __( 'There was an error contacting the API, please try again.', 'couponxl' );
 			}
@@ -2379,7 +2385,7 @@ function couponxl_send_subscription( $email = '' ){
 			else{
 				$response['success'] = __( 'You have successfully subscribed to the newsletter.', 'couponxl' );
 			}
-			
+
 		}
 		else{
 			$response['error'] = __( 'API data are not yet set.', 'couponxl' );
@@ -2388,7 +2394,7 @@ function couponxl_send_subscription( $email = '' ){
 	else{
 		$response['error'] = __( 'Email is empty or invalid.', 'couponxl' );
 	}
-	
+
 	echo json_encode( $response );
 	die();
 }
@@ -2400,11 +2406,11 @@ add_action('wp_ajax_nopriv_subscribe', 'couponxl_send_subscription');
 function couponxl_popular_stores( $limit ){
 	global $wpdb;
 	$popular_stores = array();
-	$query = "SELECT posts.ID, postmeta1.meta_value, SUM(postmeta2.meta_value) as clicks_sum 
+	$query = "SELECT posts.ID, postmeta1.meta_value, SUM(postmeta2.meta_value) as clicks_sum
 				FROM {$wpdb->posts} as posts
 				INNER JOIN {$wpdb->postmeta} as postmeta1 ON posts.ID = postmeta1.meta_value
-				INNER JOIN {$wpdb->postmeta} as postmeta2 ON postmeta1.post_id = postmeta2.post_id 
-				WHERE postmeta1.meta_key = 'offer_store' AND    postmeta2.meta_key = 'offer_clicks' 
+				INNER JOIN {$wpdb->postmeta} as postmeta2 ON postmeta1.post_id = postmeta2.post_id
+				WHERE postmeta1.meta_key = 'offer_store' AND    postmeta2.meta_key = 'offer_clicks'
 				GROUP BY postmeta1.meta_value ORDER BY clicks_sum DESC LIMIT {$limit}";
 	$results = $wpdb->get_results( $query );
 	if( !empty( $results ) ){
@@ -2429,12 +2435,12 @@ add_filter( 'video_embed_html', 'couponxl_embed_html' ); // Jetpack
 
 function couponxl_comments( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
-	$add_below = ''; 
+	$add_below = '';
 	?>
 	<!-- comment-1 -->
 	<div class="media <?php echo $depth > 1 ? 'left-padding' : ''; ?>">
 		<div class="comment-inner">
-			<?php 
+			<?php
 			$avatar = couponxl_get_avatar_url( get_avatar( $comment, 75 ) );
 			if( !empty( $avatar ) ): ?>
 				<a class="pull-left" href="javascript:;">
@@ -2448,36 +2454,36 @@ function couponxl_comments( $comment, $args, $depth ) {
 				</div>
 				<div class="pull-right">
 					<?php
-						comment_reply_link( 
-							array_merge( 
-								$args, 
-								array( 
-									'reply_text' => '<span class="fa fa-reply"></span>', 
-									'add_below' => $add_below, 
-									'depth' => $depth, 
-									'max_depth' => $args['max_depth'] 
-								) 
-							) 
+						comment_reply_link(
+							array_merge(
+								$args,
+								array(
+									'reply_text' => '<span class="fa fa-reply"></span>',
+									'add_below' => $add_below,
+									'depth' => $depth,
+									'max_depth' => $args['max_depth']
+								)
+							)
 						);
 					?>
 				</div>
 				<div class="clearfix"></div>
-				<?php 
+				<?php
 				if ($comment->comment_approved != '0'){
 				?>
 					<p><?php echo get_comment_text(); ?></p>
-				<?php 
+				<?php
 				}
 				else{ ?>
 					<p><?php _e('Your comment is awaiting moderation.', 'couponxl'); ?></p>
 				<?php
 				}
-				?>				
+				?>
 			</div>
 		</div>
 	</div>
-	<!-- .comment-1 -->	
-	<?php  
+	<!-- .comment-1 -->
+	<?php
 }
 
 function couponxl_end_comments(){
@@ -2488,9 +2494,9 @@ function couponxl_end_comments(){
 function couponxl_has_media(){
 	$post_format = get_post_format();
 	switch( $post_format ){
-		case 'aside' : 
+		case 'aside' :
 			return has_post_thumbnail() ? true : false; break;
-			
+
 		case 'audio' :
 			$iframe_audio = get_post_meta( get_the_ID(), 'iframe_audio', true );
 			if( !empty( $iframe_audio ) ){
@@ -2503,27 +2509,27 @@ function couponxl_has_media(){
 				return false;
 			}
 			break;
-			
-		case 'chat' : 
+
+		case 'chat' :
 			return has_post_thumbnail() ? true : false; break;
-		
+
 		case 'gallery' :
 			$post_meta = get_post_custom();
-			$gallery_images = couponxl_smeta_images( 'gallery_images', get_the_ID(), array() );		
+			$gallery_images = couponxl_smeta_images( 'gallery_images', get_the_ID(), array() );
 			if( !empty( $gallery_images ) ){
 				return true;
 			}
 			else if( has_post_thumbnail() ){
 				return true;
-			}			
+			}
 			else{
 				return false;
 			}
 			break;
-			
+
 		case 'image':
 			return has_post_thumbnail() ? true : false; break;
-			
+
 		case 'link' :
 			$link = get_post_meta( get_the_ID(), 'link', true );
 			if( !empty( $link ) ){
@@ -2533,7 +2539,7 @@ function couponxl_has_media(){
 				return false;
 			}
 			break;
-			
+
 		case 'quote' :
 			$blockquote = get_post_meta( get_the_ID(), 'blockquote', true );
 			$cite = get_post_meta( get_the_ID(), 'cite', true );
@@ -2547,10 +2553,10 @@ function couponxl_has_media(){
 				return false;
 			}
 			break;
-		
+
 		case 'status' :
 			return has_post_thumbnail() ? true : false; break;
-	
+
 		case 'video' :
 			$video = get_post_meta( get_the_ID(), 'video', true );
 			if( !empty( $video ) ){
@@ -2563,8 +2569,8 @@ function couponxl_has_media(){
 				return false;
 			}
 			break;
-			
-		default: 
+
+		default:
 			$iframe_standard = get_post_meta( get_the_ID(), 'iframe_standard', true );
 			if( !empty( $iframe_standard ) ){
 				return true;
@@ -2576,7 +2582,7 @@ function couponxl_has_media(){
 				return false;
 			}
 			break;
-	}	
+	}
 }
 
 function couponxl_store_logo( $store_id = '', $echo = true ){
@@ -2609,14 +2615,14 @@ function couponxl_calculate_owner_part( $post_id = '' ){
 			$deal_owner_price = couponxl_get_option( 'deal_owner_price_shared' );
 		}
 		else{
-			$deal_owner_price = couponxl_get_option( 'deal_owner_price_not_shared' );	
+			$deal_owner_price = couponxl_get_option( 'deal_owner_price_not_shared' );
 		}
 	}
 
 	if( stristr( $deal_owner_price, '%' ) ){
 		$deal_owner_price = str_replace( '%', '', $deal_owner_price );
 		$deal_owner_price = round( ($deal_owner_price / 100) * $deal_sale_price, 2 );
-	}	
+	}
 
 	return $deal_owner_price;
 }
@@ -2645,9 +2651,9 @@ function couponxl_get_deal_price( $post_id = '' ){
 
 	$deal_type = get_post_meta( $post_id, 'deal_type', true );
 	$deal_price = get_post_meta( $post_id, 'deal_price', true );
-	$deal_sale_price = get_post_meta( $post_id, 'deal_sale_price', true );	
+	$deal_sale_price = get_post_meta( $post_id, 'deal_sale_price', true );
 
-	if(empty($deal_sale_price)){		
+	if(empty($deal_sale_price)){
 		return;
 	}
 
@@ -2656,7 +2662,7 @@ function couponxl_get_deal_price( $post_id = '' ){
 	}
 	else{
 		$owned_part = couponxl_calculate_owner_part( $post_id );
-		return '<h2 class="price">'.couponxl_format_price_number( $owned_part ).'</h2>';	
+		return '<h2 class="price">'.couponxl_format_price_number( $owned_part ).'</h2>';
 	}
 }
 
@@ -2710,25 +2716,25 @@ function couponxl_save_ratings( $post_id ) {
 		delete_post_meta( $post_id, 'couponxl_rating' );
 		delete_post_meta( $post_id, 'couponxl_average_rate' );
 		$sum = 0;
-		foreach( $ratings as $rate ){			
+		foreach( $ratings as $rate ){
 			if( !strpos( $rate, "|" ) ){
 				$rate = '0|'.$rate;
 			}
 			$temp = explode( "|", $rate );
 			$sum += $temp[1];
-			$wpdb->insert( 
+			$wpdb->insert(
 				$wpdb->postmeta,
-				array( 
+				array(
 					'post_id' => $post_id,
 					'meta_key' => 'couponxl_rating',
 					'meta_value' => $rate
-				), 
-				array( 
+				),
+				array(
 					'%d',
 					'%s',
 					'%s'
-				) 
-			);			
+				)
+			);
 		}
 		add_post_meta( $post_id, 'couponxl_average_rate', $sum / sizeof( $ratings ) );
 	}
@@ -2803,7 +2809,7 @@ function couponxl_get_organized( $taxonomy ){
 			case 'count' : usort( $taxonomy_organized, "couponxl_organized_sort_count_asc" ); break;
 			default : usort( $taxonomy_organized, "couponxl_organized_sort_name_asc" ); break;
 		}
-		
+
 	}
 	else{
 		switch( $sortby ){
@@ -2868,7 +2874,7 @@ function couponxl_display_select_tree( $cat, $selected = '', $level = 0 ){
 
 
 function couponxl_display_indent_select_tree( $term, $categories, $indent ){
-	echo '<option style="padding-left:'.( 10*$indent ).'px;" value="'.esc_attr( $term->slug ).'" '.( in_array( $term->slug, $categories ) ? 'selected="selected"' : '' ).'>'.$term->name.'</option>';	
+	echo '<option style="padding-left:'.( 10*$indent ).'px;" value="'.esc_attr( $term->slug ).'" '.( in_array( $term->slug, $categories ) ? 'selected="selected"' : '' ).'>'.$term->name.'</option>';
 	if( !empty( $term->children ) ){
 		$indent++;
 		foreach( $term->children as $key => $child ){
@@ -2887,7 +2893,7 @@ function couponxl_display_tree( $cat, $taxonomy ){
 				<span class="count">'.$child->count.'</span>';
 				if( !empty( $child->children ) ){
 					couponxl_display_tree( $child, $taxonomy );
-				}				
+				}
 		echo '</li>';
 	}
     echo '</ul>';
@@ -2905,7 +2911,7 @@ function couponxl_ucfirst( $string ){
 
 
 
-function couponxl_search_options(){	
+function couponxl_search_options(){
 	$search_by = esc_sql( $_POST['search_by'] );
 	$value = mb_strtolower( esc_sql( $_POST['val'] ) );
 	global $wpdb, $couponxl_slugs;
@@ -2956,7 +2962,7 @@ function couponxl_search_options(){
 				'name' => __( 'We could not find that store', 'couponxl' ),
 				'slug' => '',
 			);
-		}		
+		}
 	}
 	echo json_encode( $list );
 	die();
@@ -2994,7 +3000,7 @@ function couponxl_show_code(){
 		else if( $coupon_type == 'sale' ){
 			$coupon_sale = get_post_meta( $offer_id, 'coupon_sale', true );
 			echo '<a class="coupon-code-modal" href="'.esc_url( $coupon_sale ).'" target="_blank">'.__( 'SEE SALE', 'couponxl' ).'</a>';
-		}		
+		}
 		?>
 
         <ul class="list-unstyled list-inline store-social-networks">
@@ -3012,16 +3018,16 @@ function couponxl_show_code(){
                 <a href="https://plus.google.com/share?url=<?php echo urlencode( get_permalink( $offer_id ) ) ?>" class="share" target="_blank">
                     <i class="fa fa-google-plus"></i>
                 </a>
-            </li>                     
+            </li>
         </ul>
 
-		<?php 
+		<?php
 		$coupon_modal_content = couponxl_get_option( 'coupon_modal_content' );
 		if( $coupon_modal_content == 'content' ){
-			echo apply_filters( 'the_content', $offer->post_content );	
+			echo apply_filters( 'the_content', $offer->post_content );
 		}
 		else{
-			echo $offer->post_excerpt;	
+			echo $offer->post_excerpt;
 		}
 		?>
 
@@ -3049,7 +3055,7 @@ function couponxl_deal_voucher_count( $offer_id = '' ){
 			$offer_id
 		)
 	);
-	$deal_vouchers = array_shift( $deal_vouchers );	
+	$deal_vouchers = array_shift( $deal_vouchers );
 
 	return $deal_vouchers->vouchers;
 }
@@ -3092,7 +3098,7 @@ function couponxl_generate_paypal_link( $amount, $title, $desc, $uniq, $cancelUr
 		'signature' => couponxl_get_option( 'paypal_signature' ),
 		'cancelUrl' => $cancelUrl,
 		'returnUrl' => $returnUrl,
-	));	
+	));
 
 	$pdata = array(
 		'PAYMENTREQUEST_0_PAYMENTACTION' => "SALE",
@@ -3161,12 +3167,12 @@ function couponxl_skrill_form( $amount, $currency, $offer_id, $offer_title, $ret
 	return '
 	<form class="hidden" action="https://www.moneybookers.com/app/payment.pl" method="post">
 		<input type="hidden" name="pay_to_email" value="'.esc_attr( couponxl_get_option( 'skrill_owner_mail' ) ).'"/>
-		<input type="hidden" name="status_url" value="'.esc_url( $status_url ).'"/> 
+		<input type="hidden" name="status_url" value="'.esc_url( $status_url ).'"/>
 		<input type="hidden" name="language" value="EN"/>
 		<input type="hidden" name="return_url" value="'.esc_url( $return_url ).'"/>
 		<input type="hidden" name="amount" value="'.esc_attr( $amount ).'"/>
-		<input type="hidden" name="currency" value="'.esc_attr( $currency ).'"/>	
-		<input type="hidden" name="detail1_text " value="'.esc_attr( $offer_title ).'"/>	
+		<input type="hidden" name="currency" value="'.esc_attr( $currency ).'"/>
+		<input type="hidden" name="detail1_text " value="'.esc_attr( $offer_title ).'"/>
 	</form>
 	';
 }
@@ -3189,9 +3195,9 @@ function couponxl_ideal_form( $amount, $currency, $offer_id, $offer_title, $retu
 		$form .= '</select>';
 		$form .= '<input type="hidden" name="currency" value="'.esc_attr( $currency ).'"/>
 				  <input type="hidden" name="return_url" value="'.esc_url( $return_url ).'"/>
-				  <input type="hidden" name="status_url" value="'.esc_url( $status_url ).'"/> 
-				  <input type="hidden" name="offer_id" value="'.esc_attr( $offer_id ).'"/> 
-				  <input type="hidden" name="action" value="ideal_link"/> 
+				  <input type="hidden" name="status_url" value="'.esc_url( $status_url ).'"/>
+				  <input type="hidden" name="offer_id" value="'.esc_attr( $offer_id ).'"/>
+				  <input type="hidden" name="action" value="ideal_link"/>
 				  </form>';
 	}
 
@@ -3199,7 +3205,7 @@ function couponxl_ideal_form( $amount, $currency, $offer_id, $offer_title, $retu
 }
 
 function couponxl_payu_form( $offer_id = '', $return_url = '', $is_submit = false ){
-	
+
 	if( empty( $offer_id ) ){
 		$offer_id = $_POST['offer_id'];
 	}
@@ -3222,7 +3228,7 @@ function couponxl_payu_form( $offer_id = '', $return_url = '', $is_submit = fals
 			}
 			else{
 				$amount = couponxl_get_option( 'deal_submit_price' );
-			}			
+			}
 		}
 		else{
 			$amount = couponxl_get_deal_amount( $offer_id );
@@ -3236,7 +3242,7 @@ function couponxl_payu_form( $offer_id = '', $return_url = '', $is_submit = fals
 		if( isset( $_POST['payu_phone'] ) ){
 			$phone_number = $_POST['payu_phone'];
 			update_user_meta( $buyer_id, 'phone_number', $phone_number );
-		}		
+		}
 		if( empty( $first_name ) || empty( $phone_number ) ){
 			$return = '
 				<form class="payu-form payu-additional">
@@ -3268,7 +3274,7 @@ function couponxl_payu_form( $offer_id = '', $return_url = '', $is_submit = fals
 
 			$hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
 			$hashVarsSeq = explode('|', $hashSequence);
-			$hash_string = '';	
+			$hash_string = '';
 			foreach($hashVarsSeq as $hash_var) {
 				$hash_string .= isset($values[$hash_var]) ? $values[$hash_var] : '';
 				$hash_string .= '|';
@@ -3284,8 +3290,8 @@ function couponxl_payu_form( $offer_id = '', $return_url = '', $is_submit = fals
 					<input type="hidden" name="firstname" value="'.esc_attr( $values['firstname'] ).'" />
 					<input type="hidden" name="email" value="'.esc_attr( $values['email'] ).'" />
 					<input type="hidden" name="surl" value="'.esc_url( $return_url ).'" />
-					<input type="hidden" name="furl" value="'.esc_url( $return_url ).'" />	
-					<input type="hidden" name="service_provider" value="payu_paisa" />	
+					<input type="hidden" name="furl" value="'.esc_url( $return_url ).'" />
+					<input type="hidden" name="service_provider" value="payu_paisa" />
 					<input type="hidden" name="key" value="'.esc_attr( $payu_merchant_key ).'" />
 					<input type="hidden" name="hash" value="'.$hash.'"/>
 					<input type="hidden" name="txnid" value="'.esc_attr( $values['txnid'] ).'" />
@@ -3310,7 +3316,7 @@ function couponxl_buy_pay_link( $offer_id, $buy_now, $generating, $permalink, $s
 	$payments_available = array();
 
 	$currency = couponxl_get_option( 'main_unit_abbr' );
-	
+
 	$pk_client_id = couponxl_get_option( 'pk_client_id' );
 	if( !empty( $pk_client_id ) ){
 		$payments_available['stripe'] = 'j';
@@ -3318,14 +3324,14 @@ function couponxl_buy_pay_link( $offer_id, $buy_now, $generating, $permalink, $s
 
 	$paypal_username = couponxl_get_option( 'paypal_username' );
 	if( !empty( $paypal_username ) ){
-		$response = couponxl_generate_paypal_link( 
-			$amount, 
-			$offer->post_title, 
-			$offer->post_excerpt, 
-			uniqid( '', true ), 
+		$response = couponxl_generate_paypal_link(
+			$amount,
+			$offer->post_title,
+			$offer->post_excerpt,
+			uniqid( '', true ),
 			$success_redirect,
 			$cancel_redirect
-		);				
+		);
 		$payments_available['paypal'] = !isset( $response['error'] ) ? $response['url'] : 'javascript:;';
 	}
 
@@ -3393,7 +3399,7 @@ function couponxl_buy_pay_link( $offer_id, $buy_now, $generating, $permalink, $s
 				$is_submit = true;
 			}
 			echo '<a href="javascript:;" class="'.( $btn ? 'btn' : '' ).'" class="payu-initiate">'.$buy_now.'</a>'.couponxl_payu_form( $offer_id, $return_url, $is_submit );
-		}		
+		}
 	}
 	else{
 		$modal = '';
@@ -3482,7 +3488,7 @@ function couponxl_generate_paypal_offer_link( $offer_id = '' ){
 				$permalink,
 				esc_url( add_query_arg( array( 'cancel' => 'true' ), $permalink ) ),
 				$permalink,
-				$amount			
+				$amount
 			);
 		}
 		else{
@@ -3528,7 +3534,7 @@ function couponxl_generate_voucher( $length = 10 ){
     	$random_string = couponxl_generate_voucher();
     }
     else{
-    	return $random_string;	
+    	return $random_string;
     }
 }
 
@@ -3563,7 +3569,7 @@ function couponxl_get_voucher_code( $offer, $transaction_id = '', $voucher_buyer
 				update_post_meta( $offer_id, 'deal_item_vouchers', join( "\n", $deal_item_vouchers ) );
 			}
 			else{
-				$voucher_code = couponxl_generate_voucher();		
+				$voucher_code = couponxl_generate_voucher();
 			}
 		}
 		else{
@@ -3587,7 +3593,7 @@ function couponxl_get_voucher_code( $offer, $transaction_id = '', $voucher_buyer
 		}
 		update_post_meta( $voucher_id, 'voucher_deal', $offer_id );
 		update_post_meta( $voucher_id, 'voucher_code', $voucher_code );
-		update_post_meta( $voucher_id, 'voucher_status', 'not_used' );		
+		update_post_meta( $voucher_id, 'voucher_status', 'not_used' );
 		update_post_meta( $voucher_id, 'voucher_payer_id', isset( $_GET['PayerID'] ) ? $_GET['PayerID'] : '' );
 		update_post_meta( $voucher_id, 'voucher_transaction_id', $transaction_id );
 		update_post_meta( $voucher_id, 'voucher_type', $voucher_type );
@@ -3595,11 +3601,11 @@ function couponxl_get_voucher_code( $offer, $transaction_id = '', $voucher_buyer
 		update_post_meta( $voucher_id, 'voucher_seller_share', $voucher_seller_share );
 		update_post_meta( $voucher_id, 'voucher_buyer_id', $voucher_buyer_id );
 		update_post_meta( $voucher_id, 'voucher_seller_id', $offer->post_author );
-		update_post_meta( $voucher_id, 'voucher_payment_status', $voucher_payment_status );	
+		update_post_meta( $voucher_id, 'voucher_payment_status', $voucher_payment_status );
 
 	    $headers   = array();
 	    $headers[] = "MIME-Version: 1.0";
-	    $headers[] = "Content-Type: text/html; charset=UTF-8"; 
+	    $headers[] = "Content-Type: text/html; charset=UTF-8";
 
 		$user = get_userdata($voucher_buyer_id);
 		$to = $user->user_email;
@@ -3645,11 +3651,11 @@ function couponxl_do_express_checkout( $permalink, $title, $amount ){
 		'signature' => couponxl_get_option( 'paypal_signature' ),
 		'cancelUrl' => add_query_arg( array( 'cancel' => 'true' ), $permalink ),
 		'returnUrl' => $permalink,
-	));	
+	));
 
 	$pdata = array(
 		'TOKEN' => $_GET['token'],
-		'PAYERID' => $_GET['PayerID'],				
+		'PAYERID' => $_GET['PayerID'],
 		'PAYMENTREQUEST_0_PAYMENTACTION' => "SALE",
 		'L_PAYMENTREQUEST_0_NAME0' => $title,
 		'L_PAYMENTREQUEST_0_NUMBER0' => uniqid( '', true ),
@@ -3691,7 +3697,7 @@ function couponxl_check_submission( $offer_id ){
 	}
 	else{
 		return '<div class="alert alert-danger">'.__( 'There was an error processing yor request. Please contact administration of the site with this error message: <br /><strong>', 'couponxl' ).$response['error'].'</strong></div>';
-	}	
+	}
 }
 
 function couponxl_check_shopping(){
@@ -3776,7 +3782,7 @@ function couponxl_check_shopping(){
 }
 
 function couponxl_verify_skrill(){
-	if( isset( $_POST['merchant_id'] ) ){	
+	if( isset( $_POST['merchant_id'] ) ){
 		$skrill_secret_word = couponxl_get_option( 'skrill_secret_word' );
 		$concatFields = $_POST['merchant_id']
 		    .$_POST['transaction_id']
@@ -3792,7 +3798,7 @@ function couponxl_verify_skrill(){
 				if( isset( $_GET['submit_offer'] ) ){
 					update_post_meta( $_GET['id_offer'], 'offer_initial_payment', 'paid' );
 				}
-				else{			
+				else{
 		    		$offer = get_post( $_GET['id_offer'] );
 		    		if( !empty( $offer ) ){
 		    			$buyer_id = $_GET['buyer_id'];
@@ -3832,7 +3838,7 @@ function couponxl_process_stripe( $amount, $token ){
 function couponxl_submit_with_stripe(){
 	$token = $_POST['token'];
 	$offer_id = $_POST['offer_id'];
-	$offer = get_post( $offer_id );	
+	$offer = get_post( $offer_id );
 	$payment_for = isset( $_POST['payment_for'] ) ? $_POST['payment_for'] : '';
 
 	if( !empty( $offer ) ){
@@ -3842,13 +3848,13 @@ function couponxl_submit_with_stripe(){
 		}
 		else{
 			$amount = couponxl_get_option( 'deal_submit_price' );
-		}		
+		}
 		$response = couponxl_process_stripe( $amount, $token );
 	    if ( is_wp_error( $response ) ) {
 	        $error_message = $response->get_error_message();
 	        echo '<div class="alert alert-danger">'.__( 'Something went wrong: ', 'couponxl' ).$error_message.'</div>';
-	    } 
-	    else{           
+	    }
+	    else{
 	        $data = json_decode( $response['body'], true );
 	        if( empty( $data['error'] ) ){
 	            if( $payment_for == 'submission-list' ){
@@ -3857,16 +3863,16 @@ function couponxl_submit_with_stripe(){
 	            }
 	            else{
 	            	update_post_meta( $offer_id, 'offer_initial_payment', 'paid' );
-	            	echo '<div class="alert alert-success">'.__( 'Your offer is submited and it will be reviewed as soon as possible.', 'couponxl' ).'</div>';	
+	            	echo '<div class="alert alert-success">'.__( 'Your offer is submited and it will be reviewed as soon as possible.', 'couponxl' ).'</div>';
 	            }
 	        }
 	        else{
 	        	echo '<div class="alert alert-danger">'.$data['error_description'].'</div>';
 	        }
-	    } 		
+	    }
 	}
 	die();
-	
+
 }
 add_action('wp_ajax_submit_with_stripe', 'couponxl_submit_with_stripe');
 add_action('wp_ajax_nopriv_submit_with_stripe', 'couponxl_submit_with_stripe');
@@ -3885,8 +3891,8 @@ function couponxl_pay_with_stripe(){
 		    if ( is_wp_error( $response ) ) {
 		        $error_message = $response->get_error_message();
 		        echo '<div class="alert alert-danger">'.__( 'Something went wrong: ', 'couponxl' ).$error_message.'</div>';
-		    } 
-		    else{           
+		    }
+		    else{
 		        $data = json_decode( $response['body'], true );
 		        if( empty( $data['error'] ) ){
 		            $voucher_code = couponxl_get_voucher_code( $offer );
@@ -3895,7 +3901,7 @@ function couponxl_pay_with_stripe(){
 		        else{
 		        	echo '<div class="alert alert-danger">'.$data['error_description'].'</div>';
 		        }
-		    } 		    
+		    }
 		}
 		else{
 			echo '<div class="alert alert-danger">'.__( 'Offer is not available, no charges are deducted from your card', 'couponxl' ).'</div>';
@@ -3925,7 +3931,7 @@ function couponxl_pay_with_ideal_link(){
 				$iDEAL = new Couponxl_Mollie_iDEAL_Payment ( $mollie_id );
 				if( couponxl_get_option( 'ideal_mode' ) == 'test' ){
 					$iDEAL->setTestmode(true);
-				}				
+				}
 
 				$payment = $iDEAL->createPayment( $bank_id, $amount*100,  __( 'Buying Deal', 'couonxl' ), $return_url, $status_url );
 
@@ -3939,7 +3945,7 @@ function couponxl_pay_with_ideal_link(){
 			}
 			else{
 				echo '<div class="alert alert-danger no-margin">'.__( 'Amount is empty', 'couponxl' ).'</div>';
-			}	    
+			}
 		}
 		else{
 			echo '<div class="alert alert-danger">'.__( 'Offer is not available', 'couponxl' ).'</div>';
@@ -3955,7 +3961,7 @@ function couponxl_submit_with_ideal(){
 	$bank_id = $_POST['bank_id'];
 	$return_url = $_POST['return_url'];
 	$status_url = $_POST['status_url'];
-	$offer = get_post( $offer_id );	
+	$offer = get_post( $offer_id );
 
 	if( !empty( $offer ) ){
 		$offer_type = get_post_meta( $offer_id, 'offer_type', true );
@@ -3964,14 +3970,14 @@ function couponxl_submit_with_ideal(){
 		}
 		else{
 			$amount = couponxl_get_option( 'deal_submit_price' );
-		}		
+		}
 
 		if( $amount ){
 			$mollie_id = couponxl_get_option( 'mollie_id' );
 			$iDEAL = new Couponxl_Mollie_iDEAL_Payment ( $mollie_id );
 			if( couponxl_get_option( 'ideal_mode' ) == 'test' ){
 				$iDEAL->setTestmode(true);
-			}			
+			}
 
 			$payment = $iDEAL->createPayment( $bank_id, $amount*100,  __( 'Submitting Offer', 'couonxl' ), $return_url, $status_url );
 
@@ -3982,22 +3988,22 @@ function couponxl_submit_with_ideal(){
 				echo '<div class="alert alert-danger no-margin">'.__( 'Could not retrive bank URL', 'couponxl' ).' '.$iDEAL->getErrorMessage().'</div>';
 			}
 
-		}	
+		}
 	}
 	die();
-	
+
 }
 add_action('wp_ajax_submit_with_ideal', 'couponxl_submit_with_ideal');
 add_action('wp_ajax_nopriv_submit_with_ideal', 'couponxl_submit_with_ideal');
 
 
 function couponxl_verify_ideal(){
-	if( isset( $_GET['transaction_id'] ) ){	
+	if( isset( $_GET['transaction_id'] ) ){
 		$mollie_id = couponxl_get_option( 'mollie_id' );
 		$iDEAL = new Couponxl_Mollie_iDEAL_Payment( $mollie_id );
 		if( couponxl_get_option( 'ideal_mode' ) == 'test' ){
 			$iDEAL->setTestmode(true);
-		}		
+		}
 		$iDEAL->checkPayment($_GET['transaction_id']);
 
 		if ( $iDEAL->getPaidStatus() ){
@@ -4005,7 +4011,7 @@ function couponxl_verify_ideal(){
 				if( isset( $_GET['submit_offer'] ) ){
 					update_post_meta( $_GET['id_offer'], 'offer_initial_payment', 'paid' );
 				}
-				else{			
+				else{
 		    		$offer = get_post( $_GET['id_offer'] );
 		    		if( !empty( $offer ) ){
 		    			$buyer_id = $_GET['buyer_id'];
@@ -4024,12 +4030,12 @@ add_action('init', 'couponxl_verify_ideal', 0 );
 
 add_filter( 'manage_edit-store_columns', 'couponxl_custom_store_columns' );
 function couponxl_custom_store_columns($columns) {
-	$columns = 
-		array_slice($columns, 0, count($columns) - 1, true) + 
+	$columns =
+		array_slice($columns, 0, count($columns) - 1, true) +
 		array(
 			"store_logo" => __( 'Store Logo', 'coupon' ),
-		) + 
-		array_slice($columns, count($columns) - 1, count($columns) - 1, true) ;	
+		) +
+		array_slice($columns, count($columns) - 1, count($columns) - 1, true) ;
 	return $columns;
 }
 
@@ -4045,8 +4051,8 @@ function couponxl_custom_store_columns_populate( $column, $post_id ) {
 /* CUSTOM OFFER COLUMNS */
 add_filter( 'manage_edit-offer_columns', 'couponxl_custom_offer_columns' );
 function couponxl_custom_offer_columns($columns) {
-	$columns = 
-		array_slice($columns, 0, count($columns) - 1, true) + 
+	$columns =
+		array_slice($columns, 0, count($columns) - 1, true) +
 		array(
 			"offer_store" => __( 'Store', 'coupon' ),
 			"offer_type" => __( 'Type', 'coupon' ),
@@ -4054,8 +4060,8 @@ function couponxl_custom_offer_columns($columns) {
 			"offer_average_rate" => __( 'Ratings', 'coupon' ),
 			"offer_in_slider" => __( 'In Slider', 'coupon' ),
 			"offer_clicks" => __( 'Clicks', 'coupon' )
-		) + 
-		array_slice($columns, count($columns) - 1, count($columns) - 1, true) ;	
+		) +
+		array_slice($columns, count($columns) - 1, count($columns) - 1, true) ;
 	return $columns;
 }
 
@@ -4102,7 +4108,7 @@ function couponxl_custom_offer_columns_populate( $column, $post_id ) {
 				_e( 'No', 'couponxl' );
 			}
 			break;
-		case 'offer_clicks' : 
+		case 'offer_clicks' :
 			echo get_post_meta( $post_id, 'offer_clicks', true );
 			break;
 	}
@@ -4127,7 +4133,7 @@ function couponxl_sorting_offer_columns($columns) {
 add_action( 'pre_get_posts', 'couponxl_sort_offer_columns' );
 function couponxl_sort_offer_columns( $query ){
 	if( ! is_admin() ){
-		return;	
+		return;
 	}
 
 	$orderby = $query->get( 'orderby');
@@ -4147,8 +4153,8 @@ function couponxl_sort_offer_columns( $query ){
 /* VOUCHER COLUMNS */
 add_filter( 'manage_edit-voucher_columns', 'couponxl_custom_voucher_columns' );
 function couponxl_custom_voucher_columns($columns) {
-	$columns = 
-		array_slice($columns, 0, count($columns) - 1, true) + 
+	$columns =
+		array_slice($columns, 0, count($columns) - 1, true) +
 		array(
 			"voucher_deal" => __( 'Deal', 'coupon' ),
 			"voucher_code" => __( 'Voucher Code', 'coupon' ),
@@ -4156,8 +4162,8 @@ function couponxl_custom_voucher_columns($columns) {
 			"voucher_seller_share" => __( 'Seller Share', 'coupon' ),
 			"voucher_buyer_id" => __( 'Buyer', 'coupon' ),
 			"voucher_payment_status" => __( 'Pay To Seller', 'coupon' ),
-		) + 
-		array_slice($columns, count($columns) - 1, count($columns) - 1, true) ;	
+		) +
+		array_slice($columns, count($columns) - 1, count($columns) - 1, true) ;
 	return $columns;
 }
 
@@ -4183,7 +4189,7 @@ function couponxl_custom_voucher_columns_populate( $column, $post_id ) {
 		case 'voucher_seller_share' :
 			echo couponxl_format_price_number( get_post_meta( $post_id, 'voucher_seller_share', true ) );
 			break;
-		case 'voucher_buyer_id' : 
+		case 'voucher_buyer_id' :
 			$voucher_buyer_id = get_post_meta( $post_id, 'voucher_buyer_id', true );
 			$user_data = get_userdata( $voucher_buyer_id );
 			if( $user_data ){
@@ -4228,7 +4234,7 @@ function couponxl_sorting_voucher_columns($columns) {
 add_action( 'pre_get_posts', 'couponxl_sort_voucher_columns' );
 function couponxl_sort_voucher_columns( $query ){
 	if( ! is_admin() ){
-		return;	
+		return;
 	}
 
 	$orderby = $query->get( 'orderby');
@@ -4254,7 +4260,7 @@ function couponxl_pay_sellers( $bulk_posts = array(), $echo = 'yes' ){
 		));
 
 		$pdata = array(
-			'RECEIVERTYPE' => 'EmailAddress',				
+			'RECEIVERTYPE' => 'EmailAddress',
 			'CURRENCYCODE' => couponxl_get_option( 'main_unit_abbr' ),
 		);
 		$counter = 0;
@@ -4304,7 +4310,7 @@ function couponxl_pay_sellers( $bulk_posts = array(), $echo = 'yes' ){
 		    }
 		    else{
 		        $data = json_decode( $post_response['body'], true );
-		        if( empty( $data['error'] ) ){		        	
+		        if( empty( $data['error'] ) ){
 		        	if( !empty( $payment_data['voucher_ids'] ) ){
 		        		foreach( $payment_data['voucher_ids'] as $voucher_id ){
 		        			update_post_meta( $voucher_id, 'voucher_payment_status', 'paid' );
@@ -4314,7 +4320,7 @@ function couponxl_pay_sellers( $bulk_posts = array(), $echo = 'yes' ){
 		        }
 		        else{
 		        	$response['error'][] =  $payment_data['user'].' - '.$data['error']['message'];
-		        }		    	
+		        }
 		    }
 		}
 	}
@@ -4353,7 +4359,7 @@ function couponxl_pay_sellers( $bulk_posts = array(), $echo = 'yes' ){
 				        			update_post_meta( $voucher_id, 'voucher_payment_status', 'paid' );
 				        		}
 				        	}
-				        	$response['success'][] =  $payment_data['user'].' - '.__( 'Payment Sent', 'couponxl' );					    	
+				        	$response['success'][] =  $payment_data['user'].' - '.__( 'Payment Sent', 'couponxl' );
 					    }
 					    else{
 					    	$response['error'][] =  $payment_data['user'].' - '.$data->error->error_msg;
@@ -4361,8 +4367,8 @@ function couponxl_pay_sellers( $bulk_posts = array(), $echo = 'yes' ){
 			        }
 			        else{
 			        	$response['error'][] =  $payment_data['user'].' - '.$data->error->error_msg;
-			        }		    	
-			    }			    
+			        }
+			    }
 			}
 		}
 	}
@@ -4395,7 +4401,7 @@ function custom_bulk_admin_notices() {
 					echo '<div class="updated"><p>'.$message.'</p></div>';
 				}
 			}
-		}		
+		}
 	}
 }
 add_action('admin_notices', 'custom_bulk_admin_notices');
@@ -4465,7 +4471,7 @@ function couponxl_pay_all_sellers( $vouchers = array(), $echo = 'yes' ){
 			$seller_payout_method = get_user_meta( $voucher_seller_id, 'seller_payout_method', true );
 			if( !empty( $seller_payout_method ) ){
 				switch( $seller_payout_method ){
-					case 'paypal' : 
+					case 'paypal' :
 						$seller_paypal_account = get_user_meta( $voucher_seller_id, 'seller_paypal_account', true );
 						if( empty( $sellers[$seller_payout_method][$seller_paypal_account] ) ){
 							$sellers[$seller_payout_method][$seller_paypal_account] = array(
@@ -4499,7 +4505,7 @@ function couponxl_pay_all_sellers( $vouchers = array(), $echo = 'yes' ){
 							);
 						}
 						$sellers[$seller_payout_method][$seller_skrill_account]['amount'] += get_post_meta( $voucher->ID, 'voucher_seller_share', true );
-						$sellers[$seller_payout_method][$seller_skrill_account]['voucher_ids'][] = $voucher->ID;						
+						$sellers[$seller_payout_method][$seller_skrill_account]['voucher_ids'][] = $voucher->ID;
 				}
 			}
 		}
@@ -4520,7 +4526,7 @@ function couponxl_login_errors( $message ) {
 		$message = __( 'Invalid password', 'couponxl' );
 	}
 
-	return $message;	
+	return $message;
 }
 add_filter( 'login_errors', 'couponxl_login_errors' );
 
@@ -4533,8 +4539,8 @@ function couponxl_return_tweets( $count = 1 ){
 	$oauth_access_token_secret = couponxl_get_option( 'twitter-oauth_access_token_secret' );
 	$consumer_key = couponxl_get_option( 'twitter-consumer_key' );
 	$consumer_secret = couponxl_get_option( 'twitter-consumer_secret' );
-		
-	if( !empty( $username ) && !empty( $oauth_access_token ) && !empty( $oauth_access_token_secret ) && !empty( $consumer_key ) && !empty( $consumer_secret ) ){		
+
+	if( !empty( $username ) && !empty( $oauth_access_token ) && !empty( $oauth_access_token_secret ) && !empty( $consumer_key ) && !empty( $consumer_secret ) ){
 		$cache_file = dirname(__FILE__).'/includes/'.'twitter-cache.txt';
 		if( !file_exists( $cache_file ) ){
 			file_put_contents( $cache_file, '' );
@@ -4554,7 +4560,7 @@ function couponxl_return_tweets( $count = 1 ){
 				'username' => $username,
 				'tweets' => $count
 			);
-			
+
 			$twitter = new TwitterAPIExchange( $settings );
 			$response = $twitter->get_tweets();
 
@@ -4605,7 +4611,7 @@ function couponxl_prepare_discussion_names( $offer_discussion_old ){
 			$time = date_i18n( 'M j, Y - H:i:s', $time );
 	    	$offer_discussion_old =  str_replace( $match, '<span>('.$time.')</span>', $offer_discussion_old );
 	    }
-	}	
+	}
 
 	return $offer_discussion_old;
 }
@@ -4622,10 +4628,10 @@ function couponxl_new_offer( $offer_id ){
 }
 
 
-function couponxl_send_admin_message( $message, $user_id = '' ){	
+function couponxl_send_admin_message( $message, $user_id = '' ){
     $headers   = array();
     $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-Type: text/html; charset=UTF-8"; 
+    $headers[] = "Content-Type: text/html; charset=UTF-8";
 
 	if( !empty( $user_id ) ){
 		$user = get_userdata($user_id);
@@ -4664,7 +4670,7 @@ function couponxl_discussion_meta( $post ) {
 		echo '<h4>'.__( 'Previous discussion', 'couponxl' ).'</h4>';
 	}
 	$offer_discussion_old = couponxl_prepare_discussion_names( $offer_discussion_old );
-	echo apply_filters( 'the_content', $offer_discussion_old );	
+	echo apply_filters( 'the_content', $offer_discussion_old );
 	?>
 	<div class="field">
 		<div class="field-title">
@@ -4684,7 +4690,7 @@ function couponxl_discussion_meta( $post ) {
 				<option value="yes"><?php _e( 'Yes', 'couponxl' ) ?></option>
 			</select>
 		</div>
-	</div>	
+	</div>
 	<?php
 }
 
@@ -4713,8 +4719,8 @@ function couponxl_save_meta_box_data( $post_id, $post ) {
 	$offer_discussion = sanitize_text_field( $_POST['offer_discussion'] );
 	$offer_discussion_clear = sanitize_text_field( $_POST['offer_discussion_clear'] );
 	if( $offer_discussion_clear == 'yes' ){
-		delete_post_meta( $post_id, 'offer_discussion' );	
-	}	
+		delete_post_meta( $post_id, 'offer_discussion' );
+	}
 	if( !empty( $offer_discussion ) ){
 		// Sanitize user input.
 		$offer_discussion_old = get_post_meta( $post_id, 'offer_discussion', true );
@@ -4740,7 +4746,7 @@ function couponxl_voucher_status(){
 			$status = __( 'Used', 'couponxl' );
 		}
 		else{
-			$status = __( 'Not Used', 'couponxl' );	
+			$status = __( 'Not Used', 'couponxl' );
 		}
 	}
 
@@ -4779,7 +4785,7 @@ function couponxl_get_breadcrumbs(){
 		$blog_url = get_permalink( $blog_page );
 		if( !is_home() ){
 			$breadcrumb .= '<li><a href="'.home_url().'">'.__( 'Home', 'couponxl' ).'</a></li>';
-		}	
+		}
 		if( is_category() ){
 			$breadcrumb .= '<li><a href="'.esc_url( $blog_url ).'">'.__( 'Blog', 'couponxl' ).'</a></li>';
 			$breadcrumb .= '<li>'.single_cat_title( '', false ).'</li>';
@@ -4822,7 +4828,7 @@ function couponxl_get_breadcrumbs(){
 				}
 				else{
 					$breadcrumb .= '<li>'.__( 'Coupons ', 'couponxl' );
-				}		
+				}
 
 				if( !empty( $offer_cat ) ){
 					$offer_cat_term = get_term_by( 'slug', esc_sql( $offer_cat ), 'offer_cat' );
@@ -4938,10 +4944,10 @@ function couponxl_coupon_overall(){
 				'couponxl' => '>'
 			),
         )
-    )); 
+    ));
 
     $total_coupons = $coupons_valid + $coupons_expired;
-    
+
 	echo '
 		<ul class="couponxl-overall-stats">
 			<li>'.__( 'Valid Coupons:', 'couponxl' ).'<span class="value">'.$coupons_valid.'</span></li>
@@ -4998,7 +5004,7 @@ function couponxl_deal_overall(){
 				'couponxl' => '>'
 			),
         )
-    )); 
+    ));
 
     $total_deals = $deals_valid + $deals_expired;
 
@@ -5018,13 +5024,13 @@ function couponxl_user_overall(){
     $total_users = 0;
     if( !empty( $result['avail_roles']['editor'] ) ){
     	$total_users = $result['avail_roles']['editor'];
-   	}	
+   	}
    	global $wpdb;
- 
+
 	$date = date('Y-m-d', current_time( 'timestamp' ));
 
 	$morning = new DateTime($date. ' 00:00:00');
-	$night = new DateTime($date.' 23:59:59'); 
+	$night = new DateTime($date.' 23:59:59');
 	$m = $morning->format('Y-m-d H:i:s');
 	$n = $night->format('Y-m-d H:i:s');
 
@@ -5038,7 +5044,7 @@ function couponxl_user_overall(){
 
     $date = date('Y-m-d', current_time( 'timestamp' ) - 86400);
 	$morning = new DateTime($date. ' 00:00:00');
-	$night = new DateTime($date.' 23:59:59'); 
+	$night = new DateTime($date.' 23:59:59');
 	$m = $morning->format('Y-m-d H:i:s');
 	$n = $night->format('Y-m-d H:i:s');
 
@@ -5134,13 +5140,13 @@ function couponxl_custom_term_count( $offer_type, $term, $taxonomy ){
 	global $couponxl_term_count;
 	if( empty( $couponxl_term_count[$taxonomy] ) ){
 		global $wpdb, $offer_type, $offer_cat, $location, $offer_tag, $offer_store, $keyword;
-		$query = "SELECT terms1.term_id as ID, COUNT(posts.ID) AS posts 
-					FROM {$wpdb->posts} AS posts 
-					LEFT JOIN {$wpdb->postmeta} AS postmeta1 ON posts.ID = postmeta1.post_id 
-					LEFT JOIN {$wpdb->postmeta} AS postmeta2 ON postmeta1.post_id = postmeta2.post_id 
-					LEFT JOIN {$wpdb->postmeta} AS postmeta3 ON postmeta2.post_id = postmeta3.post_id 
-					LEFT JOIN {$wpdb->term_relationships} AS termsrel1 ON posts.ID = termsrel1.object_id 
-					LEFT JOIN {$wpdb->terms} AS terms1 ON termsrel1.term_taxonomy_id = terms1.term_id 
+		$query = "SELECT terms1.term_id as ID, COUNT(posts.ID) AS posts
+					FROM {$wpdb->posts} AS posts
+					LEFT JOIN {$wpdb->postmeta} AS postmeta1 ON posts.ID = postmeta1.post_id
+					LEFT JOIN {$wpdb->postmeta} AS postmeta2 ON postmeta1.post_id = postmeta2.post_id
+					LEFT JOIN {$wpdb->postmeta} AS postmeta3 ON postmeta2.post_id = postmeta3.post_id
+					LEFT JOIN {$wpdb->term_relationships} AS termsrel1 ON posts.ID = termsrel1.object_id
+					LEFT JOIN {$wpdb->terms} AS terms1 ON termsrel1.term_taxonomy_id = terms1.term_id
 					LEFT JOIN {$wpdb->term_taxonomy} AS tax ON termsrel1.term_taxonomy_id = tax.term_taxonomy_id ";
 		if( !empty( $offer_type ) ){
 			$query .= "LEFT JOIN {$wpdb->postmeta} AS postmeta4 ON postmeta3.post_id = postmeta4.post_id ";
@@ -5150,7 +5156,7 @@ function couponxl_custom_term_count( $offer_type, $term, $taxonomy ){
 				$query .= "LEFT JOIN {$wpdb->postmeta} AS postmeta5 ON postmeta4.post_id = postmeta5.post_id ";
 			}
 			else{
-				$query .= "LEFT JOIN {$wpdb->postmeta} AS postmeta5 ON postmeta3.post_id = postmeta5.post_id ";	
+				$query .= "LEFT JOIN {$wpdb->postmeta} AS postmeta5 ON postmeta3.post_id = postmeta5.post_id ";
 			}
 		}
 		if( ( !empty( $offer_cat ) && $taxonomy == 'location' ) || ( !empty( $location ) && $taxonomy == 'offer_cat' ) ){
@@ -5159,14 +5165,14 @@ function couponxl_custom_term_count( $offer_type, $term, $taxonomy ){
 			$query .= "LEFT JOIN {$wpdb->term_taxonomy} AS tax2 ON termsrel2.term_taxonomy_id = tax2.term_taxonomy_id ";
 		}
 		$query .= "
-					WHERE posts.post_type = 'offer' 
-					AND postmeta1.meta_key = 'offer_start' 
-					AND postmeta1.meta_value <= ".current_time( 'timestamp' )." 
-					AND postmeta2.meta_key = 'offer_expire' 
-					AND postmeta2.meta_value >= ".current_time( 'timestamp' )." 
-					AND postmeta3.meta_key = 'deal_status' 
-					AND postmeta3.meta_value != 'sold_out' 
-					AND tax.taxonomy = '".esc_sql( $taxonomy )."' 
+					WHERE posts.post_type = 'offer'
+					AND postmeta1.meta_key = 'offer_start'
+					AND postmeta1.meta_value <= ".current_time( 'timestamp' )."
+					AND postmeta2.meta_key = 'offer_expire'
+					AND postmeta2.meta_value >= ".current_time( 'timestamp' )."
+					AND postmeta3.meta_key = 'deal_status'
+					AND postmeta3.meta_value != 'sold_out'
+					AND tax.taxonomy = '".esc_sql( $taxonomy )."'
 					";
 		if( !empty( $offer_type ) ){
 			$query .= "AND postmeta4.meta_key = 'offer_type' AND postmeta4.meta_value = '".esc_sql( $offer_type )."' ";
@@ -5203,7 +5209,7 @@ function couponxl_custom_term_count( $offer_type, $term, $taxonomy ){
 			unset( $couponxl_term_count[$taxonomy][$key] );
 			break;
 		}
-	}	
+	}
 
 	return '<span class="count">'.$count.'</span>';
 
@@ -5282,7 +5288,7 @@ function couponxl_append_query_string( $permalink, $include = array(), $exclude 
 			}
 		}
 		$permalink .= $query_string;
-	} 
+	}
 	else {
 		if( !empty( $include ) ){
 			foreach( $include as $arg => $value ){
@@ -5293,9 +5299,9 @@ function couponxl_append_query_string( $permalink, $include = array(), $exclude 
 			if( isset( $wp->query_vars[$trans_slug] ) && !isset( $include[$slug] ) && !in_array( $slug, $exclude ) && !in_array( 'all', $exclude ) ){
 				$permalink = esc_url( add_query_arg( array( $trans_slug => $wp->query_vars[$trans_slug] ), $permalink ) );
 			}
-		}		
-		
-	}	
+		}
+
+	}
 
 	return $permalink;
 }
@@ -5312,7 +5318,7 @@ function couponxl_add_rewrite_rules() {
 		$key_1 = '([^/]*)/'.$key.'(page)/(.+?)/?$';
 		$key_2 = '([^/]*)/'.$key.'?$';
 		$rewrite_to = 'index.php?pagename='.$wp_rewrite->preg_index( 1 );
-		
+
 		for( $k=2; $k<=($i*2)+1; $k+=2 ){
 			$rewrite_to .= '&' . $wp_rewrite->preg_index( $k ) . '=' . $wp_rewrite->preg_index( $k+1 );
 		}
@@ -5371,7 +5377,7 @@ function couponxl_store_pagination() {
 }
 add_action('template_redirect', 'couponxl_store_pagination', 0 );
 
-function couponxl_store_pagenum_link( $link ) { 
+function couponxl_store_pagenum_link( $link ) {
     if( !is_singular('store') )
         return $link;    // Do nothing unless on a search
 
@@ -5426,7 +5432,7 @@ function couponxl_register(){
 		                                    $confirmation_message = couponxl_get_option( 'registration_message' );
 		                                    $confirmation_link = couponxl_get_permalink_by_tpl( 'page-tpl_register' );
 		                                    $confirmation_link = couponxl_append_query_string( $confirmation_link,  array( 'username' => $username, 'confirmation_hash' => $confirmation_hash ) );
-		                                    
+
 		                                    $confirmation_message = str_replace( '%LINK%', $confirmation_link, $confirmation_message );
 
 		                                    $registration_subject = couponxl_get_option( 'registration_subject' );
@@ -5435,7 +5441,7 @@ function couponxl_register(){
 		                                    $name_sender = couponxl_get_option( 'name_sender' );
 		                                    $headers   = array();
 		                                    $headers[] = "MIME-Version: 1.0";
-		                                    $headers[] = "Content-Type: text/html; charset=UTF-8"; 
+		                                    $headers[] = "Content-Type: text/html; charset=UTF-8";
 		                                    $headers[] = "From: ".$name_sender." <".$email_sender.">";
 
 		                                    $info = wp_mail( $email, $registration_subject, $confirmation_message, $headers );
@@ -5444,7 +5450,7 @@ function couponxl_register(){
 		                                        $success = true;
 		                                    }
 		                                    else{
-		                                        $message = '<div class="alert alert-danger">'.__( 'There was an error trying to send an email', 'couponxl' ).'</div>';  
+		                                        $message = '<div class="alert alert-danger">'.__( 'There was an error trying to send an email', 'couponxl' ).'</div>';
 		                                    }
 		                                }
 		                                else{
@@ -5460,12 +5466,12 @@ function couponxl_register(){
 		                        }
 		                    }
 		                    else{
-		                        $message = '<div class="alert alert-danger">'.__( 'Provided passwords do not match', 'couponxl' ).'</div>';    
+		                        $message = '<div class="alert alert-danger">'.__( 'Provided passwords do not match', 'couponxl' ).'</div>';
 		                    }
 		                }
 	                    else{
-	                        $message = '<div class="alert alert-danger">'.__( 'Username can not hold empty spaces or dots', 'couponxl' ).'</div>';    
-	                    }		                    
+	                        $message = '<div class="alert alert-danger">'.__( 'Username can not hold empty spaces or dots', 'couponxl' ).'</div>';
+	                    }
 	                }
 	                else{
 	                    $message = '<div class="alert alert-danger">'.__( 'Email address is invalid', 'couponxl' ).'</div>';
