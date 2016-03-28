@@ -646,6 +646,12 @@ remove_action( 'wp_head', 'rsd_link' ) ;
 remove_action( 'wp_head', 'feed_links', 2 );
 remove_action( 'wp_head', 'feed_links_extra', 3 );
 
+//Disable WordPress Login Hints
+function no_wordpress_errors(){
+  return 'GET OFF MY LAWN !! RIGHT NOW !!';
+}
+add_filter( 'login_errors', 'no_wordpress_errors' );
+
 
 
 
