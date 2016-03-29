@@ -19,6 +19,44 @@ get_template_part( 'includes/title' );
     .single-promocode .promocode-filter-container select{
         width: 40%;
     }
+    .single-promocode .promocode-table-container table{
+        text-align: center;
+    }
+    .single-promocode .promocode-table-container table .promo-code{
+        background: #fff;
+        padding: 8px 15px;
+    }
+    .single-promocode .promocode-table-container table,.single-promocode .promocode-table-container table tr:nth-child(odd) {
+        background: #e2f1ec;
+    }
+    .single-promocode .promocode-table-container th{
+        background-color: rgb(43, 133, 206);
+        color: #fff;
+        border: none;
+        text-align: center;
+    }
+    .single-promocode .promocode-table-container .offer-btn{
+        padding: 8px 12px;
+        background: #4CAF50;
+        color: white;
+        font-weight: 500;
+    }
+    @media screen and (max-width:650px) {
+        .single-promocode .contact-page .white-block {
+            padding: 0;
+        }
+    }
+    @media screen and (max-width:650px) {
+        .single-promocode .container,.single-promocode .white-block-content {
+            padding: 0;
+        }
+        .single-promocode .promocode-table-container .offer-btn{
+            padding: 6px 6px;
+        }
+        .single-promocode .promocode-table-container td{
+            padding: 10px 5px;
+        }
+    }
 </style>
 <?php
     $args = array(
@@ -77,22 +115,38 @@ get_template_part( 'includes/title' );
                         <br/>
                         <div class="promocode-table-container">
                             <table>
+                                <col width="40%">
+                                <col width="20%">
+                                <col width="30%">
+                                <col width="10%">
                                 <tr>
                                     <th>Title</th>
                                     <th>Code</th>
-                                    <th>Offer Page</th>
+                                    <th>Click Here</th>
                                     <th>Status</th>
                                 </tr>
                                 <tr>
                                     <td>Post title here</td>
-                                    <td>Code</td>
-                                    <td><a href="javascript:void(0)">Offer Page</a></td>
+                                    <td><span class="promo-code">Code</span></td>
+                                    <td ><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
                                     <td>Status</td>
                                 </tr>
                                 <tr>
                                     <td>Post title here</td>
-                                    <td>Code</td>
-                                    <td><a href="javascript:void(0)">Offer Page</a></td>
+                                    <td><span class="promo-code">Code</span></td>
+                                    <td><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
+                                    <td>Status</td>
+                                </tr>
+                                <tr>
+                                    <td>Post title here</td>
+                                    <td><span class="promo-code">Code</span></td>
+                                    <td ><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
+                                    <td>Status</td>
+                                </tr>
+                                <tr>
+                                    <td>Post title here</td>
+                                    <td><span class="promo-code">Code</span></td>
+                                    <td><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
                                     <td>Status</td>
                                 </tr>
                             </table>
