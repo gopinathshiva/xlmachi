@@ -117,8 +117,8 @@ get_template_part( 'includes/title' );
                             <table>
                                 <col width="40%">
                                 <col width="20%">
-                                <col width="30%">
-                                <col width="10%">
+                                <col width="32%">
+                                <col width="8%">
                                 <tr>
                                     <th>Title</th>
                                     <th>Code</th>
