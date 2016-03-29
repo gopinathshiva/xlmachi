@@ -16,6 +16,13 @@ global $categories_data_transient_lifetime;
 <section>
     <div class="container">
         <div class="row">
+            <?php echo do_shortcode('[featured_stores title="Featured Stores" text="" target="_self" btn_text="" link=""
+            option1="237,235,229,226,224,218,196,233"
+            option2="237,229,224,218,198,235,226,82"
+            option3="196,93,176,192,85,161,188,218"
+            option4="202,235,233,231,222,194,184,139"
+            option5="220,210,143,135,117,131,147,208"]
+            [/featured_stores]'); ?>
             <div class="col-md-3">
 
                 <?php do_action('xl_offer_type') ?>

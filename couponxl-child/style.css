@@ -69,6 +69,10 @@ Tags: white
 
 /* ***********************  store page style starts here ******************************* */
 
+.single-store .featured-stores-carousel,.single-store .featured-stores{
+    display: none;
+}
+
 .single-store .store-bottom-description{
     font-family: lato !important;
 }
@@ -98,6 +102,14 @@ Tags: white
 
 .single-store .col-md-3 .white-block-content,.search-template-page .col-md-3 .white-block-content{
     padding: 5px 20px;
+}
+
+.single-store .featured-stores-tabs.nav-justified>.active>a{
+    border-color: rgba(89, 38, 110, 0.36);
+}
+
+.single-store .featured-stores-tabs.nav-justified>li>a{
+    border-bottom-color: rgba(89, 38, 110, 0.36);
 }
 
 /* ***********************  store page style ends here ******************************* */
@@ -798,6 +810,10 @@ a.read-info{
         min-height: 105px;
         max-height: 105px;
         overflow: auto;
+    }
+
+    .single-store .featured-stores-carousel,.single-store .featured-stores{
+        display: block;
     }
 }
 

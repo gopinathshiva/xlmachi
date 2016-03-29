@@ -176,7 +176,7 @@ jQuery(document).ready(function($){
 
 	function xl_filterOffers(){
 
-		var scrollStart = $("body").offset().top + 150;
+		var scrollStart = $("body").offset().top + 330;
 
 		$('html, body').animate({
 		    scrollTop: scrollStart
@@ -461,12 +461,12 @@ jQuery(document).ready(function($){
 
     //added for carousel effect in featured store page in home page
 
-    if($('.featured-stores ul').length){
+    if($('.featured-stores.carousel ul').length){
     	var firstval = 0,isCarouselPaused = false, carouselTimeout;
 
 		function Carousel() {
 		    firstval += 2;
-		    var parent = $('.featured-stores ul')[0];
+		    var parent = $('.featured-stores.carousel ul.stores-image-container')[0];
 		    parent.style.left = "-" + firstval + "px";
 		    if (!(firstval % 130)) {
 		        carouselTimeout = setTimeout(Carousel, 3000);
@@ -482,7 +482,7 @@ jQuery(document).ready(function($){
 		}
 		Carousel();
 
-		$('.featured-stores').hover(function(){
+		$('.featured-stores.carousel').hover(function(){
 			isCarouselPaused = true;
 		},function(){
 			clearTimeout(carouselTimeout);
@@ -490,5 +490,30 @@ jQuery(document).ready(function($){
 			Carousel();
 		});
     }
+
+	if($('.single-store .featured-stores-tabs').length){
+		$('.single-store .featured-stores-tabs').off('click').on('click','li',function () {
+			var totalStores = $('.single-store .stores-image-container li');
+			$(totalStores).fadeOut();
+			var requiredStoreIds = $(this).attr('data-store-ids');
+			requiredStoreIds = requiredStoreIds.split(',');
+			for(var i=0;i<totalStores.length;i++){
+				if(requiredStoreIds.indexOf(totalStores[i].id)>=0){
+					requiredStoreIds.splice(requiredStoreIds.indexOf(totalStores[i].id),1);
+					$(totalStores[i]).fadeIn();
+				}
+				if(!requiredStoreIds.length){
+					break;
+				}
+			}
+		});
+	}
+
+	//auto scroll on loading store page
+	if($('.single-store').length && window.innerWidth >= 768){
+		$('html, body').animate({
+		    scrollTop: $("body").offset().top + 145
+	 	}, 350);
+	}
 
 });
