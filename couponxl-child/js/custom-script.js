@@ -29,23 +29,23 @@ jQuery(document).ready(function($){
 	//function to call when user focus/exit on search box
 	$('.xl-search-input').off('focus blur').on('focus blur',function(e){
 		if(e.type=='blur'){
-			$('.xl-search-result,.xl-search-description').slideUp('fast');	
+			$('.xl-search-result,.xl-search-description').slideUp('fast');
 			$('.navbar-nav>li.dropdown').show();
-		}else{			
+		}else{
 			updateSearchUI(this);
 			if(isTouchDevice){
 				$('.navbar-nav>li.dropdown').hide();
 			}
-		}		
+		}
 	});
 
 	function updateSearchUI(input){
 		if(!$(input).val()){
-			$('.xl-search-result').slideUp('fast');	
+			$('.xl-search-result').slideUp('fast');
 			$('.xl-search-description').slideDown('fast');
-			return false;				
+			return false;
 		}else{
-			$('.xl-search-description').slideUp('fast');	
+			$('.xl-search-description').slideUp('fast');
 			$('.xl-search-result').slideDown('fast');
 			return true;
 		}
@@ -53,11 +53,11 @@ jQuery(document).ready(function($){
 
 	//to block triggering blur event on clicking any of search results
 	$('.xl-search-form-container ul').off('mousedown').on('mousedown',function(evt) {
-		evt.preventDefault(); 
+		evt.preventDefault();
 	});
-	
+
 	var keyupTimeout;
-	$( document ).on( 'keyup', '.xl-search-input', function() {	
+	$( document ).on( 'keyup', '.xl-search-input', function() {
 
 		if(!updateSearchUI(this)){
 			return false;
@@ -81,19 +81,19 @@ jQuery(document).ready(function($){
 				url : ajaxurl,
 				type : 'post',
 				data : {
-					action : 'search_offer'				
+					action : 'search_offer'
 				},
-				success : function( response ) {				
-					sessionStorage.setItem('xl_offer_result',response);		
-					updateSearchResults(response,searchText,parentElement);	
+				success : function( response ) {
+					sessionStorage.setItem('xl_offer_result',response);
+					updateSearchResults(response,searchText,parentElement);
 				}
 			});
-		}.bind(this),300);		
+		}.bind(this),300);
 
 		function updateSearchResults(results,searchText,parentElement){
 			$(parentElement).empty();
 			results = JSON.parse(results);
-			var resultCounter = 0;			
+			var resultCounter = 0;
 			for(var i = 0 ;i < results.length; i++){
 				if(results[i].offer_name.toLowerCase().indexOf(searchText.toLowerCase())>=0){
 					$(parentElement).append("<a href="+results[i].offer_slug+"><li class='xl-search-result-item'><span>" + results[i].offer_name + "</span></li></a>");
@@ -111,7 +111,7 @@ jQuery(document).ready(function($){
 
 	});
 
-	// function xl_getText(text){		
+	// function xl_getText(text){
 	// 	if(text.indexOf('+')<0){
 	// 		return text.replace('-','+');
 	// 	}else{
@@ -120,14 +120,14 @@ jQuery(document).ready(function($){
 	// }
 
 	// //on click of coupon-info / deal - info button
-	// $('.white-block-content a.read-info').on('click',function(){		
+	// $('.white-block-content a.read-info').on('click',function(){
 	// 	var replaceText = xl_getText($(this).text());
 	// 	$(this).closest('ul').next().slideToggle( "slow" );
 	// 	$(this).text(replaceText);
-	// });	
+	// });
 
 	//on click of comment show/hide block
-	$('.xl-comment-show-block h2').on('click',function(){	
+	$('.xl-comment-show-block h2').on('click',function(){
 		var replaceText = xl_getText($(this).text());
 		$(this).closest('.xl-comment-show-block').next().slideToggle( "slow" );
 		$(this).text(replaceText);
@@ -142,13 +142,13 @@ jQuery(document).ready(function($){
 	}
 
 	//on click of checkbox to filter offer category
-	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){				
-	 	xl_filterOffers();	 	
+	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){
+	 	xl_filterOffers();
 	 	var option = $(this).attr('data-option');
 	 	option = option.toLowerCase();
  		option = option.split(' ').join('_');
-	 	if($(this).prop('checked')){	 		
-	 		var id="xl_filter_text_"+option;	 		
+	 	if($(this).prop('checked')){
+	 		var id="xl_filter_text_"+option;
 	 		var element = '<li class="xl_filter_text_item" id='+id+'>'+$(this).attr('data-option')+', </li>'
 	 		$('#xl_filter_text_items').append(element);
 	 	}else{
@@ -160,18 +160,18 @@ jQuery(document).ready(function($){
 	});
 
 	//on click of radio button to filter offer type
-	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){	
+	$('.xl-offer-type-filter input.xl-offer-type-filter-radio').off('change').on('change',function(event){
 		xl_filterOffers();
 		event.stopImmediatePropagation();
 		//updateOfferCategoryCount();
 	});
 
 	//on click of checkbox to filter offer store
-	$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').off('click').on('click',function(event){					
+	$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').off('click').on('click',function(event){
 		xl_filterOffers();
 		event.stopImmediatePropagation();
 		//updateOfferTypeCount();
-		//updateOfferCategoryCount();	
+		//updateOfferCategoryCount();
 	});
 
 	function xl_filterOffers(){
@@ -186,17 +186,17 @@ jQuery(document).ready(function($){
 		$('.xl-offer-filter-not-found').hide();
 
 		$('.xl-offer-item').removeClass('xl-filtered-type xl-filtered-cat xl-filtered-store');
-	 	
+
 		var offerType = $('.xl-offer-type-filter input.xl-offer-type-filter-radio:checked').val();
 
 		var offerCatCheckedCount = $('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').length;
 		var offerStoreCheckedCount = $('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').length;
 
 		$('.xl-offer-item').hide();
-		
+
 		if($('.xl-offer-store-filter').length){
-								
-			//offer type filter 
+
+			//offer type filter
 			if(offerType=="all"){
 				$('.xl-offer-item').addClass("xl-filtered-type");
 			}else if(offerType=="cashback"){
@@ -205,27 +205,27 @@ jQuery(document).ready(function($){
 				$('div[data-xltype='+offerType+']').addClass("xl-filtered-type");
 			}
 
-			//offer category filter 	
+			//offer category filter
 			if(offerCatCheckedCount){
-				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {
 			       	var categoryId = $(this).val();
-			       	$('.xl-offer-item.xl-filtered-type[data-xlcategory*='+categoryId+']').addClass("xl-filtered-cat");			       					
+			       	$('.xl-offer-item.xl-filtered-type[data-xlcategory*='+categoryId+']').addClass("xl-filtered-cat");
 		     	});
 			}else{
 				$('.xl-offer-item.xl-filtered-type').addClass("xl-filtered-cat");
-			}	
+			}
 
-			//offer store filter 	
+			//offer store filter
 			if(offerStoreCheckedCount){
 				$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox:checked').each(function(){
 					$('.xl-offer-item.xl-filtered-type.xl-filtered-cat[data-xlstore='+$(this).val()+']').addClass('xl-filtered-store');
-				});	
+				});
 			}else{
 				$('.xl-offer-item.xl-filtered-type.xl-filtered-cat').addClass('xl-filtered-store');
 			}
 
 			$('.xl-offer-item.xl-filtered-type.xl-filtered-cat.xl-filtered-store').fadeIn('slow');
-		     	
+
 		}else{
 			//offer category filter not checked
 			if(!offerCatCheckedCount){
@@ -239,16 +239,16 @@ jQuery(document).ready(function($){
 			}
 			//offer category filter checked
 			else{
-				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {	       	
+				$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox:checked').each(function() {
 			       	var categoryId = $(this).val();
 			       	if(offerType=='all'){
-			       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");	
+			       		$('div[data-xlcategory*='+categoryId+']').fadeIn("slow");
 			       	}else if(offerType=="cashback"){
 						$('div[data-xltag='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn('slow');
 					}else{
 			       		$('div[data-xltype='+offerType+'][data-xlcategory*='+categoryId+']').fadeIn("slow");
-			       	}				
-		     	});	
+			       	}
+		     	});
 			}
 		}
 
@@ -258,16 +258,16 @@ jQuery(document).ready(function($){
 
 		setTimeout(function(){
 			$('.xl-offer-type-filter-radio,.xl-offer-cat-filter-checkbox,.xl-offer-store-filter-checkbox').prop('disabled',false);
-		},1000);		
+		},1000);
 	}
 
-	//input search text to filter categories 
+	//input search text to filter categories
 	$('.xl-offer-cat-filter .xl-offer-cat-search').off('keyup').on('keyup',function(e){
 		var value = $(this).val().toLowerCase();
 		if(!value){
 			$('.xl-offer-cat-result li:not(.xl-no-offer)').show();
 			return;
-		}		
+		}
 		$('.xl-offer-cat-result li:not(.xl-no-offer)').each(function(){
 			if($(this).text().toLowerCase().indexOf(value)>=0){
 				$(this).show();
@@ -277,13 +277,13 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	//input search text to filter stores 
+	//input search text to filter stores
 	$('.xl-offer-store-filter .xl-offer-store-search').off('keyup').on('keyup',function(e){
 		var value = $(this).val().toLowerCase();
 		if(!value){
 			$('.xl-offer-store-result li:not(.xl-no-offer)').show();
 			return;
-		}		
+		}
 		$('.xl-offer-store-result li:not(.xl-no-offer)').each(function(){
 			if($(this).text().toLowerCase().indexOf(value)>=0){
 				$(this).show();
@@ -293,12 +293,12 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	updateOfferCount = function(){						
+	updateOfferCount = function(){
 
 		updateOfferTypeCount();
 		updateOfferCategoryCount();
 		updateOfferStoreCount();
-	
+
 	}
 
 	function updateOfferTypeCount(){
@@ -308,35 +308,35 @@ jQuery(document).ready(function($){
 		$('#xl-offer-type-coupon-count').text('('+couponCount+')');
 		var cashbackCount = $('div[data-xltag=cashback]:visible').length;
 		$('#xl-offer-type-cashback-count').text('('+cashbackCount+')');
-		
+
 		var allCount = dealCount+couponCount;
 		$('#xl-offer-type-all-count').text('('+allCount+')');
 	}
 
 	function updateOfferCategoryCount(){
-		$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').each(function(){			
+		$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').each(function(){
 			var catId = $(this).val();
-			var catCount = $('div[data-xlcategory*='+catId+']:visible').length;			
+			var catCount = $('div[data-xlcategory*='+catId+']:visible').length;
 			if(!catCount){
 				$('li.xl-cat-'+catId).addClass('xl-no-offer').hide();
-			}			
+			}
 		});
 	}
 
 	function updateOfferStoreCount(){
 		if($('.xl-offer-store-filter').length){
-			$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').each(function(){		
+			$('.xl-offer-store-filter input.xl-offer-store-filter-checkbox').each(function(){
 				var storeId = $(this).val();
-				var storeCount = $('div[data-xlstore*='+storeId+']').length;			
+				var storeCount = $('div[data-xlstore*='+storeId+']').length;
 				if(!storeCount){
 					$('li.xl-store-'+storeId).addClass('xl-no-offer').hide();
 				}
 			});
-		}	
+		}
 	}
 
 	if(window.isXlSearchPage || window.isXlStorePage){
-		updateOfferTypeCount();                                     
+		updateOfferTypeCount();
 
         if(window.isXlSearchPage && window.isXlStorePage){
         	checkStoresFilter();
@@ -345,10 +345,10 @@ jQuery(document).ready(function($){
         }else{
         	if(window.isXlSearchPage){
 		        checkStoresFilter();
-	        }        
+	        }
 	        else if(window.isXlStorePage){
 		        checkCategoryFilter();
-	        } 
+	        }
         }
 	}
 
@@ -371,7 +371,7 @@ jQuery(document).ready(function($){
             if(!($('div[data-xlcategory='+id+']:visible').length)){
                 $(this).remove();
             }
-        });	
+        });
 	}
 
 	//scroll to top script
@@ -396,7 +396,7 @@ jQuery(document).ready(function($){
     },function(){
     	$(this).find('span').fadeOut('fast');
     });
-    
+
     //fixed position widget scroll on offer and store page
     if(window.isXlSearchPage && !isTouchDevice){
 
@@ -405,7 +405,7 @@ jQuery(document).ready(function($){
 
     	$(window).scroll(function() {                  // assign scroll event listener
 
-		    var currentScroll = $(window).scrollTop(); // get current position		    
+		    var currentScroll = $(window).scrollTop(); // get current position
 		    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
@@ -429,13 +429,13 @@ jQuery(document).ready(function($){
 		});
 
     }else if(window.isXlStorePage && !isTouchDevice){
-    	
+
     	var fixmeTop = $('.xl-store-detail').offset().top;       // get initial position of the element
     	var offerTypeFilterHeight = $('.xl-offer-type-filter').height();
 
     	$(window).scroll(function() {                  // assign scroll event listener
 
-		    var currentScroll = $(window).scrollTop(); // get current position		    
+		    var currentScroll = $(window).scrollTop(); // get current position
 		    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
 		        $('.xl-offer-type-filter').css({                      // scroll to that element or below it
 		            position: 'fixed',
@@ -462,14 +462,14 @@ jQuery(document).ready(function($){
     //added for carousel effect in featured store page in home page
 
     if($('.featured-stores ul').length){
-    	var firstval = 0,isCarouselPaused = false;	
+    	var firstval = 0,isCarouselPaused = false, carouselTimeout;
 
 		function Carousel() {
-		    firstval += 2;		    
+		    firstval += 2;
 		    var parent = $('.featured-stores ul')[0];
 		    parent.style.left = "-" + firstval + "px";
 		    if (!(firstval % 130)) {
-		        setTimeout(Carousel, 3000);
+		        carouselTimeout = setTimeout(Carousel, 3000);
 		        firstval = 0;
 		        var firstChild = parent.firstElementChild;
 		        parent.appendChild(firstChild);
@@ -477,17 +477,18 @@ jQuery(document).ready(function($){
 		        return;
 		    }
 		    if(!isCarouselPaused){
-		    	setTimeout(Carousel, 20);
-		    }		    
+		    	carouselTimeout = setTimeout(Carousel, 20);
+		    }
 		}
 		Carousel();
 
 		$('.featured-stores').hover(function(){
 			isCarouselPaused = true;
 		},function(){
+			clearTimeout(carouselTimeout);
 			isCarouselPaused = false;
 			Carousel();
 		});
-    }    
+    }
 
 });

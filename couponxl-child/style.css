@@ -69,6 +69,15 @@ Tags: white
 
 /* ***********************  store page style starts here ******************************* */
 
+.single-store .store-bottom-description{
+    font-family: lato !important;
+}
+
+.single-store .store-bottom-description h3{
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .single-store .shop-logo{
 	padding:initial;
 }
@@ -82,7 +91,7 @@ Tags: white
 .xl-offer-filter-not-found{
     display: none;
 }
- 
+
 .single-store .col-md-3 .white-block,.search-template-page .col-md-3 .white-block{
     margin-bottom: 20px;
 }
@@ -166,7 +175,7 @@ Tags: white
     float: left;
     margin: 0;
     padding: 0 5px;
-    width: auto;    
+    width: auto;
     height: 20px;
     color: #ffffff;
     font: 600 11px/20px 'Open Sans', sans-serif;
@@ -190,7 +199,7 @@ Tags: white
     border-top: 10px solid #1D5DCA;
 }
 
-.coupon-box .xl-offer-triangle-bottomright{    
+.coupon-box .xl-offer-triangle-bottomright{
     border-bottom: 10px solid #D23047;
 }
 
@@ -206,12 +215,12 @@ Tags: white
 }
 
 .offer-box .xl-offer-triangle-topright{
-    border-right: 8px solid rgba(0, 0, 0, 0);    
+    border-right: 8px solid rgba(0, 0, 0, 0);
     height: 0;
     width: 0;
 }
 
-.offer-box .xl-offer-triangle-bottomright{    
+.offer-box .xl-offer-triangle-bottomright{
     border-right: 8px solid rgba(0, 0, 0, 0);
     height: 0;
     width: 0;
@@ -228,7 +237,7 @@ Tags: white
 .offer-box .offer-other-info-container{
     margin-bottom:12px;
     font-size:12px;
-    color:#7C7C7C;    
+    color:#7C7C7C;
 }
 
 .offer-box .offer-used-count{
@@ -255,7 +264,7 @@ Tags: white
 }
 
 .masonry-item .deal-info-container,.masonry-item .coupon-info-container{
-    display: none;    
+    display: none;
 }
 
 .bottom-meta li{
@@ -267,7 +276,7 @@ Tags: white
     padding: 5px;
 }
 
-.deal-info-container,.coupon-info-container{    
+.deal-info-container,.coupon-info-container{
     float: right;
 }
 
@@ -330,15 +339,15 @@ a.read-info{
 }
 
 .navbar .xl-search-form-container .fa-search{
-    position: absolute;    
+    position: absolute;
     left: 15px;
-    top: 14px;    
+    top: 14px;
 }
 
 .navbar .xl-search-form-container .xl-search-input{
     border-radius: 8px;
     outline: 0;
-    border: 1px solid rgba(0, 0, 0, 0.3);    
+    border: 1px solid rgba(0, 0, 0, 0.3);
     height: 40px;
     padding-left: 40px;
     width: 100%;
@@ -369,7 +378,7 @@ a.read-info{
     text-transform: uppercase;
 }
 
-.xl-search-description .right-description{    
+.xl-search-description .right-description{
     float: right;
     padding-right: 10px;
 }
@@ -389,7 +398,7 @@ a.read-info{
 }
 
 .navbar .xl-search-result .xl-search-result-item a:hover{
-    background: transparent;    
+    background: transparent;
 }
 
 .navbar .xl-search-result .xl-search-result-item:hover{
@@ -404,7 +413,7 @@ a.read-info{
     display: inline;
 }
 
-.xl_filter_text_item{    
+.xl_filter_text_item{
     font-weight: bold;
 }
 
@@ -456,6 +465,7 @@ a.read-info{
     background: none;
     max-width: 100%;
     margin: 20px auto 0;
+    padding: 5px 0;
     overflow: hidden;
     text-align: center;
 }
@@ -548,10 +558,10 @@ a.read-info{
 }
 
 .xl-coupon-listing .category-boxes a img:hover {
-    -webkit-transform: rotate(360deg) scale(1.2); 
+    -webkit-transform: rotate(360deg) scale(1.2);
     -moz-transform: rotate(360deg) scale(1.2);
     -ms-transform: rotate(360deg) scale(1.2);
-    -o-transform: rotate(360deg) scale(1.2); 
+    -o-transform: rotate(360deg) scale(1.2);
     transform: rotate(360deg) scale(1.2);
 }*/
 
@@ -606,16 +616,16 @@ a.read-info{
     margin-left: -25px;
 }
 
-.xl-sidemenu li a {    
+.xl-sidemenu li a {
     display: block;
     margin: 0px;
     padding-top: 5px;
-    padding-right: 5px;    
+    padding-right: 5px;
     text-decoration: none;
     position: relative;
 }
 
-.xl-sidemenu li a:hover { 
+.xl-sidemenu li a:hover {
     color: black;
 }
 
@@ -718,7 +728,7 @@ a.read-info{
     -ms-transform: initial;
     -o-transform: initial;
     transform: initial;
-    position: initial; 
+    position: initial;
 }
 
 /* footer stats css starts here */
@@ -837,7 +847,7 @@ a.read-info{
 }
 
 @media screen and (max-width:1000px){
-    .xl-sidemenu,.featured-stores{
+    .xl-sidemenu{
         display: none;
     }
 }
@@ -859,7 +869,11 @@ a.read-info{
         width: 50%;
     }
 
-    ..home .xl-coupon-listing .white-block-title h2{
+    .home .xl-coupon-listing .white-block-title h2{
         font-size: 19px;
+    }
+
+    .featured-stores{
+        display: none;
     }
 }

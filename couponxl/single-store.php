@@ -9,7 +9,7 @@ get_template_part( 'includes/title' );
 $post_id = get_the_ID();
 $offer_type = get_query_var( $couponxl_slugs['offer_type'], '' );
 $theme_usage = couponxl_get_option( 'theme_usage' );
-$store_link = get_post_meta( get_the_ID(), 'store_link', true );
+$store_link = get_post_meta( $post_id, 'store_link', true );
 global $categories_data_transient_lifetime;
 ?>
 
@@ -21,11 +21,11 @@ global $categories_data_transient_lifetime;
                 <?php do_action('xl_offer_type') ?>
                 <?php do_action('xl_offer_cat') ?>
                 <div class="white-block xl-store-detail">
-                    
+
                     <?php if( has_post_thumbnail() ): ?>
                         <div class="shop-logo">
                             <?php if( !empty( $store_link ) ): ?>
-                                <a href="<?php echo esc_url( add_query_arg( array( 'rs' => get_the_ID() ), get_permalink() ) ) ?>" target="_blank">
+                                <a href="<?php echo esc_url( add_query_arg( array( 'rs' => $post_id ), get_permalink() ) ) ?>" target="_blank">
                             <?php endif; ?>
                                 <?php the_post_thumbnail( 'thumbnail', array( 'class' => 'img-responsive' ) ); ?>
                             <?php if( !empty( $store_link ) ): ?>
@@ -55,7 +55,7 @@ global $categories_data_transient_lifetime;
                                 </a>
                             </li>
                             <?php
-                        }                            
+                        }
                         $store_google = get_post_meta( $post_id, 'store_google', true );
                         if( !empty( $store_google ) ){
                             ?>
@@ -65,12 +65,12 @@ global $categories_data_transient_lifetime;
                                 </a>
                             </li>
                             <?php
-                        }                            
+                        }
                         ?>
                     </ul>
 
                     <div class="white-block-content">
-                        <?php 
+                        <?php
                         $show_breadcrumbs = couponxl_get_option( 'show_breadcrumbs' );
                         if( $show_breadcrumbs == 'yes' ){
                             ?>
@@ -83,7 +83,7 @@ global $categories_data_transient_lifetime;
                             <?php
                         }
                         ?>
-                        <?php 
+                        <?php
                         $content = get_the_content();
                         if( !empty( $content ) ):
                         ?>
@@ -101,9 +101,9 @@ global $categories_data_transient_lifetime;
                     <!-- <div class="white-block-content shop-offer-filter">
                         <?php
                         if( $theme_usage == 'all' || $theme_usage == 'deals' ){
-                            $deals = couponxl_count_post_type( 
-                                'offer', 
-                                array( 
+                            $deals = couponxl_count_post_type(
+                                'offer',
+                                array(
                                     'meta_query' => array(
                                         'relation' => 'AND',
                                         array(
@@ -123,27 +123,27 @@ global $categories_data_transient_lifetime;
                                         ),
                                         array(
                                             'key' => 'offer_store',
-                                            'value' => get_the_ID(),
+                                            'value' => $post_id,
                                             'compare' => '='
-                                        ),                                    
+                                        ),
                                         array(
                                             'key' => 'offer_type',
                                             'value' => 'deal',
                                             'compare' => '='
                                         )
-                                    ) 
-                                ) 
+                                    )
+                                )
                             );
                         }
                         else{
                             $deals  = 0;
                         }
-                        
+
                         if( $theme_usage == 'all' || $theme_usage == 'coupons' ){
-                            $coupons = couponxl_count_post_type( 
-                                'offer', 
-                                array( 
-                                    'meta_query' => array( 
+                            $coupons = couponxl_count_post_type(
+                                'offer',
+                                array(
+                                    'meta_query' => array(
                                         'relation' => 'AND',
                                         array(
                                             'key' => 'offer_start',
@@ -162,22 +162,22 @@ global $categories_data_transient_lifetime;
                                         ),
                                         array(
                                             'key' => 'offer_store',
-                                            'value' => get_the_ID(),
+                                            'value' => $post_id,
                                             'compare' => '='
-                                        ),                                    
+                                        ),
                                         array(
                                             'key' => 'offer_type',
                                             'value' => 'coupon',
                                             'compare' => '='
                                         )
-                                    ) 
-                                ) 
+                                    )
+                                )
                             );
                         }
                         else{
                             $coupons  = 0;
                         }
-                        ?>  
+                        ?>
                         <?php if( $theme_usage == 'all'): ?>
                             <a href="<?php the_permalink() ?>" class="<?php echo empty( $offer_type ) ? 'active' : '' ?>"><?php _e( 'All ', 'couponxl' ) ?>(<?php echo $deals + $coupons; ?>)</a>
                         <?php endif; ?>
@@ -191,7 +191,7 @@ global $categories_data_transient_lifetime;
 
                 </div>
 
-                <?php 
+                <?php
                     if ( is_active_sidebar( 'store-sidebar-1' ) ){
                         dynamic_sidebar( 'store-sidebar-1' );
                     }
@@ -218,7 +218,7 @@ global $categories_data_transient_lifetime;
                         'relation' => 'AND',
                         array(
                             'key' => 'offer_store',
-                            'value' => get_the_ID(),
+                            'value' => $post_id,
                             'compare' => '='
                         ),
                         array(
@@ -251,7 +251,7 @@ global $categories_data_transient_lifetime;
                         'relation' => 'AND',
                         array(
                             'key' => 'offer_store',
-                            'value' => get_the_ID(),
+                            'value' => $post_id,
                             'compare' => '='
                         ),
                     )
@@ -272,7 +272,7 @@ global $categories_data_transient_lifetime;
 
                 if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                     $offers = new WP_Query( $args );
-                    set_transient( $transient_key, $offers, $category_page_transient_lifetime );                    
+                    set_transient( $transient_key, $offers, $category_page_transient_lifetime );
                 }
 
                 // $page_links_total =  $offers->max_num_pages;
@@ -281,7 +281,7 @@ global $categories_data_transient_lifetime;
                 //     'mid_size' => 2,
                 //     'format' => '?page=%#%',
                 //     'total' => $page_links_total,
-                //     'current' => $cur_page, 
+                //     'current' => $cur_page,
                 //     'prev_next' => false,
                 //     'type' => 'array'
                 // );
@@ -292,48 +292,48 @@ global $categories_data_transient_lifetime;
                 // $page_links = paginate_links( $pagination_args );
 
                 // $pagination = couponxl_format_pagination( $page_links );
-                if( $offers->have_posts() ){                    
+                if( $offers->have_posts() ){
                     $col = 4;							/* CUSTOMISATION DONE HERE FROM 6 TO 4 */
                     if( $offer_view == 'list' ){
                         $col = 12;
                     }
                     ?>
-                    <div class="row masonry">                        
+                    <div class="row masonry">
                         <?php
                         while( $offers->have_posts() ){
-                            $offers->the_post();                            
-                            $xl_post_id = get_the_ID();
+                            $offers->the_post();
+                            $xl_post_id = $post_id;
                             $xl_offer_cat_id = '';
                             $xl_offer_tag_slug = '';
                             $xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
                             $xl_offer_tag = get_the_terms( $xl_post_id, 'offer_tag' );
                             for ($i = 0; $i < count($xl_offer_cat); ++$i) {
-                                $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';                                
+                                $xl_offer_cat_id.=$xl_offer_cat[$i]->term_taxonomy_id.',';
                             }
                             for ($i = 0; $i < count($xl_offer_tag); ++$i) {
-                                $xl_offer_tag_slug.=$xl_offer_tag[$i]->slug.',';                                
+                                $xl_offer_tag_slug.=$xl_offer_tag[$i]->slug.',';
                             }
-                            unset($i);                         
-                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ","); 
-                            $xl_offer_tag_slug =  rtrim($xl_offer_tag_slug, ",");                                 
+                            unset($i);
+                            $xl_offer_cat_id =  rtrim($xl_offer_cat_id, ",");
+                            $xl_offer_tag_slug =  rtrim($xl_offer_tag_slug, ",");
                             $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
-                            $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true );                            
+                            $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true );
                             ?>
                             <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" data-xltag="<?php echo $xl_offer_tag_slug; ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
                                 <?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
                             </div>
                             <?php
                         }?>
-                        <script type="text/javascript">  
+                        <script type="text/javascript">
                             window.isXlStorePage = true;
-                        </script>                        
+                        </script>
                         <!-- <?php if( !empty( $pagination ) ): ?>
                             <div class="col-sm-<?php echo esc_attr( $col ) ?> masonry-item">
                                 <ul class="pagination">
                                    <?php echo $pagination; ?>
                                 </ul>
                             </div>
-                        <?php endif; ?>   -->                      
+                        <?php endif; ?>   -->
                     </div>
                     <!-- CUSTOMISATION DONE HERE -->
                     <div class="white-block xl-offer-filter-not-found">
@@ -352,8 +352,17 @@ global $categories_data_transient_lifetime;
                     </div>
                     <?php
                 }
+                    $store_bottom_description = get_post_meta( $post_id, 'store_bottom', true );
+                    if(!empty($store_bottom_description)){ ?>
+                        <div class="white-block store-bottom-description">
+                            <div class="white-block-content">
+                                <?php echo $store_bottom_description; ?>
+                            </div>
+                        </div>
+                    <?php }
                 ?>
             </div>
+
         </div>
     </div>
 </section>
