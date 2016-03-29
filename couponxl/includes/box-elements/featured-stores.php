@@ -1,27 +1,11 @@
 <div class="white-block featured-stores">
     <div class="row">
-        <!-- <div class="col-sm-4">
-            <div class="featured-stores-title">
-                <?php if( !empty( $title ) ): ?>
-                    <h2><?php echo $title; ?></h2>
-                <?php endif; ?>
-                <?php if( !empty( $text ) ): ?>
-                    <p><?php echo $text; ?></p>
-                <?php endif; ?>
-                <?php if( !empty( $btn_text ) ): ?>
-                    <a href="<?php echo esc_url( $link ) ?>" class="btn">
-                        <?php echo $btn_text; ?>
-                    </a>
-                <?php endif; ?>
-            </div>
-        </div> -->
         <div class="col-sm-12">
             <?php
             $args = array(
                 'post_type' => 'store',
                 'post_status' => 'publish',
-                'posts_per_page' => -1,
-
+                'posts_per_page' => -1
             );
 
             if( !empty( $items ) ){
@@ -38,10 +22,19 @@
             }
             $stores = new WP_Query( $args );
             $counter = 0;
+            ?>
+            <ul class="list-unstyled list-inline nav nav-tabs nav-justified" role="tablist">
+                <li class=""><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-hand-right Top"></span> Top Online Stores</a></li>
+                <li class=""><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-hand-right Top"></span> Top Online Stores</a></li>
+                <li class=""><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-hand-right Top"></span> Top Online Stores</a></li>
+                <li class=""><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-hand-right Top"></span> Top Online Stores</a></li>
+                <li class=""><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-hand-right Top"></span> Top Online Stores</a></li>
+            </ul>
+            <?php
             if( $stores->have_posts() ){
                 ?>
                 <ul class="list-unstyled list-inline">
-                    <?php                    
+                    <?php
                     while( $stores->have_posts() ){
                         $stores->the_post();
                         ?>
