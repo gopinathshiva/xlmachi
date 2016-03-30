@@ -1,59 +1,69 @@
 <?php
+/*
+	Template Name: Promocodes Template
+*/
+
 get_header();
 the_post();
 get_template_part( 'includes/title' );
 ?>
 
 <style>
-    .single-promocode .breadcrumb-section {
+    .page-template-page_tpl_promocode .breadcrumb-section {
         margin-bottom: 0;
     }
-    .single-promocode .row>h1{
+    .page-template-page_tpl_promocode .row>h1{
         font-size: 30px;
         font-weight: bold;
         text-align: center;
     }
-    .single-promocode .promocode-filter-container{
+    .page-template-page_tpl_promocode .promocode-filter-container{
         padding: 10px 0;
     }
-    .single-promocode .promocode-filter-container select{
+    .page-template-page_tpl_promocode .promocode-filter-container select{
         width: 40%;
     }
-    .single-promocode .promocode-table-container table{
+    .page-template-page_tpl_promocode .promocode-table-container table{
         text-align: center;
     }
-    .single-promocode .promocode-table-container table .promo-code{
+    .page-template-page_tpl_promocode .promocode-table-container table .promo-code{
         background: #fff;
         padding: 8px 15px;
     }
-    .single-promocode .promocode-table-container table,.single-promocode .promocode-table-container table tr:nth-child(odd) {
+    .page-template-page_tpl_promocode .promocode-table-container table,.page-template-page_tpl_promocode .promocode-table-container table tr:nth-child(odd) {
         background: #e2f1ec;
     }
-    .single-promocode .promocode-table-container th{
+    .page-template-page_tpl_promocode .promocode-table-container th{
         background-color: rgb(43, 133, 206);
         color: #fff;
         border: none;
         text-align: center;
     }
-    .single-promocode .promocode-table-container .offer-btn{
+    .page-template-page_tpl_promocode .promocode-table-container .offer-btn{
         padding: 8px 12px;
         background: #4CAF50;
         color: white;
         font-weight: 500;
     }
+    @media screen and (max-width:990px) {
+        .page-template-page_tpl_promocode .promocode-filter-container label{
+            width: 25%;
+            min-width: 125px;
+        }
+    }
     @media screen and (max-width:650px) {
-        .single-promocode .contact-page .white-block {
+        .page-template-page_tpl_promocode .contact-page .white-block {
             padding: 0;
         }
     }
     @media screen and (max-width:650px) {
-        .single-promocode .container,.single-promocode .white-block-content {
+        .page-template-page_tpl_promocode .contact-page>.container,.page-template-page_tpl_promocode .white-block-content {
             padding: 0;
         }
-        .single-promocode .promocode-table-container .offer-btn{
+        .page-template-page_tpl_promocode .promocode-table-container .offer-btn{
             padding: 6px 6px;
         }
-        .single-promocode .promocode-table-container td{
+        .page-template-page_tpl_promocode .promocode-table-container td{
             padding: 10px 5px;
         }
     }
