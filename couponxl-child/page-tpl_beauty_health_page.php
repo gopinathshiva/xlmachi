@@ -6,8 +6,8 @@
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
 
-                    $offer_cat = 'nutrition,personal-care-beauty,sports-wear,personal-care-appliances,healthcare-fitness';
-                    
+                    $offer_cat = 'nutrition-supplements,personal-care-beauty,sports-wear,personal-care-appliances,healthcare-fitness,medicines,eye-lenses,jewellery';
+
             		$args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
@@ -48,7 +48,7 @@
                     //         $args['meta_key'] = $temp[0];
                     //         $args['order'] = $temp[1];
                     //     }
-                    // }                    
+                    // }
 
             		// if( !empty( $offer_type ) ){
               //           if( !empty( $offer_type ) || $offer_type == 'deal' ){
@@ -80,7 +80,7 @@
             				'terms' => explode( ",", $offer_cat ),
                             'operator' => 'IN'
             			);
-            		}                    
+            		}
 
             		// if( !empty( $offer_tag ) ){
             		// 	$args['tax_query'][] = array(
@@ -100,11 +100,11 @@
                     if( !empty( $keyword ) ){
                         $args['s'] = urldecode( $keyword );
                     }
-                    
+
 
                     $transient_args = $args;
 
-                    foreach ($transient_args as $index => $data) {                        
+                    foreach ($transient_args as $index => $data) {
                         if ($index == 'meta_query') {
                             unset($transient_args[$index]);
                         }
@@ -112,12 +112,12 @@
 
                     $transient_namespace = xl_transient_namespace();
 
-                    $transient_key = $transient_namespace .md5( serialize($transient_args) );                       
+                    $transient_key = $transient_namespace .md5( serialize($transient_args) );
 
                     if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                         $offers = new WP_Query( $args );
-                        set_transient( $transient_key, $offers, $category_page_transient_lifetime );                                            
-                    }                   
-            		
+                        set_transient( $transient_key, $offers, $category_page_transient_lifetime );
+                    }
+
 					require_once( locate_template( 'includes/search-after.php' ) );
 ?>

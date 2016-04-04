@@ -1,12 +1,12 @@
 <?php
 /*
-	Template Name: Baby, Kids and Toys Page
+	Template Name: Flowers, Gifts & Jewellery Page
 */
     global $category_page_transient_lifetime;
                     require_once( locate_template( 'includes/search-before.php' ) );
                     $cur_page = 1;
 
-                    $offer_cat = 'baby,kids-toys,kids-clothing,school-stationery-items,gaming';
+                    $offer_cat = 'automotive,bike-accessories,car-accessories,safety-products';
 
             		$args = array(
             			'post_status' => 'publish',
@@ -73,6 +73,8 @@
                     //     );
                     // }
 
+
+
             		if( !empty( $offer_cat ) ){
             			$args['tax_query'][] = array(
             				'taxonomy' => 'offer_cat',
@@ -81,21 +83,6 @@
                             'operator' => 'IN'
             			);
             		}
-
-            		// if( !empty( $offer_tag ) ){
-            		// 	$args['tax_query'][] = array(
-            		// 		'taxonomy' => 'offer_tag',
-            		// 		'field'	=> 'slug',
-            		// 		'terms' => $offer_tag,
-            		// 	);
-            		// }
-            		// if( !empty( $location ) ){
-            		// 	$args['tax_query'][] = array(
-            		// 		'taxonomy' => 'location',
-            		// 		'field'	=> 'slug',
-            		// 		'terms' => $location,
-            		// 	);
-            		// }
 
                     if( !empty( $keyword ) ){
                         $args['s'] = urldecode( $keyword );
