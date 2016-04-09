@@ -2,7 +2,7 @@ var updateOfferCount;
 
 jQuery(document).ready(function($){
 
-	var isTouchDevice = (window.innerWidth <= 760 ) ? true:false;
+	var isTouchDevice = (window.innerWidth < 768 ) ? true:false;
 	var stickyNavigationHeight = $('.navigation.sticky-nav').height();
 
 	//function to call for smooth scrolling on click of sidebar menu
@@ -66,6 +66,7 @@ jQuery(document).ready(function($){
 		if(keyupTimeout){
 			clearTimeout(keyupTimeout);
 		}
+		$('.xl-search-form-container .search-loader').show();
 		keyupTimeout = setTimeout(function(){
 			var searchText = $(this).val();
 			var parentElement = $(this).next()[0];
@@ -91,6 +92,7 @@ jQuery(document).ready(function($){
 		}.bind(this),300);
 
 		function updateSearchResults(results,searchText,parentElement){
+			$('.xl-search-form-container .search-loader').hide();
 			$(parentElement).empty();
 			results = JSON.parse(results);
 			var resultCounter = 0;
@@ -144,9 +146,7 @@ jQuery(document).ready(function($){
 	//on click of checkbox to filter offer category
 	$('.xl-offer-cat-filter input.xl-offer-cat-filter-checkbox').off('click').on('click',function(event){
 	 	xl_filterOffers();
-	 	var option = $(this).attr('data-option');
-	 	option = option.toLowerCase();
- 		option = option.split(' ').join('_');
+	 	var option = $(this).attr('data-xlcategory');
 	 	if($(this).prop('checked')){
 	 		var id="xl_filter_text_"+option;
 	 		var element = '<li class="xl_filter_text_item" id='+id+'>'+$(this).attr('data-option')+', </li>'
@@ -357,7 +357,7 @@ jQuery(document).ready(function($){
 		$('.xl-offer-store-result li').each(function(k,v){
             var input = $(this).find('input')[0];
             var id = ($(input).val());
-            if(!($('div[data-xlstore='+id+']:visible').length)){
+            if(!($('div[data-xlstore*='+id+']:visible').length)){
                 $(this).remove();
             }
         });
@@ -368,7 +368,7 @@ jQuery(document).ready(function($){
 		$('.xl-offer-cat-result li').each(function(k,v){
             var input = $(this).find('input')[0];
             var id = ($(input).val());
-            if(!($('div[data-xlcategory='+id+']:visible').length)){
+            if(!($('div[data-xlcategory*='+id+']:visible').length)){
                 $(this).remove();
             }
         });
@@ -396,6 +396,19 @@ jQuery(document).ready(function($){
     },function(){
     	$(this).find('span').fadeOut('fast');
     });
+
+	//promocodes page
+	if('.page-template-page_tpl_promocode'){
+		if(isTouchDevice){
+			$("html, body").animate({
+	            scrollTop:30
+	        }, 600);
+		}else{
+			$("html, body").animate({
+	            scrollTop: 130
+	        }, 600);
+		}
+	}
 
     //fixed position widget scroll on offer and store page
     if(window.isXlSearchPage && !isTouchDevice){
@@ -514,6 +527,89 @@ jQuery(document).ready(function($){
 		$('html, body').animate({
 		    scrollTop: $("body").offset().top + 145
 	 	}, 350);
+	}
+
+	//promocodes select button click
+	if($('#promocodes-filter-store').length){
+		$('#promocodes-filter-store').on('change',function () {
+			onPromocodesStoreChange($(this).val());
+		});
+
+		$('#promocodes-filter-category').on('change',function () {
+			var id = $(this).val();
+			$('.promocode-table-container table tr:not(".promocode-tbl-header")').hide();
+			$('.promocode-table-container table tr:not(".promocode-tbl-header")').each(function(k,v){
+			   var cat = $(v).attr('data-offer-cat');
+			       if(cat.indexOf(id)>=0){
+			         $(v).show();
+			       }
+			});
+		});
+
+		initPromocodePage();
+
+		function initPromocodePage(){
+			$('#promocodes-filter-store option#235').prop('selected',true);
+			onPromocodesStoreChange('235');
+		}
+
+		function onPromocodesStoreChange(value){
+			var cat_filters = [];
+			$('.page-template-page_tpl_promocode .promocode-no-offers').hide();
+			$('.page-template-page_tpl_promocode .promocode-loading').show();
+			$('.promocode-table-container table tr:not(".promocode-tbl-header")').remove();
+			$.ajax({
+				url : ajaxurl,
+				type : 'post',
+				data : {
+					action : 'promocodes_search',
+					store_id: value
+				},
+				success : function( offers ) {
+					$('.page-template-page_tpl_promocode .promocode-loading').hide();
+					if(!offers){
+						return;
+					}
+					offers = JSON.parse(offers);
+					if(!offers.length){
+						$('.page-template-page_tpl_promocode .promocode-no-offers').show();
+						return;
+					}
+					$('.page-template-page_tpl_promocode .promocode-no-offers').hide();
+					var html = '';
+					for(var offer in offers){
+						var cat = offers[offer].cat;
+						if(cat.length){
+							for(var i in cat){
+								if(cat_filters.indexOf(cat[i])<0){
+									cat_filters.push(cat[i]);
+								}
+							}
+						}
+						cat = cat.join(',');
+						html += '<tr class="'+offers[offer].type+'" data-offer-cat="'+cat+'">';
+						html += '<td>'+offers[offer].title+'</td>';
+						if(!offers[offer].code){
+							offers[offer].code = 'Deal';
+						}
+						html += '<td><span class="promo-code">'+offers[offer].code+'</span></td>';
+						html += '<td><a target="_blank" class="offer-btn" href="'+offers[offer].url+'">Click Here</a></td>';
+						html += '<td>Active</td>';
+						html += '</tr>';
+					}
+					console.log(cat_filters);
+					$('.promocode-table-container table').append(html);
+					$('#promocodes-filter-category option').each(function (k,v) {
+						if(cat_filters.indexOf(+v.id)<0 && v.id!="-1"){
+							$(v).hide();
+						}else{
+							$(v).show();
+						}
+					});
+					$('#promocodes-filter-category option').first().prop('selected',true);
+				}
+			});
+		}
 	}
 
 });

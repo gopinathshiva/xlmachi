@@ -277,6 +277,10 @@ global $categories_data_transient_lifetime;
 
                 $transient_key = $transient_namespace .md5( serialize($transient_args) );
 
+                if(is_localhost()){
+                    delete_transient( $transient_key );
+                }
+
                 if ( false === ( $offers = get_transient( $transient_key ) ) ) {
                     $offers = new WP_Query( $args );
                     set_transient( $transient_key, $offers, $category_page_transient_lifetime );
@@ -309,7 +313,7 @@ global $categories_data_transient_lifetime;
                         <?php
                         while( $offers->have_posts() ){
                             $offers->the_post();
-                            $xl_post_id = $post_id;
+                            $xl_post_id = get_the_ID();
                             $xl_offer_cat_id = '';
                             $xl_offer_tag_slug = '';
                             $xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
@@ -326,7 +330,7 @@ global $categories_data_transient_lifetime;
                             $xl_store_id = get_post_meta( $xl_post_id, 'offer_store', true );
                             $xl_offer_type =  get_post_meta( $xl_post_id, 'offer_type', true );
                             ?>
-                            <div data-xltype="<?php echo $xl_offer_type ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" data-xltag="<?php echo $xl_offer_tag_slug; ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
+                            <div data-xltype="<?php echo $xl_offer_type; ?>" data-xlstore="<?php echo $xl_store_id ?>" data-xlcategory="<?php echo $xl_offer_cat_id ?>" data-xltag="<?php echo $xl_offer_tag_slug; ?>" class="col-sm-<?php echo esc_attr( $col ) ?> xl-offer-item">
                                 <?php include( locate_template( 'includes/offers/offers.php' ) ); ?>
                             </div>
                             <?php

@@ -339,7 +339,7 @@ a.read-info{
     top: 22px;
     height: 40px;
     z-index: 1000;
-    width: 55%;
+    width: 50%;
 }
 
 .navigation.sticky-nav .navbar .xl-search-form-container{
@@ -348,6 +348,14 @@ a.read-info{
 
 .navbar .xl-search-form{
     position: relative;
+}
+
+.xl-search-form-container .search-loader{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1.5%;
+    display: none;
 }
 
 .navbar .xl-search-form-container .fa-search{
@@ -794,6 +802,13 @@ a.read-info{
 }
 
 /* Media Queries */
+
+@media screen and (max-width:767px){
+    .offer-box .white-block-content h3 {
+        min-height: initial !important;
+        max-height: initial !important;
+    }
+}
 
 @media screen and (min-width: 768px){
 

@@ -9,6 +9,12 @@ get_template_part( 'includes/title' );
 ?>
 
 <style>
+    .page-template-page_tpl_promocode .promocode-no-offers,.page-template-page_tpl_promocode .promocode-loading{
+        display: none;
+        text-align: center;
+        padding: 3%;
+        background: #e2f1ec;
+    }
     .page-template-page_tpl_promocode .breadcrumb-section {
         margin-bottom: 0;
     }
@@ -100,9 +106,9 @@ get_template_part( 'includes/title' );
                         <div class="promocode-filter-container">
                             <div class='col-md-6'>
                                 <label>Filter by Store:&nbsp;</label>
-                                <select> <?php
+                                <select id="promocodes-filter-store"> <?php
                                     while ( $stores->have_posts() ) : $stores->the_post();
-                                        echo '<option value="'.$post->ID.'">';
+                                        echo '<option id="'.$post->ID.'" value="'.$post->ID.'">';
                                     	the_title();
                                     	echo '</option>';
                                     endwhile; ?>
@@ -110,10 +116,11 @@ get_template_part( 'includes/title' );
                             </div>
                             <div class='col-md-6'>
                                 <label>Filter by Category:&nbsp;</label>
-                                <select>
+                                <select id="promocodes-filter-category">
                                 <?php
+                                    echo '<option id="-1" value="-1">All</option>';
                                     foreach( $xl_offer_cats as $key => $cat){
-                                        echo '<option value="'.$cat->term_taxonomy_id.'">';
+                                        echo '<option id="'.$cat->term_taxonomy_id.'" value="'.$cat->term_taxonomy_id.'">';
                                     	echo $cat->name;
                                     	echo '</option>';
                                     }
@@ -129,37 +136,21 @@ get_template_part( 'includes/title' );
                                 <col width="20%">
                                 <col width="32%">
                                 <col width="8%">
-                                <tr>
+                                <tr class='promocode-tbl-header'>
                                     <th>Title</th>
                                     <th>Code</th>
-                                    <th>Click Here</th>
+                                    <th>Offer Page</th>
                                     <th>Status</th>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>Post title here</td>
                                     <td><span class="promo-code">Code</span></td>
                                     <td ><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
                                     <td>Status</td>
-                                </tr>
-                                <tr>
-                                    <td>Post title here</td>
-                                    <td><span class="promo-code">Code</span></td>
-                                    <td><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
-                                    <td>Status</td>
-                                </tr>
-                                <tr>
-                                    <td>Post title here</td>
-                                    <td><span class="promo-code">Code</span></td>
-                                    <td ><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
-                                    <td>Status</td>
-                                </tr>
-                                <tr>
-                                    <td>Post title here</td>
-                                    <td><span class="promo-code">Code</span></td>
-                                    <td><a class="offer-btn" href="javascript:void(0)">Click Here</a></td>
-                                    <td>Status</td>
-                                </tr>
+                                </tr> -->
                             </table>
+                            <p class="promocode-no-offers">No Offers Found!</p>
+                            <p class="promocode-loading">Loading...!</p>
                         </div>
                     </div>
 
