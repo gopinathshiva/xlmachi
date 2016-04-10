@@ -207,6 +207,10 @@ add_action('xl_offer_cat','xl_offer_cat_fn');
 function xl_offer_cat_fn(){
     global $categories_data_transient_lifetime;
 
+    if(is_localhost()){
+        delete_transient( 'couponxl_filter_categories' );
+    }
+
     if ( false === ( $xl_offer_cats = get_transient( 'couponxl_filter_categories' ) ) ) {
         $xl_offer_cats = couponxl_get_organized( 'offer_cat' );
         set_transient( 'couponxl_filter_categories', $xl_offer_cats, $categories_data_transient_lifetime );

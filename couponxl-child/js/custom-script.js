@@ -10,6 +10,7 @@ jQuery(document).ready(function($){
 		if ($(this).hasAttr("data-scroll-id")) {
 			var offsetToAdd = (stickyNavigationHeight + 5);
 			var id = $(this).attr('data-scroll-id');
+
 		    $('html, body').animate({
 		        scrollTop: ($("#xl-home-offer-"+id).offset().top - offsetToAdd)
 		    }, 350);
@@ -176,7 +177,12 @@ jQuery(document).ready(function($){
 
 	function xl_filterOffers(){
 
-		var scrollStart = $("body").offset().top + 330;
+		var scrollStart;
+		if($('.single-store').length){
+			scrollStart = $("body").offset().top + 330;
+		}else{
+			scrollStart = $("body").offset().top + 150;
+		}
 
 		$('html, body').animate({
 		    scrollTop: scrollStart
@@ -337,23 +343,10 @@ jQuery(document).ready(function($){
 
 	if(window.isXlSearchPage || window.isXlStorePage){
 		updateOfferTypeCount();
-
-        if(window.isXlSearchPage && window.isXlStorePage){
-        	checkStoresFilter();
-        	checkCategoryFilter();
-
-        }else{
-        	if(window.isXlSearchPage){
-		        checkStoresFilter();
-	        }
-	        else if(window.isXlStorePage){
-		        checkCategoryFilter();
-	        }
-        }
 	}
 
 	//hiding stores with no offers
-	function checkStoresFilter(){
+	if($('.xl-offer-store-result li').length){
 		$('.xl-offer-store-result li').each(function(k,v){
             var input = $(this).find('input')[0];
             var id = ($(input).val());
@@ -364,7 +357,7 @@ jQuery(document).ready(function($){
 	}
 
 	//hiding categories with no offers
-	function checkCategoryFilter(){
+	if($('.xl-offer-cat-result li').length){
 		$('.xl-offer-cat-result li').each(function(k,v){
             var input = $(this).find('input')[0];
             var id = ($(input).val());
@@ -384,6 +377,7 @@ jQuery(document).ready(function($){
     });
 
     $('.xl-scrollup').click(function () {
+
         $("html, body").animate({
             scrollTop: 0
         }, 600);
@@ -398,7 +392,8 @@ jQuery(document).ready(function($){
     });
 
 	//promocodes page
-	if('.page-template-page_tpl_promocode'){
+	if($('.page-template-page_tpl_promocode').length){
+
 		if(isTouchDevice){
 			$("html, body").animate({
 	            scrollTop:30
@@ -409,6 +404,7 @@ jQuery(document).ready(function($){
 	        }, 600);
 		}
 	}
+
 
     //fixed position widget scroll on offer and store page
     if(window.isXlSearchPage && !isTouchDevice){
@@ -524,6 +520,7 @@ jQuery(document).ready(function($){
 
 	//auto scroll on loading store page
 	if($('.single-store').length && window.innerWidth >= 768){
+
 		$('html, body').animate({
 		    scrollTop: $("body").offset().top + 145
 	 	}, 350);
