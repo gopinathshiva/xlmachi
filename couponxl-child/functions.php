@@ -572,6 +572,60 @@ function xl_footer_stats_callback(){ ?>
 
 add_action('xl_footer_stats','xl_footer_stats_callback');
 
+function xl_footer_cats_callback(){
+    $site_url = esc_url(home_url('/'));
+    ?>
+
+    <div class="xl-footer-cats">
+        <div class="row">
+            <ul>
+                <h6 class="heading">CouponMachi</h6>
+                <li><a href="<?php echo $site_url.'about'; ?>" title="About Us">About Us</a></li>
+                <li><a href="<?php echo $site_url.'privacy-policy'; ?>" title="Privacy Policy" rel="nofollow">Privacy</a></li>
+                <li><a href="<?php echo $site_url.'terms-and-conditions'; ?>" title="Terms & Conditions" rel="nofollow">Terms of Use</a></li>
+                <li><a href="<?php echo $site_url.'sitemap_index.xml'; ?>" title="Sitemap">Sitemap</a></li>
+            </ul>
+            <ul>
+                <h6 class="heading">Stores</h6>
+                <li><a href="<?php echo $site_url.'paytm'; ?>" title="Paytm Offers">Paytm</a></li>
+                <li><a href="<?php echo $site_url.'ebay'; ?>" title="Flipkart Offers">Flipkart</a></li>
+                <li><a href="<?php echo $site_url.'amazon'; ?>" title="Amazon Offers">Amazon</a></li>
+                <li><a href="<?php echo $site_url.'makemytrip'; ?>" title="MakeMyTrip Offers">MakeMyTrip</a></li>
+                <li><a href="<?php echo $site_url.'snapdeal'; ?>" title="Snapdeal Offers">Snapdeal</a></li>
+                <li class='view-all'><a href="<?php echo $site_url.'stores'; ?>" title="All Stores">All Stores</a></li>
+            </ul>
+            <ul>
+                <h6 class="heading">Popular Coupons</h6>
+                <li><a href="<?php echo $site_url.'recharge-coupons'; ?>" title="Recharge Offers">Recharge</a></li>
+                <li><a href="<?php echo $site_url.'food-dining-coupons'; ?>" title="Food Offers">Food</a></li>
+                <li><a href="<?php echo $site_url.'travel-coupons'; ?>" title="Travel Offers">Travel</a></li>
+                <li><a href="<?php echo $site_url.'fashion-coupons'; ?>" title="Fashion Offers">Fashion</a></li>
+                <li><a href="<?php echo $site_url.'groceries-coupons'; ?>" title="Groceries Offers">Groceries</a></li>
+            </ul>
+            <ul>
+                <h6 class="heading">Popular Categories</h6>
+                <li><a href="<?php echo $site_url.'electronics-coupons'; ?>" title="Electronics Offers">Electronics</a></li>
+                <li><a href="<?php echo $site_url.'appliances-coupons'; ?>" title="Appliances Offers">Appliances</a></li>
+                <li><a href="<?php echo $site_url.'flowers-gifts-jewellery-coupons'; ?>" title="Flowers & Gifts Offers">Flowers & Gifts</a></li>
+                <li><a href="<?php echo $site_url.'beauty-health-coupons'; ?>" title="Health & Fitness Offers">Health & Fitness</a></li>
+                <li><a href="<?php echo $site_url.'books-stationery-coupons'; ?>" title="Books & Stationery Offers">Books & Stationery</a></li>
+                <li class='view-all'><a href="<?php echo $site_url.'categories'; ?>" title="View All Categories">All Categories</a></li>
+            </ul>
+            <ul>
+                <h6 class="heading">Offer Filtes</h6>
+                <li><a href="<?php echo $site_url.'promocodes'; ?>" title="All Store Promocodes">All Store Promocodes</a></li>
+                <li><a href="<?php echo $site_url.'offer_tag/cashback'; ?>" title="Cashback Offers">Cashback Offers</a></li>
+                <li><a href="<?php echo $site_url.'expiring-offers'; ?>" title="Latest Offers">Expiring Offers</a></li>
+                <li><a href="<?php echo $site_url.'flipkart_deal_of_the_day'; ?>" title="Flipkart Deal of the Day">Flipkart Deal of the Day</a></li>
+             </ul>
+         </div>
+     </div>
+
+    <?php
+}
+
+add_action('xl_footer_cats','xl_footer_cats_callback');
+
 /* function xl_offer_of_the_day_callback(){?>
     <div class="buzz-container">
         <div class="buzz-it-up notification" id="buzz_smile" data-notifcount="2">

@@ -156,6 +156,29 @@ Tags: white
 
 /* ***********************  widget style starts here ******************************* */
 
+.xl-footer-cats{
+    border-bottom: 1px rgba(145, 143, 130, 0.35) solid;
+    padding-bottom: 3%;
+}
+
+.xl-footer-cats h6{
+    color: rgba(255, 255, 255, 0.74);
+}
+
+.xl-footer-cats ul li a{
+    color: #919394;
+}
+
+.xl-footer-cats ul .view-all{
+    text-decoration: underline;
+}
+
+.xl-footer-cats ul{
+    list-style-type: none;
+    width: 20%;
+    float: left;
+}
+
 .footer-social-follow>a{
     color: white;
     width: 30px;
@@ -832,6 +855,10 @@ a.read-info{
     .offer-box .white-block-content h3 {
         min-height: initial !important;
         max-height: initial !important;
+    }
+
+    .xl-footer-cats ul{
+        width: 50%;
     }
 }
 
