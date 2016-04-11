@@ -155,6 +155,31 @@ Tags: white
 /* ***********************  coupon box style ends here ******************************* */
 
 /* ***********************  widget style starts here ******************************* */
+
+.footer-social-follow>a{
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 20px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 5% 0 0;
+}
+
+.footer-social-follow>a.follow-facebook{
+    background: #3b5998;
+}
+
+.footer-social-follow>a.follow-twitter{
+    background: #00aced;
+}
+
+.footer-social-follow>a.follow-google{
+    background: #dd4b39;
+}
+
 .textwidget{
 	color: #919394;
 	text-align:justify;
