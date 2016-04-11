@@ -15,6 +15,11 @@ Tags: white
     background: url('images/bg.webp');
 }*/
 
+body{
+    /*background: rgba(89, 38, 110, 0.13);*/
+    background-color: rgba(187, 16, 158, 0.13);
+}
+
 /* ***********************  header style starts here ******************************* */
 
 .account-collapse .xl-register{
