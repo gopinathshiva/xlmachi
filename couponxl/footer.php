@@ -6,7 +6,7 @@ $footer_facebook = couponxl_get_option( 'footer_facebook' );
 $footer_twitter = couponxl_get_option( 'footer_twitter' );
 $footer_google = couponxl_get_option( 'footer_google' );
 
-do_action('xl_side_menu');	
+do_action('xl_side_menu');
 
 if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $footer_twitter ) || !empty( $footer_google ) ):
 ?>
@@ -15,6 +15,7 @@ if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $foote
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
+					<?php do_action('xl_footer_cats'); ?>
 					<?php do_action('xl_footer_stats'); ?>
 					<?php
 					$show_to_top = couponxl_get_option( 'show_to_top' );
@@ -31,7 +32,7 @@ if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $foote
 						<?php echo $footer_copyrights ?>
 					</div>
 
-					<?php 
+					<?php
 					do_action('xl_scroll_top'); ?>
 
 					<div class="pull-right">
@@ -50,7 +51,7 @@ if( !empty( $footer_copyrights ) || !empty( $footer_facebook ) || !empty( $foote
 								?>
 								<a href="<?php echo esc_url( $footer_google ) ?>" class="btn google" target="_blank"><i class="fa fa-google-plus"></i></a>
 								<?php
-							}						
+							}
 						?>
 					</div>
 
