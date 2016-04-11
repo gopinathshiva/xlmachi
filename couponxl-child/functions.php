@@ -541,12 +541,12 @@ function xl_side_menu_callback(){
     <?php }else{?>
 
         <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
-        <li><a href="<?php echo esc_url( home_url('/') ).'recharge-offers' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'travel-offers' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-offers' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'tv-audio-video-entertainment-offers' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-offers' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'fashion-offers' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'recharge-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'travel-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'computers-laptops-gaming-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'fashion-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
     <?php }
     ?>
@@ -562,9 +562,9 @@ function xl_side_menu_callback(){
 function xl_footer_stats_callback(){ ?>
 
         <ul class="list-inline xl-footer-stats go-flex">
-            <li><span><i class="fa fa-smile-o"></i></span><span><b>4325</b><br><small>Coupons redeemed so far</small></span></li>
+            <li><span><i class="fa fa-smile-o"></i></span><span><b>4125</b><br><small>Coupons redeemed so far</small></span></li>
             <li><span><i class="fa fa-bookmark"></i></span><span><b>5204</b><br><small>Coupons &amp; Deals for you</small></span></li>
-            <li><span><i class="fa fa-users"></i></span><span><b>2636</b><br><small>Subscribed Users</small></span></li>
+            <li><span><i class="fa fa-users"></i></span><span><b>5636</b><br><small>Subscribed Users</small></span></li>
             <li><span><i class="fa fa-check-circle"></i></span><span><b>100%</b><br><small>Verified</small></span></li>
         </ul>
     <?php
