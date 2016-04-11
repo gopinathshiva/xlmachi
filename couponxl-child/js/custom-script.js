@@ -529,7 +529,11 @@ jQuery(document).ready(function($){
 	//promocodes select button click
 	if($('#promocodes-filter-store').length){
 		$('#promocodes-filter-store').on('change',function () {
-			onPromocodesStoreChange($(this).val());
+			if($(this).val()==-1){
+				$('.promocode-table-container table tr:not(".promocode-tbl-header")').show();
+			}else{
+				onPromocodesStoreChange($(this).val());
+			}
 		});
 
 		$('#promocodes-filter-category').on('change',function () {
