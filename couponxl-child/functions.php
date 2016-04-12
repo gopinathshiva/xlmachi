@@ -447,8 +447,8 @@ function offer_top_info_callback(){?>
     <div class="xl-offer-label <?php echo $offer_flat.$offer_cashback; ?>" data-xl-offer-amount="<?php echo $offer_amount; ?>" data-xl-offer-number="<?php echo $offer_number; ?>" data-xl-offer-type="<?php echo $offer_type; ?>" data-xl-offer-unit="<?php echo $offer_unit; ?>">
         <div class="xl-offer-text">
             <?php if($offer_type == 'Exclusive'){ ?>
-                <a style="color:white;" href="javascript:void(0);"><?php echo $offer_type.' offer' ?></a>
-            <?php else{ ?>
+                <a style="color:white;" href="javascript:void(0);"><?php echo $offer_type.' offer'; ?></a>
+            <?php } else { ?>
                 <a style="color:white;" href="<?php echo esc_url( home_url('/') ).'offer_tag/'.$offer_type; ?>"><?php echo $offer_type.' offer' ?></a>
             <?php } ?>
         </div>

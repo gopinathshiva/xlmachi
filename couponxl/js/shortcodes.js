@@ -8,12 +8,12 @@
 	/* HANDLE MULTIPLE IMAGES */
 	$(document).on( 'click', '.shortcode-add-images', function( e ){
 		e.preventDefault();
-		
+
 		var $this = $(this);
 		var $parent = $this.parents('.shortcode-option');
 		var $field = $parent.find( 'input' );
 		var $image_holder = $parent.find('.shortcode-images-holder');
-		
+
 		var Proper_Frame = wp.media({
 			multiple: true,
 			title: 'Select Images'
@@ -31,32 +31,32 @@
 			update_images( $image_holder, $field );
 			Proper_Frame.close();
 		});
-				
-		
+
+
 		Proper_Frame.open();
 	});
-	
+
 	$(document).on( 'click', '.shortcode-remove-images', function(e){
 		e.preventDefault();
 		var $this = $(this);
 		var $parent = $this.parents('.shortcode-option');
 		var $field = $parent.find( 'input' );
-		var $image_holder = $parent.find( '.shortcode-images-holder' );		
+		var $image_holder = $parent.find( '.shortcode-images-holder' );
 		var image_id = $this.data('image_id');
-		$image_holder.find('img[data-image_id="'+image_id+'"]').fadeOut( 150, function(){ 
+		$image_holder.find('img[data-image_id="'+image_id+'"]').fadeOut( 150, function(){
 			$(this).remove();
-			$this.remove(); 
+			$this.remove();
 			update_images( $image_holder, $field );
-		});		
+		});
 	});
-	
+
 	function update_images( $image_holder, $field ){
 		var image_ids = [];
 		$image_holder.find( 'img' ).each(function(){
 			var $this = $(this);
 			image_ids.push( $this.data('image_id') );
 		});
-		
+
 		$field.val( image_ids.join(",") );
 	}
 
@@ -88,19 +88,19 @@
 
 		Proper_Frame.open();
 	});
-	
+
 	$(document).on( 'click', '.shortcode-remove-image', function(e){
 		e.preventDefault();
 		var $this = $(this);
 		var $parent = $this.parents('.shortcode-option');
 		var $field = $parent.find( 'input' );
 
-		$('img[data-image_id="'+$field.val()+'"]').fadeOut( 100, function(){ 
+		$('img[data-image_id="'+$field.val()+'"]').fadeOut( 100, function(){
 			$parent.find('.shortcode-image-wrapper').remove();
 		});
 
 		$field.val('');
-	});	
+	});
 	/* END HANDLE ONE IMAGE */
 
 	$(document).on( 'click', '.shortcode-save-options', function(e){
@@ -143,7 +143,7 @@
 	function call_shortcode(){
 		$.ajax({
 			url: ajaxurl,
-			data: { 
+			data: {
 				shortcode: active_shortcode,
 				action: 'shortcode_call'
 			},
@@ -193,7 +193,7 @@
 	if( typeof tinymce != 'undefined' ){
 	    tinymce.create('tinymce.plugins.couponxl', {
 	        init : function(ed, url) {
-	        	instance = ed;        	
+	        	instance = ed;
 				ed.addButton('couponxlgrid', {
 					type: 'listbox',
 					text: 'CouponXL Grid',
@@ -231,12 +231,13 @@
 						{ text: 'Slider', value: 'slider' },
 						{ text: 'Accordion', value: 'accordion' },
 						//CUSTOMISATION DONE HERE
-						{ text: 'Top Categories', value: 'top_categories' }
+						{ text: 'Top Categories', value: 'top_categories' },
+						{ text: 'Slider Posts', value: 'slider_posts' }
 					],
 					onPostRender: function() {
 						ed.my_control = this;
 					}
-				});			
+				});
 	        }
 	    });
 	    // Register plugin

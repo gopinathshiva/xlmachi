@@ -1,7 +1,7 @@
 <?php
 
 class Shortcodes{
-	
+
 	function __construct(){
 		add_action( 'init', array( $this, 'shortcode_buttons' ) );
 		add_action('wp_ajax_shortcode_call', array( $this, 'shortcode_options' ) );
@@ -10,9 +10,9 @@ class Shortcodes{
 
 	function shortcode_buttons(){
 		add_filter( "mce_external_plugins", array( $this, "add_buttons" ) );
-	    add_filter( 'mce_buttons', array( $this, 'register_buttons' ) );	
+	    add_filter( 'mce_buttons', array( $this, 'register_buttons' ) );
 	}
-	
+
 
 	function add_buttons( $plugin_array ) {
 	    $plugin_array['couponxl'] = get_template_directory_uri() . '/js/shortcodes.js';
@@ -20,7 +20,7 @@ class Shortcodes{
 	}
 
 	function register_buttons( $buttons ) {
-	    array_push( $buttons, 'couponxlgrid', 'couponxlelements' ); 
+	    array_push( $buttons, 'couponxlgrid', 'couponxlelements' );
 	    return $buttons;
 	}
 
@@ -37,7 +37,7 @@ class Shortcodes{
 			if( !in_array( $field['type'], array( 'css_editor', 'textarea_html' ) ) ){
 				$fields_html .= '<div class="shortcode-option"><label>'.$field['heading'].'</label>';
 				switch ( $field['type'] ){
-					case 'textfield' : 
+					case 'textfield' :
 						$fields_html .= '<input type="text" class="shortcode-field" name="'.$field['param_name'].'" value="'.$field['value'].'">';
 						break;
 					case 'dropdown' :
@@ -65,18 +65,18 @@ class Shortcodes{
 						$fields_html .= '<div class="shortcode-image-holder"></div><div class="clearfix"></div>
 										<a href="javascript:;" class="shortcode-add-image button">'.__( 'Add Image', 'couponxl' ).'</a>
 										<input type="hidden" name="'.$field['param_name'].'" class="shortcode-field" valu="'.$field['value'].'">';
-						break;	
+						break;
 					case 'attach_images' :
 						$fields_html .= '<div class="shortcode-images-holder"></div><div class="clearfix"></div>
 										<a href="javascript:;" class="shortcode-add-images button">'.__( 'Add Images', 'couponxl' ).'</a>
 										<input type="hidden" name="'.$field['param_name'].'" class="shortcode-field" value="'.$field['value'].'">';
 						break;
-					case 'textarea' :					
+					case 'textarea' :
 						$fields_html .= '<textarea name="'.$field['param_name'].'" class="shortcode-field">'.$field['value'].'</textarea>';
 						break;
-					case 'textarea_raw_html' :					
+					case 'textarea_raw_html' :
 						$fields_html .= '<textarea name="'.$field['param_name'].'" class="shortcode-field">'.$field['value'].'</textarea>';
-						break;						
+						break;
 				}
 				$fields_html .= '<div class="description">'.$field['description'].'</div></div>';
 			}
@@ -94,7 +94,7 @@ class Shortcodes{
 	}
 	function accordion(){
 		$fields = $this->render_options( couponxl_accordion_params() );
-	}	
+	}
 	function column(){
 		$fields = $this->render_options( couponxl_column_params() );
 	}
@@ -103,7 +103,7 @@ class Shortcodes{
 	}
 	function coupons(){
 		$fields = $this->render_options( couponxl_coupons_params() );
-	}	
+	}
 	function deals(){
 		$fields = $this->render_options( couponxl_deals_params() );
 	}
@@ -112,7 +112,7 @@ class Shortcodes{
 	}
 	function gmap(){
 		$fields = $this->render_options( couponxl_gmap_params() );
-	}	
+	}
 	function slider(){
 		echo '';
 		die();
@@ -130,8 +130,11 @@ class Shortcodes{
 	function top_categories(){
 		$fields = $this->render_options( couponxl_top_categories_params() );
 	}
+	function slider_posts(){
+		$fields = $this->render_options( couponxl_slider_posts_params() );
+	}
 	function category_homepage_filters(){
-		$fields = $this->render_options( couponxl_category_homepage_filters_params() );	
+		$fields = $this->render_options( couponxl_category_homepage_filters_params() );
 	}
 }
 
