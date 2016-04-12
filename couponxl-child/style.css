@@ -15,9 +15,10 @@ Tags: white
     background: url('images/bg.webp');
 }*/
 
-body{
-    /*background: rgba(89, 38, 110, 0.13);*/
-    background-color: rgba(187, 16, 158, 0.13);
+#body{
+    /* background: rgba(89, 38, 110, 0.13);*/
+    /* background-color: rgba(187, 16, 158, 0.09); */
+    background-color: rgba(204, 63, 179, 0.09);
 }
 
 /* ***********************  header style starts here ******************************* */
@@ -38,6 +39,14 @@ body{
 
 
 /* ***********************  home page style starts here ******************************* */
+
+.home .xl-coupon-listing>.white-block>.white-block-title {
+    border-bottom:initial;
+}
+
+.home .xl-coupon-listing>.white-block>.white-block-title a{
+    border-left: initial;
+}
 
 .home .page-content p{
     margin:0 0 10px;
@@ -184,7 +193,7 @@ body{
     float: left;
 }
 
-.footer-social-follow>a{
+.widget-footer .footer-social-follow>a{
     color: white;
     width: 30px;
     height: 30px;
@@ -196,15 +205,15 @@ body{
     margin: 0 5% 0 0;
 }
 
-.footer-social-follow>a.follow-facebook{
+.widget-footer .footer-social-follow>a.follow-facebook{
     background: #3b5998;
 }
 
-.footer-social-follow>a.follow-twitter{
+.widget-footer .footer-social-follow>a.follow-twitter{
     background: #00aced;
 }
 
-.footer-social-follow>a.follow-google{
+.widget-footer .footer-social-follow>a.follow-google{
     background: #dd4b39;
 }
 

@@ -7,6 +7,7 @@
                     $cur_page = 1;
 
                     $offer_cat = 'bus,flight,hotel,cabs,travel-packages,train-tickets';
+                    $args = array(
             			'post_status' => 'publish',
             			'posts_per_page' => couponxl_get_option( 'offers_per_page' ),
             			'post_type'	=> 'offer',

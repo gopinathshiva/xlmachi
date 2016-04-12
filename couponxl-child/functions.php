@@ -541,12 +541,12 @@ function xl_side_menu_callback(){
     <?php }else{?>
 
         <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
-        <li><a href="<?php echo esc_url( home_url('/') ).'recharge-offers' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'travel-offers' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-offers' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'tv-audio-video-entertainment-offers' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-offers' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'fashion-offers' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'recharge-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'travel-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'tv-audio-video-entertainment-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'fashion-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
     <?php }
     ?>
@@ -615,6 +615,7 @@ function xl_footer_cats_callback(){
                 <h6 class="heading">Offer Filtes</h6>
                 <li><a href="<?php echo $site_url.'promocodes'; ?>" title="All Store Promocodes">All Store Promocodes</a></li>
                 <li><a href="<?php echo $site_url.'offer_tag/cashback'; ?>" title="Cashback Offers">Cashback Offers</a></li>
+                <li><a href="<?php echo $site_url.'offer_tag/flat'; ?>" title="Flat Offers">Flat Offers</a></li>
                 <li><a href="<?php echo $site_url.'expiring-offers'; ?>" title="Latest Offers">Expiring Offers</a></li>
                 <li><a href="<?php echo $site_url.'flipkart_deal_of_the_day'; ?>" title="Flipkart Deal of the Day">Flipkart Deal of the Day</a></li>
              </ul>
