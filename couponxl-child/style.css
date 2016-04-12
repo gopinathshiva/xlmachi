@@ -166,6 +166,11 @@ Tags: white
     padding: 0;
 }
 
+.offer-box .white-block-content {
+    padding: 10px;
+    padding-bottom: 0;
+}
+
 /* ***********************  coupon box style ends here ******************************* */
 
 /* ***********************  widget style starts here ******************************* */
@@ -255,6 +260,16 @@ Tags: white
     font: 600 11px/20px 'Open Sans', sans-serif;
     text-align: center;
     text-transform: uppercase;
+    transition:all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+}
+
+.offer-box .xl-offer-text:hover{
+    padding: 0 8px;
+    box-shadow: 1px 1px 3px #5d5d54;
 }
 
 .coupon-box .xl-offer-text{
@@ -879,7 +894,7 @@ a.read-info{
 @media screen and (min-width: 768px){
 
     .xl-offer-item {
-        min-height: 380px;
+        /*min-height: 380px;*/
         height: auto;
     }
 
@@ -891,6 +906,8 @@ a.read-info{
         min-height: 105px;
         max-height: 105px;
         overflow: auto;
+        margin-bottom: 0;
+        margin-top: 10px;
     }
 
     .single-store .featured-stores-carousel,.single-store .featured-stores{
@@ -902,6 +919,10 @@ a.read-info{
 
     .xl-coupon-listing li{
         width: 30%;
+    }
+
+    .offer-box .white-block-content{
+        padding-bottom: 5px;
     }
 
     .breadcrumb-section {

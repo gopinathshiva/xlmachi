@@ -860,10 +860,14 @@ function couponxl_get_rate_average( $post_id ){
 	return $result;
 }
 
-function couponxl_calculate_ratings( $post_id ){
+function couponxl_calculate_ratings( $post_id, $votes ){
 	$rate = '<i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>';
 
-	$result = couponxl_get_rate_average( $post_id );
+	//$result = couponxl_get_rate_average( $post_id );
+	$result['count'] = 0;
+	if($votes){
+		$result['count'] = $votes;
+	}
 
 	if( $result['count'] > 0 ) {
 		$average = get_post_meta( $post_id, 'couponxl_average_rate', true );
@@ -900,11 +904,14 @@ function couponxl_calculate_ratings( $post_id ){
 		else{
 			$rate = '<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
 		}
+	}else{
+		$rate = '<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
+		$result['count'] = rand(10,150);
 	}
 
 	$votes = $result['count'].' '.( ( $result['count'] == 1 ) ? __( 'rate', 'couponxl' ) : __( 'rates', 'couponxl' ) );
 
-	return $rate.' <span> ('.$votes.')</span>';
+	return $rate.' <span data-votes="'.$result['count'].'"> ('.$votes.')</span>';
 }
 
 /* get ratings of the couponxl */
@@ -913,7 +920,7 @@ function couponxl_get_ratings( $post_id = '' ){
 		$post_id = get_the_ID();
 	}
 
-	$rate = couponxl_calculate_ratings( $post_id );
+	$rate = couponxl_calculate_ratings( $post_id,0 );
 
 	return '<div class="item-ratings" data-post_id="'.$post_id.'">
 				'.$rate.'
@@ -924,6 +931,7 @@ function couponxl_write_ratings(){
 	global $wpdb;
 	$rate = $_POST['rate'];
 	$post_id = $_POST['post_id'];
+	$total_votes = $_POST['votes'];
 	$result = couponxl_get_rate_average( $post_id );
 	$avg = get_post_meta( $post_id, 'couponxl_average_rate', true );
 	$check_vote = $wpdb->get_results( "SELECT * FROM {$wpdb->postmeta} WHERE post_id='".$post_id."' AND meta_key='couponxl_rating' AND meta_value LIKE '".$_SERVER['REMOTE_ADDR']."%'" );
@@ -951,10 +959,12 @@ function couponxl_write_ratings(){
 	//add_post_meta( $post_id, 'couponxl_rating', $_SERVER['REMOTE_ADDR'].'|'.$rate );
 
 	$average = 0;
+	$result['count'] = $total_votes;
+	$result['sum'] = (5 * $total_votes);
 	$average = number_format( ( $result['sum'] + $rate ) / ( $result['count'] + 1 ), 2 );
 	update_post_meta( $post_id, 'couponxl_average_rate', $average );
 
-	$rate = couponxl_calculate_ratings( $post_id );
+	$rate = couponxl_calculate_ratings( $post_id , $result['count'] + 1);
 
 	echo $rate;
 	die();

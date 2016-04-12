@@ -7,21 +7,21 @@ jQuery(document).ready(function($){
 		$('.bt-table').show();
 	});
 
-	$.fn.hasAttr = function(name) {  
+	$.fn.hasAttr = function(name) {
 	   return this.attr(name) !== undefined;
-	};		
-	
+	};
+
 	/* SCROLL TO TOP */
 	$('.to-top a').click(function(e){
 		e.preventDefault();
 		$("html, body").stop().animate(
 			{
 				scrollTop: 0
-			}, 
+			},
 			{
 				duration: 1200
 			}
-		);		
+		);
 	});
 
 
@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
 			else{
 				$sticky_nav.slideUp();
 			}
-		});	
+		});
 		sticky_nav();
 	}
 
@@ -60,7 +60,7 @@ jQuery(document).ready(function($){
 				$(this).addClass('open').find(' > .dropdown-menu').stop(true, true).hide().slideDown(200);
 			}, function () {
 				$(this).removeClass('open').find(' > .dropdown-menu').stop(true, true).show().slideUp(200);
-	
+
 			});
 		}
 		else{
@@ -79,10 +79,10 @@ jQuery(document).ready(function($){
 			$('ul.nav li.mega_menu_li').click(function(){
 				$(this).find('.mega_menu').slideToggle();
 			});
-		}		
+		}
 	}
 	handle_navigation();
-	
+
 	$(document).on( 'click', 'a[data-toggle="dropdown"]',function(){
 		if( $(this).attr( 'href' ).indexOf('http') > -1 ){
 			window.location.href = $(this).attr('href');
@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 		}, 200);
 	});
 
-	/* TOGGLE SHARE ICONS */	
+	/* TOGGLE SHARE ICONS */
 	$('.open-share').click(function(e){
 		e.preventDefault();
 		$(this).prev().toggleClass('opened');
@@ -145,7 +145,7 @@ jQuery(document).ready(function($){
 	// 	nav: true,
 	// 	prevText: '<i class="fa fa-angle-left"></i>',
 	// 	nextText: '<i class="fa fa-angle-right"></i>',
-	// });	
+	// });
 
 	// /* FEATURED SLIDER */
 	// $(window).load(function(){
@@ -162,11 +162,11 @@ jQuery(document).ready(function($){
 	// 		nextText: '<i class="fa fa-angle-right"></i>',
 	// 		init: function(){
 	// 			$('.rslides_nav').css( 'bottom', $('.rslides1_on .white-block').outerHeight( true ) + 1);
-	// 		},		
+	// 		},
 	// 		after: function(){
 	// 			$('.rslides_nav').css( 'bottom', $('.rslides1_on .white-block').outerHeight( true ) + 1);
 	// 		}
-	// 	});		
+	// 	});
 	// });
 
 	/* COUNTDOWN */
@@ -187,7 +187,7 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	
+
 	$(document).on( 'mouseover', '.item-ratings i', function(e){
 		var $parent = $(this).parents('.item-ratings');
 		if( $parent.find('.fa-spin').length == 0 ){
@@ -208,16 +208,19 @@ jQuery(document).ready(function($){
 	});
 
 	$(document).on( 'click', '.item-ratings i', function(e){
+		//return;
 		var $parent = $(this).parents('.item-ratings');
 		var count = $parent.children().index( this );
 		$parent.html('<i class="fa fa-spinner fa-spin"></i>');
+		var votes = $($parent).find('span').attr('data-votes');
 		$.ajax({
 			url: ajaxurl,
 			method: "POST",
 			data:{
 				action: 'write_rate',
 				rate: count + 1,
-				post_id: $parent.data('post_id')
+				post_id: $parent.data('post_id'),
+				votes:votes
 			},
 			success: function( response ){
 				$parent.html( response );
@@ -229,7 +232,7 @@ jQuery(document).ready(function($){
 
 			}
 		});
-	});	
+	});
 
 	/* GOOGLE MAPS */
 	var $map = $('#deal-map');
@@ -248,11 +251,11 @@ jQuery(document).ready(function($){
 				var marker = new google.maps.Marker({
 				    position: location,
 				    map: map,
-				});				
+				});
 			}
 
 			map.fitBounds( bounds );
-			
+
 		}
 	}
 
@@ -276,17 +279,17 @@ jQuery(document).ready(function($){
 					    icon: markers[i].marker,
 					    url: markers[i].url,
 					    title: markers[i].title,
-					});	
+					});
 					google.maps.event.addListener(marker, 'click', function () {
 					    window.location.href = this.url;
 					});
 				}
 
 				map.fitBounds( bounds );
-				
+
 			}
 		});
-	}	
+	}
 
 
 	/* MAIN SEARCH */
@@ -296,7 +299,7 @@ jQuery(document).ready(function($){
 
 	function show_search_option( $search_options ){
 		$search_options.slideDown( 200 );
-	}	
+	}
 
 	$(document).on( 'click', '.search_options a', function(){
 		var $this = $(this);
@@ -318,13 +321,13 @@ jQuery(document).ready(function($){
 		var $search_options = $parent.find('.search_options');
 		if( $search_options.text() !== '' ){
 			show_search_option( $search_options );
-		}		
+		}
 	});
 
 	$('.main-search input').on( 'blur', function(){
 		var $this = $(this);
 		var $parent = $this.parents('.input-group');
-		var $search_options = $parent.find('.search_options');		
+		var $search_options = $parent.find('.search_options');
 		if( $this.val() == '' ){
 			$this.parents('form').removeClass('disabled');
 		}
@@ -340,7 +343,7 @@ jQuery(document).ready(function($){
 	$('.main-search input').on( 'keyup', function(e){
 		var code = e.which || e.keyCode;
 		var $this = $(this);
-		var $form = $this.parents('.main-search' );		
+		var $form = $this.parents('.main-search' );
 		if( code !== 13 ){
 			var $parent = $this.parents('.input-group');
 			var $search_options = $parent.find('.search_options');
@@ -362,7 +365,7 @@ jQuery(document).ready(function($){
 						dataType: "JSON",
 						success: function( response ){
 							if( response.length > 0 ){
-								var $list = '<ul class="list-unstyled">';					
+								var $list = '<ul class="list-unstyled">';
 								for( var i=0; i<response.length; i++ ){
 									$list += '<li><a href="javascript:;" data-value="'+response[i].slug+'">'+response[i].name+'</a></li>';
 								}
@@ -395,7 +398,7 @@ jQuery(document).ready(function($){
 			$form.submit();
 		}
 	});
-	
+
 	/* SHOW CODE */
 	// function show_code_modal( offer_id ){
 	// 	$('.coupon-print-image').remove();
@@ -432,7 +435,7 @@ jQuery(document).ready(function($){
 			}else{
 				offer_btn = '<a href="'+permalink+'" class="xl-activate-deal btn" target="_blank">ACTIVATE DEAL</a><br/>';
 			}
-			
+
 			parent = $(button).closest('.offer-box');
 			title = $(parent).find('h3 a')[0];
 			title = $(title).text().trim();
@@ -473,7 +476,7 @@ jQuery(document).ready(function($){
 			else{
 				$('.coupon-code-modal.print').attr( 'href', $('.coupon-print-image').attr('src') );
 				$('.coupon-code-copied').hide();
-			}	
+			}
 		}catch(e){
 			console.log('exception thrown:'+e);
 		}
@@ -494,7 +497,7 @@ jQuery(document).ready(function($){
 	// 	}
 	// }
 
-	// //CUSTOMISATION DONE HERE 
+	// //CUSTOMISATION DONE HERE
 
 	// if( window.location.href.indexOf('coupon_id'+'=') !== -1 ){
 	// 	var offer_id = parseInt( window.location.href.split('coupon_id'+'=')[1].split('&')[0] );
@@ -542,15 +545,15 @@ jQuery(document).ready(function($){
 					// 	$("<a>").attr("href", aff_url).attr("target", "_blank")[0].click();
 					// },1000);
 				});
-		
+
 				client.on( 'aftercopy', function(event) {
 					$('.coupon-code-copied').text( $('.coupon-code-copied').data( 'aftertext' ) );
 				});
 			});
-		
+
 			client.on( 'error', function(event) {
 				ZeroClipboard.destroy();
-			});			
+			});
 		}
 	}
 
@@ -567,7 +570,7 @@ jQuery(document).ready(function($){
 		var valid = true;
 		$container.find( 'small.error' ).remove();
 		$container.find('select, input, textarea').each(function(){
-			var $$this = $(this);			
+			var $$this = $(this);
 			$$this.removeClass( 'error' )
 			if( $$this.hasAttr('data-validation') && ( $$this.is(':visible') || ( $$this.attr('type') == 'hidden' && $$this.parents('.input-group').is(':visible') ) ) ){
 				var validations = $$this.data('validation').split('|');
@@ -579,20 +582,20 @@ jQuery(document).ready(function($){
 								if( $$this.val().split(/\r*\n/).length != num ){
 									valid = false;
 								}
-							} break;						
+							} break;
 						case 'conditional' :
 							if( $$this.val() == '' && $('#'+$$this.data('conditional-field')).val() == '' ){
 								valid = false;
 							} break;
-						case 'required' : 
+						case 'required' :
 							if( $$this.val() == '' ){
 								valid = false;
 							} break;
-						case 'number' : 
+						case 'number' :
 							if( isNaN( parseInt( $$this.val() ) ) ){
 								valid = false;
 							} break;
-						case 'email' : 
+						case 'email' :
 							if( !/\S+@\S+\.\S+/.test( $$this.val() ) ){
 								valid = false;
 							} break;
@@ -603,7 +606,7 @@ jQuery(document).ready(function($){
 						case 'checked' :
 							if( !$$this.prop( 'checked' ) ){
 								valid = false;
-							} break;							
+							} break;
 					}
 				}
 				if( !valid ){
@@ -613,12 +616,12 @@ jQuery(document).ready(function($){
 					else{
 						$$this.before('<small class="error">'+$$this.data('error')+'</small>');
 					}
-				}				
+				}
 			}
 		});
 		if( $container.find('#offer_description').length > 0 ){
 			var $desc_label = $('label[for="offer_description"]');
-			$desc_label.parent().find( '.error' ).remove();			
+			$desc_label.parent().find( '.error' ).remove();
 			if( typeof tinyMCE !== 'undefined' && tinyMCE.get('offer_description')){
 				var tiny = tinyMCE.get('offer_description').getContent();
 				var description = $('#offer_description').val( tiny );
@@ -629,14 +632,14 @@ jQuery(document).ready(function($){
 			if( tiny == '' ){
 				valid = false;
 				$desc_label.after('<small class="error">'+$desc_label.data('error')+'</small>');
-			}			
+			}
 		}
 		return valid;
 	}
 	$('.submit-form').click(function(){
 		var $this = $(this);
 		var $form = $this.parents('form');
-		
+
 		var can_submit = validate_form( $form );
 
 		if( can_submit ){
@@ -652,7 +655,7 @@ jQuery(document).ready(function($){
 						if( response.message.indexOf('success') > -1 ){
 							$('input').val('');
 						}
-						$('.ajax-response').html( '<div class="white-block-content">'+response.message+'</div>' );					
+						$('.ajax-response').html( '<div class="white-block-content">'+response.message+'</div>' );
 					},
 					complete: function(){
 						$this.html( $text );
@@ -666,15 +669,15 @@ jQuery(document).ready(function($){
 		else{
 			var error_message = $('.submit-form').data('form-error');
 			if( typeof error_message !== 'undefined' ){
-				$('.submit-form').after('<small class="submit-form-error error"><br />'+$('.submit-form').data('form-error')+'</small>');		
+				$('.submit-form').after('<small class="submit-form-error error"><br />'+$('.submit-form').data('form-error')+'</small>');
 			}
 		}
-	});	
+	});
 
 	/* SEND CONTACT */
 	$('.submit-form-contact').click(function(e){
 		e.preventDefault();
-		
+
 		$.ajax({
 			url: ajaxurl,
 			method: "POST",
@@ -685,7 +688,7 @@ jQuery(document).ready(function($){
 					$('.send_result').html( '<div class="alert alert-success" role="alert"><span class="fa fa-check-circle"></span> '+response.success+'</div>' );
 				}
 				else{
-					$('.send_result').html( '<div class="alert alert-danger" role="alert"><span class="fa fa-times-circle"></span> '+response.error+'</div>' );				
+					$('.send_result').html( '<div class="alert alert-danger" role="alert"><span class="fa fa-times-circle"></span> '+response.error+'</div>' );
 				}
 			}
 		})
@@ -721,7 +724,7 @@ jQuery(document).ready(function($){
 							date.setDate( date.getDate() - range );
 							minDate = date.getFullYear() +'/'+ (date.getMonth()+1) +'/'+ date.getDate();
 						}
-					}			
+					}
 					this.setOptions({
 						maxDate: maxDate,
 						minDate: minDate
@@ -744,27 +747,27 @@ jQuery(document).ready(function($){
 						if( range !== '' ){
 							date.setDate( date.getDate() + range );
 							maxDate = date.getFullYear() +'/'+ (date.getMonth()+1) +'/'+ date.getDate();
-						}				
+						}
 					}
-					
+
 					this.setOptions({
 						maxDate: maxDate,
 						minDate: minDate
 					});
 				},
 				timepicker:false
-			});	
+			});
 
 			/* VOUCHER EXPIRE DATE */
 			$('#deal_voucher_expire').datetimepicker({
 				format:'Y-m-d',
-				onShow:function( ct ){		
+				onShow:function( ct ){
 					this.setOptions({
 						minDate: $('#deal_voucher_expire').data( 'min-date' )
 					});
 				},
 				timepicker:false
-			});	
+			});
 		}
 	}
 
@@ -782,7 +785,7 @@ jQuery(document).ready(function($){
 		else{
 			$(this).parents('.marker-wrap').find('input').val('');
 		}
-	});	
+	});
 
 	/* GENERATE PAYMENT LINK AJAX */
 	$('.pay-offer').click(function(e){
@@ -880,7 +883,7 @@ jQuery(document).ready(function($){
 				$('.navigation .col-xs-3').css( 'top', '0' );
 				$('.site-logo').css( 'top', '0' );
 			}
-		}		
+		}
 	}
 	toggle_offset();
 	$(window).resize(function(){
@@ -888,7 +891,7 @@ jQuery(document).ready(function($){
 		toggle_offset();
 		if( $(window).width() > 760 ){
 			$('.navigation .col-xs-3').css( 'top', 0 );
-			$('.site-logo').css( 'top', 0 );			
+			$('.site-logo').css( 'top', 0 );
 		}
 	});
 
@@ -908,7 +911,7 @@ jQuery(document).ready(function($){
 	function start_masonry(){
 		if( $(window).width() < 768 && has_masonry ){
 			$container.masonry('destroy');
-			has_masonry = false;			
+			has_masonry = false;
 		}
 		else if( $(window).width() >= 768 && !has_masonry ){
 			$container.imagesLoaded(function() {
@@ -917,7 +920,7 @@ jQuery(document).ready(function($){
 					columnWidth: '.masonry-item',
 				});
 				has_masonry = true;
-			});	
+			});
 		}
 	}
 	start_masonry();
@@ -925,7 +928,7 @@ jQuery(document).ready(function($){
 		setTimeout( function(){
 			start_masonry();
 		}, 500);
-	});	
+	});
 
 	/* EQUAL WIDGET HEIGHT FOR THE MEGAMENU */
 	function is_ie(){
@@ -986,7 +989,7 @@ jQuery(document).ready(function($){
 	            }
 	        });
 	   	}
-    });	
+    });
 
     /* SUBMIT DEAL CALCULATE DISCOUNT OR SALE */
 
@@ -1020,9 +1023,9 @@ jQuery(document).ready(function($){
 		});
 		var markersArray = [];
 		var bounds = new google.maps.LatLngBounds();
-		var mapOptions = { 
+		var mapOptions = {
 			scrollwheel: $('.contact_map_scroll_zoom').length > 0 ? false: true,
-			mapTypeId: google.maps.MapTypeId.ROADMAP 
+			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		var map =  new google.maps.Map(document.getElementById("map"), mapOptions);
 		var location;
@@ -1034,11 +1037,11 @@ jQuery(document).ready(function($){
 				var marker = new google.maps.Marker({
 				    position: location,
 				    map: map,
-				});				
+				});
 			}
 
 			map.fitBounds( bounds );
-			
+
 		}
 	}
 
@@ -1057,14 +1060,14 @@ jQuery(document).ready(function($){
 			});
 			full_height+=5;
 			$parent.data('initial_height', initial_height);
-			$parent.data('full_height', full_height);					
+			$parent.data('full_height', full_height);
 		});
 
 
 		$('.expand-filter').each(function(){
 			var $this = $(this);
 			var expand_text = $this.text();
-			var collapse_text = $this.data('less');			
+			var collapse_text = $this.data('less');
 			$this.click(function(e){
 				e.preventDefault();
 				var $this = $(this);
@@ -1088,9 +1091,9 @@ jQuery(document).ready(function($){
 				500,
 				function(){
 					$this.toggleClass('closed');
-				});				
-			});				
-		});	
+				});
+			});
+		});
 	}
 
 	/* TOGGLE COLLAPSED */
@@ -1103,7 +1106,7 @@ jQuery(document).ready(function($){
 				$(this).click();
 			}
 		})
-	});	
+	});
 
 
 	/* DEAL TYPE EXPLANATION */
@@ -1148,7 +1151,7 @@ jQuery(document).ready(function($){
 			}
 			else{
 				charged = charged+unit;
-			}			
+			}
 			$('.not_shared_info .charged').html( charged );
 		}
 	});
@@ -1156,7 +1159,7 @@ jQuery(document).ready(function($){
 	/* CLOSE NOTIFICATION BAR */
 	$('.close-notification-bar').click( function(){
         $(this).parents('section').slideToggle(200);
-        $.cookie('couponxl_notification', 'closed', { expires: 3 });		
+        $.cookie('couponxl_notification', 'closed', { expires: 3 });
 	});
 
 	/* KEYWORD SEARCH TOGGLE */
@@ -1166,7 +1169,7 @@ jQuery(document).ready(function($){
 		}
 		else{
 			$('.top-bar .main-search').slideDown( 200 );
-			$('.top-bar .main-search').toggleClass( 'main-search-hide' );	
+			$('.top-bar .main-search').toggleClass( 'main-search-hide' );
 		}
 		$('.keyword-search').slideToggle( 200 );
 	});
@@ -1179,23 +1182,23 @@ jQuery(document).ready(function($){
 		}
 		var prettylinks = $('.prettylinks').val();
 		var url = $('.search_page_url').val();
-		var protocol = url.indexOf( 'http://' ) > -1 ? 'http://' : 'https://'		
+		var protocol = url.indexOf( 'http://' ) > -1 ? 'http://' : 'https://'
 		url = url.replace( protocol, '' );
 		var temp = url.split('?');
 		var query_string = temp[1] ? temp[1] : '';
 		if( prettylinks == 'yes' ){
-			var segments = temp[0].split(/\//g);			
+			var segments = temp[0].split(/\//g);
 			$this.find( 'input[type="hidden"]' ).each(function(){
 				if( $(this).val() !== '' ){
 					var index = segments.indexOf( $(this).attr('name') );
-					if( index > -1 ) {					
+					if( index > -1 ) {
 						segments[index+1] = $(this).val();
 					}
 					else{
 						segments.push( $(this).attr('name') );
 						segments.push( $(this).val() );
-					}	
-				}			
+					}
+				}
 			});
 			url = protocol + segments.join('/') + ( query_string ? '?' + query_string : '' );
 			window.location.href = url;
@@ -1208,7 +1211,7 @@ jQuery(document).ready(function($){
 				}
 			});
 			window.location.search = queryString.stringify( segments );
-		}			
+		}
 	});
 
 	$('.keyword-search').submit(function(e){
@@ -1257,7 +1260,7 @@ jQuery(document).ready(function($){
 				}
 				else{
 					return false;
-				}				
+				}
 			},
 			onFinished: function(){
 				$('#wizard').parents('form').submit();
@@ -1326,7 +1329,7 @@ jQuery(document).ready(function($){
 					}
 				});
 		    }
-		});		
+		});
 		$(document).on( 'click', '.stripe-payment', function(e){
 			e.preventDefault();
 			handler.open({
@@ -1336,11 +1339,11 @@ jQuery(document).ready(function($){
 				currency: $(this).attr('data-currency')
 			});
 			offer_id = $(this).attr('data-offer_id');
-		});	
+		});
 		// Close Checkout on page navigation
 		$(window).on('popstate', function() {
 			handler.close();
-		});		
+		});
 	}
 
 	/* PAY WITH IDEAL */
@@ -1363,7 +1366,7 @@ jQuery(document).ready(function($){
 				}
 			}
 		})
-	});	
+	});
 
 	/* PAY WITH PAYU */
 	$(document).on( 'click', '.payu-initiate', function(){
@@ -1467,7 +1470,7 @@ jQuery(document).ready(function($){
 					return encodeURIComponent(key) + '=' + encodeURIComponent(val2);
 				}).join('&');
 			}
-			return encodeURIComponent(key) + '=' + encodeURIComponent(val);	
+			return encodeURIComponent(key) + '=' + encodeURIComponent(val);
 		}).join('&') : '';
 	};
 

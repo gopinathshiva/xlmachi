@@ -2,7 +2,7 @@ var updateOfferCount;
 
 jQuery(document).ready(function($){
 
-	var isTouchDevice = (window.innerWidth < 768 ) ? true:false;
+	var isTouchDevice = (window.innerWidth <= 768 ) ? true:false;
 	var stickyNavigationHeight = $('.navigation.sticky-nav').height();
 
 	//function to call for smooth scrolling on click of sidebar menu

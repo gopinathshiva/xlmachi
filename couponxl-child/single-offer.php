@@ -17,8 +17,8 @@ if(is_localhost()){
 }else{
     $base_url = 'http://couponmachi.com/';
 }
-header('Location: '.$aff_link);
-//header( "refresh:.5;url=".$aff_link );
+//header('Location: '.$aff_link);
+header( "refresh:.8;url=".$aff_link );
 ?>
 <style>
 body{
@@ -69,7 +69,7 @@ body{
     float: left;
     width: 30%;
     height: 92px;
-    background: url(http://localhost/coupons/wp-content/themes/couponxl-child/images/store_redirector.gif) no-repeat center center;
+    background: url(<?php echo $base_url; ?> wp-content/themes/couponxl-child/images/store_redirector.gif) no-repeat center center;
 }
 
 .redirection-box .redirect-logo ul li.partner-logo {

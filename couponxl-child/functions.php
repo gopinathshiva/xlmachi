@@ -246,7 +246,7 @@ function xl_offer_type_fn(){
 	?>
 	<div class="white-block xl-offer-type-filter">
         <div class="white-block-content">
-            <h2>Filter By Type</h2>
+            <h2>Filter By Offer Type</h2>
             <ul class="list-unstyled xl-offer-type-result xl-offer-list-unstyled">
             	<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-all" value="all" checked><label for="xl-offer-type-all">&nbsp All <span id="xl-offer-type-all-count" class="count"></span></label></li>
 				<li><input class="xl-offer-type-filter-radio" type="radio" name="xl-offer-type" id="xl-offer-type-deals" value="deal"><label for="xl-offer-type-deals">&nbsp Deals <span id="xl-offer-type-deal-count" class="count"></span></label></li>
@@ -445,7 +445,7 @@ function offer_top_info_callback(){?>
     }
     ?>
     <div class="xl-offer-label <?php echo $offer_flat.$offer_cashback; ?>" data-xl-offer-amount="<?php echo $offer_amount; ?>" data-xl-offer-number="<?php echo $offer_number; ?>" data-xl-offer-type="<?php echo $offer_type; ?>" data-xl-offer-unit="<?php echo $offer_unit; ?>">
-        <div class="xl-offer-text"><?php echo $offer_type.' offer' ?></div>
+        <div class="xl-offer-text"><a style="color:white;" href="<?php echo esc_url( home_url('/') ).'offer_tag/'.$offer_type; ?>"><?php echo $offer_type.' offer' ?></a></div>
         <div class="xl-offer-wrapper">
             <div class="xl-offer-triangle-topright"></div>
             <div class="xl-offer-triangle-bottomright"></div>

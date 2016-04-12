@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Version: 3.0
 Tags: white
 */
-/* TABLE OF CONTENTS 
+/* TABLE OF CONTENTS
 1.      OVERALL
 2.      TOP BAR
 3.      NAVIGATION
@@ -1406,7 +1406,7 @@ a.share {
     color: #f64c06;
 }
 .offer-box .white-block-content h3 {
-    margin: 15px 0;
+    /*margin: 15px 0;*/
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: 16px;
