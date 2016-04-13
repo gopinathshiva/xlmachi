@@ -11,53 +11,56 @@
             </ul>
         </div>
     <?php }
-?>
-<div class="white-block featured-stores <?php echo $is_carousel?'carousel':'no-carousel'; ?>">
-    <div class="row">
-        <div class="col-sm-12">
-            <?php
-            $args = array(
-                'post_type' => 'store',
-                'post_status' => 'publish',
-                'posts_per_page' => -1
-            );
 
-            if( !empty( $items ) ){
-                $args['post__in'] = $items;
-                $args['orderby'] = 'post__in';
-            }
-            else{
-                $args['meta_query'] = array(
-                    array(
-                        'key' => 'store_featured',
-                        'value' => 'yes',
-                        'compare' => '='
-                    ),
-                );
-            }
-            $stores = new WP_Query( $args );
-            if( $stores->have_posts() ){
-                ?>
-                <ul class="list-unstyled list-inline stores-image-container">
-                    <?php
-                    while( $stores->have_posts() ){
-                        $stores->the_post();
-                        ?>
-                        <li id="<?php the_ID(); ?>">
-                            <div class="store-logo">
-                                <a href="<?php the_permalink() ?>">
-                                    <?php couponxl_store_logo(); ?>
-                                </a>
-                            </div>
-                        </li>
-                        <?php
-                    }
-                    ?>
-                </ul>
+if(!wp_is_mobile()){?>
+    <div class="white-block featured-stores <?php echo $is_carousel?'carousel':'no-carousel'; ?>">
+        <div class="row">
+            <div class="col-sm-12">
                 <?php
-                wp_reset_query();
-            }
-            ?>
+                $args = array(
+                    'post_type' => 'store',
+                    'post_status' => 'publish',
+                    'posts_per_page' => -1
+                );
+
+                if( !empty( $items ) ){
+                    $args['post__in'] = $items;
+                    $args['orderby'] = 'post__in';
+                }
+                else{
+                    $args['meta_query'] = array(
+                        array(
+                            'key' => 'store_featured',
+                            'value' => 'yes',
+                            'compare' => '='
+                        ),
+                    );
+                }
+                $stores = new WP_Query( $args );
+                if( $stores->have_posts() ){
+                    ?>
+                    <ul class="list-unstyled list-inline stores-image-container">
+                        <?php
+                        while( $stores->have_posts() ){
+                            $stores->the_post();
+                            ?>
+                            <li id="<?php the_ID(); ?>">
+                                <div class="store-logo">
+                                    <a href="<?php the_permalink() ?>">
+                                        <?php couponxl_store_logo(); ?>
+                                    </a>
+                                </div>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                    <?php
+                    wp_reset_query();
+                }
+                ?>
+            </div>
         </div>
     </div>
-</div>
+
+<?php } ?>

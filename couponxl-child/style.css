@@ -89,6 +89,7 @@ Tags: white
 
 .single-store .store-bottom-description{
     font-family: lato !important;
+    clear: both;
 }
 
 .single-store .store-bottom-description h3{
@@ -98,6 +99,15 @@ Tags: white
 
 .single-store .shop-logo{
 	padding:initial;
+}
+
+.single-store .xl-store-detail{
+    background-color: transparent;
+    box-shadow: initial;
+}
+
+.shop-logo img{
+    height: 110px;
 }
 
 .xl-offer-list-unstyled{

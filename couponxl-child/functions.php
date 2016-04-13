@@ -825,5 +825,30 @@ function xl_promocodes_search(){
     die();
 }
 
+add_action('xl_advertisement','xl_advertisement_callback');
+
+function xl_advertisement_callback($post_id){
+    if(empty($post_id) || wp_is_mobile()){
+        return;
+    }
+    $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );
+    $url = get_the_permalink($post_id);
+    ?>
+    <div class="white-block xl-store-detail">
+        <div class="shop-logo">
+            <a href="<?php echo $url; ?>" target="_blank">
+                <img alt="offer image" src="<?php echo $img_url; ?>" class="img-responsive wp-post-image" title="<?php echo get_the_title($post_id); ?>">
+            </a>
+        </div>
+    </div>
+    <?php
+}
+
+// Remove Canonical Link Added By Yoast WordPress SEO Plugin
+function at_remove_dup_canonical_link() {
+	return false;
+}
+add_filter( 'wpseo_canonical', 'at_remove_dup_canonical_link' );
+
 
 ?>

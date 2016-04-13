@@ -99,6 +99,10 @@ jQuery(document).ready(function($){
 			var resultCounter = 0;
 			for(var i = 0 ;i < results.length; i++){
 				if(results[i].offer_name.toLowerCase().indexOf(searchText.toLowerCase())>=0){
+					if(results[i] && results[i].offer_slug){
+						var str = results[i].offer_slug;
+						results[i].offer_slug = str.replace('/store','');
+					}
 					$(parentElement).append("<a href="+results[i].offer_slug+"><li class='xl-search-result-item'><span>" + results[i].offer_name + "</span></li></a>");
 					resultCounter++;
 					if(resultCounter>=8){
