@@ -4,8 +4,6 @@
 		<div class="embed-responsive embed-responsive-16by9">
 			<?php
 			$xl_post_id = get_the_ID();
-			//$xl_offer_cat = get_the_terms( $xl_post_id, 'offer_cat' );
-			//$xl_affiliate_link = get_post_meta( $xl_post_id, 'deal_link')[0];
 
 			if( has_post_thumbnail() ){?>
 			<!-- CUSTOMISATION DONE HERE -->
@@ -26,13 +24,9 @@
 			}
 			?>
 		</div>
-		<?php
+		<!-- <?php
 			get_template_part( 'includes/share' );
-		?>
-		<!-- CUSTOMISATION DONE HERE -->
-		<!-- <a data-affiliate="<?php echo $xl_affiliate_link; ?>" class="xl-activate-deal btn" onclick="activateDeal(this,'<?php echo $xl_affiliate_link; ?>')">ACTIVATE DEAL</a>					 -->
-		<a target="_blank" href="<?php the_permalink(); ?>" class="xl-activate-deal btn">ACTIVATE DEAL</a>
-		<!-- <a href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'deal' => get_the_ID() ), array('all') ) ); ?>" class="btn"><?php _e( 'VIEW DEAL', 'couponxl' ) ?></a> -->
+		?> -->
 	</div>
 
 	<div class="white-block-content  <?php echo $col == '12' ? 'col-sm-8' : '' ?>">
@@ -48,33 +42,16 @@
 			</li>
 		</ul> -->
 
-		<h3 style="max-height:105px;overflow:auto;"><a target="_blank" href="<?php the_permalink(); ?>" class=""><?php the_title(); ?></a></h3>
-
-		<!-- <?php do_action('offer_other_info'); ?> -->
-		<!-- <ul class="list-unstyled list-inline bottom-meta">
-			<li>
-				<i class="fa fa-dot-circle-o icon-margin"></i>
-				<?php
-					$store_id = get_post_meta( get_the_ID(), 'offer_store', true );
-					echo '<a href="'.get_permalink( $store_id ).'">'.get_the_title( $store_id ).'</a>';
-				?>
-			</li>
-			<?php
-	        $content = get_the_content();
-	        if( !empty($content) ):
-	        ?>
-				<li class="deal-info-container">
-					<a href="<?php the_permalink(); ?>" class="read-info" href="javascript:void(0)">Deal Info (+)</a>
-				</li>
-			<?php endif; ?>
-		</ul> -->
+		<h3 style="min-height:105px;overflow:auto;"><a target="_blank" href="<?php the_permalink(); ?>" class=""><?php the_title(); ?></a></h3>
 		<div class="read-info-description"><?php echo $content; ?></div>
 		<p class='xl-permalink'><?php echo the_permalink(); ?></p>
+		<div class='offer-btn-container'>
+			<a target="_blank" href="<?php the_permalink(); ?>" class="xl-activate-deal btn">ACTIVATE DEAL</a>
+		</div>
 	</div>
-
 	<!-- hiding empty div when there is no price to be shown -->
 
-	<?php
+	<!-- <?php
 	 $xl_deal_price = couponxl_get_deal_price();
 	 if( !empty($xl_deal_price) ){ ?>
 	  <div class="white-block-footer  <?php echo $col == '12' ? 'col-sm-12' : '' ?>">
@@ -82,5 +59,6 @@
 		<?php echo couponxl_get_deal_price(); ?>
 	    </div>
       </div>
-	<?php } ?>
+	<?php } ?> -->
+	<p class="visit-store"><a href="<?php echo get_permalink( $store_id ); ?>" title="<?php echo get_the_title( $store_id ); ?>">Visit Store</a></p>
 </div>

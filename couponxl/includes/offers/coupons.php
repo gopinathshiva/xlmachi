@@ -15,13 +15,11 @@
 			?>
 			<!-- </a> -->
 		</div>
-		<?php get_template_part( 'includes/share' ); ?>
+		<!-- <?php get_template_part( 'includes/share' ); ?> -->
 		<?php
 		if( !isset( $is_shortcode ) ){
 			$is_shortcode = false;
 		}
-
-		echo couponxl_coupon_button( '', $is_shortcode );
 		?>
 	</div>
 	<!-- href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>" -->
@@ -38,42 +36,16 @@
 				?>
 			</li>
 		</ul> -->
-		<h3 style="max-height:105px;overflow:auto;">
+		<h3 style="max-height:100px;overflow:auto;">
 			<a data-coupon="<?php echo $coupon_code; ?>" href="<?php the_permalink(); ?>" class='custom show-code' target="_blank" href="<?php echo esc_url( couponxl_append_query_string( couponxl_get_permalink_by_tpl( 'page-tpl_search_page' ), array( 'offer_cat' => $xl_offer_cat[0]->slug ), array('all') ) ); ?>">
 				<?php the_title(); ?>
 			</a>
 		</h3>
-		<!-- CUSTOMISATION DONE HERE -->
-		<!-- <?php do_action('offer_other_info'); ?> -->
-		<!-- <ul class="list-unstyled list-inline bottom-meta">
-			<li>
-				<i class="fa fa-dot-circle-o icon-margin"></i>
-				<?php echo '<a href="'.get_permalink( $store_id ).'">'.get_the_title( $store_id ).'</a>'; ?>
-			</li>
-
-			<?php
-			$xl_coupon_content = get_the_content();
-
-	        if( !empty($xl_coupon_content) ):
-	        ?>
-				<li class="coupon-info-container">
-					<a href="<?php the_permalink(); ?>" data-coupon="<?php echo $coupon_code; ?>" data-offer_id="<?php echo esc_attr( $xl_post_id );?>" class="read-info show-code" href="javascript:void(0)">Coupon Info (+)</a>
-				</li>
-			<?php endif; ?>
-			<?php
-			$coupon_type = get_post_meta( $xl_post_id, 'coupon_type', true );
-			if( $coupon_type == 'printable' ){
-				?>
-				<li>
-					<i class="fa fa-map-marker icon-margin"></i>
-					<?php echo couponxl_taxonomy( 'location', 1 ) ?>
-				</li>
-				<?php
-			}
-			?>
-		</ul> -->
-		<p class="visit-store"><a href="<?php echo get_permalink( $store_id ); ?>" title="<?php echo get_the_title( $store_id ); ?>">Visit Store</a></p>
-		<p class='xl-permalink'><?php echo the_permalink(); ?></p>
-		<div class="read-info-description"><?php echo the_content(); ?></div>
+		<div class='offer-btn-container'>
+			<?php echo couponxl_coupon_button( '', $is_shortcode ); ?>
+		</div>
+		<!-- <p class='xl-permalink'><?php echo the_permalink(); ?></p> -->
+		<!-- <div class="read-info-description"><?php echo the_content(); ?></div> -->
 	</div>
+	<p class="visit-store"><a href="<?php echo get_permalink( $store_id ); ?>" title="<?php echo get_the_title( $store_id ); ?>">Visit Store</a></p>
 </div>

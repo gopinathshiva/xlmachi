@@ -5,6 +5,9 @@ $permalink = couponxl_get_permalink_by_tpl( 'page-tpl_search_page' );
 
 $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
 ?>
+<div class="filter-offer-menu">
+    <a href="javascript:void(0);">Filter Offers<i class="fa fa-chevron-down coupon-type"></i></a>
+</div>
 <section class="search-template-page">
     <div class="container">
         <div class="row">
@@ -16,7 +19,7 @@ $search_sidebar_location = couponxl_get_option( 'search_sidebar_location' );
             <div class="col-md-9">
 
                 <?php do_action('xl_filter_text') ?>
-                <?php 
+                <?php
                 // $show_search_slider = couponxl_get_option( 'show_search_slider' );
                 // if( $show_search_slider == 'yes' ){
                 //     include( locate_template( 'includes/featured-slider.php' ) );
