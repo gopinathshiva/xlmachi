@@ -384,6 +384,12 @@ jQuery(document).ready(function($){
         return false;
     });
 
+	$('.offer-box').hover(function(){
+		$(this).find('.visit-store').addClass('active');
+	},function(){
+		$(this).find('.visit-store').removeClass('active');
+	});
+
     //sidemenu script
     $('.xl-sidemenu li').hover(function () {
     	$(this).find('span').fadeIn('fast');

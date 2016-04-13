@@ -130,6 +130,34 @@ Tags: white
 
 /* ***********************  deal page style starts here ******************************* */
 
+.visit-store{
+    text-align: center;
+    display: none;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.visit-store.active{
+    display: block;
+}
+
+.visit-store a{
+    padding: 5px;
+    background: rgba(89, 38, 110, 0.61);
+    color: white;
+    border-radius: 3px;
+}
+
+.visit-store a:hover{
+    background: rgba(89, 38, 110, 0.81);
+    color: white !important;
+}
+
+.single-store .visit-store{
+    display: none !important;
+}
+
 .coupon_modal_content a.xl-activate-deal{
     color: white;
     margin-bottom: 15px;
@@ -169,6 +197,7 @@ Tags: white
 .offer-box .white-block-content {
     padding: 10px;
     padding-bottom: 0;
+    position: relative;
 }
 
 /* ***********************  coupon box style ends here ******************************* */
