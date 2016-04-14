@@ -1,10 +1,16 @@
 <div class="col-md-3">
     <?php do_action('xl_offer_type');
     if($offer_tag == 'flat' || $offer_tag == 'cashback'){
-        do_action('xl_offer_cat');     
-    }    
+        do_action('xl_offer_cat');
+    }
     do_action('xl_offer_store'); ?>
-    <!-- <div class="widget white-block widget_couponxl_filter">        
+    <?php
+        $advertisement_1_id = '';
+        $advertisement_2_id = '';
+        do_action('xl_advertisement',$advertisement_1_id);
+        do_action('xl_advertisement',$advertisement_2_id);
+    ?>
+    <!-- <div class="widget white-block widget_couponxl_filter">
         <?php
         $theme_usage = couponxl_get_option( 'theme_usage' );
         if( $theme_usage == 'all' ):
@@ -29,7 +35,7 @@
                 <li>
                     <a href="<?php echo esc_url( couponxl_append_query_string( $permalink, array( 'offer_type' => 'coupon' ) ) ) ?>" class="<?php echo $offer_type == 'coupon' ? 'active' : '' ?>"><?php _e( 'Coupons', 'couponxl' ) ?></a>
                 </li>
-            </ul>                        
+            </ul>
         <?php
         endif;
         ?>
@@ -48,7 +54,7 @@
             $zero_args = array(
                 'hide_empty' => couponxl_get_option( 'search_include_empty' ) == 'yes' ? false : true,
                 'parent' => 0
-            );                        
+            );
             $search_show_count = couponxl_get_option( 'search_show_count' );
             $search_visible_categories_count = couponxl_get_option( 'search_visible_categories_count' );
             $visible_count = 0;
@@ -149,10 +155,10 @@
                 echo '<div class="show-all"><a href="javascript:;" class="expand-filter closed" data-target=".ex_offer_cat" data-less="'.__( '-SHOW LESS CATEGORIES-', 'couponxl' ).'">'.__( '-SHOW ALL CATEGORIES-', 'couponxl' ).'</a></div>';
             }
         ?>
-	
+
     </div> -->
     <div class="xl-search-page-widget">
-    <?php 
+    <?php
         if ( is_active_sidebar( 'sidebar-search' ) ){
             dynamic_sidebar( 'sidebar-search' );
         }

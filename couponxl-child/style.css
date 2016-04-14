@@ -97,6 +97,10 @@ Tags: white
     font-weight: bold;
 }
 
+.single-store .store-bottom-description p{
+    font-size: 15px;
+}
+
 .single-store .shop-logo{
 	padding:initial;
 }

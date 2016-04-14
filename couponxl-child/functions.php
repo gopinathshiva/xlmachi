@@ -549,9 +549,9 @@ function xl_side_menu_callback(){
         <!-- <li><a data-scroll-id="top-offers" class="xl-side-menu-item"><i class="fa fa-star icon-margin" ></i><span>Featured Offers</span></a></li> -->
         <li><a href="<?php echo esc_url( home_url('/') ).'recharge-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-flash icon-margin" ></i><span>Recharge Coupons</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'travel-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-bus icon-margin" ></i><span>Travel Offers</span></a></li>
+        <li><a href="<?php echo esc_url( home_url('/') ).'computers-laptops-gaming-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-laptop icon-margin" ></i><span>Computer & Laptops</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'mobiles-tablets-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-mobile icon-margin" ></i><span>Mobiles & Tablets</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'tv-audio-video-entertainment-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
-        <li><a href="<?php echo esc_url( home_url('/') ).'computers-laptops-gaming-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-television icon-margin" ></i><span>TV & Entertainment</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'food-dining-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-cutlery icon-margin" ></i><span>Food Coupons</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'fashion-coupons' ?>" class="xl-side-menu-item"><i class="fa fa-female icon-margin" ></i><span>Clothing</span></a></li>
         <li><a href="<?php echo esc_url( home_url('/') ).'offer_tag/cashback' ?>" class="xl-side-menu-item"><i class="fa fa-inr icon-margin" ></i><span>Cashbacks</span></a></li>
