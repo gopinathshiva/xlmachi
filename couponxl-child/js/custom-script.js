@@ -623,4 +623,24 @@ jQuery(document).ready(function($){
 		}
 	}
 
+	//offer menu to show only on devices less than 768px
+	$('.filter-offer-menu').off('click').on('click',function () {
+		if($('.filter-offer-container').hasClass('active')){
+			//close filter
+			$('.filter-offer-menu a').text('Offer Filter');
+			$('.filter-offer-menu a').append('<i class="fa fa-chevron-down coupon-type"></i>');
+			$('.filter-offer-container').removeClass('active');
+			$('#xl-store-start').removeClass('opacity-zero');
+			$('html, body').animate({
+		        scrollTop: 0
+		    }, 350);
+		}else{
+			//open filter
+			$('.filter-offer-menu a').text('Click here to close filter');
+			$('.filter-offer-menu a').append('<i class="fa fa-chevron-up coupon-type"></i>');
+			$('.filter-offer-container').addClass('active');
+			$('#xl-store-start').addClass('opacity-zero');
+		}
+	});
+
 });

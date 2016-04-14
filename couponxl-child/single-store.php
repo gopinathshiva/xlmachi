@@ -12,7 +12,9 @@ $theme_usage = couponxl_get_option( 'theme_usage' );
 $store_link = get_post_meta( $post_id, 'store_link', true );
 global $categories_data_transient_lifetime;
 ?>
-
+<div class="filter-offer-menu">
+    <a href="javascript:void(0);">Filter Offers<i class="fa fa-chevron-down coupon-type"></i></a>
+</div>
 <section>
     <div class="container">
         <div class="row">
@@ -23,13 +25,13 @@ global $categories_data_transient_lifetime;
             option4="202,235,233,231,222,194,184,139"
             option5="220,210,143,135,117,131,147,208"]
             [/featured_stores]'); ?>
-            <div class="col-md-3">
+            <div class="col-md-3 filter-offer-container">
 
                 <?php do_action('xl_offer_type'); ?>
                 <?php do_action('xl_offer_cat'); ?>
                 <?php
-                    $advertisement_1_id = '';
-                    $advertisement_2_id = '';
+                    $advertisement_1_id = '397';
+                    $advertisement_2_id = '398';
                     do_action('xl_advertisement',$advertisement_1_id);
                     do_action('xl_advertisement',$advertisement_2_id);
                 ?>

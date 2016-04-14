@@ -444,19 +444,17 @@ function offer_top_info_callback(){?>
         }
     }
     ?>
-    <div class="xl-offer-label <?php echo $offer_flat.$offer_cashback; ?>" data-xl-offer-amount="<?php echo $offer_amount; ?>" data-xl-offer-number="<?php echo $offer_number; ?>" data-xl-offer-type="<?php echo $offer_type; ?>" data-xl-offer-unit="<?php echo $offer_unit; ?>">
-        <div class="xl-offer-text">
-            <?php if($offer_type != 'flat' && $offer_type != 'cashback'){ ?>
-                <a style="color:white;" href="javascript:void(0);"><?php echo $offer_type.' offer'; ?></a>
-            <?php } else { ?>
+    <?php if($offer_type == 'flat' || $offer_type == 'cashback'){ ?>
+        <div class="xl-offer-label <?php echo $offer_flat.$offer_cashback; ?>" data-xl-offer-amount="<?php echo $offer_amount; ?>" data-xl-offer-number="<?php echo $offer_number; ?>" data-xl-offer-type="<?php echo $offer_type; ?>" data-xl-offer-unit="<?php echo $offer_unit; ?>">
+            <div class="xl-offer-text">
                 <a style="color:white;" href="<?php echo esc_url( home_url('/') ).'offer_tag/'.$offer_type; ?>"><?php echo $offer_type.' offer' ?></a>
-            <?php } ?>
+            </div>
+            <div class="xl-offer-wrapper">
+                <div class="xl-offer-triangle-topright"></div>
+                <div class="xl-offer-triangle-bottomright"></div>
+            </div>
         </div>
-        <div class="xl-offer-wrapper">
-            <div class="xl-offer-triangle-topright"></div>
-            <div class="xl-offer-triangle-bottomright"></div>
-        </div>
-    </div>
+    <?php } ?>
     <?php
 }
 
@@ -831,13 +829,14 @@ function xl_advertisement_callback($post_id){
     if(empty($post_id) || wp_is_mobile()){
         return;
     }
-    $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );
+    $img_url = get_the_post_thumbnail( $post_id, 'medium' );
     $url = get_the_permalink($post_id);
     ?>
     <div class="white-block xl-store-detail">
         <div class="shop-logo">
             <a href="<?php echo $url; ?>" target="_blank">
-                <img alt="offer image" src="<?php echo $img_url; ?>" class="img-responsive wp-post-image" title="<?php echo get_the_title($post_id); ?>">
+                <?php echo $img_url; ?>
+                <!-- <img alt="offer image" src="<?php echo $img_url; ?>" class="img-responsive wp-post-image" title="<?php echo get_the_title($post_id); ?>"> -->
             </a>
         </div>
     </div>

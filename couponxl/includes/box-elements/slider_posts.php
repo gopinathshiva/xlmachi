@@ -4,14 +4,11 @@
      <style>
         .offer-slider-post{
             height: 110px;
-            background-repeat: no-repeat;
-            background-size: contain;
             padding: 10px;
         }
         .offer-slider-post img{
             width: 100%;
             height: 100%;
-            /*box-shadow: 0px 0px 10px -2px black;*/
         }
 
         @media screen and (min-width:1200px){
@@ -39,36 +36,23 @@
         query_posts(array(
             'post__in'=>$slider_posts,
             'post_type'=>'offer',
-            'order' => 'post__in'
+            'order' => 'post__in',
+            'posts_per_page'=>4
         ));
         if ( have_posts() ) {
             while ( have_posts() ) : the_post();
-                // $post_id = get_the_ID();
-                // $permalink = get_post_meta($post_id,'coupon_link',true);
+                $post_id = get_the_ID();
+                $img_url = get_the_post_thumbnail( $post_id, array(140,90) );
+                $url = get_the_permalink($post_id);
                 ?>
-                <div class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
-                    <a class="sp_offer cpn_click_redir atf-ad-small " data-link="http://www.grabon.in/load/coupon/?go=23661" href="?go=23661" target="_blank" rel="nofollow">
-                        <img src="http://cdn.lmitassets.com/gograbon/images/coupon/special/spcial-1460251319791-thumb.png">
+                <div data-offer-title="<?php the_title(); ?>" class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
+                    <a href="<?php echo $url; ?>" target="_blank" rel="nofollow">
+                        <!-- <img src="<?php echo $img_url; ?>"> -->
+                        <?php echo $img_url; ?>
                     </a>
                 </div>
                 <?php
             endwhile;
         }
      ?>
-
-     <!-- <div class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
-          <a class="sp_offer cpn_click_redir atf-ad-small " data-link="http://www.grabon.in/load/coupon/?go=15355" href="?go=15355" target="_blank" rel="nofollow">
-              <img src="http://cdn.lmitassets.com/gograbon/images/coupon/special/spcial-1460375368027-thumb.png">
-          </a>
-      </div>
-      <div class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
-          <a class="sp_offer cpn_click_redir atf-ad-small no-margin" data-link="http://www.grabon.in/load/coupon/?go=15084" href="?go=15084" target="_blank" rel="nofollow">
-              <img src="http://cdn.lmitassets.com/gograbon/images/coupon/special/spcial-1459749231058-thumb.png">
-          </a>
-      </div>
-      <div class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
-          <a class="sp_offer cpn_click_redir atf-ad-small no-margin" data-link="http://www.grabon.in/load/coupon/?go=15084" href="?go=15084" target="_blank" rel="nofollow">
-              <img src="http://cdn.lmitassets.com/gograbon/images/coupon/special/spcial-1459749231058-thumb.png">
-          </a>
-      </div> -->
   </div>

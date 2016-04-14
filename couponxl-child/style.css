@@ -83,6 +83,14 @@ Tags: white
 
 /* ***********************  store page style starts here ******************************* */
 
+.opacity-zero{
+    opacity: 0;
+}
+
+.filter-offer-menu{
+    display: none;
+}
+
 .single-store .featured-stores-carousel,.single-store .featured-stores{
     display: none;
 }
@@ -145,15 +153,20 @@ Tags: white
 /* ***********************  deal page style starts here ******************************* */
 
 .visit-store{
-    text-align: center;
-    display: none;
-    width: 100%;
     position: absolute;
-    bottom: 0;
+    top: 10px;
+    right: -10px;
+    opacity: 0;
+    transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
 }
 
 .visit-store.active{
-    display: block;
+    opacity: 1;
+    right: 10px;
 }
 
 .visit-store a{
@@ -196,6 +209,13 @@ Tags: white
     -webkit-box-shadow: 0px 0px 10px 1px rgba(119, 119, 119, 0.75);
 }
 
+.white-block-content .offer-btn-container .xl-activate-deal{
+    background-color: rgba(51, 122, 183,0.89);
+}
+
+.white-block-content .offer-btn-container .xl-activate-deal:hover{
+    background-color: rgb(16, 106, 183);
+}
 /* ***********************  deal page style ends here ******************************* */
 
 /* *********************** coupon box style starts here ***************************** */
@@ -208,9 +228,13 @@ Tags: white
     padding: 0;
 }
 
+.offer-btn-container{
+    text-align: center;
+}
+
 .offer-box .white-block-content {
     padding: 10px;
-    padding-bottom: 0;
+    padding-bottom: 15px;
     position: relative;
 }
 
@@ -428,9 +452,8 @@ a.read-info{
     -o-transition: background .3s ease;
 }
 
-.offer-box .white-block-content a.read-info:hover{
+.offer-box .white-block-content .offer-btn-container a:hover{
     color: white;
-    background: #5B0F70;
 }
 
 /*.read-info-container{
@@ -924,13 +947,78 @@ a.read-info{
 /* Media Queries */
 
 @media screen and (max-width:767px){
+    .navbar .navbar-collapse{
+        z-index: 12;
+    }
+
     .offer-box .white-block-content h3 {
         min-height: initial !important;
         max-height: initial !important;
+        margin-top: 0;
     }
 
     .xl-footer-cats ul{
         width: 50%;
+    }
+
+    .filter-offer-menu{
+        display: block;
+        position: fixed;
+        top: 37px;
+        background: #ccc;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+        z-index: 11;
+    }
+
+    .filter-offer-menu a{
+        font-size: large;
+        color: #333;
+    }
+
+    .filter-offer-menu a i{
+        margin-left: 25px;
+    }
+
+    .filter-offer-container{
+        position: fixed;
+        width: 100%;
+        transform: translateY(-500px);
+        -webkit-transform: translateY(-500px);
+        -moz-transform: translateY(-500px);
+        -ms-transform: translateY(-500px);
+        -o-transform: translateY(-500px);
+        opacity: 0;
+        transition: all .6s ease;
+        -webkit-transition: all .6s ease;
+        -moz-transition: all .6s ease;
+        -ms-transition: all .6s ease;
+        -o-transition: all .6s ease;
+        z-index: 10;
+        margin-top: -20px;
+    }
+
+    .filter-offer-container.active{
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        opacity: 1;
+        overflow: auto;
+    }
+
+    .col-md-3.filter-offer-container .white-block{
+        margin-bottom: 0;
+    }
+
+    .search-template-page .col-md-3 .white-block-content{
+        padding: 1px 20px;
+    }
+
+    .xl-offer-list-unstyled{
+        max-height: 110px;
     }
 }
 
@@ -946,8 +1034,8 @@ a.read-info{
     }
 
     .offer-box .white-block-content h3 {
-        min-height: 105px;
-        max-height: 105px;
+        min-height: 100px;
+        max-height: 100px;
         overflow: auto;
         margin-bottom: 0;
         margin-top: 10px;
