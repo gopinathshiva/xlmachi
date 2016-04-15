@@ -585,7 +585,7 @@ function xl_footer_cats_callback(){
         <div class="row">
             <ul>
                 <h6 class="heading">CouponMachi</h6>
-                <li><a href="<?php echo $site_url.'about'; ?>" title="About Us">About Us</a></li>
+                <!-- <li><a href="<?php echo $site_url.'about'; ?>" title="About Us">About Us</a></li> -->
                 <li><a href="<?php echo $site_url.'privacy-policy'; ?>" title="Privacy Policy" rel="nofollow">Privacy</a></li>
                 <li><a href="<?php echo $site_url.'terms-and-conditions'; ?>" title="Terms & Conditions" rel="nofollow">Terms of Use</a></li>
                 <li><a href="<?php echo $site_url.'sitemap_index.xml'; ?>" title="Sitemap">Sitemap</a></li>
