@@ -513,7 +513,7 @@ jQuery(document).ready(function($){
 		$this.text('ACTIVATED');
 	});
 
-	$('.deal-info-container a.read-info').click(function(e){
+	$('.show-deal').click(function(e){
 		e.preventDefault();
 		var permalink = $(this).attr('href');
 		aff_url = $(this).attr('data-affiliate');

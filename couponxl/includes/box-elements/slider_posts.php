@@ -18,7 +18,7 @@
         }
         @media screen and (max-width:991px){
             .offer-slider-post img{
-                height: auto;
+                height: 90px;
             }
         }
         @media screen and (max-width:767px){
@@ -33,26 +33,36 @@
         }
      </style>
      <?php
-        query_posts(array(
+
+        $transient_args = array(
             'post__in'=>$slider_posts,
             'post_type'=>'offer',
             'order' => 'post__in',
             'posts_per_page'=>4
-        ));
-        if ( have_posts() ) {
-            while ( have_posts() ) : the_post();
-                $post_id = get_the_ID();
-                $img_url = get_the_post_thumbnail( $post_id, array(140,90) );
-                $url = get_the_permalink($post_id);
-                ?>
-                <div data-offer-title="<?php the_title(); ?>" class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
-                    <a href="<?php echo $url; ?>" target="_blank" rel="nofollow">
-                        <!-- <img src="<?php echo $img_url; ?>"> -->
-                        <?php echo $img_url; ?>
-                    </a>
-                </div>
-                <?php
-            endwhile;
+        );
+
+        $transient_namespace = xl_transient_namespace();
+        $transient_key = $transient_namespace .md5( serialize($transient_args) );
+        if ( false === ( $html = get_transient( $transient_key ) ) ) {
+            query_posts($transient_args);
+            if ( have_posts() ) {
+                $html = '';
+                while ( have_posts() ) : the_post();
+                    $post_id = get_the_ID();
+                    $img_url = get_the_post_thumbnail( $post_id, array(140,90) );
+                    $title = get_the_title($post_id);
+                    $url = get_post_meta( $post_id, 'coupon_link', true );
+                    $html .= '<div data-offer-title="<?php the_title(); ?>" class="col-md-6 col-sm-3 col-xs-6 offer-slider-post">
+                        <a title="'.$title.'" href="'.$url.'" target="_blank" rel="nofollow">
+                            '.$img_url.'
+                        </a>
+                    </div>';
+                endwhile;
+                set_transient( $transient_key, $html, 1*DAY_IN_SECONDS );
+                echo $html;
+            }
+        }else{
+            echo $html;
         }
      ?>
   </div>

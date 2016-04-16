@@ -6,7 +6,9 @@ function couponxl_slider_posts_func( $atts, $content ){
 	), $atts ) );
 
 	$slider_posts = explode( ",", $posts );
-
+	if(wp_is_mobile()){
+		return;
+	}
 	ob_start();
 	include( locate_template( 'includes/box-elements/slider_posts.php' ) );
 	$content = ob_get_contents();

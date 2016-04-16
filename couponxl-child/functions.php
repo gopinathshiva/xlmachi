@@ -622,7 +622,7 @@ function xl_footer_cats_callback(){
                 <li><a href="<?php echo $site_url.'offer_tag/cashback'; ?>" title="Cashback Offers">Cashback Offers</a></li>
                 <li><a href="<?php echo $site_url.'offer_tag/flat'; ?>" title="Flat Offers">Flat Offers</a></li>
                 <li><a href="<?php echo $site_url.'expiring-offers'; ?>" title="Latest Offers">Expiring Offers</a></li>
-                <li><a href="<?php echo $site_url.'flipkart_deal_of_the_day'; ?>" title="Flipkart Deal of the Day">Flipkart Deal of the Day</a></li>
+                <li><a href="<?php echo $site_url.'flipkart-deal-of-the-day'; ?>" title="Flipkart Deal of the Day">Flipkart Deal of the Day</a></li>
              </ul>
          </div>
      </div>
@@ -830,7 +830,8 @@ function xl_advertisement_callback($post_id){
         return;
     }
     $img_url = get_the_post_thumbnail( $post_id, 'medium' );
-    $url = get_the_permalink($post_id);
+    $url = get_post_meta( $post_id, 'coupon_link', true );
+    //$url = get_the_permalink($post_id);
     ?>
     <div class="white-block xl-store-detail">
         <div class="shop-logo">

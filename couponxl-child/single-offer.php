@@ -17,8 +17,9 @@ if(is_localhost()){
 }else{
     $base_url = 'http://couponmachi.com/';
 }
-//header('Location: '.$aff_link);
-header( "refresh:.8;url=".$aff_link );
+if(!empty($aff_link)){
+	header( "refresh:.8;url=".$aff_link );
+}
 ?>
 <style>
 body{

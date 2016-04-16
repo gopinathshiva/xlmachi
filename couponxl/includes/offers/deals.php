@@ -42,8 +42,8 @@
 			</li>
 		</ul> -->
 
-		<h3 style="min-height:105px;overflow:auto;"><a target="_blank" href="<?php the_permalink(); ?>" class=""><?php the_title(); ?></a></h3>
-		<div class="read-info-description"><?php echo $content; ?></div>
+		<h3 style="min-height:105px;overflow:auto;"><a target="_blank" href="javascript:void(0);" class="show-deal"><?php the_title(); ?></a></h3>
+		<div class="read-info-description"><?php the_content(); ?></div>
 		<p class='xl-permalink'><?php echo the_permalink(); ?></p>
 		<div class='offer-btn-container'>
 			<a target="_blank" href="<?php the_permalink(); ?>" class="xl-activate-deal btn">ACTIVATE DEAL</a>

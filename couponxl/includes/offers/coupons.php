@@ -45,7 +45,7 @@
 			<?php echo couponxl_coupon_button( '', $is_shortcode ); ?>
 		</div>
 		<!-- <p class='xl-permalink'><?php echo the_permalink(); ?></p> -->
-		<!-- <div class="read-info-description"><?php echo the_content(); ?></div> -->
+		<div class="read-info-description"><?php echo the_content(); ?></div>
 	</div>
 	<p class="visit-store"><a href="<?php echo get_permalink( $store_id ); ?>" title="<?php echo get_the_title( $store_id ); ?>">Visit Store</a></p>
 </div>
