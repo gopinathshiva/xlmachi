@@ -2,6 +2,7 @@
 	<div class="white-block-media <?php echo $col == '12' ? 'col-sm-4 no-padding' : '' ?>">
 		<?php do_action('offer_top_info'); ?>
 		<div class="embed-responsive embed-responsive-16by9">
+			<div class="show-offer-detail"><a class="show-code-detail">Show Detail</a></div>
 			<?php
 			$xl_post_id = get_the_ID();
 			$store_id = get_post_meta( $xl_post_id, 'offer_store', true );
