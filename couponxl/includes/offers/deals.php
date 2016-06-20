@@ -2,6 +2,7 @@
 	<div class="white-block-media  <?php echo $col == '12' ? 'col-sm-4 no-padding' : '' ?>">
 		<?php do_action('offer_top_info'); ?>
 		<div class="embed-responsive embed-responsive-16by9">
+			<div class="show-offer-detail"><a class="show-deal">Show Detail</a></div>
 			<?php
 			$xl_post_id = get_the_ID();
 
@@ -43,7 +44,7 @@
 		</ul> -->
 
 		<h3 style="min-height:105px;overflow:auto;"><a target="_blank" href="javascript:void(0);" class="show-deal"><?php the_title(); ?></a></h3>
-		<div class="read-info-description"><?php the_content(); ?></div>
+		<div class="read-info-description"><?php echo the_content(); ?></div>
 		<p class='xl-permalink'><?php echo the_permalink(); ?></p>
 		<div class='offer-btn-container'>
 			<a target="_blank" href="<?php the_permalink(); ?>" class="xl-activate-deal btn">ACTIVATE DEAL</a>
