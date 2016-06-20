@@ -519,6 +519,10 @@ jQuery(document).ready(function($){
 		aff_url = $(this).attr('data-affiliate');
 		show_code_modal( $(this),'deal',permalink );
 	});
+	
+	$('.show-code-detail').click(function(e){
+		$(this).closest('.white-block').find('a.btn.show-code')[0].click();
+	});
 
 	$('.show-code').click(function(e){
 		e.preventDefault();
