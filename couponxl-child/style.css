@@ -158,6 +158,7 @@ Tags: white
     right: -10px;
     opacity: 0;
     transition: all .3s ease-out;
+  	z-index: 40;
     -webkit-transition: all .3s ease-out;
     -moz-transition: all .3s ease-out;
     -ms-transition: all .3s ease-out;
@@ -171,18 +172,49 @@ Tags: white
 
 .visit-store a{
     padding: 5px;
-    background: rgba(89, 38, 110, 0.61);
+    background: rgba(210, 212, 0, 0.61);
     color: white;
     border-radius: 3px;
 }
 
 .visit-store a:hover{
-    background: rgba(89, 38, 110, 0.81);
+    background: rgba(196, 197, 3, 0.61);
     color: white !important;
 }
 
 .single-store .visit-store{
     display: none !important;
+}
+
+.show-offer-detail{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.76);
+  z-index: 10;
+  transition: all .5s ease;
+  opacity: 0;
+}
+
+.show-offer-detail.active{
+    opacity: 1;
+}
+
+.show-offer-detail a{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background: #BB60E0;
+  border-radius: 10px;
+  padding: 5%;
+  color: white;
+  cursor:pointer;
+}
+
+.show-offer-detail a:hover{
+  background: #A446CA;
 }
 
 .coupon_modal_content a.xl-activate-deal{
