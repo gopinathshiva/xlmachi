@@ -390,8 +390,10 @@ jQuery(document).ready(function($){
 
 	$('.offer-box').hover(function(){
 		$(this).find('.visit-store').addClass('active');
+		$(this).find('.show-offer-detail').addClass('active');
 	},function(){
 		$(this).find('.visit-store').removeClass('active');
+		$(this).find('.show-offer-detail').removeClass('active');
 	});
 
     //sidemenu script
