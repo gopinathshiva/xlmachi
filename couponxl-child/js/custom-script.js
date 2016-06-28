@@ -550,11 +550,15 @@ jQuery(document).ready(function($){
 
 		$('#promocodes-filter-category').on('change',function () {
 			var id = $(this).val();
+			if(id<0){
+				$('.promocode-table-container table tr:not(".promocode-tbl-header")').fadeIn();
+				return;
+			}
 			$('.promocode-table-container table tr:not(".promocode-tbl-header")').hide();
 			$('.promocode-table-container table tr:not(".promocode-tbl-header")').each(function(k,v){
 			   var cat = $(v).attr('data-offer-cat');
 			       if(cat.indexOf(id)>=0){
-			         $(v).show();
+			         $(v).fadeIn();
 			       }
 			});
 		});
